@@ -2,7 +2,7 @@
  * app.js — main entry point, wires everything together
  */
 
-import { loadData, searchRecipes, getRecipeById, addRecipe, deleteRecipe, getAllRecipes, slugify } from './recipes.js';
+import { loadData, searchRecipes, getRecipeById, addRecipe, updateRecipe, deleteRecipe, getAllRecipes, slugify } from './recipes.js';
 import { getWeekDays, toDateKey, toWeekKey, MEAL_SLOTS, MONTH_NAMES } from './calendar.js';
 import {
   fetchPlan, savePlan,
@@ -190,7 +190,7 @@ function renderSidebar() {
 
     // On mobile: tapping the card body opens the slot picker directly (drag unavailable)
     card.addEventListener('click', (e) => {
-      if (e.target.closest('.recipe-card-info') || e.target.closest('.recipe-card-delete')) return;
+      if (e.target.closest('.recipe-card-info') || e.target.closest('.recipe-card-edit') || e.target.closest('.recipe-card-delete')) return;
       if (isMobile() && state.activeDay) {
         // Close sidebar first
         document.getElementById('sidebar').classList.add('collapsed');
@@ -203,6 +203,12 @@ function renderSidebar() {
     card.querySelector('.recipe-card-info').addEventListener('click', (e) => {
       e.stopPropagation();
       openRecipeModal(recipe.id);
+    });
+
+    // Edit button
+    card.querySelector('.recipe-card-edit').addEventListener('click', (e) => {
+      e.stopPropagation();
+      openRecipeEditorForEdit(recipe.id);
     });
 
     // Delete button
@@ -266,27 +272,48 @@ function openDayDetail(dateKey) {
 function refreshDayDetail() {
   if (!state.activeDay) return;
 
-  const weekKey  = toWeekKey(new Date(state.activeDay + 'T12:00:00'));
+  const weekKey = toWeekKey(new Date(state.activeDay + 'T12:00:00'));
 
-  // For Familia, canonical plan lives under Pablo
-  const planPerson = state.person === 'Familia' ? 'Pablo' : state.person;
-  const dayEntry   = state.plan?.[planPerson]?.[weekKey]?.[state.activeDay] || {};
-
-  renderDayDetail({
-    dateKey:      state.activeDay,
-    dayEntry,
-    nutrition:    state.person !== 'Familia' ? state.nutrition[state.person] : null,
-    nutritionAll: state.nutrition,
-    person:       state.person,
-    onRemoveMeal: removeMeal,
-    onAddMealToSlot: (slotId, recipeId) => {
-      if (recipeId) {
-        assignMeal(state.activeDay, slotId, recipeId);
-      } else {
-        openSlotPicker(slotId);
-      }
-    },
-  });
+  if (state.person === 'Familia') {
+    const pabloEntry = state.plan?.['Pablo']?.[weekKey]?.[state.activeDay] || {};
+    const juliEntry  = state.plan?.['Juli']?.[weekKey]?.[state.activeDay]  || {};
+    renderDayDetail({
+      dateKey:      state.activeDay,
+      dayEntry:     pabloEntry,   // still used for compat
+      pabloEntry,
+      juliEntry,
+      nutrition:    null,
+      nutritionAll: state.nutrition,
+      person:       'Familia',
+      onRemoveMeal: (dateKey, slotId, targetPerson) => removeMeal(dateKey, slotId, targetPerson),
+      onAddMealToSlot: (slotId, recipeId, targetPerson) => {
+        if (recipeId) {
+          assignMealForPerson(state.activeDay, slotId, recipeId, targetPerson);
+        } else {
+          openSlotPickerForPerson(slotId, targetPerson);
+        }
+      },
+    });
+  } else {
+    const dayEntry = state.plan?.[state.person]?.[weekKey]?.[state.activeDay] || {};
+    renderDayDetail({
+      dateKey:      state.activeDay,
+      dayEntry,
+      pabloEntry:   null,
+      juliEntry:    null,
+      nutrition:    state.nutrition[state.person],
+      nutritionAll: state.nutrition,
+      person:       state.person,
+      onRemoveMeal: removeMeal,
+      onAddMealToSlot: (slotId, recipeId) => {
+        if (recipeId) {
+          assignMeal(state.activeDay, slotId, recipeId);
+        } else {
+          openSlotPicker(slotId);
+        }
+      },
+    });
+  }
 }
 
 function closeDayDetail() {
@@ -301,9 +328,7 @@ function closeDayDetail() {
 
 let _slotPickerCleanup = null;
 
-function openSlotPicker(slotId) {
-  // Use a simple in-app recipe selector panel
-  // We'll show a floating picker with all recipes
+function openSlotPicker(slotId, targetPerson = null) {
   const existing = document.querySelector('.slot-picker');
   if (existing) existing.remove();
   if (_slotPickerCleanup) { _slotPickerCleanup(); _slotPickerCleanup = null; }
@@ -312,16 +337,21 @@ function openSlotPicker(slotId) {
   picker.className = 'slot-picker';
 
   const slotLabel = MEAL_SLOTS.find(s => s.id === slotId)?.label || slotId;
-  const results   = searchRecipes(state.searchQuery, state.searchCategory);
+  const personLabel = targetPerson ? ` — ${targetPerson}` : '';
+  const results = searchRecipes(state.searchQuery, state.searchCategory);
 
-  picker.innerHTML = `<div class="slot-picker-title">Seleccionar para ${slotLabel}</div>`;
+  picker.innerHTML = `<div class="slot-picker-title">Seleccionar para ${slotLabel}${personLabel}</div>`;
 
   results.slice(0, 30).forEach(recipe => {
     const item = document.createElement('div');
     item.className = 'slot-picker-item';
     item.textContent = recipe.receta.nombre;
     item.addEventListener('click', () => {
-      assignMeal(state.activeDay, slotId, recipe.id);
+      if (targetPerson) {
+        assignMealForPerson(state.activeDay, slotId, recipe.id, targetPerson);
+      } else {
+        assignMeal(state.activeDay, slotId, recipe.id);
+      }
       picker.remove();
       _slotPickerCleanup = null;
     });
@@ -454,10 +484,13 @@ async function assignMeal(dateKey, slotId, recipeId) {
   }
 }
 
-async function removeMeal(dateKey, slotId) {
+async function removeMeal(dateKey, slotId, targetPerson = null) {
   const weekKey = toWeekKey(new Date(dateKey + 'T12:00:00'));
+  // If targetPerson is given (family individual remove), only remove for that person.
+  // Otherwise use personsToWrite() which respects the current state.person.
+  const persons = targetPerson ? [targetPerson] : personsToWrite();
 
-  for (const p of personsToWrite()) {
+  for (const p of persons) {
     const entry = state.plan?.[p]?.[weekKey]?.[dateKey];
     if (!entry) continue;
     delete entry[slotId];
@@ -478,6 +511,39 @@ async function removeMeal(dateKey, slotId) {
   } catch (e) {
     showToast('⚠️ Error al guardar', 'error');
   }
+}
+
+/**
+ * Assign a meal to a single specific person (used in Familia mode per-person slots).
+ */
+async function assignMealForPerson(dateKey, slotId, recipeId, targetPerson) {
+  const recipe = getRecipeById(recipeId);
+  if (!recipe) return;
+  const { receta } = recipe;
+  const weekKey  = toWeekKey(new Date(dateKey + 'T12:00:00'));
+  const mealData = { recipeId, recipeName: receta.nombre, macros: { ...receta.macros_por_porcion } };
+  const persons  = targetPerson ? [targetPerson] : ['Pablo', 'Juli'];
+  for (const p of persons) {
+    setDeep(state.plan, p, weekKey, dateKey, slotId, mealData);
+  }
+  renderWeek();
+  if (state.activeDay === dateKey) refreshDayDetail();
+  try {
+    const result = await savePlan(state.plan);
+    showToast(
+      result.saved === 'github' ? `✅ Guardado (${persons.join('+')})` : `💾 Guardado localmente`,
+      result.saved === 'github' ? 'success' : ''
+    );
+  } catch (e) {
+    showToast('⚠️ Error al guardar: ' + e.message, 'error');
+  }
+}
+
+/**
+ * Open slot picker scoped to a specific person in Familia mode.
+ */
+function openSlotPickerForPerson(slotId, targetPerson) {
+  openSlotPicker(slotId, targetPerson);
 }
 
 // ══════════════════════════════════════════════════════════
@@ -519,7 +585,11 @@ async function handleDeleteRecipe(id, name) {
 
 // ── Editor modal ──────────────────────────────────────────
 
+// null when creating a new recipe; recipe id string when editing an existing one
+let _editingRecipeId = null;
+
 function openRecipeEditor() {
+  _editingRecipeId = null;
   resetEditorForm();
   document.getElementById('recipe-editor-title').textContent = 'Nueva receta';
   document.getElementById('modal-recipe-editor').classList.remove('hidden');
@@ -528,7 +598,49 @@ function openRecipeEditor() {
   addStepRow();
 }
 
+function openRecipeEditorForEdit(id) {
+  const recipe = getRecipeById(id);
+  if (!recipe) return;
+  _editingRecipeId = id;
+  resetEditorForm();
+
+  const { receta } = recipe;
+  const m = receta.macros_por_porcion || {};
+
+  // Fill basic fields
+  document.getElementById('rf-nombre').value      = receta.nombre || '';
+  document.getElementById('rf-descripcion').value = receta.descripcion_breve || '';
+  document.getElementById('rf-porciones').value   = receta.porciones || 2;
+  document.getElementById('rf-cal').value         = m.calorias      || '';
+  document.getElementById('rf-prot').value        = m.proteina_g    || '';
+  document.getElementById('rf-carbs').value       = m.carbohidratos_g || '';
+  document.getElementById('rf-fat').value         = m.grasas_g      || '';
+
+  // Categoria — find the matching option or fall back to first
+  const sel = document.getElementById('rf-categoria');
+  const cat = receta.categoria || '';
+  const matchingOpt = [...sel.options].find(o => o.value === cat);
+  sel.value = matchingOpt ? cat : sel.options[0].value;
+
+  // Ingredients
+  (receta.ingredientes || []).forEach(ing => {
+    addIngredientRow(ing.item, ing.cantidad, ing.unidad);
+  });
+  if (!(receta.ingredientes || []).length) addIngredientRow();
+
+  // Steps
+  (receta.paso_a_paso || []).forEach(step => addStepRow(step));
+  if (!(receta.paso_a_paso || []).length) addStepRow();
+
+  // Also pre-fill JSON tab with the current recipe JSON
+  document.getElementById('rf-json').value = JSON.stringify({ receta: receta }, null, 2);
+
+  document.getElementById('recipe-editor-title').textContent = 'Editar receta';
+  document.getElementById('modal-recipe-editor').classList.remove('hidden');
+}
+
 function closeRecipeEditor() {
+  _editingRecipeId = null;
   document.getElementById('modal-recipe-editor').classList.add('hidden');
 }
 
@@ -639,14 +751,21 @@ async function saveRecipeFromForm() {
     return;
   }
 
-  const updated = addRecipe(data);
+  const isEditing = !!_editingRecipeId;
+  const updated   = isEditing
+    ? updateRecipe(_editingRecipeId, data)
+    : addRecipe(data);
+
   renderSidebar();
+  renderWeek(); // refresh kcal bars in case macros changed
   closeRecipeEditor();
 
   try {
     const result = await saveRecipes(updated);
     showToast(
-      result.saved === 'github' ? '✅ Receta guardada (GitHub)' : '💾 Receta guardada (local)',
+      result.saved === 'github'
+        ? (isEditing ? '✅ Receta actualizada (GitHub)' : '✅ Receta guardada (GitHub)')
+        : (isEditing ? '💾 Receta actualizada (local)'  : '💾 Receta guardada (local)'),
       'success'
     );
   } catch (e) {
@@ -666,7 +785,31 @@ async function saveRecipeFromJSON() {
     return;
   }
 
-  // Accept { receta: {...} }, { recetas: [...] }, or bare array
+  // When editing a single recipe via JSON tab, accept a bare { receta: {…} }
+  // and apply it as an update rather than an insert.
+  if (_editingRecipeId) {
+    const entry = parsed.receta ? parsed : { receta: parsed };
+    if (!entry.receta) {
+      showToast('Estructura no reconocida. Usá { "receta": {…} }', 'error');
+      return;
+    }
+    const updated = updateRecipe(_editingRecipeId, entry);
+    renderSidebar();
+    renderWeek();
+    closeRecipeEditor();
+    try {
+      const result = await saveRecipes(updated);
+      showToast(
+        result.saved === 'github' ? '✅ Receta actualizada (GitHub)' : '💾 Receta actualizada (local)',
+        'success'
+      );
+    } catch (e) {
+      showToast('⚠️ Error al guardar: ' + e.message, 'error');
+    }
+    return;
+  }
+
+  // New recipe(s) — accept { receta: {...} }, { recetas: [...] }, or bare array
   const entries = parsed.recetas
     ? parsed.recetas
     : parsed.receta

@@ -95,6 +95,17 @@ export function addRecipe(recipeObj) {
 }
 
 /**
+ * Update an existing recipe in-place by id.
+ * Returns the updated array.
+ */
+export function updateRecipe(id, recipeObj) {
+  _recipes = _recipes.map(r =>
+    r.id === id ? { id, receta: recipeObj.receta } : r
+  );
+  return _recipes;
+}
+
+/**
  * Delete a recipe by id.
  * Returns the updated array.
  */

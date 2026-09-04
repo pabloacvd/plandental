@@ -494,6 +494,50 @@ input  { font: inherit; border: none; outline: none; }
 .slot-btn:hover { background: var(--accent-bg); color: var(--accent); border-color: var(--accent); }
 .slot-btn.remove:hover { background: var(--red-bg); color: var(--red); border-color: var(--red); }
 
+/* ── Family slot rows ── */
+.slot-family-rows   { display: flex; flex-direction: column; gap: 5px; flex: 1; }
+.slot-family-shared { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+
+.slot-family-person-row {
+  display: flex; align-items: center; gap: 6px;
+  padding: 4px 6px; border-radius: 5px;
+  font-size: .75rem;
+}
+.slot-family-person-row.has-meal-row { background: var(--bg); }
+.slot-family-person-row.empty-row    { opacity: .7; }
+
+.slot-family-badge {
+  font-size: .68rem; font-weight: 700; padding: 1px 6px;
+  border-radius: 10px; white-space: nowrap; flex-shrink: 0;
+}
+.pablo-badge  { background: var(--accent-bg);  color: var(--accent-dark); }
+.juli-badge   { background: var(--purple-bg);  color: var(--purple); }
+.shared-badge { background: var(--green-bg);   color: #15803d; }
+
+.slot-meal-name-sm {
+  flex: 1; overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap; font-weight: 600;
+}
+.slot-meal-kcal  { font-size: .68rem; color: var(--text-muted); white-space: nowrap; }
+.slot-empty-text { flex: 1; color: var(--text-muted); font-style: italic; }
+
+.slot-btn-icon {
+  width: 18px; height: 18px; border-radius: 50%; font-size: .6rem;
+  border: none; background: transparent; cursor: pointer;
+  color: var(--text-muted);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: var(--transition);
+}
+.slot-btn-icon:hover { background: var(--red-bg); color: var(--red); }
+
+.slot-btn-add-sm {
+  padding: 1px 7px; border: 1px solid var(--border); border-radius: 4px;
+  font-size: .68rem; font-weight: 600; color: var(--accent);
+  background: var(--accent-bg); white-space: nowrap; cursor: pointer;
+  transition: var(--transition); flex-shrink: 0;
+}
+.slot-btn-add-sm:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
 /* Day summary */
 .day-summary {
   background: var(--bg);
@@ -781,8 +825,9 @@ input  { font: inherit; border: none; outline: none; }
 #rf-json:focus { border-color: var(--accent); outline: none; }
 
 /* Delete recipe button on cards */
+.recipe-card-edit,
 .recipe-card-delete {
-  position: absolute; bottom: 8px; right: 8px;
+  position: absolute;
   font-size: .65rem; color: var(--text-muted);
   width: 18px; height: 18px;
   display: flex; align-items: center; justify-content: center;
@@ -790,8 +835,12 @@ input  { font: inherit; border: none; outline: none; }
   transition: var(--transition);
   opacity: 0;
 }
-.recipe-card:hover .recipe-card-delete { opacity: 1; }
-.recipe-card-delete:hover { background: var(--red-bg); color: var(--red); }
+.recipe-card-delete { bottom: 8px; right: 8px; }
+.recipe-card-edit   { bottom: 8px; right: 30px; }
+.recipe-card:hover .recipe-card-delete,
+.recipe-card:hover .recipe-card-edit   { opacity: 1; }
+.recipe-card-delete:hover { background: var(--red-bg);    color: var(--red);    }
+.recipe-card-edit:hover   { background: var(--accent-bg); color: var(--accent); }
 
 /* Auth modal */
 #modal-auth h3 { margin-bottom: 8px; }

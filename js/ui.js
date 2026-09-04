@@ -47,7 +47,8 @@ export function renderRecipeCard(recipeObj) {
       <span>🌾 ${m.carbohidratos_g}g carbs</span>
       <span>🧈 ${m.grasas_g}g grasas</span>
     </div>
-    <button class="recipe-card-info" data-info="${id}" title="Ver receta">ℹ</button>
+    <button class="recipe-card-info"   data-info="${id}"   title="Ver receta">ℹ</button>
+    <button class="recipe-card-edit"   data-edit="${id}"   title="Editar receta">✏️</button>
     <button class="recipe-card-delete" data-delete="${id}" title="Eliminar receta">🗑</button>
   `;
   return card;
@@ -102,12 +103,22 @@ export function renderRecipeDetail(recipeObj) {
 // ── Calendar grid ─────────────────────────────────────────
 
 /**
- * For the Familia view we merge Pablo+Juli entries (they are identical meals).
- * We read from Pablo's plan only (canonical source).
+ * For the Familia view we merge both Pablo+Juli entries.
+ * If they share the same meal for a slot, show it once; otherwise show both.
  */
 function getDayEntry(planData, person, weekKey, dateKey) {
   if (person === 'Familia') {
-    return planData?.['Pablo']?.[weekKey]?.[dateKey] || {};
+    const pablo = planData?.['Pablo']?.[weekKey]?.[dateKey] || {};
+    const juli  = planData?.['Juli']?.[weekKey]?.[dateKey]  || {};
+    const merged = { ...pablo };
+    // Add Juli's meals that are different or missing from Pablo
+    for (const slotId of Object.keys(juli)) {
+      if (!merged[slotId] || merged[slotId].recipeId !== juli[slotId].recipeId) {
+        // Different meal — append as a virtual slot so it shows as an extra pill
+        merged[`${slotId}_juli`] = juli[slotId];
+      }
+    }
+    return merged;
   }
   return planData?.[person]?.[weekKey]?.[dateKey] || {};
 }
@@ -156,15 +167,21 @@ export function renderCalendarGrid({
     const mealsDiv = document.createElement('div');
     mealsDiv.className = 'day-meals-summary';
 
-    MEAL_SLOTS.forEach(slot => {
-      const meal = dayEntry[slot.id];
+    // Build a quick icon lookup for standard slot IDs
+    const slotIconMap = Object.fromEntries(MEAL_SLOTS.map(s => [s.id, s.icon]));
+
+    // Iterate over all keys (including virtual _juli keys from Familia merge)
+    Object.entries(dayEntry).forEach(([key, meal]) => {
       if (!meal) return;
+      // Derive the base slot id (strip _juli suffix) for the icon
+      const baseSlotId = key.endsWith('_juli') ? key.slice(0, -5) : key;
+      const icon = slotIconMap[baseSlotId] || '🍽️';
       const pill = document.createElement('div');
       pill.className = 'meal-pill';
       pill.innerHTML = `
-        <span class="meal-pill-slot">${slot.icon}</span>
+        <span class="meal-pill-slot">${icon}</span>
         <span class="meal-pill-name meal-pill-name--link" data-recipe-id="${meal.recipeId}" title="Ver receta: ${meal.recipeName}">${meal.recipeName}</span>
-        <button class="meal-pill-remove" data-date="${dateKey}" data-slot="${slot.id}" title="Quitar">✕</button>
+        <button class="meal-pill-remove" data-date="${dateKey}" data-slot="${key}" title="Quitar">✕</button>
       `;
       mealsDiv.appendChild(pill);
     });
@@ -269,9 +286,11 @@ export function updateKcalBars(weekDays, planData, person, weekKey, nutrition) {
 export function renderDayDetail({
   dateKey,
   dayEntry,
-  nutrition,    // single person's nutrition OR null (Familia passes null here)
+  pabloEntry,   // only set in Familia mode
+  juliEntry,    // only set in Familia mode
+  nutrition,
   person,
-  nutritionAll, // full nutrition object { Pablo: {...}, Juli: {...} }
+  nutritionAll,
   onRemoveMeal,
   onAddMealToSlot,
 }) {
@@ -285,66 +304,156 @@ export function renderDayDetail({
   const summaryEl = document.getElementById('day-summary');
   slotsEl.innerHTML = '';
 
-  MEAL_SLOTS.forEach(slot => {
-    const meal = dayEntry?.[slot.id];
-    const card = document.createElement('div');
-    card.className = 'slot-card' + (meal ? ' has-meal' : '');
-    card.dataset.slot = slot.id;
-
-    if (meal) {
-      const m = meal.macros || {};
-      card.innerHTML = `
-        <div class="slot-title">${slot.icon} ${slot.label}</div>
-        <div class="slot-meal-name">${meal.recipeName}</div>
-        <div class="slot-meal-macros">
-          <span>🔥 ${m.calorias || 0} kcal</span>
-          <span>💪 ${m.proteina_g || 0}g</span>
-          <span>🌾 ${m.carbohidratos_g || 0}g</span>
-          <span>🧈 ${m.grasas_g || 0}g</span>
-        </div>
-        <div class="slot-actions">
-          <button class="slot-btn remove" data-slot="${slot.id}">Quitar</button>
-        </div>
-      `;
-      card.querySelector('.slot-btn.remove').addEventListener('click', () => {
-        onRemoveMeal(dateKey, slot.id);
-      });
-    } else {
-      card.innerHTML = `
-        <div class="slot-title">${slot.icon} ${slot.label}</div>
-        <div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:.75rem;">
-          Arrastrá una receta aquí
-        </div>
-        <div class="slot-actions">
-          <button class="slot-btn add-btn" data-slot="${slot.id}">+ Agregar</button>
-        </div>
-      `;
-      card.querySelector('.add-btn').addEventListener('click', () => {
-        onAddMealToSlot(slot.id);
-      });
-    }
-
-    // Drop zone
-    card.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      card.classList.add('drop-target');
-    });
-    card.addEventListener('dragleave', () => card.classList.remove('drop-target'));
-    card.addEventListener('drop', (e) => {
-      e.preventDefault();
-      card.classList.remove('drop-target');
-      const recipeId = e.dataTransfer.getData('recipeId');
-      if (recipeId) onAddMealToSlot(slot.id, recipeId);
-    });
-
-    slotsEl.appendChild(card);
-  });
-
-  // Summary — single person or family split
   if (person === 'Familia') {
-    renderFamilySummary(dayEntry, nutritionAll, summaryEl);
+    // ── Family mode: show all slots that have a meal for either person ──
+    MEAL_SLOTS.forEach(slot => {
+      const pMeal = pabloEntry?.[slot.id] || null;
+      const jMeal = juliEntry?.[slot.id]  || null;
+
+      // Only show the slot if at least one person has something, OR always show all slots
+      const hasMeal = pMeal || jMeal;
+      const sameRecipe = pMeal && jMeal && pMeal.recipeId === jMeal.recipeId;
+
+      const card = document.createElement('div');
+      card.className = 'slot-card' + (hasMeal ? ' has-meal' : '');
+      card.dataset.slot = slot.id;
+
+      const titleEl = `<div class="slot-title">${slot.icon} ${slot.label}</div>`;
+
+      if (sameRecipe) {
+        // Same meal for both — show once with a "los dos" label
+        const m = pMeal.macros || {};
+        card.innerHTML = `
+          ${titleEl}
+          <div class="slot-family-shared">
+            <span class="slot-family-badge shared-badge">🏋️🌸 Los dos</span>
+            <div class="slot-meal-name">${pMeal.recipeName}</div>
+            <div class="slot-meal-macros">
+              <span>🔥 ${m.calorias || 0} kcal</span>
+              <span>💪 ${m.proteina_g || 0}g</span>
+            </div>
+          </div>
+          <div class="slot-actions">
+            <button class="slot-btn remove" data-person="both">Quitar a los dos</button>
+          </div>
+        `;
+        card.querySelector('.slot-btn.remove').addEventListener('click', () => {
+          onRemoveMeal(dateKey, slot.id, null); // null = both
+        });
+      } else {
+        // Different meals (or only one has a meal) — show two rows
+        card.innerHTML = `
+          ${titleEl}
+          <div class="slot-family-rows">
+            ${buildPersonMealHTML(pMeal, 'Pablo', 'pablo', slot.id)}
+            ${buildPersonMealHTML(jMeal, 'Juli',  'juli',  slot.id)}
+          </div>
+        `;
+        card.querySelector('.slot-btn-remove-pablo')?.addEventListener('click', () => {
+          onRemoveMeal(dateKey, slot.id, 'Pablo');
+        });
+        card.querySelector('.slot-btn-remove-juli')?.addEventListener('click', () => {
+          onRemoveMeal(dateKey, slot.id, 'Juli');
+        });
+        card.querySelector('.slot-btn-add-pablo')?.addEventListener('click', () => {
+          onAddMealToSlot(slot.id, null, 'Pablo');
+        });
+        card.querySelector('.slot-btn-add-juli')?.addEventListener('click', () => {
+          onAddMealToSlot(slot.id, null, 'Juli');
+        });
+      }
+
+      // Drop zone — assigns to both when dragged in family mode
+      card.addEventListener('dragover', (e) => { e.preventDefault(); card.classList.add('drop-target'); });
+      card.addEventListener('dragleave', () => card.classList.remove('drop-target'));
+      card.addEventListener('drop', (e) => {
+        e.preventDefault();
+        card.classList.remove('drop-target');
+        const recipeId = e.dataTransfer.getData('recipeId');
+        if (recipeId) onAddMealToSlot(slot.id, recipeId, null); // null = both
+      });
+
+      slotsEl.appendChild(card);
+    });
+
+    renderFamilySummary(pabloEntry, juliEntry, nutritionAll, summaryEl);
+
   } else {
+    // ── Single person mode ──
+    MEAL_SLOTS.forEach(slot => {
+      const meal = dayEntry?.[slot.id];
+      const card = document.createElement('div');
+      card.className = 'slot-card' + (meal ? ' has-meal' : '');
+      card.dataset.slot = slot.id;
+
+      if (meal) {
+        const m = meal.macros || {};
+        card.innerHTML = `
+          <div class="slot-title">${slot.icon} ${slot.label}</div>
+          <div class="slot-meal-name">${meal.recipeName}</div>
+          <div class="slot-meal-macros">
+            <span>🔥 ${m.calorias || 0} kcal</span>
+            <span>💪 ${m.proteina_g || 0}g</span>
+            <span>🌾 ${m.carbohidratos_g || 0}g</span>
+            <span>🧈 ${m.grasas_g || 0}g</span>
+          </div>
+          <div class="slot-actions">
+            <button class="slot-btn remove" data-slot="${slot.id}">Quitar</button>
+          </div>
+        `;
+        card.querySelector('.slot-btn.remove').addEventListener('click', () => {
+          onRemoveMeal(dateKey, slot.id);
+        });
+      } else {
+        card.innerHTML = `
+          <div class="slot-title">${slot.icon} ${slot.label}</div>
+          <div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:.75rem;">
+            Arrastrá una receta aquí
+          </div>
+          <div class="slot-actions">
+            <button class="slot-btn add-btn" data-slot="${slot.id}">+ Agregar</button>
+          </div>
+        `;
+        card.querySelector('.add-btn').addEventListener('click', () => {
+          onAddMealToSlot(slot.id);
+        });
+      }
+
+      card.addEventListener('dragover', (e) => { e.preventDefault(); card.classList.add('drop-target'); });
+      card.addEventListener('dragleave', () => card.classList.remove('drop-target'));
+      card.addEventListener('drop', (e) => {
+        e.preventDefault();
+        card.classList.remove('drop-target');
+        const recipeId = e.dataTransfer.getData('recipeId');
+        if (recipeId) onAddMealToSlot(slot.id, recipeId);
+      });
+
+      slotsEl.appendChild(card);
+    });
+
     renderDaySummary(dayEntry, nutrition, summaryEl);
+  }
+}
+
+function buildPersonMealHTML(meal, personName, cls, slotId) {
+  if (meal) {
+    const m = meal.macros || {};
+    return `
+      <div class="slot-family-person-row has-meal-row">
+        <span class="slot-family-badge ${cls}-badge">${personName === 'Pablo' ? '🏋️' : '🌸'} ${personName}</span>
+        <span class="slot-meal-name-sm">${meal.recipeName}</span>
+        <span class="slot-meal-kcal">${m.calorias || 0} kcal</span>
+        <button class="slot-btn-remove-${cls} slot-btn-icon" title="Quitar">✕</button>
+      </div>
+    `;
+  } else {
+    return `
+      <div class="slot-family-person-row empty-row">
+        <span class="slot-family-badge ${cls}-badge">${personName === 'Pablo' ? '🏋️' : '🌸'} ${personName}</span>
+        <span class="slot-empty-text">Sin asignar</span>
+        <button class="slot-btn-add-${cls} slot-btn-add-sm" title="Agregar">+ Agregar</button>
+      </div>
+    `;
   }
 }
 
@@ -409,19 +518,21 @@ export function renderDaySummary(dayEntry, nutrition, container) {
 
 // ── Family day summary (Pablo + Juli side by side) ────────
 
-function renderFamilySummary(dayEntry, nutritionAll, container) {
-  const macros = computeDayMacros(dayEntry); // meals are the same for both
-  const pablo  = nutritionAll?.Pablo  || {};
-  const juli   = nutritionAll?.Juli   || {};
+function renderFamilySummary(pabloEntry, juliEntry, nutritionAll, container) {
+  const pMacros = computeDayMacros(pabloEntry);
+  const jMacros = computeDayMacros(juliEntry);
+  const pablo   = nutritionAll?.Pablo || {};
+  const juli    = nutritionAll?.Juli  || {};
 
   const rows = [
-    { label: 'Calorías',      key: 'calorias',         pabloTarget: pablo.daily_calories_kcal, juliTarget: juli.daily_calories_kcal, unit: 'kcal', color: 'var(--orange)' },
-    { label: 'Proteína',      key: 'proteina_g',        pabloTarget: pablo.protein_g,           juliTarget: juli.protein_g,           unit: 'g',    color: 'var(--accent)' },
-    { label: 'Carbohidratos', key: 'carbohidratos_g',   pabloTarget: pablo.carbs_g,             juliTarget: juli.carbs_g,             unit: 'g',    color: 'var(--green)'  },
-    { label: 'Grasas',        key: 'grasas_g',          pabloTarget: pablo.fat_g,               juliTarget: juli.fat_g,               unit: 'g',    color: 'var(--purple)' },
+    { label: 'Calorías',      key: 'calorias',           pabloTarget: pablo.daily_calories_kcal, juliTarget: juli.daily_calories_kcal, unit: 'kcal', color: 'var(--orange)' },
+    { label: 'Proteína',      key: 'proteina_g',          pabloTarget: pablo.protein_g,           juliTarget: juli.protein_g,           unit: 'g',    color: 'var(--accent)' },
+    { label: 'Carbohidratos', key: 'carbohidratos_g',     pabloTarget: pablo.carbs_g,             juliTarget: juli.carbs_g,             unit: 'g',    color: 'var(--green)'  },
+    { label: 'Grasas',        key: 'grasas_g',            pabloTarget: pablo.fat_g,               juliTarget: juli.fat_g,               unit: 'g',    color: 'var(--purple)' },
   ];
 
-  const pct = (val, target) => target ? Math.min((val / target) * 100, 100).toFixed(1) : 0;
+  const pct  = (val, target) => target ? Math.min((val / target) * 100, 100).toFixed(1) : 0;
+  const disp = (val, unit)   => unit === 'kcal' ? `${Math.round(val)} ${unit}` : `${val} ${unit}`;
 
   container.innerHTML = `
     <div class="family-summary">
@@ -431,20 +542,20 @@ function renderFamilySummary(dayEntry, nutritionAll, container) {
         <div class="family-col-label juli-col">🌸 Juli</div>
       </div>
       ${rows.map(r => {
-        const val   = macros[r.key] ?? 0;
-        const pPct  = pct(val, r.pabloTarget);
-        const jPct  = pct(val, r.juliTarget);
-        const dispVal = r.key === 'calorias' ? `${Math.round(val)} ${r.unit}` : `${val} ${r.unit}`;
+        const pVal  = pMacros[r.key] ?? 0;
+        const jVal  = jMacros[r.key] ?? 0;
+        const pPct  = pct(pVal, r.pabloTarget);
+        const jPct  = pct(jVal, r.juliTarget);
         return `
           <div class="family-summary-row">
             <div class="family-row-label" style="color:${r.color}">${r.label}</div>
             <div class="family-row-cell">
-              <div class="family-row-value">${dispVal}</div>
+              <div class="family-row-value">${disp(pVal, r.unit)}</div>
               ${r.pabloTarget ? `<div class="family-row-sub">meta: ${r.pabloTarget} ${r.unit}</div>` : ''}
               ${r.pabloTarget ? `<div class="summary-stat-bar"><div class="summary-stat-bar-fill" style="width:${pPct}%;background:${r.color}"></div></div>` : ''}
             </div>
             <div class="family-row-cell">
-              <div class="family-row-value">${dispVal}</div>
+              <div class="family-row-value">${disp(jVal, r.unit)}</div>
               ${r.juliTarget ? `<div class="family-row-sub">meta: ${r.juliTarget} ${r.unit}</div>` : ''}
               ${r.juliTarget ? `<div class="summary-stat-bar"><div class="summary-stat-bar-fill" style="width:${jPct}%;background:${r.color}"></div></div>` : ''}
             </div>
