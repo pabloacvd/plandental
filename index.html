@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlanDental — Planner Semanal</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════════
+       HEADER
+  ═══════════════════════════════════════════════ -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="header-brand">
+        <span class="brand-icon">🥗</span>
+        <span class="brand-name">PlanDental</span>
+      </div>
+      <div class="header-controls">
+        <div class="person-switcher">
+          <button class="person-btn active" data-person="Pablo">Pablo</button>
+          <button class="person-btn" data-person="Juli">Juli</button>
+          <button class="person-btn person-btn--familia" data-person="Familia">👨‍👩 Familia</button>
+        </div>
+        <div class="week-nav">
+          <button id="btn-prev-week" title="Semana anterior">&#8249;</button>
+          <span id="week-label">Sem 00</span>
+          <button id="btn-next-week" title="Semana siguiente">&#8250;</button>
+        </div>
+        <div class="auth-area">
+          <button id="btn-github-auth" class="btn-auth">Conectar GitHub</button>
+          <span id="auth-status" class="auth-status"></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ════════════════════════════════════════════
+       MAIN LAYOUT
+  ═══════════════════════════════════════════════ -->
+  <main class="app-main">
+
+    <!-- SIDEBAR: Recipe Search -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <button id="btn-toggle-sidebar" class="btn-hamburger" title="Menú">
+          <span></span><span></span><span></span>
+        </button>
+        <span class="sidebar-title">Recetas</span>
+        <button id="btn-add-recipe" class="btn-new-recipe" title="Nueva receta">＋</button>
+      </div>
+      <div class="search-box">
+        <input type="text" id="recipe-search" placeholder="Buscar receta, ingrediente…" autocomplete="off" />
+        <button id="btn-clear-search" class="btn-clear" title="Limpiar">✕</button>
+      </div>
+      <div class="filter-chips" id="filter-chips">
+        <button class="chip active" data-cat="all">Todas</button>
+        <button class="chip" data-cat="desayuno">Desayuno</button>
+        <button class="chip" data-cat="almuerzo/cena">Almuerzo/Cena</button>
+        <button class="chip" data-cat="snack">Snack</button>
+        <button class="chip" data-cat="almuerzo/cena liviana">Liviana</button>
+      </div>
+      <div id="recipe-list" class="recipe-list"></div>
+    </aside>
+
+    <!-- MAIN CONTENT: Calendar + Day detail -->
+    <div class="content-area">
+
+      <!-- WEEKLY CALENDAR -->
+      <section class="calendar-section">
+        <div id="calendar-grid" class="calendar-grid"></div>
+      </section>
+
+      <!-- DAY DETAIL PANEL -->
+      <section class="day-detail" id="day-detail">
+        <div class="day-detail-header">
+          <span id="detail-day-label">Seleccioná un día</span>
+          <button id="btn-close-detail" class="btn-icon" title="Cerrar">✕</button>
+        </div>
+        <div class="meal-slots" id="meal-slots"></div>
+        <div class="day-summary" id="day-summary"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ════════════════════════════════════════════
+       MODALS
+  ═══════════════════════════════════════════════ -->
+  <!-- Recipe Detail Modal -->
+  <div id="modal-recipe" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-box">
+      <button class="modal-close" id="btn-close-modal">✕</button>
+      <div id="modal-recipe-content"></div>
+    </div>
+  </div>
+
+  <!-- GitHub Auth Modal -->
+  <div id="modal-auth" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-box modal-box--sm">
+      <button class="modal-close" id="btn-close-auth-modal">✕</button>
+      <h3>Conectar con GitHub</h3>
+      <p>Ingresá tu <strong>Personal Access Token</strong> de GitHub con permisos de <code>repo</code>.</p>
+      <input type="password" id="input-gh-token" placeholder="ghp_xxxxxxxxxxxx" />
+      <div class="auth-repo-fields">
+        <input type="text" id="input-gh-owner" placeholder="usuario/org (owner)" />
+        <input type="text" id="input-gh-repo" placeholder="nombre del repositorio" />
+      </div>
+      <button id="btn-save-auth" class="btn-primary">Guardar y conectar</button>
+      <p class="auth-note">El token se guarda solo en localStorage de tu navegador.</p>
+    </div>
+  </div>
+
+  <!-- Recipe Editor Modal -->
+  <div id="modal-recipe-editor" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-box modal-box--editor">
+      <button class="modal-close" id="btn-close-recipe-editor">✕</button>
+      <h3 id="recipe-editor-title">Nueva receta</h3>
+
+      <!-- Tab switcher -->
+      <div class="editor-tabs">
+        <button class="editor-tab active" data-tab="form">📝 Formulario</button>
+        <button class="editor-tab" data-tab="json">{ } JSON</button>
+      </div>
+
+      <!-- FORM TAB -->
+      <div id="editor-tab-form" class="editor-tab-content">
+        <div class="form-grid">
+          <div class="form-field form-field--full">
+            <label>Nombre *</label>
+            <input type="text" id="rf-nombre" placeholder="Nombre del plato" />
+          </div>
+          <div class="form-field form-field--full">
+            <label>Descripción breve *</label>
+            <textarea id="rf-descripcion" rows="2" placeholder="Una línea descriptiva del plato"></textarea>
+          </div>
+          <div class="form-field">
+            <label>Categoría *</label>
+            <select id="rf-categoria">
+              <option value="desayuno">Desayuno</option>
+              <option value="almuerzo/cena" selected>Almuerzo/Cena</option>
+              <option value="almuerzo/cena liviana">Liviana</option>
+              <option value="snack">Snack</option>
+              <option value="desayuno/cena liviana">Desayuno / Cena liviana</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Porciones *</label>
+            <input type="number" id="rf-porciones" min="1" max="20" value="2" />
+          </div>
+        </div>
+
+        <div class="form-section-title">Macros por porción</div>
+        <div class="form-grid form-grid--4">
+          <div class="form-field">
+            <label>Calorías (kcal)</label>
+            <input type="number" id="rf-cal" min="0" placeholder="500" />
+          </div>
+          <div class="form-field">
+            <label>Proteína (g)</label>
+            <input type="number" id="rf-prot" min="0" step="0.1" placeholder="40" />
+          </div>
+          <div class="form-field">
+            <label>Carbohidratos (g)</label>
+            <input type="number" id="rf-carbs" min="0" step="0.1" placeholder="50" />
+          </div>
+          <div class="form-field">
+            <label>Grasas (g)</label>
+            <input type="number" id="rf-fat" min="0" step="0.1" placeholder="10" />
+          </div>
+        </div>
+
+        <div class="form-section-title">
+          Ingredientes
+          <button class="btn-add-row" id="btn-add-ingredient">+ Agregar</button>
+        </div>
+        <div id="ingredients-list" class="dynamic-list"></div>
+
+        <div class="form-section-title">
+          Preparación (pasos)
+          <button class="btn-add-row" id="btn-add-step">+ Agregar paso</button>
+        </div>
+        <div id="steps-list" class="dynamic-list"></div>
+
+        <div class="editor-actions">
+          <button id="btn-save-recipe" class="btn-primary">Guardar receta</button>
+        </div>
+      </div>
+
+      <!-- JSON TAB -->
+      <div id="editor-tab-json" class="editor-tab-content hidden">
+        <p class="json-hint">Pegá un objeto con la estructura <code>receta: { … }</code> o el array completo <code>recetas: [ … ]</code>.</p>
+        <textarea id="rf-json" rows="16" placeholder='{ "receta": { "nombre": "...", ... } }'></textarea>
+        <div class="editor-actions">
+          <button id="btn-load-json" class="btn-secondary">Previsualizar</button>
+          <button id="btn-save-json-recipe" class="btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

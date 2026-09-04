@@ -1,0 +1,646 @@
+{
+  "recetas": [
+    {
+      "id": "boller-karry",
+      "receta": {
+        "nombre": "Boller i karry (versión fit)",
+        "descripcion_breve": "El clásico danés de albóndigas adaptado para recomposición corporal. Albóndigas magras de pechuga de pollo en salsa de curry con leche de coco light, servidas sobre cous cous.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 615,
+          "proteina_g": 53,
+          "carbohidratos_g": 42,
+          "grasas_g": 10
+        },
+        "ingredientes": [
+          { "item": "Pechuga de pollo cruda (procesada o picada)", "cantidad": 400, "unidad": "g" },
+          { "item": "Cebolla blanca", "cantidad": 100, "unidad": "g" },
+          { "item": "Leche de coco light (ej. Santa Maria)", "cantidad": 200, "unidad": "ml" },
+          { "item": "Caldo de pollo", "cantidad": 200, "unidad": "ml" },
+          { "item": "Cous cous (peso en seco)", "cantidad": 100, "unidad": "g" },
+          { "item": "Curry en polvo", "cantidad": 15, "unidad": "g" },
+          { "item": "Aceite de oliva", "cantidad": 5, "unidad": "ml" },
+          { "item": "Sal", "cantidad": 5, "unidad": "g" },
+          { "item": "Pimienta negra", "cantidad": 2, "unidad": "g" }
+        ],
+        "paso_a_paso": [
+          "Procesar los 400g de pechuga de pollo junto con la mitad de la cebolla (50g), 2g de sal y la pimienta hasta obtener una pasta homogénea.",
+          "Formar albóndigas medianas con las manos ligeramente húmedas para que la mezcla no se pegue.",
+          "En una sartén profunda o cacerola, calentar los 5ml de aceite de oliva a fuego medio-alto y dorar las albóndigas superficialmente. Retirar y reservar.",
+          "En la misma cacerola, sofreír el resto de la cebolla (50g) finamente picada junto con los 15g de curry en polvo durante 2 minutos a fuego medio para liberar los aromas.",
+          "Agregar los 200ml de caldo de pollo y los 200ml de leche de coco light. Revolver bien y llevar a ebullición suave.",
+          "Reincorporar las albóndigas a la salsa, tapar y cocinar a fuego bajo durante 12-15 minutos para que se cocinen por dentro y la salsa reduzca.",
+          "Mientras se hacen las albóndigas, colocar los 100g de cous cous en un recipiente, agregar 100ml de agua hirviendo (o caldo extra) y los 3g de sal restantes. Tapar y dejar reposar 5 minutos. Luego desgranar con un tenedor.",
+          "Servir la porción de cous cous como base y colocar las albóndigas bañadas en la salsa de curry por encima."
+        ]
+      }
+    },
+    {
+      "id": "pollo-batata-asado",
+      "receta": {
+        "nombre": "Pollo al horno con batata y pimentón",
+        "descripcion_breve": "Muslos de pollo al horno con batata asada y pimentón ahumado. Reconfortante, alto en proteína y sin complicaciones.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 520,
+          "proteina_g": 48,
+          "carbohidratos_g": 38,
+          "grasas_g": 12
+        },
+        "ingredientes": [
+          { "item": "Muslos de pollo sin piel", "cantidad": 500, "unidad": "g" },
+          { "item": "Batata", "cantidad": 300, "unidad": "g" },
+          { "item": "Pimentón ahumado", "cantidad": 8, "unidad": "g" },
+          { "item": "Ajo en polvo", "cantidad": 4, "unidad": "g" },
+          { "item": "Aceite de oliva", "cantidad": 10, "unidad": "ml" },
+          { "item": "Sal", "cantidad": 4, "unidad": "g" },
+          { "item": "Pimienta negra", "cantidad": 2, "unidad": "g" }
+        ],
+        "paso_a_paso": [
+          "Precalentar el horno a 200°C.",
+          "Pelar y cortar la batata en cubos de 2cm. Mezclar con 5ml de aceite, sal y ajo en polvo.",
+          "Adobar los muslos con el pimentón ahumado, pimienta y el aceite restante.",
+          "Disponer todo en una bandeja. Primero la batata; a los 10 minutos incorporar el pollo.",
+          "Hornear 35-40 minutos hasta que el pollo esté dorado y la batata tierna.",
+          "Servir caliente."
+        ]
+      }
+    },
+    {
+      "id": "salmon-quinoa",
+      "receta": {
+        "nombre": "Salmón con quinoa y espinacas salteadas",
+        "descripcion_breve": "Filete de salmón a la plancha sobre cama de quinoa con espinacas salteadas al ajo. Rico en omega-3 y proteínas completas.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 580,
+          "proteina_g": 46,
+          "carbohidratos_g": 34,
+          "grasas_g": 22
+        },
+        "ingredientes": [
+          { "item": "Filete de salmón", "cantidad": 400, "unidad": "g" },
+          { "item": "Quinoa (seca)", "cantidad": 120, "unidad": "g" },
+          { "item": "Espinacas frescas", "cantidad": 150, "unidad": "g" },
+          { "item": "Ajo", "cantidad": 2, "unidad": "dientes" },
+          { "item": "Aceite de oliva", "cantidad": 10, "unidad": "ml" },
+          { "item": "Limón", "cantidad": 1, "unidad": "unidad" },
+          { "item": "Sal", "cantidad": 4, "unidad": "g" }
+        ],
+        "paso_a_paso": [
+          "Cocinar la quinoa en 240ml de agua con sal durante 15 minutos. Reposar tapada 5 minutos.",
+          "Calentar una plancha o sartén con 5ml de aceite. Salpimentar el salmón y cocinar 4 minutos por lado.",
+          "En otra sartén, dorar el ajo laminado en el aceite restante. Agregar las espinacas y saltear 2 minutos.",
+          "Servir la quinoa como base, colocar las espinacas y el salmón. Exprimir limón al gusto."
+        ]
+      }
+    },
+    {
+      "id": "omelette-claras",
+      "receta": {
+        "nombre": "Omelette de claras con vegetales",
+        "descripcion_breve": "Omelette proteico hecho con claras de huevo, champiñones, pimiento rojo y queso fresco. Ideal para desayuno o cena liviana.",
+        "categoria": "desayuno/cena liviana",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 280,
+          "proteina_g": 32,
+          "carbohidratos_g": 8,
+          "grasas_g": 12
+        },
+        "ingredientes": [
+          { "item": "Claras de huevo", "cantidad": 6, "unidad": "unidades" },
+          { "item": "Champiñones", "cantidad": 80, "unidad": "g" },
+          { "item": "Pimiento rojo", "cantidad": 60, "unidad": "g" },
+          { "item": "Queso fresco o cottage", "cantidad": 40, "unidad": "g" },
+          { "item": "Aceite de oliva", "cantidad": 5, "unidad": "ml" },
+          { "item": "Sal y especias", "cantidad": 1, "unidad": "al gusto" }
+        ],
+        "paso_a_paso": [
+          "Batir las claras con una pizca de sal hasta que estén ligeramente espumosas.",
+          "Saltear los champiñones y el pimiento en el aceite durante 3 minutos.",
+          "Verter las claras sobre los vegetales en la sartén a fuego medio-bajo.",
+          "Cuando los bordes estén cuajados, agregar el queso fresco y doblar el omelette.",
+          "Cocinar 1 minuto más y servir."
+        ]
+      }
+    },
+    {
+      "id": "bowl-atun-arroz",
+      "receta": {
+        "nombre": "Bowl de atún con arroz integral",
+        "descripcion_breve": "Bowl rápido y nutritivo con atún al natural, arroz integral, edamame y pepino. Sin cocción de proteína necesaria.",
+        "categoria": "almuerzo/cena",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 460,
+          "proteina_g": 42,
+          "carbohidratos_g": 52,
+          "grasas_g": 7
+        },
+        "ingredientes": [
+          { "item": "Atún al natural en lata", "cantidad": 160, "unidad": "g" },
+          { "item": "Arroz integral cocido", "cantidad": 150, "unidad": "g" },
+          { "item": "Edamame (sin vaina)", "cantidad": 80, "unidad": "g" },
+          { "item": "Pepino", "cantidad": 80, "unidad": "g" },
+          { "item": "Salsa de soja baja en sodio", "cantidad": 15, "unidad": "ml" },
+          { "item": "Aceite de sésamo", "cantidad": 5, "unidad": "ml" },
+          { "item": "Semillas de sésamo", "cantidad": 5, "unidad": "g" }
+        ],
+        "paso_a_paso": [
+          "Colocar el arroz integral cocido como base del bowl.",
+          "Escurrir el atún y disponerlo sobre el arroz.",
+          "Agregar el edamame y el pepino cortado en rodajas.",
+          "Mezclar la salsa de soja con el aceite de sésamo y verter sobre el bowl.",
+          "Terminar con semillas de sésamo."
+        ]
+      }
+    },
+    {
+      "id": "lentejas-espinacas",
+      "receta": {
+        "nombre": "Lentejas con espinacas y huevo pochado",
+        "descripcion_breve": "Lentejas cocidas con espinacas frescas y coronadas con un huevo pochado. Plato vegetariano completo con hierro y proteína.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 430,
+          "proteina_g": 28,
+          "carbohidratos_g": 52,
+          "grasas_g": 8
+        },
+        "ingredientes": [
+          { "item": "Lentejas cocidas", "cantidad": 300, "unidad": "g" },
+          { "item": "Espinacas frescas", "cantidad": 100, "unidad": "g" },
+          { "item": "Huevos", "cantidad": 2, "unidad": "unidades" },
+          { "item": "Cebolla", "cantidad": 80, "unidad": "g" },
+          { "item": "Ajo", "cantidad": 2, "unidad": "dientes" },
+          { "item": "Comino", "cantidad": 4, "unidad": "g" },
+          { "item": "Aceite de oliva", "cantidad": 10, "unidad": "ml" },
+          { "item": "Vinagre blanco", "cantidad": 15, "unidad": "ml" },
+          { "item": "Sal", "cantidad": 4, "unidad": "g" }
+        ],
+        "paso_a_paso": [
+          "Sofreír la cebolla y el ajo en aceite de oliva hasta transparentar.",
+          "Agregar el comino y las lentejas cocidas. Mezclar y calentar 5 minutos.",
+          "Incorporar las espinacas y cocinar hasta que se marchiten.",
+          "Para el huevo pochado: hervir agua con vinagre, crear un remolino y depositar el huevo 3 minutos.",
+          "Servir las lentejas con espinacas y coronar con el huevo pochado."
+        ]
+      }
+    },
+    {
+      "id": "pollo-brocoli-sweet-potato",
+      "receta": {
+        "nombre": "Pechugas de pollo con brócoli y puré de batata",
+        "descripcion_breve": "El clásico fit. Pechuga de pollo a la plancha, brócoli al vapor y puré de batata. Simple, efectivo y muy nutritivo.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 490,
+          "proteina_g": 55,
+          "carbohidratos_g": 40,
+          "grasas_g": 8
+        },
+        "ingredientes": [
+          { "item": "Pechuga de pollo", "cantidad": 500, "unidad": "g" },
+          { "item": "Brócoli", "cantidad": 300, "unidad": "g" },
+          { "item": "Batata", "cantidad": 250, "unidad": "g" },
+          { "item": "Ajo en polvo", "cantidad": 4, "unidad": "g" },
+          { "item": "Aceite de oliva", "cantidad": 10, "unidad": "ml" },
+          { "item": "Sal y pimienta", "cantidad": 1, "unidad": "al gusto" }
+        ],
+        "paso_a_paso": [
+          "Hervir la batata pelada hasta tierna (20 min). Pisarla con sal y una pizca de aceite.",
+          "Cocinar el brócoli al vapor o hervido 5-7 minutos. Salpimentar.",
+          "Adobar las pechugas con ajo en polvo, sal y pimienta. Cocinar a la plancha 5-6 min por lado.",
+          "Servir con el puré de batata y el brócoli."
+        ]
+      }
+    },
+    {
+      "id": "pasta-pavo",
+      "receta": {
+        "nombre": "Pasta integral con salsa de pavo y tomate",
+        "descripcion_breve": "Pasta integral con salsa boloñesa de pavo magro. Alta en proteínas y carbohidratos complejos, ideal post-entrenamiento.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 560,
+          "proteina_g": 42,
+          "carbohidratos_g": 68,
+          "grasas_g": 10
+        },
+        "ingredientes": [
+          { "item": "Pasta integral", "cantidad": 160, "unidad": "g" },
+          { "item": "Carne molida de pavo", "cantidad": 300, "unidad": "g" },
+          { "item": "Tomate triturado", "cantidad": 400, "unidad": "g" },
+          { "item": "Cebolla", "cantidad": 100, "unidad": "g" },
+          { "item": "Ajo", "cantidad": 3, "unidad": "dientes" },
+          { "item": "Orégano", "cantidad": 4, "unidad": "g" },
+          { "item": "Aceite de oliva", "cantidad": 10, "unidad": "ml" },
+          { "item": "Sal y pimienta", "cantidad": 1, "unidad": "al gusto" }
+        ],
+        "paso_a_paso": [
+          "Sofreír la cebolla y ajo en aceite hasta dorar.",
+          "Agregar el pavo molido y cocinar hasta que cambie de color, desmenuzando bien.",
+          "Incorporar el tomate triturado y orégano. Cocinar a fuego bajo 20 minutos.",
+          "Cocinar la pasta al dente según indicaciones del paquete.",
+          "Servir la pasta con la salsa encima."
+        ]
+      }
+    },
+    {
+      "id": "wok-pollo-vegetales",
+      "receta": {
+        "nombre": "Wok de pollo con vegetales y salsa de ostras",
+        "descripcion_breve": "Salteado rápido de tiras de pollo con zanahorias, morrones y arvejas en salsa de ostras. Listo en 20 minutos.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 420,
+          "proteina_g": 44,
+          "carbohidratos_g": 32,
+          "grasas_g": 9
+        },
+        "ingredientes": [
+          { "item": "Pechuga de pollo en tiras", "cantidad": 400, "unidad": "g" },
+          { "item": "Zanahoria", "cantidad": 100, "unidad": "g" },
+          { "item": "Morrón rojo", "cantidad": 100, "unidad": "g" },
+          { "item": "Arvejas congeladas", "cantidad": 80, "unidad": "g" },
+          { "item": "Salsa de ostras", "cantidad": 30, "unidad": "ml" },
+          { "item": "Salsa de soja", "cantidad": 15, "unidad": "ml" },
+          { "item": "Jengibre fresco", "cantidad": 10, "unidad": "g" },
+          { "item": "Aceite de sésamo", "cantidad": 10, "unidad": "ml" }
+        ],
+        "paso_a_paso": [
+          "Calentar el wok o sartén grande a fuego muy alto con el aceite de sésamo.",
+          "Saltear el pollo en tiras 3-4 minutos hasta dorado. Retirar.",
+          "Saltear los vegetales 3 minutos. Agregar el jengibre rallado.",
+          "Devolver el pollo, agregar la salsa de ostras y soja. Saltear 2 minutos más.",
+          "Servir solo o sobre arroz blanco."
+        ]
+      }
+    },
+    {
+      "id": "tortilla-espanola-fit",
+      "receta": {
+        "nombre": "Tortilla española fit (mixta)",
+        "descripcion_breve": "Tortilla española con patata cocida y clara de huevo extra para reducir grasas sin perder esponjosidad. Perfecta caliente o fría.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 340,
+          "proteina_g": 26,
+          "carbohidratos_g": 30,
+          "grasas_g": 12
+        },
+        "ingredientes": [
+          { "item": "Huevos enteros", "cantidad": 3, "unidad": "unidades" },
+          { "item": "Claras de huevo", "cantidad": 3, "unidad": "unidades" },
+          { "item": "Papa cocida", "cantidad": 250, "unidad": "g" },
+          { "item": "Cebolla", "cantidad": 80, "unidad": "g" },
+          { "item": "Aceite de oliva", "cantidad": 10, "unidad": "ml" },
+          { "item": "Sal", "cantidad": 3, "unidad": "g" }
+        ],
+        "paso_a_paso": [
+          "Cocinar las papas con cáscara hasta tiernas. Pelar y cortar en rodajas.",
+          "Sofreír la cebolla en aceite hasta transparentar.",
+          "Batir huevos y claras con sal. Incorporar papas y cebolla.",
+          "Verter la mezcla en sartén antiadherente a fuego medio. Cuajar los bordes.",
+          "Dar vuelta con ayuda de un plato. Cocinar el otro lado 2-3 minutos.",
+          "Dejar reposar 5 minutos antes de cortar."
+        ]
+      }
+    },
+    {
+      "id": "curry-garbanzos",
+      "receta": {
+        "nombre": "Curry de garbanzos con leche de coco",
+        "descripcion_breve": "Curry vegetariano de garbanzos con tomate, espinacas y leche de coco light. Abundante en fibra, proteína vegetal y sabor.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 390,
+          "proteina_g": 18,
+          "carbohidratos_g": 52,
+          "grasas_g": 10
+        },
+        "ingredientes": [
+          { "item": "Garbanzos cocidos", "cantidad": 400, "unidad": "g" },
+          { "item": "Tomate triturado", "cantidad": 200, "unidad": "g" },
+          { "item": "Leche de coco light", "cantidad": 150, "unidad": "ml" },
+          { "item": "Espinacas", "cantidad": 80, "unidad": "g" },
+          { "item": "Cebolla", "cantidad": 100, "unidad": "g" },
+          { "item": "Curry en polvo", "cantidad": 12, "unidad": "g" },
+          { "item": "Comino", "cantidad": 4, "unidad": "g" },
+          { "item": "Aceite de oliva", "cantidad": 10, "unidad": "ml" }
+        ],
+        "paso_a_paso": [
+          "Sofreír la cebolla hasta dorar. Agregar curry y comino, cocinar 1 minuto.",
+          "Incorporar los garbanzos y el tomate triturado. Cocinar 10 minutos.",
+          "Agregar la leche de coco y las espinacas. Cocinar 5 minutos más.",
+          "Servir con arroz basmati o naan."
+        ]
+      }
+    },
+    {
+      "id": "burrito-bowl",
+      "receta": {
+        "nombre": "Burrito bowl de carne magra",
+        "descripcion_breve": "Bowl estilo tex-mex con carne vacuna magra, arroz, frijoles negros, guacamole light y pico de gallo. Rico y saciante.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 570,
+          "proteina_g": 45,
+          "carbohidratos_g": 55,
+          "grasas_g": 14
+        },
+        "ingredientes": [
+          { "item": "Carne vacuna magra picada", "cantidad": 300, "unidad": "g" },
+          { "item": "Arroz cocido", "cantidad": 150, "unidad": "g" },
+          { "item": "Frijoles negros cocidos", "cantidad": 120, "unidad": "g" },
+          { "item": "Palta/aguacate", "cantidad": 60, "unidad": "g" },
+          { "item": "Tomate", "cantidad": 80, "unidad": "g" },
+          { "item": "Cebolla morada", "cantidad": 40, "unidad": "g" },
+          { "item": "Lima", "cantidad": 1, "unidad": "unidad" },
+          { "item": "Comino y pimentón", "cantidad": 6, "unidad": "g" },
+          { "item": "Sal y cilantro", "cantidad": 1, "unidad": "al gusto" }
+        ],
+        "paso_a_paso": [
+          "Cocinar la carne picada con comino, pimentón y sal hasta dorar bien.",
+          "Preparar el pico de gallo con tomate, cebolla morada, cilantro y jugo de lima.",
+          "Pisar la palta con limón y sal para el guacamole.",
+          "Armar el bowl: arroz de base, carne, frijoles, guacamole y pico de gallo."
+        ]
+      }
+    },
+    {
+      "id": "ensalada-pollo-greek",
+      "receta": {
+        "nombre": "Ensalada griega con pollo a la plancha",
+        "descripcion_breve": "Ensalada mediterránea con pollo a la plancha, tomate cherry, pepino, aceitunas y queso feta light. Fresca y proteica.",
+        "categoria": "almuerzo/cena liviana",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 380,
+          "proteina_g": 38,
+          "carbohidratos_g": 12,
+          "grasas_g": 18
+        },
+        "ingredientes": [
+          { "item": "Pechuga de pollo", "cantidad": 200, "unidad": "g" },
+          { "item": "Tomate cherry", "cantidad": 100, "unidad": "g" },
+          { "item": "Pepino", "cantidad": 100, "unidad": "g" },
+          { "item": "Aceitunas kalamata", "cantidad": 30, "unidad": "g" },
+          { "item": "Queso feta light", "cantidad": 40, "unidad": "g" },
+          { "item": "Aceite de oliva", "cantidad": 10, "unidad": "ml" },
+          { "item": "Orégano y limón", "cantidad": 1, "unidad": "al gusto" }
+        ],
+        "paso_a_paso": [
+          "Cocinar el pollo a la plancha con orégano y sal. Cortar en tiras.",
+          "Combinar tomate cherry, pepino en rodajas y aceitunas.",
+          "Agregar el feta desmenuzado.",
+          "Aliñar con aceite de oliva y jugo de limón. Coronar con el pollo."
+        ]
+      }
+    },
+    {
+      "id": "avena-proteica",
+      "receta": {
+        "nombre": "Avena proteica con frutas y miel",
+        "descripcion_breve": "Porridge de avena cocida con proteína de suero, banana, arándanos y un toque de miel. El mejor desayuno energético.",
+        "categoria": "desayuno",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 420,
+          "proteina_g": 35,
+          "carbohidratos_g": 58,
+          "grasas_g": 6
+        },
+        "ingredientes": [
+          { "item": "Avena arrollada", "cantidad": 70, "unidad": "g" },
+          { "item": "Leche descremada", "cantidad": 200, "unidad": "ml" },
+          { "item": "Proteína de suero (whey vanilla)", "cantidad": 30, "unidad": "g" },
+          { "item": "Banana", "cantidad": 80, "unidad": "g" },
+          { "item": "Arándanos", "cantidad": 50, "unidad": "g" },
+          { "item": "Miel", "cantidad": 10, "unidad": "g" }
+        ],
+        "paso_a_paso": [
+          "Cocinar la avena en la leche a fuego medio, revolviendo, hasta espesar (5 min).",
+          "Retirar del fuego y mezclar con la proteína de suero.",
+          "Servir en un bowl con la banana en rodajas y los arándanos.",
+          "Terminar con la miel."
+        ]
+      }
+    },
+    {
+      "id": "tostadas-palta-huevo",
+      "receta": {
+        "nombre": "Tostadas de palta con huevo revuelto",
+        "descripcion_breve": "Tostadas integrales con palta y huevos revueltos al estilo cremoso. Desayuno completo listo en 10 minutos.",
+        "categoria": "desayuno",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 360,
+          "proteina_g": 22,
+          "carbohidratos_g": 30,
+          "grasas_g": 16
+        },
+        "ingredientes": [
+          { "item": "Pan integral", "cantidad": 2, "unidad": "rebanadas" },
+          { "item": "Palta/aguacate", "cantidad": 80, "unidad": "g" },
+          { "item": "Huevos", "cantidad": 3, "unidad": "unidades" },
+          { "item": "Limón", "cantidad": 0.5, "unidad": "unidad" },
+          { "item": "Sal y pimienta", "cantidad": 1, "unidad": "al gusto" },
+          { "item": "Hojuelas de chile (opcional)", "cantidad": 1, "unidad": "pizca" }
+        ],
+        "paso_a_paso": [
+          "Tostar el pan.",
+          "Pisar la palta con limón, sal y pimienta.",
+          "Batir los huevos con sal. En sartén a fuego muy bajo, revolver lentamente con espátula.",
+          "Untar la palta en las tostadas y colocar los huevos revueltos encima.",
+          "Terminar con hojuelas de chile si se desea."
+        ]
+      }
+    },
+    {
+      "id": "snack-cottage-frutas",
+      "receta": {
+        "nombre": "Snack: Cottage cheese con frutas y granola",
+        "descripcion_breve": "Bowl de queso cottage con frutos rojos, rodajas de pera y una cucharada de granola. Alto en proteína, sin cocción.",
+        "categoria": "snack",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 210,
+          "proteina_g": 18,
+          "carbohidratos_g": 24,
+          "grasas_g": 4
+        },
+        "ingredientes": [
+          { "item": "Queso cottage", "cantidad": 150, "unidad": "g" },
+          { "item": "Frutos rojos (frutillas, arándanos)", "cantidad": 80, "unidad": "g" },
+          { "item": "Pera", "cantidad": 60, "unidad": "g" },
+          { "item": "Granola sin azúcar", "cantidad": 20, "unidad": "g" },
+          { "item": "Miel (opcional)", "cantidad": 5, "unidad": "g" }
+        ],
+        "paso_a_paso": [
+          "Colocar el cottage en un bowl.",
+          "Agregar las frutas cortadas encima.",
+          "Terminar con la granola y la miel opcional."
+        ]
+      }
+    },
+    {
+      "id": "snack-yogur-proteico",
+      "receta": {
+        "nombre": "Snack: Yogur griego con proteína y nueces",
+        "descripcion_breve": "Yogur griego natural mezclado con proteína de suero y nueces picadas. Snack saciante entre comidas.",
+        "categoria": "snack",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 240,
+          "proteina_g": 28,
+          "carbohidratos_g": 12,
+          "grasas_g": 8
+        },
+        "ingredientes": [
+          { "item": "Yogur griego 0% sin azúcar", "cantidad": 150, "unidad": "g" },
+          { "item": "Proteína de suero (whey)", "cantidad": 20, "unidad": "g" },
+          { "item": "Nueces picadas", "cantidad": 15, "unidad": "g" },
+          { "item": "Canela", "cantidad": 1, "unidad": "pizca" }
+        ],
+        "paso_a_paso": [
+          "Mezclar el yogur con la proteína de suero hasta integrar.",
+          "Agregar las nueces picadas y la canela.",
+          "Servir frío."
+        ]
+      }
+    },
+    {
+      "id": "snack-batido-platano",
+      "receta": {
+        "nombre": "Snack: Batido de banana y mantequilla de maní",
+        "descripcion_breve": "Batido espeso de banana con leche, proteína de suero y mantequilla de maní. El snack post-entrenamiento perfecto.",
+        "categoria": "snack",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 310,
+          "proteina_g": 30,
+          "carbohidratos_g": 35,
+          "grasas_g": 8
+        },
+        "ingredientes": [
+          { "item": "Banana", "cantidad": 100, "unidad": "g" },
+          { "item": "Leche descremada", "cantidad": 200, "unidad": "ml" },
+          { "item": "Proteína de suero (whey)", "cantidad": 25, "unidad": "g" },
+          { "item": "Mantequilla de maní natural", "cantidad": 15, "unidad": "g" }
+        ],
+        "paso_a_paso": [
+          "Colocar todos los ingredientes en la licuadora.",
+          "Procesar hasta obtener una mezcla homogénea.",
+          "Servir inmediatamente."
+        ]
+      }
+    },
+    {
+      "id": "snack-hummus-vegetales",
+      "receta": {
+        "nombre": "Snack: Hummus casero con bastones de vegetales",
+        "descripcion_breve": "Hummus suave de garbanzos con ajo y limón, acompañado de bastones de zanahoria, apio y morrón. Snack saludable y saciante.",
+        "categoria": "snack",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 180,
+          "proteina_g": 8,
+          "carbohidratos_g": 20,
+          "grasas_g": 7
+        },
+        "ingredientes": [
+          { "item": "Garbanzos cocidos", "cantidad": 200, "unidad": "g" },
+          { "item": "Tahini", "cantidad": 20, "unidad": "g" },
+          { "item": "Limón", "cantidad": 1, "unidad": "unidad" },
+          { "item": "Ajo", "cantidad": 1, "unidad": "diente" },
+          { "item": "Aceite de oliva", "cantidad": 10, "unidad": "ml" },
+          { "item": "Zanahoria", "cantidad": 100, "unidad": "g" },
+          { "item": "Apio", "cantidad": 60, "unidad": "g" },
+          { "item": "Morrón rojo", "cantidad": 80, "unidad": "g" }
+        ],
+        "paso_a_paso": [
+          "Procesar los garbanzos con tahini, ajo, jugo de limón y aceite hasta suave.",
+          "Ajustar sal y consistencia con agua fría.",
+          "Cortar los vegetales en bastones.",
+          "Servir el hummus con los bastones."
+        ]
+      }
+    },
+    {
+      "id": "caldo-pollo-verduras",
+      "receta": {
+        "nombre": "Caldo de pollo con verduras y fideos",
+        "descripcion_breve": "Sopa reconfortante de caldo de pollo casero con zanahoria, apio, zapallito y fideos cabello de ángel. Ideal para días fríos.",
+        "categoria": "almuerzo/cena liviana",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 290,
+          "proteina_g": 28,
+          "carbohidratos_g": 30,
+          "grasas_g": 5
+        },
+        "ingredientes": [
+          { "item": "Pechuga de pollo", "cantidad": 300, "unidad": "g" },
+          { "item": "Zanahoria", "cantidad": 100, "unidad": "g" },
+          { "item": "Apio", "cantidad": 80, "unidad": "g" },
+          { "item": "Zapallito verde", "cantidad": 100, "unidad": "g" },
+          { "item": "Fideos cabello de ángel", "cantidad": 60, "unidad": "g" },
+          { "item": "Caldo de pollo bajo en sodio", "cantidad": 1000, "unidad": "ml" },
+          { "item": "Sal, perejil y laurel", "cantidad": 1, "unidad": "al gusto" }
+        ],
+        "paso_a_paso": [
+          "Hervir el caldo con la pechuga entera, laurel y sal 20 minutos.",
+          "Retirar el pollo, desmenuzar y reservar.",
+          "Agregar las verduras cortadas al caldo. Cocinar 10 minutos.",
+          "Incorporar los fideos y el pollo desmenuzado. Cocinar 3-4 minutos más.",
+          "Servir caliente con perejil fresco."
+        ]
+      }
+    },
+    {
+      "id": "risotto-champignones-fit",
+      "receta": {
+        "nombre": "Risotto de champiñones fit",
+        "descripcion_breve": "Risotto cremoso de champiñones preparado con arroz arbóreo, caldo de verduras y queso parmesano en cantidad moderada. Sin crema de leche.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 400,
+          "proteina_g": 16,
+          "carbohidratos_g": 62,
+          "grasas_g": 8
+        },
+        "ingredientes": [
+          { "item": "Arroz arbóreo", "cantidad": 150, "unidad": "g" },
+          { "item": "Champiñones", "cantidad": 200, "unidad": "g" },
+          { "item": "Caldo de verduras", "cantidad": 600, "unidad": "ml" },
+          { "item": "Cebolla", "cantidad": 80, "unidad": "g" },
+          { "item": "Vino blanco seco", "cantidad": 60, "unidad": "ml" },
+          { "item": "Queso parmesano rallado", "cantidad": 20, "unidad": "g" },
+          { "item": "Aceite de oliva", "cantidad": 10, "unidad": "ml" },
+          { "item": "Sal y pimienta", "cantidad": 1, "unidad": "al gusto" }
+        ],
+        "paso_a_paso": [
+          "Calentar el caldo en una olla a fuego bajo.",
+          "Sofreír la cebolla en aceite. Agregar los champiñones y saltear 4 minutos.",
+          "Incorporar el arroz, tostar 1 minuto. Agregar el vino y dejar evaporar.",
+          "Agregar el caldo caliente de a cucharones, revolviendo constantemente hasta absorber.",
+          "Después de 18-20 minutos, retirar del fuego. Incorporar el parmesano.",
+          "Dejar reposar 2 minutos y servir."
+        ]
+      }
+    }
+  ]
+}

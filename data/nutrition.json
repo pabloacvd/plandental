@@ -1,0 +1,24 @@
+{
+  "nutrition": {
+    "Pablo": {
+      "daily_calories_kcal": 2080,
+      "protein_g": 160,
+      "carbs_g": 215,
+      "fat_g": 64,
+      "creatine_g": 5,
+      "whey_g": 45,
+      "whey_purity_percent": 84,
+      "notes": "Batido Ninja Creami (tarde): ~50-55g proteína. Almuerzo y cena: ~800 kcal c/u con 50-55g proteína."
+    },
+    "Juli": {
+      "daily_calories_kcal": 1690,
+      "protein_g": 125,
+      "carbs_g": 175,
+      "fat_g": 54,
+      "creatine_g": 5,
+      "whey_g": 30,
+      "whey_purity_percent": 84,
+      "notes": "Batido Ninja Creami (tarde): ~35-40g proteína. Almuerzo y cena: ~600 kcal c/u con 40-45g proteína."
+    }
+  }
+}
