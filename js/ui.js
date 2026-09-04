@@ -498,7 +498,15 @@ export function renderDaySummary(dayEntry, nutrition, container) {
   ];
 
   container.innerHTML = stats.map(s => {
-    const pct = s.target ? Math.min((s.current / s.target) * 100, 100) : null;
+    const pct       = s.target ? Math.min((s.current / s.target) * 100, 100) : null;
+    const remaining = s.target != null ? s.target - s.current : null;
+    const remRound  = remaining != null
+      ? (s.unit === 'kcal' ? Math.round(remaining) : Math.round(remaining * 10) / 10)
+      : null;
+    const remColor  = remaining != null && remaining < 0 ? 'var(--red)' : 'var(--green)';
+    const remLabel  = remaining != null && remaining < 0
+      ? `Exceso: ${Math.abs(remRound)} ${s.unit}`
+      : `Disponible: ${remRound} ${s.unit}`;
     return `
       <div class="summary-stat">
         <div class="summary-stat-label">${s.label}</div>
@@ -511,6 +519,7 @@ export function renderDaySummary(dayEntry, nutrition, container) {
             </div>
           </div>
         ` : ''}
+        ${remRound !== null ? `<div class="summary-stat-remaining" style="color:${remColor}">${remLabel}</div>` : ''}
       </div>
     `;
   }).join('');
@@ -546,6 +555,16 @@ function renderFamilySummary(pabloEntry, juliEntry, nutritionAll, container) {
         const jVal  = jMacros[r.key] ?? 0;
         const pPct  = pct(pVal, r.pabloTarget);
         const jPct  = pct(jVal, r.juliTarget);
+
+        const remDisp = (val, target, unit) => {
+          if (!target) return '';
+          const rem   = target - val;
+          const round = unit === 'kcal' ? Math.round(rem) : Math.round(rem * 10) / 10;
+          const color = rem < 0 ? 'var(--red)' : 'var(--green)';
+          const label = rem < 0 ? `Exceso: ${Math.abs(round)} ${unit}` : `Disponible: ${round} ${unit}`;
+          return `<div class="family-row-remaining" style="color:${color}">${label}</div>`;
+        };
+
         return `
           <div class="family-summary-row">
             <div class="family-row-label" style="color:${r.color}">${r.label}</div>
@@ -553,11 +572,13 @@ function renderFamilySummary(pabloEntry, juliEntry, nutritionAll, container) {
               <div class="family-row-value">${disp(pVal, r.unit)}</div>
               ${r.pabloTarget ? `<div class="family-row-sub">meta: ${r.pabloTarget} ${r.unit}</div>` : ''}
               ${r.pabloTarget ? `<div class="summary-stat-bar"><div class="summary-stat-bar-fill" style="width:${pPct}%;background:${r.color}"></div></div>` : ''}
+              ${remDisp(pVal, r.pabloTarget, r.unit)}
             </div>
             <div class="family-row-cell">
               <div class="family-row-value">${disp(jVal, r.unit)}</div>
               ${r.juliTarget ? `<div class="family-row-sub">meta: ${r.juliTarget} ${r.unit}</div>` : ''}
               ${r.juliTarget ? `<div class="summary-stat-bar"><div class="summary-stat-bar-fill" style="width:${jPct}%;background:${r.color}"></div></div>` : ''}
+              ${remDisp(jVal, r.juliTarget, r.unit)}
             </div>
           </div>
         `;

@@ -586,6 +586,9 @@ input  { font: inherit; border: none; outline: none; }
 .family-row-sub {
   font-size: .68rem; color: var(--text-muted);
 }
+.family-row-remaining {
+  font-size: .68rem; font-weight: 600; margin-top: 1px;
+}
 .summary-stat {
   display: flex; flex-direction: column; gap: 2px;
 }
@@ -598,6 +601,9 @@ input  { font: inherit; border: none; outline: none; }
 }
 .summary-stat-sub {
   font-size: .7rem; color: var(--text-muted);
+}
+.summary-stat-remaining {
+  font-size: .72rem; font-weight: 600; margin-top: 1px;
 }
 .summary-stat-bar {
   height: 3px; background: var(--border);
