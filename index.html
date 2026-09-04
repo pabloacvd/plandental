@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>PlanDental — Planner Semanal</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -19,16 +19,17 @@
       </div>
       <div class="header-controls">
         <div class="person-switcher">
-          <button class="person-btn active" data-person="Pablo">Pablo</button>
+          <button class="person-btn" data-person="Pablo">Pablo</button>
           <button class="person-btn" data-person="Juli">Juli</button>
-          <button class="person-btn person-btn--familia" data-person="Familia">👨‍👩 Familia</button>
+          <button class="person-btn person-btn--familia active" data-person="Familia">👨‍👩 Familia</button>
         </div>
         <div class="week-nav">
-          <button id="btn-prev-week" title="Semana anterior">&#8249;</button>
+          <button id="btn-prev-week" title="Anterior">&#8249;</button>
           <span id="week-label">Sem 00</span>
-          <button id="btn-next-week" title="Semana siguiente">&#8250;</button>
+          <button id="btn-next-week" title="Siguiente">&#8250;</button>
         </div>
-        <div class="auth-area">
+        <!-- Auth moved to footer on mobile; shown here on desktop -->
+        <div class="auth-area auth-area--desktop">
           <button id="btn-github-auth" class="btn-auth">Conectar GitHub</button>
           <span id="auth-status" class="auth-status"></span>
         </div>
@@ -84,6 +85,17 @@
 
     </div>
   </main>
+
+  <!-- ════════════════════════════════════════════
+       FOOTER (mobile: GitHub auth)
+  ═══════════════════════════════════════════════ -->
+  <footer class="app-footer" id="app-footer">
+    <button id="btn-github-auth-footer" class="btn-auth">Conectar GitHub</button>
+    <span id="auth-status-footer" class="auth-status"></span>
+  </footer>
+
+  <!-- Mobile sidebar overlay backdrop -->
+  <div id="sidebar-backdrop" class="sidebar-backdrop hidden"></div>
 
   <!-- ════════════════════════════════════════════
        MODALS

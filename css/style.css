@@ -859,6 +859,22 @@ input  { font: inherit; border: none; outline: none; }
 /* ═══════════════════════════════════════════
    TOAST
 ═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+.app-footer {
+  display: none; /* hidden on desktop */
+}
+
+/* ═══════════════════════════════════════════
+   SIDEBAR OVERLAY BACKDROP (mobile)
+═══════════════════════════════════════════ */
+.sidebar-backdrop {
+  position: fixed; inset: 0; z-index: 98;
+  background: rgba(0,0,0,.4);
+}
+.sidebar-backdrop.hidden { display: none; }
+
 .toast {
   position: fixed; bottom: 20px; right: 20px; z-index: 500;
   background: var(--text); color: #fff;
@@ -902,13 +918,145 @@ input  { font: inherit; border: none; outline: none; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
 /* ═══════════════════════════════════════════
-   RESPONSIVE
+   RESPONSIVE — tablet
 ═══════════════════════════════════════════ */
 @media (max-width: 900px) {
   .calendar-grid { grid-template-columns: repeat(4, 1fr); }
+  .auth-area--desktop { display: none; }
 }
-@media (max-width: 600px) {
-  :root { --sidebar-w: 260px; }
-  .calendar-grid { grid-template-columns: repeat(2, 1fr); }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — mobile
+═══════════════════════════════════════════ */
+@media (max-width: 700px) {
+  :root {
+    --sidebar-w: 290px;
+    --header-h: 50px;
+    --footer-h: 52px;
+  }
+
+  /* ── Header ── */
+  .app-header { height: var(--header-h); }
+  .header-inner { padding: 0 10px; gap: 8px; }
+  .brand-name { font-size: .95rem; }
+  .brand-icon { font-size: 1.2rem; }
+  .auth-area--desktop { display: none; }
+
+  /* ── Person switcher compact ── */
+  .person-btn { padding: 4px 10px; font-size: .78rem; }
+
+  /* ── Week nav label ── */
+  #week-label { min-width: 0; font-size: .78rem; }
+
+  /* ── Main layout ── */
+  .app-main {
+    height: calc(100dvh - var(--header-h) - var(--footer-h));
+  }
+
+  /* ── Sidebar: slides in as overlay ── */
+  .sidebar {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    height: calc(100dvh - var(--header-h) - var(--footer-h));
+    z-index: 99;
+    transform: translateX(0);
+    transition: transform 220ms ease, width 220ms ease, min-width 220ms ease;
+    box-shadow: var(--shadow-md);
+    /* start collapsed */
+    width: var(--sidebar-w) !important;
+    min-width: var(--sidebar-w) !important;
+  }
+  .sidebar.collapsed {
+    transform: translateX(calc(-1 * var(--sidebar-w)));
+  }
+  /* When sidebar is open, keep content behind it fully visible */
+  .content-area { width: 100%; }
+
+  /* ── Calendar: single column (1 day at a time) ── */
+  .calendar-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  /* Hide non-active days on mobile; JS adds .mobile-visible to the active day */
+  .calendar-grid .day-cell { display: none; }
+  .calendar-grid .day-cell.mobile-visible { display: flex; }
+
+  /* Make the single visible day cell fill the space */
+  .day-cell.mobile-visible {
+    min-height: 0;
+    flex: 1;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+  }
+
+  /* ── Day detail panel: larger on mobile ── */
+  .day-detail {
+    max-height: none;
+    flex: 1;
+    overflow-y: auto;
+  }
+  .day-detail.hidden-panel { display: none; }
+
+  /* ── Meal slots: vertical on mobile ── */
+  .meal-slots { grid-template-columns: 1fr; }
+
+  /* ── Day summary: 2 columns ── */
+  .day-summary { grid-template-columns: repeat(2, 1fr); }
+
+  /* ── Recipe macros modal: 2 cols ── */
   .recipe-detail-macros { grid-template-columns: repeat(2, 1fr); }
+
+  /* ── Editor form: single col ── */
+  .form-grid { grid-template-columns: 1fr; }
+  .form-grid--4 { grid-template-columns: repeat(2, 1fr); }
+
+  /* ── Footer ── */
+  .app-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: var(--footer-h);
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 0 16px;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 90;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  .app-footer .btn-auth {
+    font-size: .82rem;
+  }
+  .app-footer .auth-status {
+    font-size: .75rem;
+  }
+
+  /* ── Toast: above footer ── */
+  .toast { bottom: calc(var(--footer-h) + 8px); }
+
+  /* ── Slot picker: full-width bottom sheet feel ── */
+  .slot-picker {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 90vw;
+    max-height: 50vh;
+  }
+
+  /* ── Family summary ── */
+  .family-summary-header,
+  .family-summary-row {
+    grid-template-columns: 90px 1fr 1fr;
+    gap: 6px;
+  }
+
+  /* ── Modal boxes: full-width ── */
+  .modal-box {
+    width: 96vw;
+    padding: 18px 16px;
+    max-height: 92vh;
+  }
 }

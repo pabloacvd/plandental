@@ -17,19 +17,29 @@ import {
 } from './ui.js';
 
 // ══════════════════════════════════════════════════════════
+// MOBILE DETECTION
+// ══════════════════════════════════════════════════════════
+
+function isMobile() {
+  return window.innerWidth <= 700;
+}
+
+// ══════════════════════════════════════════════════════════
 // STATE
 // ══════════════════════════════════════════════════════════
 
 let state = {
-  person:    'Pablo',
+  person:     'Familia',          // default
   anchorDate: new Date(),
-  activeDay: null,
-  plan:      {},         // full plan object
-  nutrition: {},
-  recipes:   [],
-  searchQuery: '',
+  activeDay:  toDateKey(new Date()), // open today by default
+  plan:       {},
+  nutrition:  {},
+  recipes:    [],
+  searchQuery:    '',
   searchCategory: 'all',
   draggingRecipeId: null,
+  // Mobile-only: which day index (0–6 in week) is shown
+  mobileDayIndex: null,
 };
 
 // ══════════════════════════════════════════════════════════
@@ -44,6 +54,20 @@ async function init() {
 
   // Load saved plan
   state.plan = await fetchPlan();
+
+  // Apply mobile defaults
+  if (isMobile()) {
+    // Collapse sidebar
+    document.getElementById('sidebar').classList.add('collapsed');
+    // Familia already in state; mark it in UI
+    document.querySelectorAll('.person-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.person === 'Familia');
+    });
+    // Set mobile day index to today
+    const weekDays = getWeekDays(state.anchorDate);
+    state.mobileDayIndex = weekDays.findIndex(d => toDateKey(d) === toDateKey(new Date()));
+    if (state.mobileDayIndex < 0) state.mobileDayIndex = 0;
+  }
 
   // Render sidebar
   renderSidebar();
@@ -66,14 +90,21 @@ function renderWeek() {
   const weekDays = getWeekDays(state.anchorDate);
   const weekKey  = toWeekKey(state.anchorDate);
 
-  // Update week label
-  const mon = weekDays[0];
-  const sun = weekDays[6];
-  const sameMonth = mon.getMonth() === sun.getMonth();
-  const label = sameMonth
-    ? `${MONTH_NAMES[mon.getMonth()]} ${mon.getFullYear()}`
-    : `${MONTH_NAMES[mon.getMonth()].slice(0,3)}–${MONTH_NAMES[sun.getMonth()].slice(0,3)} ${sun.getFullYear()}`;
-  document.getElementById('week-label').textContent = label;
+  // Update navigation label
+  if (isMobile() && state.mobileDayIndex !== null) {
+    const d = weekDays[state.mobileDayIndex];
+    const { DAY_NAMES_SHORT: DNS, MONTH_NAMES: MN } = { DAY_NAMES_SHORT: ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'], MONTH_NAMES };
+    document.getElementById('week-label').textContent =
+      `${DNS[state.mobileDayIndex]} ${d.getDate()} ${MONTH_NAMES[d.getMonth()].slice(0,3)}`;
+  } else {
+    const mon = weekDays[0];
+    const sun = weekDays[6];
+    const sameMonth = mon.getMonth() === sun.getMonth();
+    const label = sameMonth
+      ? `${MONTH_NAMES[mon.getMonth()]} ${mon.getFullYear()}`
+      : `${MONTH_NAMES[mon.getMonth()].slice(0,3)}–${MONTH_NAMES[sun.getMonth()].slice(0,3)} ${sun.getFullYear()}`;
+    document.getElementById('week-label').textContent = label;
+  }
 
   renderCalendarGrid({
     weekDays,
@@ -87,16 +118,37 @@ function renderWeek() {
     onRecipeClick: openRecipeModal,
   });
 
+  // Mobile: mark only the current day as visible
+  if (isMobile() && state.mobileDayIndex !== null) {
+    applyMobileDayVisibility(weekDays);
+  }
+
   // For Familia, use Pablo's nutrition for the kcal bar (representative)
   const nutritionForBar = state.person === 'Familia'
     ? state.nutrition['Pablo']
     : state.nutrition[state.person];
   updateKcalBars(weekDays, state.plan, state.person, weekKey, nutritionForBar);
 
-  // Re-open active day panel if one was selected
+  // Always open the active day panel
   if (state.activeDay) {
+    const panel = document.getElementById('day-detail');
+    panel.classList.remove('hidden-panel');
     refreshDayDetail();
   }
+}
+
+/**
+ * Mark only the mobile-current day cell as visible.
+ * Sync state.activeDay to that day so the detail panel shows it.
+ */
+function applyMobileDayVisibility(weekDays) {
+  const idx     = state.mobileDayIndex ?? 0;
+  const dateKey = toDateKey(weekDays[idx]);
+  state.activeDay = dateKey;
+
+  document.querySelectorAll('.day-cell').forEach((cell, i) => {
+    cell.classList.toggle('mobile-visible', i === idx);
+  });
 }
 
 // ══════════════════════════════════════════════════════════
@@ -136,6 +188,17 @@ function renderSidebar() {
       card.classList.remove('dragging');
     });
 
+    // On mobile: tapping the card body opens the slot picker directly (drag unavailable)
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.recipe-card-info') || e.target.closest('.recipe-card-delete')) return;
+      if (isMobile() && state.activeDay) {
+        // Close sidebar first
+        document.getElementById('sidebar').classList.add('collapsed');
+        document.getElementById('sidebar-backdrop').classList.add('hidden');
+        showSlotPickerForDrop(state.activeDay, recipe.id);
+      }
+    });
+
     // Info button
     card.querySelector('.recipe-card-info').addEventListener('click', (e) => {
       e.stopPropagation();
@@ -150,6 +213,36 @@ function renderSidebar() {
 
     list.appendChild(card);
   });
+}
+
+// ══════════════════════════════════════════════════════════
+// MOBILE DAY NAVIGATION
+// ══════════════════════════════════════════════════════════
+
+function mobilePrevDay() {
+  if (state.mobileDayIndex === null) return;
+  if (state.mobileDayIndex > 0) {
+    state.mobileDayIndex--;
+  } else {
+    // Go to previous week, land on Sunday (index 6)
+    state.anchorDate = new Date(state.anchorDate);
+    state.anchorDate.setDate(state.anchorDate.getDate() - 7);
+    state.mobileDayIndex = 6;
+  }
+  renderWeek();
+}
+
+function mobileNextDay() {
+  if (state.mobileDayIndex === null) return;
+  if (state.mobileDayIndex < 6) {
+    state.mobileDayIndex++;
+  } else {
+    // Go to next week, land on Monday (index 0)
+    state.anchorDate = new Date(state.anchorDate);
+    state.anchorDate.setDate(state.anchorDate.getDate() + 7);
+    state.mobileDayIndex = 0;
+  }
+  renderWeek();
 }
 
 // ══════════════════════════════════════════════════════════
@@ -662,11 +755,13 @@ async function saveAuth() {
 }
 
 function updateAuthUI() {
-  const btn = document.getElementById('btn-github-auth');
-  const status = document.getElementById('auth-status');
+  const connected = isAuthenticated();
+  const { owner, repo } = connected ? getCredentials() : {};
 
-  if (isAuthenticated()) {
-    const { owner, repo } = getCredentials();
+  // Desktop header button
+  const btn    = document.getElementById('btn-github-auth');
+  const status = document.getElementById('auth-status');
+  if (connected) {
     btn.textContent = '⚡ GitHub conectado';
     btn.classList.add('connected');
     status.textContent = `${owner}/${repo}`;
@@ -674,6 +769,19 @@ function updateAuthUI() {
     btn.textContent = 'Conectar GitHub';
     btn.classList.remove('connected');
     status.textContent = '(sin conexión — guardado local)';
+  }
+
+  // Footer button (mobile)
+  const btnF    = document.getElementById('btn-github-auth-footer');
+  const statusF = document.getElementById('auth-status-footer');
+  if (connected) {
+    btnF.textContent = '⚡ Conectado';
+    btnF.classList.add('connected');
+    statusF.textContent = `${owner}/${repo}`;
+  } else {
+    btnF.textContent = 'Conectar GitHub';
+    btnF.classList.remove('connected');
+    statusF.textContent = '';
   }
 }
 
@@ -688,28 +796,52 @@ function wireControls() {
       document.querySelectorAll('.person-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       state.person = btn.dataset.person;
-      state.activeDay = null;
-      document.getElementById('day-detail').classList.add('hidden-panel');
+      if (!isMobile()) {
+        state.activeDay = null;
+        document.getElementById('day-detail').classList.add('hidden-panel');
+      }
       renderWeek();
     });
   });
 
-  // Week navigation
+  // Navigation — single day on mobile, full week on desktop
   document.getElementById('btn-prev-week').addEventListener('click', () => {
-    state.anchorDate = new Date(state.anchorDate);
-    state.anchorDate.setDate(state.anchorDate.getDate() - 7);
-    renderWeek();
+    if (isMobile()) {
+      mobilePrevDay();
+    } else {
+      state.anchorDate = new Date(state.anchorDate);
+      state.anchorDate.setDate(state.anchorDate.getDate() - 7);
+      renderWeek();
+    }
   });
   document.getElementById('btn-next-week').addEventListener('click', () => {
-    state.anchorDate = new Date(state.anchorDate);
-    state.anchorDate.setDate(state.anchorDate.getDate() + 7);
-    renderWeek();
+    if (isMobile()) {
+      mobileNextDay();
+    } else {
+      state.anchorDate = new Date(state.anchorDate);
+      state.anchorDate.setDate(state.anchorDate.getDate() + 7);
+      renderWeek();
+    }
   });
 
-  // Sidebar toggle — hamburger stays visible when collapsed
+  // Sidebar toggle — hamburger; on mobile also shows/hides overlay
   document.getElementById('btn-toggle-sidebar').addEventListener('click', () => {
-    document.getElementById('sidebar').classList.toggle('collapsed');
+    const sidebar  = document.getElementById('sidebar');
+    const backdrop = document.getElementById('sidebar-backdrop');
+    sidebar.classList.toggle('collapsed');
+    if (isMobile()) {
+      backdrop.classList.toggle('hidden', sidebar.classList.contains('collapsed'));
+    }
   });
+
+  // Sidebar backdrop tap → close sidebar
+  document.getElementById('sidebar-backdrop').addEventListener('click', () => {
+    document.getElementById('sidebar').classList.add('collapsed');
+    document.getElementById('sidebar-backdrop').classList.add('hidden');
+  });
+
+  // Footer auth button (mobile)
+  document.getElementById('btn-github-auth-footer').addEventListener('click', openAuthModal);
 
   // Recipe search
   document.getElementById('recipe-search').addEventListener('input', (e) => {
