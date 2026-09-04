@@ -2,16 +2,6 @@
   "Pablo": {
     "2026-W36": {
       "2026-09-04": {
-        "almuerzo": {
-          "recipeId": "tarta-integral-espinaca",
-          "recipeName": "Tarta integral de espinaca y hytteost",
-          "macros": {
-            "calorias": 340,
-            "proteina_g": 24,
-            "carbohidratos_g": 28,
-            "grasas_g": 12
-          }
-        },
         "snack_tarde": {
           "recipeId": "batido-ninja-pablo",
           "recipeName": "Batido Ninja Pablo",
@@ -28,16 +18,6 @@
   "Juli": {
     "2026-W36": {
       "2026-09-04": {
-        "almuerzo": {
-          "recipeId": "tarta-integral-espinaca",
-          "recipeName": "Tarta integral de espinaca y hytteost",
-          "macros": {
-            "calorias": 340,
-            "proteina_g": 24,
-            "carbohidratos_g": 28,
-            "grasas_g": 12
-          }
-        },
         "snack_tarde": {
           "recipeId": "batido-ninja-juli",
           "recipeName": "Batido Ninja Juli",
