@@ -21,6 +21,16 @@
             "carbohidratos_g": 9.7,
             "grasas_g": 0.9
           }
+        },
+        "cena": {
+          "recipeId": "pollo-al-curry",
+          "recipeName": "Pollo al curry con blomkålsris o quinoa",
+          "macros": {
+            "calorias": 480,
+            "proteina_g": 48,
+            "carbohidratos_g": 32,
+            "grasas_g": 12
+          }
         }
       }
     }
@@ -46,6 +56,16 @@
             "proteina_g": 33.4,
             "carbohidratos_g": 5,
             "grasas_g": 0.5
+          }
+        },
+        "cena": {
+          "recipeId": "pollo-al-curry",
+          "recipeName": "Pollo al curry con blomkålsris o quinoa",
+          "macros": {
+            "calorias": 480,
+            "proteina_g": 48,
+            "carbohidratos_g": 32,
+            "grasas_g": 12
           }
         }
       }
