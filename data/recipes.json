@@ -55,7 +55,7 @@
         "macros_por_porcion": {
           "calorias": 161,
           "proteina_g": 33.4,
-          "carbohidratos_g": 5.0,
+          "carbohidratos_g": 5,
           "grasas_g": 0.5
         },
         "ingredientes": [
@@ -152,24 +152,34 @@
       "id": "tarta-integral-espinaca",
       "receta": {
         "nombre": "Tarta integral de espinaca y hytteost",
-        "descripcion_breve": "Masa integral fina rellena de espinaca, cebolla salteada, huevos y hytteost para aportar cremosidad y proteínas.",
+        "descripcion_breve": "Masa casera integral fina rellena de espinaca, cebolla salteada, huevos y hytteost.",
         "categoria": "almuerzo/cena",
         "porciones": 4,
         "macros_por_porcion": {
-          "calorias": 340,
-          "proteina_g": 24,
-          "carbohidratos_g": 28,
-          "grasas_g": 12
+          "calorias": 380,
+          "proteina_g": 25,
+          "carbohidratos_g": 38,
+          "grasas_g": 14
         },
         "ingredientes": [
           {
-            "item": "Masa integral fina para tarta",
-            "cantidad": 1,
-            "unidad": "unidad"
+            "item": "Harina de trigo integral",
+            "cantidad": 145,
+            "unidad": "g"
           },
           {
-            "item": "Espinaca cocida y escurrida",
-            "cantidad": 400,
+            "item": "Harina de trigo común",
+            "cantidad": 65,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva",
+            "cantidad": 20,
+            "unidad": "g"
+          },
+          {
+            "item": "Espinaca congelada",
+            "cantidad": 900,
             "unidad": "g"
           },
           {
@@ -188,16 +198,18 @@
             "unidad": "g"
           },
           {
-            "item": "Nuez moscada, sal y pimienta",
+            "item": "Nuez moscada, sal y polvo de hornear",
             "cantidad": 5,
             "unidad": "g"
           }
         ],
         "paso_a_paso": [
-          "Saltear la cebolla hasta dorar y mezclar con la espinaca bien escurrida.",
-          "Batir los huevos con el hytteost, la sal, pimienta y nuez moscada.",
+          "Descongelar la espinaca y escurrirla con fuerza sobre un colador o paño limpio para retirar todo el líquido.",
+          "Mezclar las harinas con sal y polvo de hornear; agregar el aceite y agua tibia (100-105 ml) de a poco hasta formar un bollo. Reposar 15 min y estirar.",
+          "Saltear la cebolla picada hasta dorar y mezclar con la espinaca escurrida.",
+          "Batir los huevos con el hytteost, la sal y la nuez moscada.",
           "Unir las verduras con la mezcla de huevo y queso.",
-          "Disponer la masa fina en un molde, verter el relleno y hornear a 180°C durante 30 minutos."
+          "Forrar la tartera con la masa estirada, verter el relleno y hornear a 180°C durante 30 minutos."
         ]
       }
     },

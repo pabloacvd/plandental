@@ -11,6 +11,16 @@
             "carbohidratos_g": 9.7,
             "grasas_g": 0.9
           }
+        },
+        "almuerzo": {
+          "recipeId": "tarta-integral-espinaca",
+          "recipeName": "Tarta integral de espinaca y hytteost",
+          "macros": {
+            "calorias": 380,
+            "proteina_g": 25,
+            "carbohidratos_g": 38,
+            "grasas_g": 14
+          }
         }
       }
     }
@@ -26,6 +36,16 @@
             "proteina_g": 33.4,
             "carbohidratos_g": 5,
             "grasas_g": 0.5
+          }
+        },
+        "almuerzo": {
+          "recipeId": "tarta-integral-espinaca",
+          "recipeName": "Tarta integral de espinaca y hytteost",
+          "macros": {
+            "calorias": 380,
+            "proteina_g": 25,
+            "carbohidratos_g": 38,
+            "grasas_g": 14
           }
         }
       }
