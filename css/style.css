@@ -318,18 +318,18 @@ input  { font: inherit; border: none; outline: none; }
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 10px;
-  min-height: 400px;
+  min-height: 200px;
 }
 
 .day-cell {
   background: var(--surface);
   border: 2px solid var(--border);
   border-radius: var(--radius);
-  padding: 10px 10px 8px;
-  display: flex; flex-direction: column; gap: 5px;
+  padding: 8px 8px 6px;
+  display: flex; flex-direction: column; gap: 3px;
   cursor: pointer;
   transition: var(--transition);
-  min-height: 160px;
+  min-height: 100px;
   position: relative;
 }
 .day-cell:hover { border-color: var(--accent); }
