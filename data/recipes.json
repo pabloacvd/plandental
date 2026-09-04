@@ -14,15 +14,51 @@
           "grasas_g": 10
         },
         "ingredientes": [
-          { "item": "Pechuga de pollo cruda (procesada o picada)", "cantidad": 400, "unidad": "g" },
-          { "item": "Cebolla blanca", "cantidad": 100, "unidad": "g" },
-          { "item": "Leche de coco light (ej. Santa Maria)", "cantidad": 200, "unidad": "ml" },
-          { "item": "Caldo de pollo", "cantidad": 200, "unidad": "ml" },
-          { "item": "Cous cous (peso en seco)", "cantidad": 100, "unidad": "g" },
-          { "item": "Curry en polvo", "cantidad": 15, "unidad": "g" },
-          { "item": "Aceite de oliva", "cantidad": 5, "unidad": "ml" },
-          { "item": "Sal", "cantidad": 5, "unidad": "g" },
-          { "item": "Pimienta negra", "cantidad": 2, "unidad": "g" }
+          {
+            "item": "Pechuga de pollo cruda (procesada o picada)",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla blanca",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Leche de coco light (ej. Santa Maria)",
+            "cantidad": 200,
+            "unidad": "ml"
+          },
+          {
+            "item": "Caldo de pollo",
+            "cantidad": 200,
+            "unidad": "ml"
+          },
+          {
+            "item": "Cous cous (peso en seco)",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Curry en polvo",
+            "cantidad": 15,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva",
+            "cantidad": 5,
+            "unidad": "ml"
+          },
+          {
+            "item": "Sal",
+            "cantidad": 5,
+            "unidad": "g"
+          },
+          {
+            "item": "Pimienta negra",
+            "cantidad": 2,
+            "unidad": "g"
+          }
         ],
         "paso_a_paso": [
           "Procesar los 400g de pechuga de pollo junto con la mitad de la cebolla (50g), 2g de sal y la pimienta hasta obtener una pasta homogénea.",
@@ -50,13 +86,41 @@
           "grasas_g": 12
         },
         "ingredientes": [
-          { "item": "Muslos de pollo sin piel", "cantidad": 500, "unidad": "g" },
-          { "item": "Batata", "cantidad": 300, "unidad": "g" },
-          { "item": "Pimentón ahumado", "cantidad": 8, "unidad": "g" },
-          { "item": "Ajo en polvo", "cantidad": 4, "unidad": "g" },
-          { "item": "Aceite de oliva", "cantidad": 10, "unidad": "ml" },
-          { "item": "Sal", "cantidad": 4, "unidad": "g" },
-          { "item": "Pimienta negra", "cantidad": 2, "unidad": "g" }
+          {
+            "item": "Muslos de pollo sin piel",
+            "cantidad": 500,
+            "unidad": "g"
+          },
+          {
+            "item": "Batata",
+            "cantidad": 300,
+            "unidad": "g"
+          },
+          {
+            "item": "Pimentón ahumado",
+            "cantidad": 8,
+            "unidad": "g"
+          },
+          {
+            "item": "Ajo en polvo",
+            "cantidad": 4,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva",
+            "cantidad": 10,
+            "unidad": "ml"
+          },
+          {
+            "item": "Sal",
+            "cantidad": 4,
+            "unidad": "g"
+          },
+          {
+            "item": "Pimienta negra",
+            "cantidad": 2,
+            "unidad": "g"
+          }
         ],
         "paso_a_paso": [
           "Precalentar el horno a 200°C.",
@@ -82,13 +146,41 @@
           "grasas_g": 22
         },
         "ingredientes": [
-          { "item": "Filete de salmón", "cantidad": 400, "unidad": "g" },
-          { "item": "Quinoa (seca)", "cantidad": 120, "unidad": "g" },
-          { "item": "Espinacas frescas", "cantidad": 150, "unidad": "g" },
-          { "item": "Ajo", "cantidad": 2, "unidad": "dientes" },
-          { "item": "Aceite de oliva", "cantidad": 10, "unidad": "ml" },
-          { "item": "Limón", "cantidad": 1, "unidad": "unidad" },
-          { "item": "Sal", "cantidad": 4, "unidad": "g" }
+          {
+            "item": "Filete de salmón",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Quinoa (seca)",
+            "cantidad": 120,
+            "unidad": "g"
+          },
+          {
+            "item": "Espinacas frescas",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Ajo",
+            "cantidad": 2,
+            "unidad": "dientes"
+          },
+          {
+            "item": "Aceite de oliva",
+            "cantidad": 10,
+            "unidad": "ml"
+          },
+          {
+            "item": "Limón",
+            "cantidad": 1,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Sal",
+            "cantidad": 4,
+            "unidad": "g"
+          }
         ],
         "paso_a_paso": [
           "Cocinar la quinoa en 240ml de agua con sal durante 15 minutos. Reposar tapada 5 minutos.",
@@ -112,12 +204,36 @@
           "grasas_g": 12
         },
         "ingredientes": [
-          { "item": "Claras de huevo", "cantidad": 6, "unidad": "unidades" },
-          { "item": "Champiñones", "cantidad": 80, "unidad": "g" },
-          { "item": "Pimiento rojo", "cantidad": 60, "unidad": "g" },
-          { "item": "Queso fresco o cottage", "cantidad": 40, "unidad": "g" },
-          { "item": "Aceite de oliva", "cantidad": 5, "unidad": "ml" },
-          { "item": "Sal y especias", "cantidad": 1, "unidad": "al gusto" }
+          {
+            "item": "Claras de huevo",
+            "cantidad": 6,
+            "unidad": "unidades"
+          },
+          {
+            "item": "Champiñones",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Pimiento rojo",
+            "cantidad": 60,
+            "unidad": "g"
+          },
+          {
+            "item": "Queso fresco o cottage",
+            "cantidad": 40,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva",
+            "cantidad": 5,
+            "unidad": "ml"
+          },
+          {
+            "item": "Sal y especias",
+            "cantidad": 1,
+            "unidad": "al gusto"
+          }
         ],
         "paso_a_paso": [
           "Batir las claras con una pizca de sal hasta que estén ligeramente espumosas.",
@@ -142,13 +258,41 @@
           "grasas_g": 7
         },
         "ingredientes": [
-          { "item": "Atún al natural en lata", "cantidad": 160, "unidad": "g" },
-          { "item": "Arroz integral cocido", "cantidad": 150, "unidad": "g" },
-          { "item": "Edamame (sin vaina)", "cantidad": 80, "unidad": "g" },
-          { "item": "Pepino", "cantidad": 80, "unidad": "g" },
-          { "item": "Salsa de soja baja en sodio", "cantidad": 15, "unidad": "ml" },
-          { "item": "Aceite de sésamo", "cantidad": 5, "unidad": "ml" },
-          { "item": "Semillas de sésamo", "cantidad": 5, "unidad": "g" }
+          {
+            "item": "Atún al natural en lata",
+            "cantidad": 160,
+            "unidad": "g"
+          },
+          {
+            "item": "Arroz integral cocido",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Edamame (sin vaina)",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Pepino",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Salsa de soja baja en sodio",
+            "cantidad": 15,
+            "unidad": "ml"
+          },
+          {
+            "item": "Aceite de sésamo",
+            "cantidad": 5,
+            "unidad": "ml"
+          },
+          {
+            "item": "Semillas de sésamo",
+            "cantidad": 5,
+            "unidad": "g"
+          }
         ],
         "paso_a_paso": [
           "Colocar el arroz integral cocido como base del bowl.",
@@ -173,15 +317,51 @@
           "grasas_g": 8
         },
         "ingredientes": [
-          { "item": "Lentejas cocidas", "cantidad": 300, "unidad": "g" },
-          { "item": "Espinacas frescas", "cantidad": 100, "unidad": "g" },
-          { "item": "Huevos", "cantidad": 2, "unidad": "unidades" },
-          { "item": "Cebolla", "cantidad": 80, "unidad": "g" },
-          { "item": "Ajo", "cantidad": 2, "unidad": "dientes" },
-          { "item": "Comino", "cantidad": 4, "unidad": "g" },
-          { "item": "Aceite de oliva", "cantidad": 10, "unidad": "ml" },
-          { "item": "Vinagre blanco", "cantidad": 15, "unidad": "ml" },
-          { "item": "Sal", "cantidad": 4, "unidad": "g" }
+          {
+            "item": "Lentejas cocidas",
+            "cantidad": 300,
+            "unidad": "g"
+          },
+          {
+            "item": "Espinacas frescas",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Huevos",
+            "cantidad": 2,
+            "unidad": "unidades"
+          },
+          {
+            "item": "Cebolla",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Ajo",
+            "cantidad": 2,
+            "unidad": "dientes"
+          },
+          {
+            "item": "Comino",
+            "cantidad": 4,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva",
+            "cantidad": 10,
+            "unidad": "ml"
+          },
+          {
+            "item": "Vinagre blanco",
+            "cantidad": 15,
+            "unidad": "ml"
+          },
+          {
+            "item": "Sal",
+            "cantidad": 4,
+            "unidad": "g"
+          }
         ],
         "paso_a_paso": [
           "Sofreír la cebolla y el ajo en aceite de oliva hasta transparentar.",
@@ -206,12 +386,36 @@
           "grasas_g": 8
         },
         "ingredientes": [
-          { "item": "Pechuga de pollo", "cantidad": 500, "unidad": "g" },
-          { "item": "Brócoli", "cantidad": 300, "unidad": "g" },
-          { "item": "Batata", "cantidad": 250, "unidad": "g" },
-          { "item": "Ajo en polvo", "cantidad": 4, "unidad": "g" },
-          { "item": "Aceite de oliva", "cantidad": 10, "unidad": "ml" },
-          { "item": "Sal y pimienta", "cantidad": 1, "unidad": "al gusto" }
+          {
+            "item": "Pechuga de pollo",
+            "cantidad": 500,
+            "unidad": "g"
+          },
+          {
+            "item": "Brócoli",
+            "cantidad": 300,
+            "unidad": "g"
+          },
+          {
+            "item": "Batata",
+            "cantidad": 250,
+            "unidad": "g"
+          },
+          {
+            "item": "Ajo en polvo",
+            "cantidad": 4,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva",
+            "cantidad": 10,
+            "unidad": "ml"
+          },
+          {
+            "item": "Sal y pimienta",
+            "cantidad": 1,
+            "unidad": "al gusto"
+          }
         ],
         "paso_a_paso": [
           "Hervir la batata pelada hasta tierna (20 min). Pisarla con sal y una pizca de aceite.",
@@ -235,14 +439,46 @@
           "grasas_g": 10
         },
         "ingredientes": [
-          { "item": "Pasta integral", "cantidad": 160, "unidad": "g" },
-          { "item": "Carne molida de pavo", "cantidad": 300, "unidad": "g" },
-          { "item": "Tomate triturado", "cantidad": 400, "unidad": "g" },
-          { "item": "Cebolla", "cantidad": 100, "unidad": "g" },
-          { "item": "Ajo", "cantidad": 3, "unidad": "dientes" },
-          { "item": "Orégano", "cantidad": 4, "unidad": "g" },
-          { "item": "Aceite de oliva", "cantidad": 10, "unidad": "ml" },
-          { "item": "Sal y pimienta", "cantidad": 1, "unidad": "al gusto" }
+          {
+            "item": "Pasta integral",
+            "cantidad": 160,
+            "unidad": "g"
+          },
+          {
+            "item": "Carne molida de pavo",
+            "cantidad": 300,
+            "unidad": "g"
+          },
+          {
+            "item": "Tomate triturado",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Ajo",
+            "cantidad": 3,
+            "unidad": "dientes"
+          },
+          {
+            "item": "Orégano",
+            "cantidad": 4,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva",
+            "cantidad": 10,
+            "unidad": "ml"
+          },
+          {
+            "item": "Sal y pimienta",
+            "cantidad": 1,
+            "unidad": "al gusto"
+          }
         ],
         "paso_a_paso": [
           "Sofreír la cebolla y ajo en aceite hasta dorar.",
@@ -267,14 +503,46 @@
           "grasas_g": 9
         },
         "ingredientes": [
-          { "item": "Pechuga de pollo en tiras", "cantidad": 400, "unidad": "g" },
-          { "item": "Zanahoria", "cantidad": 100, "unidad": "g" },
-          { "item": "Morrón rojo", "cantidad": 100, "unidad": "g" },
-          { "item": "Arvejas congeladas", "cantidad": 80, "unidad": "g" },
-          { "item": "Salsa de ostras", "cantidad": 30, "unidad": "ml" },
-          { "item": "Salsa de soja", "cantidad": 15, "unidad": "ml" },
-          { "item": "Jengibre fresco", "cantidad": 10, "unidad": "g" },
-          { "item": "Aceite de sésamo", "cantidad": 10, "unidad": "ml" }
+          {
+            "item": "Pechuga de pollo en tiras",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Zanahoria",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Morrón rojo",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Arvejas congeladas",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Salsa de ostras",
+            "cantidad": 30,
+            "unidad": "ml"
+          },
+          {
+            "item": "Salsa de soja",
+            "cantidad": 15,
+            "unidad": "ml"
+          },
+          {
+            "item": "Jengibre fresco",
+            "cantidad": 10,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de sésamo",
+            "cantidad": 10,
+            "unidad": "ml"
+          }
         ],
         "paso_a_paso": [
           "Calentar el wok o sartén grande a fuego muy alto con el aceite de sésamo.",
@@ -299,12 +567,36 @@
           "grasas_g": 12
         },
         "ingredientes": [
-          { "item": "Huevos enteros", "cantidad": 3, "unidad": "unidades" },
-          { "item": "Claras de huevo", "cantidad": 3, "unidad": "unidades" },
-          { "item": "Papa cocida", "cantidad": 250, "unidad": "g" },
-          { "item": "Cebolla", "cantidad": 80, "unidad": "g" },
-          { "item": "Aceite de oliva", "cantidad": 10, "unidad": "ml" },
-          { "item": "Sal", "cantidad": 3, "unidad": "g" }
+          {
+            "item": "Huevos enteros",
+            "cantidad": 3,
+            "unidad": "unidades"
+          },
+          {
+            "item": "Claras de huevo",
+            "cantidad": 3,
+            "unidad": "unidades"
+          },
+          {
+            "item": "Papa cocida",
+            "cantidad": 250,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva",
+            "cantidad": 10,
+            "unidad": "ml"
+          },
+          {
+            "item": "Sal",
+            "cantidad": 3,
+            "unidad": "g"
+          }
         ],
         "paso_a_paso": [
           "Cocinar las papas con cáscara hasta tiernas. Pelar y cortar en rodajas.",
@@ -330,14 +622,46 @@
           "grasas_g": 10
         },
         "ingredientes": [
-          { "item": "Garbanzos cocidos", "cantidad": 400, "unidad": "g" },
-          { "item": "Tomate triturado", "cantidad": 200, "unidad": "g" },
-          { "item": "Leche de coco light", "cantidad": 150, "unidad": "ml" },
-          { "item": "Espinacas", "cantidad": 80, "unidad": "g" },
-          { "item": "Cebolla", "cantidad": 100, "unidad": "g" },
-          { "item": "Curry en polvo", "cantidad": 12, "unidad": "g" },
-          { "item": "Comino", "cantidad": 4, "unidad": "g" },
-          { "item": "Aceite de oliva", "cantidad": 10, "unidad": "ml" }
+          {
+            "item": "Garbanzos cocidos",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Tomate triturado",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Leche de coco light",
+            "cantidad": 150,
+            "unidad": "ml"
+          },
+          {
+            "item": "Espinacas",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Curry en polvo",
+            "cantidad": 12,
+            "unidad": "g"
+          },
+          {
+            "item": "Comino",
+            "cantidad": 4,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva",
+            "cantidad": 10,
+            "unidad": "ml"
+          }
         ],
         "paso_a_paso": [
           "Sofreír la cebolla hasta dorar. Agregar curry y comino, cocinar 1 minuto.",
@@ -361,15 +685,51 @@
           "grasas_g": 14
         },
         "ingredientes": [
-          { "item": "Carne vacuna magra picada", "cantidad": 300, "unidad": "g" },
-          { "item": "Arroz cocido", "cantidad": 150, "unidad": "g" },
-          { "item": "Frijoles negros cocidos", "cantidad": 120, "unidad": "g" },
-          { "item": "Palta/aguacate", "cantidad": 60, "unidad": "g" },
-          { "item": "Tomate", "cantidad": 80, "unidad": "g" },
-          { "item": "Cebolla morada", "cantidad": 40, "unidad": "g" },
-          { "item": "Lima", "cantidad": 1, "unidad": "unidad" },
-          { "item": "Comino y pimentón", "cantidad": 6, "unidad": "g" },
-          { "item": "Sal y cilantro", "cantidad": 1, "unidad": "al gusto" }
+          {
+            "item": "Carne vacuna magra picada",
+            "cantidad": 300,
+            "unidad": "g"
+          },
+          {
+            "item": "Arroz cocido",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Frijoles negros cocidos",
+            "cantidad": 120,
+            "unidad": "g"
+          },
+          {
+            "item": "Palta/aguacate",
+            "cantidad": 60,
+            "unidad": "g"
+          },
+          {
+            "item": "Tomate",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla morada",
+            "cantidad": 40,
+            "unidad": "g"
+          },
+          {
+            "item": "Lima",
+            "cantidad": 1,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Comino y pimentón",
+            "cantidad": 6,
+            "unidad": "g"
+          },
+          {
+            "item": "Sal y cilantro",
+            "cantidad": 1,
+            "unidad": "al gusto"
+          }
         ],
         "paso_a_paso": [
           "Cocinar la carne picada con comino, pimentón y sal hasta dorar bien.",
@@ -393,13 +753,41 @@
           "grasas_g": 18
         },
         "ingredientes": [
-          { "item": "Pechuga de pollo", "cantidad": 200, "unidad": "g" },
-          { "item": "Tomate cherry", "cantidad": 100, "unidad": "g" },
-          { "item": "Pepino", "cantidad": 100, "unidad": "g" },
-          { "item": "Aceitunas kalamata", "cantidad": 30, "unidad": "g" },
-          { "item": "Queso feta light", "cantidad": 40, "unidad": "g" },
-          { "item": "Aceite de oliva", "cantidad": 10, "unidad": "ml" },
-          { "item": "Orégano y limón", "cantidad": 1, "unidad": "al gusto" }
+          {
+            "item": "Pechuga de pollo",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Tomate cherry",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Pepino",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceitunas kalamata",
+            "cantidad": 30,
+            "unidad": "g"
+          },
+          {
+            "item": "Queso feta light",
+            "cantidad": 40,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva",
+            "cantidad": 10,
+            "unidad": "ml"
+          },
+          {
+            "item": "Orégano y limón",
+            "cantidad": 1,
+            "unidad": "al gusto"
+          }
         ],
         "paso_a_paso": [
           "Cocinar el pollo a la plancha con orégano y sal. Cortar en tiras.",
@@ -423,12 +811,36 @@
           "grasas_g": 6
         },
         "ingredientes": [
-          { "item": "Avena arrollada", "cantidad": 70, "unidad": "g" },
-          { "item": "Leche descremada", "cantidad": 200, "unidad": "ml" },
-          { "item": "Proteína de suero (whey vanilla)", "cantidad": 30, "unidad": "g" },
-          { "item": "Banana", "cantidad": 80, "unidad": "g" },
-          { "item": "Arándanos", "cantidad": 50, "unidad": "g" },
-          { "item": "Miel", "cantidad": 10, "unidad": "g" }
+          {
+            "item": "Avena arrollada",
+            "cantidad": 70,
+            "unidad": "g"
+          },
+          {
+            "item": "Leche descremada",
+            "cantidad": 200,
+            "unidad": "ml"
+          },
+          {
+            "item": "Proteína de suero (whey vanilla)",
+            "cantidad": 30,
+            "unidad": "g"
+          },
+          {
+            "item": "Banana",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Arándanos",
+            "cantidad": 50,
+            "unidad": "g"
+          },
+          {
+            "item": "Miel",
+            "cantidad": 10,
+            "unidad": "g"
+          }
         ],
         "paso_a_paso": [
           "Cocinar la avena en la leche a fuego medio, revolviendo, hasta espesar (5 min).",
@@ -452,12 +864,36 @@
           "grasas_g": 16
         },
         "ingredientes": [
-          { "item": "Pan integral", "cantidad": 2, "unidad": "rebanadas" },
-          { "item": "Palta/aguacate", "cantidad": 80, "unidad": "g" },
-          { "item": "Huevos", "cantidad": 3, "unidad": "unidades" },
-          { "item": "Limón", "cantidad": 0.5, "unidad": "unidad" },
-          { "item": "Sal y pimienta", "cantidad": 1, "unidad": "al gusto" },
-          { "item": "Hojuelas de chile (opcional)", "cantidad": 1, "unidad": "pizca" }
+          {
+            "item": "Pan integral",
+            "cantidad": 2,
+            "unidad": "rebanadas"
+          },
+          {
+            "item": "Palta/aguacate",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Huevos",
+            "cantidad": 3,
+            "unidad": "unidades"
+          },
+          {
+            "item": "Limón",
+            "cantidad": 0.5,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Sal y pimienta",
+            "cantidad": 1,
+            "unidad": "al gusto"
+          },
+          {
+            "item": "Hojuelas de chile (opcional)",
+            "cantidad": 1,
+            "unidad": "pizca"
+          }
         ],
         "paso_a_paso": [
           "Tostar el pan.",
@@ -482,11 +918,31 @@
           "grasas_g": 4
         },
         "ingredientes": [
-          { "item": "Queso cottage", "cantidad": 150, "unidad": "g" },
-          { "item": "Frutos rojos (frutillas, arándanos)", "cantidad": 80, "unidad": "g" },
-          { "item": "Pera", "cantidad": 60, "unidad": "g" },
-          { "item": "Granola sin azúcar", "cantidad": 20, "unidad": "g" },
-          { "item": "Miel (opcional)", "cantidad": 5, "unidad": "g" }
+          {
+            "item": "Queso cottage",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Frutos rojos (frutillas, arándanos)",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Pera",
+            "cantidad": 60,
+            "unidad": "g"
+          },
+          {
+            "item": "Granola sin azúcar",
+            "cantidad": 20,
+            "unidad": "g"
+          },
+          {
+            "item": "Miel (opcional)",
+            "cantidad": 5,
+            "unidad": "g"
+          }
         ],
         "paso_a_paso": [
           "Colocar el cottage en un bowl.",
@@ -509,10 +965,26 @@
           "grasas_g": 8
         },
         "ingredientes": [
-          { "item": "Yogur griego 0% sin azúcar", "cantidad": 150, "unidad": "g" },
-          { "item": "Proteína de suero (whey)", "cantidad": 20, "unidad": "g" },
-          { "item": "Nueces picadas", "cantidad": 15, "unidad": "g" },
-          { "item": "Canela", "cantidad": 1, "unidad": "pizca" }
+          {
+            "item": "Yogur griego 0% sin azúcar",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Proteína de suero (whey)",
+            "cantidad": 20,
+            "unidad": "g"
+          },
+          {
+            "item": "Nueces picadas",
+            "cantidad": 15,
+            "unidad": "g"
+          },
+          {
+            "item": "Canela",
+            "cantidad": 1,
+            "unidad": "pizca"
+          }
         ],
         "paso_a_paso": [
           "Mezclar el yogur con la proteína de suero hasta integrar.",
@@ -535,10 +1007,26 @@
           "grasas_g": 8
         },
         "ingredientes": [
-          { "item": "Banana", "cantidad": 100, "unidad": "g" },
-          { "item": "Leche descremada", "cantidad": 200, "unidad": "ml" },
-          { "item": "Proteína de suero (whey)", "cantidad": 25, "unidad": "g" },
-          { "item": "Mantequilla de maní natural", "cantidad": 15, "unidad": "g" }
+          {
+            "item": "Banana",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Leche descremada",
+            "cantidad": 200,
+            "unidad": "ml"
+          },
+          {
+            "item": "Proteína de suero (whey)",
+            "cantidad": 25,
+            "unidad": "g"
+          },
+          {
+            "item": "Mantequilla de maní natural",
+            "cantidad": 15,
+            "unidad": "g"
+          }
         ],
         "paso_a_paso": [
           "Colocar todos los ingredientes en la licuadora.",
@@ -561,14 +1049,46 @@
           "grasas_g": 7
         },
         "ingredientes": [
-          { "item": "Garbanzos cocidos", "cantidad": 200, "unidad": "g" },
-          { "item": "Tahini", "cantidad": 20, "unidad": "g" },
-          { "item": "Limón", "cantidad": 1, "unidad": "unidad" },
-          { "item": "Ajo", "cantidad": 1, "unidad": "diente" },
-          { "item": "Aceite de oliva", "cantidad": 10, "unidad": "ml" },
-          { "item": "Zanahoria", "cantidad": 100, "unidad": "g" },
-          { "item": "Apio", "cantidad": 60, "unidad": "g" },
-          { "item": "Morrón rojo", "cantidad": 80, "unidad": "g" }
+          {
+            "item": "Garbanzos cocidos",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Tahini",
+            "cantidad": 20,
+            "unidad": "g"
+          },
+          {
+            "item": "Limón",
+            "cantidad": 1,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Ajo",
+            "cantidad": 1,
+            "unidad": "diente"
+          },
+          {
+            "item": "Aceite de oliva",
+            "cantidad": 10,
+            "unidad": "ml"
+          },
+          {
+            "item": "Zanahoria",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Apio",
+            "cantidad": 60,
+            "unidad": "g"
+          },
+          {
+            "item": "Morrón rojo",
+            "cantidad": 80,
+            "unidad": "g"
+          }
         ],
         "paso_a_paso": [
           "Procesar los garbanzos con tahini, ajo, jugo de limón y aceite hasta suave.",
@@ -592,13 +1112,41 @@
           "grasas_g": 5
         },
         "ingredientes": [
-          { "item": "Pechuga de pollo", "cantidad": 300, "unidad": "g" },
-          { "item": "Zanahoria", "cantidad": 100, "unidad": "g" },
-          { "item": "Apio", "cantidad": 80, "unidad": "g" },
-          { "item": "Zapallito verde", "cantidad": 100, "unidad": "g" },
-          { "item": "Fideos cabello de ángel", "cantidad": 60, "unidad": "g" },
-          { "item": "Caldo de pollo bajo en sodio", "cantidad": 1000, "unidad": "ml" },
-          { "item": "Sal, perejil y laurel", "cantidad": 1, "unidad": "al gusto" }
+          {
+            "item": "Pechuga de pollo",
+            "cantidad": 300,
+            "unidad": "g"
+          },
+          {
+            "item": "Zanahoria",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Apio",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Zapallito verde",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Fideos cabello de ángel",
+            "cantidad": 60,
+            "unidad": "g"
+          },
+          {
+            "item": "Caldo de pollo bajo en sodio",
+            "cantidad": 1000,
+            "unidad": "ml"
+          },
+          {
+            "item": "Sal, perejil y laurel",
+            "cantidad": 1,
+            "unidad": "al gusto"
+          }
         ],
         "paso_a_paso": [
           "Hervir el caldo con la pechuga entera, laurel y sal 20 minutos.",
@@ -623,14 +1171,46 @@
           "grasas_g": 8
         },
         "ingredientes": [
-          { "item": "Arroz arbóreo", "cantidad": 150, "unidad": "g" },
-          { "item": "Champiñones", "cantidad": 200, "unidad": "g" },
-          { "item": "Caldo de verduras", "cantidad": 600, "unidad": "ml" },
-          { "item": "Cebolla", "cantidad": 80, "unidad": "g" },
-          { "item": "Vino blanco seco", "cantidad": 60, "unidad": "ml" },
-          { "item": "Queso parmesano rallado", "cantidad": 20, "unidad": "g" },
-          { "item": "Aceite de oliva", "cantidad": 10, "unidad": "ml" },
-          { "item": "Sal y pimienta", "cantidad": 1, "unidad": "al gusto" }
+          {
+            "item": "Arroz arbóreo",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Champiñones",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Caldo de verduras",
+            "cantidad": 600,
+            "unidad": "ml"
+          },
+          {
+            "item": "Cebolla",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Vino blanco seco",
+            "cantidad": 60,
+            "unidad": "ml"
+          },
+          {
+            "item": "Queso parmesano rallado",
+            "cantidad": 20,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva",
+            "cantidad": 10,
+            "unidad": "ml"
+          },
+          {
+            "item": "Sal y pimienta",
+            "cantidad": 1,
+            "unidad": "al gusto"
+          }
         ],
         "paso_a_paso": [
           "Calentar el caldo en una olla a fuego bajo.",
@@ -639,6 +1219,2441 @@
           "Agregar el caldo caliente de a cucharones, revolviendo constantemente hasta absorber.",
           "Después de 18-20 minutos, retirar del fuego. Incorporar el parmesano.",
           "Dejar reposar 2 minutos y servir."
+        ]
+      }
+    },
+    {
+      "id": "batido-ninja-pablo",
+      "receta": {
+        "nombre": "Batido Ninja Pablo",
+        "descripcion_breve": "Batido proteico diario de whey isolate y skyr de vainilla, con más de 54g de proteína y muy bajo contenido de grasas.",
+        "categoria": "batido/proteico",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 269,
+          "proteina_g": 54.2,
+          "carbohidratos_g": 9.7,
+          "grasas_g": 0.9
+        },
+        "ingredientes": [
+          {
+            "item": "Whey isolate",
+            "cantidad": 45,
+            "unidad": "g"
+          },
+          {
+            "item": "Cheasy Skyr Vanilje 0,2%",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Agua fría",
+            "cantidad": 200,
+            "unidad": "ml"
+          },
+          {
+            "item": "Hielo",
+            "cantidad": 100,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Colocar los 200ml de agua fría en la Ninja Blender.",
+          "Agregar los 200g de Cheasy Skyr Vanilje 0,2%.",
+          "Agregar los 45g de whey isolate.",
+          "Añadir los 100g de hielo.",
+          "Licuar durante 20-30 segundos hasta obtener una textura homogénea y cremosa.",
+          "Servir inmediatamente."
+        ]
+      }
+    },
+    {
+      "id": "batido-ninja-juli",
+      "receta": {
+        "nombre": "Batido Ninja Juli",
+        "descripcion_breve": "Batido proteico diario de whey isolate y skyr de vainilla, con más de 33g de proteína y muy bajo contenido de grasas.",
+        "categoria": "batido/proteico",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 161,
+          "proteina_g": 33.4,
+          "carbohidratos_g": 5.0,
+          "grasas_g": 0.5
+        },
+        "ingredientes": [
+          {
+            "item": "Whey isolate",
+            "cantidad": 30,
+            "unidad": "g"
+          },
+          {
+            "item": "Cheasy Skyr Vanilje 0,2%",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Agua fría",
+            "cantidad": 150,
+            "unidad": "ml"
+          },
+          {
+            "item": "Hielo",
+            "cantidad": 75,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Colocar los 150ml de agua fría en la Ninja Blender.",
+          "Agregar los 100g de Cheasy Skyr Vanilje 0,2%.",
+          "Agregar los 30g de whey isolate.",
+          "Añadir los 75g de hielo.",
+          "Licuar durante 20-30 segundos hasta obtener una textura homogénea y cremosa.",
+          "Servir inmediatamente."
+        ]
+      }
+    },
+    {
+      "id": "pollo-al-curry",
+      "receta": {
+        "nombre": "Pollo al curry con blomkålsris o quinoa",
+        "descripcion_breve": "Pechuga en cubos con vegetal sofrito en leche de coco light y especias sobre arroz de coliflor o quinoa.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 480,
+          "proteina_g": 48,
+          "carbohidratos_g": 32,
+          "grasas_g": 12
+        },
+        "ingredientes": [
+          {
+            "item": "Pechuga de pollo",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Pimiento morrón",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Leche de coco light",
+            "cantidad": 150,
+            "unidad": "ml"
+          },
+          {
+            "item": "Curry en polvo",
+            "cantidad": 10,
+            "unidad": "g"
+          },
+          {
+            "item": "Arroz de coliflor (blomkålsris) o quinoa cocida",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva spray",
+            "cantidad": 3,
+            "unidad": "ml"
+          }
+        ],
+        "paso_a_paso": [
+          "Dorar la pechuga en cubos en una sartén con spray de oliva.",
+          "Saltear la cebolla y el morrón picados finos hasta transparentar.",
+          "Añadir el curry, la leche de coco light y cocinar a fuego lento por 10 minutos.",
+          "Servir caliente sobre la base de blomkålsris salteado o quinoa cocida."
+        ]
+      }
+    },
+    {
+      "id": "tarta-integral-espinaca",
+      "receta": {
+        "nombre": "Tarta integral de espinaca y hytteost",
+        "descripcion_breve": "Masa integral fina rellena de espinaca, cebolla salteada, huevos y hytteost para aportar cremosidad y proteínas.",
+        "categoria": "almuerzo/cena",
+        "porciones": 4,
+        "macros_por_porcion": {
+          "calorias": 340,
+          "proteina_g": 24,
+          "carbohidratos_g": 28,
+          "grasas_g": 12
+        },
+        "ingredientes": [
+          {
+            "item": "Masa integral fina para tarta",
+            "cantidad": 1,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Espinaca cocida y escurrida",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Huevos",
+            "cantidad": 3,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Hytteost (Cottage cheese)",
+            "cantidad": 250,
+            "unidad": "g"
+          },
+          {
+            "item": "Nuez moscada, sal y pimienta",
+            "cantidad": 5,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Saltear la cebolla hasta dorar y mezclar con la espinaca bien escurrida.",
+          "Batir los huevos con el hytteost, la sal, pimienta y nuez moscada.",
+          "Unir las verduras con la mezcla de huevo y queso.",
+          "Disponer la masa fina en un molde, verter el relleno y hornear a 180°C durante 30 minutos."
+        ]
+      }
+    },
+    {
+      "id": "pechugas-rellenas-airfryer",
+      "receta": {
+        "nombre": "Pechugas rellenas a la Airfryer",
+        "descripcion_breve": "Pechuga abierta en mariposa rellena con hytteost y morrón asado, sellada y cocinada en la freidora de aire.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 390,
+          "proteina_g": 56,
+          "carbohidratos_g": 6,
+          "grasas_g": 14
+        },
+        "ingredientes": [
+          {
+            "item": "Pechuga de pollo entera",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Hytteost",
+            "cantidad": 120,
+            "unidad": "g"
+          },
+          {
+            "item": "Pimiento morrón asado",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Ajo en polvo, pimentón y sal",
+            "cantidad": 5,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Abrir las pechugas como un libro y condimentar por dentro y por fuera.",
+          "Rellenar con el hytteost y tiras de morrón asado.",
+          "Cerrar con escarbadientes para asegurar el relleno.",
+          "Cocinar en Ninja / Airfryer a 190°C durante 18-20 minutos girando a mitad de cocción."
+        ]
+      }
+    },
+    {
+      "id": "salmon-glaseado",
+      "receta": {
+        "nombre": "Salmón glaseado con fideos de arroz y brócoli (Día de oficina - Pablo)",
+        "descripcion_breve": "Filet de salmón horneado con soja y jengibre, servido con fideos de arroz y brócoli al vapor.",
+        "categoria": "almuerzo/cena",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 550,
+          "proteina_g": 42,
+          "carbohidratos_g": 45,
+          "grasas_g": 20
+        },
+        "ingredientes": [
+          {
+            "item": "Filet de salmón fresco",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Salsa de soja baja en sodio",
+            "cantidad": 20,
+            "unidad": "ml"
+          },
+          {
+            "item": "Jengibre rallado",
+            "cantidad": 5,
+            "unidad": "g"
+          },
+          {
+            "item": "Fideos de arroz (peso en seco)",
+            "cantidad": 50,
+            "unidad": "g"
+          },
+          {
+            "item": "Brócoli",
+            "cantidad": 150,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Marinar el salmón con salsa de soja y jengibre rallado por 10 minutos.",
+          "Cocinar el salmón en airfryer u horno a 180°C durante 12 minutos.",
+          "Cocinar los fideos de arroz e hidratar según instrucciones del paquete.",
+          "Hacer el brócoli al vapor y servir todo junto."
+        ]
+      }
+    },
+    {
+      "id": "pastel-de-carne-fit",
+      "receta": {
+        "nombre": "Pastel de carne fit con puré mixto",
+        "descripcion_breve": "Base de carne picada magra con sofrito, cubierta por un puré liviano de calabaza y papa.",
+        "categoria": "almuerzo/cena",
+        "porciones": 3,
+        "macros_por_porcion": {
+          "calorias": 420,
+          "proteina_g": 38,
+          "carbohidratos_g": 30,
+          "grasas_g": 14
+        },
+        "ingredientes": [
+          {
+            "item": "Carne picada magra (3-7% grasa)",
+            "cantidad": 500,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla y morrón picados",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Calabaza (Anco)",
+            "cantidad": 300,
+            "unidad": "g"
+          },
+          {
+            "item": "Papa",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Condimentos al gusto",
+            "cantidad": 5,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Cocinar la carne magra con la cebolla y el morrón hasta dorar.",
+          "Hervir la calabaza y la papa; hacer un puré firme pisándolas juntas.",
+          "Colocar la carne en una fuente para horno y cubrir con el puré.",
+          "Gratinar en el horno a 200°C por 15 minutos."
+        ]
+      }
+    },
+    {
+      "id": "ensalada-tibia-quinoa-pollo",
+      "receta": {
+        "nombre": "Ensalada tibia de quinoa y pollo",
+        "descripcion_breve": "Tiras de pechuga a la plancha sobre base de quinoa, brócoli al vapor, palta y aderezo de limón.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 460,
+          "proteina_g": 42,
+          "carbohidratos_g": 35,
+          "grasas_g": 16
+        },
+        "ingredientes": [
+          {
+            "item": "Pechuga de pollo",
+            "cantidad": 300,
+            "unidad": "g"
+          },
+          {
+            "item": "Quinoa cocida",
+            "cantidad": 180,
+            "unidad": "g"
+          },
+          {
+            "item": "Brócoli en floretes",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Palta (Aguacate)",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Jugo de limón y sal",
+            "cantidad": 10,
+            "unidad": "ml"
+          }
+        ],
+        "paso_a_paso": [
+          "Grillar las tiras de pollo a la plancha hasta que estén doradas.",
+          "Cocer el brócoli al vapor dejando una textura crujiente.",
+          "Mezclar la quinoa tibia, el brócoli, las tiras de pollo y la palta fileteada.",
+          "Aliñar con jugo de limón fresco y sal al gusto."
+        ]
+      }
+    },
+    {
+      "id": "hamburguesas-caseras-al-plato",
+      "receta": {
+        "nombre": "Hamburguesas caseras al plato con huevo y tomate",
+        "descripcion_breve": "Medallones de carne magra coronados con huevo a la plancha y rodajas de tomate fresco sin pan.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 410,
+          "proteina_g": 46,
+          "carbohidratos_g": 8,
+          "grasas_g": 22
+        },
+        "ingredientes": [
+          {
+            "item": "Carne picada magra",
+            "cantidad": 350,
+            "unidad": "g"
+          },
+          {
+            "item": "Huevos",
+            "cantidad": 2,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Tomate grande en rodajas",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Ajo y perejil picados",
+            "cantidad": 10,
+            "unidad": "g"
+          },
+          {
+            "item": "Spray vegetal",
+            "cantidad": 2,
+            "unidad": "ml"
+          }
+        ],
+        "paso_a_paso": [
+          "Formar 2 medallones condimentados con ajo y perejil.",
+          "Cocinar las hamburguesas a fuego fuerte a la plancha.",
+          "Hacer los huevos a la plancha utilizando spray vegetal.",
+          "Servir las hamburguesas coronadas con las rodajas de tomate y el huevo por encima."
+        ]
+      }
+    },
+    {
+      "id": "mac-and-cheese-proteico",
+      "receta": {
+        "nombre": "Mac & Cheese proteico",
+        "descripcion_breve": "Fideos de arroz con una crema proteica licuada de hytteost, Havarti fundido y especias.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 430,
+          "proteina_g": 28,
+          "carbohidratos_g": 48,
+          "grasas_g": 12
+        },
+        "ingredientes": [
+          {
+            "item": "Fideos de arroz",
+            "cantidad": 120,
+            "unidad": "g"
+          },
+          {
+            "item": "Hytteost",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Queso Havarti (16% grasa)",
+            "cantidad": 40,
+            "unidad": "g"
+          },
+          {
+            "item": "Ajo en polvo y pimentón",
+            "cantidad": 5,
+            "unidad": "g"
+          },
+          {
+            "item": "Leche descremada",
+            "cantidad": 50,
+            "unidad": "ml"
+          }
+        ],
+        "paso_a_paso": [
+          "Hervir los fideos de arroz al dente.",
+          "Licuar el hytteost con el Havarti, la leche en hilo, ajo en polvo y pimentón hasta homogenizar.",
+          "Calentar la salsa a fuego muy bajo sin hervir para mantener la textura.",
+          "Mezclar con los fideos calientes y servir de inmediato."
+        ]
+      }
+    },
+    {
+      "id": "tomates-rellenos-proteicos",
+      "receta": {
+        "nombre": "Tomates rellenos proteicos de atún y quinoa",
+        "descripcion_breve": "Tomates ahuecados rellenos con atún al natural, hytteost, cebollita picada y quinoa.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 310,
+          "proteina_g": 36,
+          "carbohidratos_g": 22,
+          "grasas_g": 8
+        },
+        "ingredientes": [
+          {
+            "item": "Tomates grandes redondos",
+            "cantidad": 4,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Atún al natural escurrido",
+            "cantidad": 160,
+            "unidad": "g"
+          },
+          {
+            "item": "Hytteost",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Quinoa cocida",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla morada muy picada",
+            "cantidad": 40,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Ahuecar los tomates retirando las semillas con una cuchara.",
+          "Mezclar el atún con el hytteost, cebolla picada fina y la quinoa.",
+          "Rellenar los tomates generosamente.",
+          "Servir fríos o llevar 5 minutos al horno si se prefieren tibios."
+        ]
+      }
+    },
+    {
+      "id": "poke-bowl-salmon",
+      "receta": {
+        "nombre": "Poke bowl de salmón (Día de oficina - Pablo)",
+        "descripcion_breve": "Dados de salmón al horno sobre quinoa, acompañados de palta, pepino fresco y chía.",
+        "categoria": "almuerzo/cena",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 520,
+          "proteina_g": 38,
+          "carbohidratos_g": 36,
+          "grasas_g": 24
+        },
+        "ingredientes": [
+          {
+            "item": "Salmón en dados",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Quinoa cocida",
+            "cantidad": 120,
+            "unidad": "g"
+          },
+          {
+            "item": "Palta en láminas",
+            "cantidad": 50,
+            "unidad": "g"
+          },
+          {
+            "item": "Pepino rodajas",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Semillas de chía",
+            "cantidad": 5,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Horneando los dados de salmón a 190°C por 10 minutos.",
+          "Disponer la quinoa cocida como base en un bowl.",
+          "Añadir el salmón, la palta y el pepino distribuidos en sectores.",
+          "Espolvorear con semillas de chía y un chorrito de salsa de soja."
+        ]
+      }
+    },
+    {
+      "id": "salteado-carne-fajitas",
+      "receta": {
+        "nombre": "Salteado de carne tipo fajitas",
+        "descripcion_breve": "Tiras de bife magro salteadas con abundante cebolla y morrón a fuego fuerte.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 390,
+          "proteina_g": 44,
+          "carbohidratos_g": 20,
+          "grasas_g": 14
+        },
+        "ingredientes": [
+          {
+            "item": "Bife magro de ternera en tiras",
+            "cantidad": 350,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla en juliana",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Morrón rojo y verde en juliana",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Comino, pimentón y ají",
+            "cantidad": 5,
+            "unidad": "g"
+          },
+          {
+            "item": "Tortilla integral pequeña (opcional)",
+            "cantidad": 1,
+            "unidad": "unidad"
+          }
+        ],
+        "paso_a_paso": [
+          "Calentar la sartén o wok a fuego máximo con un toque de spray.",
+          "Saltear la carne rápidamente para sellar y retirar.",
+          "Dorar la cebolla y los morrones hasta que estén al dente.",
+          "Mezclar todo, sazonar con comino y pimentón, y servir al plato o con tortilla integral."
+        ]
+      }
+    },
+    {
+      "id": "arrollado-de-pollo",
+      "receta": {
+        "nombre": "Arrollado de pollo relleno de espinaca y Havarti",
+        "descripcion_breve": "Pechuga aplanada enrollada con espinaca fresca y queso Havarti, cortada en rodajas.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 370,
+          "proteina_g": 52,
+          "carbohidratos_g": 4,
+          "grasas_g": 16
+        },
+        "ingredientes": [
+          {
+            "item": "Pechuga de pollo aplanada",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Espinaca fresca",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Queso Havarti (16%)",
+            "cantidad": 40,
+            "unidad": "g"
+          },
+          {
+            "item": "Ajo en polvo y sal",
+            "cantidad": 5,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Estirar la pechuga aplanada y sazonar con sal y ajo en polvo.",
+          "Colocar la espinaca y las lonchas de queso Havarti encima.",
+          "Enrollar firmemente y envolver en papel aluminio.",
+          "Hornear a 200°C por 25 minutos, retirar el papel y cortar en rodajas."
+        ]
+      }
+    },
+    {
+      "id": "souffle-de-brocoli",
+      "receta": {
+        "nombre": "Soufflé de brócoli con Havarti",
+        "descripcion_breve": "Brócoli procesado integrado con claras a punto de nieve y un toque de Havarti, horneado y esponjoso.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 240,
+          "proteina_g": 22,
+          "carbohidratos_g": 10,
+          "grasas_g": 12
+        },
+        "ingredientes": [
+          {
+            "item": "Brócoli cocido",
+            "cantidad": 350,
+            "unidad": "g"
+          },
+          {
+            "item": "Claras de huevo",
+            "cantidad": 4,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Yema de huevo",
+            "cantidad": 1,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Queso Havarti (16%) rallado",
+            "cantidad": 30,
+            "unidad": "g"
+          },
+          {
+            "item": "Sal y pimienta",
+            "cantidad": 3,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Procesar o picar muy fino el brócoli y mezclar con la yema y el queso.",
+          "Batir las 4 claras a punto de nieve con una pizca de sal.",
+          "Integrar las claras a la mezcla de brócoli con movimientos envolventes.",
+          "Volcar en un molde y hornear a 180°C por 20 minutos hasta que infle."
+        ]
+      }
+    },
+    {
+      "id": "pechuga-a-la-mostaza",
+      "receta": {
+        "nombre": "Pechuga a la mostaza con blomkålsris",
+        "descripcion_breve": "Pollo dorado desglasado con salsa de mostaza y un toque de leche de coco light, servido sobre arroz de coliflor.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 360,
+          "proteina_g": 46,
+          "carbohidratos_g": 12,
+          "grasas_g": 14
+        },
+        "ingredientes": [
+          {
+            "item": "Pechuga de pollo",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Mostaza de Dijon",
+            "cantidad": 30,
+            "unidad": "g"
+          },
+          {
+            "item": "Leche de coco light",
+            "cantidad": 100,
+            "unidad": "ml"
+          },
+          {
+            "item": "Arroz de coliflor (blomkålsris)",
+            "cantidad": 250,
+            "unidad": "g"
+          },
+          {
+            "item": "Caldo de verduras",
+            "cantidad": 50,
+            "unidad": "ml"
+          }
+        ],
+        "paso_a_paso": [
+          "Dorar las pechugas en una sartén antiadherente por ambos lados.",
+          "Desglasar agregando el caldo, la mostaza y la leche de coco light.",
+          "Cocinar a fuego bajo 8 minutos hasta reducir la salsa.",
+          "Servir junto con el blomkålsris previamente salteado."
+        ]
+      }
+    },
+    {
+      "id": "empanadas-arabes-abiertas",
+      "receta": {
+        "nombre": "Empanadas árabes (Fatay) abiertas integrales",
+        "descripcion_breve": "Masa integral con relleno de carne picada magra, cebolla, tomate y jugo de limón cocinadas abiertas.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 420,
+          "proteina_g": 36,
+          "carbohidratos_g": 38,
+          "grasas_g": 14
+        },
+        "ingredientes": [
+          {
+            "item": "Tapas de empanada integrales",
+            "cantidad": 4,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Carne picada magra (3-7%)",
+            "cantidad": 300,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla picada fina",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Tomate picado",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Jugo de limón",
+            "cantidad": 30,
+            "unidad": "ml"
+          },
+          {
+            "item": "Menta fresca, sal y siete especias",
+            "cantidad": 5,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Macerar la carne cruda con cebolla, tomate, jugo de limón y especias por 30 min.",
+          "Acomodar las tapas integrales en una placa y colocar el relleno en el centro.",
+          "Pizcar los bordes formando triángulos abiertos.",
+          "Hornear a 200°C por 18 minutos."
+        ]
+      }
+    },
+    {
+      "id": "salmon-al-papillote",
+      "receta": {
+        "nombre": "Salmón al papillote (Día de oficina - Pablo)",
+        "descripcion_breve": "Filet de salmón en papillote horneado con juliana de morrones, cebolla y limón.",
+        "categoria": "almuerzo/cena",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 440,
+          "proteina_g": 38,
+          "carbohidratos_g": 12,
+          "grasas_g": 26
+        },
+        "ingredientes": [
+          {
+            "item": "Salmón fresco",
+            "cantidad": 180,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla en juliana",
+            "cantidad": 60,
+            "unidad": "g"
+          },
+          {
+            "item": "Morrón en juliana",
+            "cantidad": 60,
+            "unidad": "g"
+          },
+          {
+            "item": "Rodajas de limón y eneldo",
+            "cantidad": 20,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Colocar un paquete de papel manteca o aluminio con los vegetales de base.",
+          "Disponer el salmón salpimentado por encima y cubrir con rodajas de limón.",
+          "Cerrar herméticamente el paquete.",
+          "Hornear a 190°C durante 15-18 minutos."
+        ]
+      }
+    },
+    {
+      "id": "zapallitos-o-berenjenas-rellenas",
+      "receta": {
+        "nombre": "Zapallitos o berenjenas rellenas gratinadas",
+        "descripcion_breve": "Verduras ahuecadas rellenas de carne picada magra y su pulpa, gratinadas con lámina de Havarti.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 360,
+          "proteina_g": 38,
+          "carbohidratos_g": 14,
+          "grasas_g": 16
+        },
+        "ingredientes": [
+          {
+            "item": "Berenjenas o zapallitos grandes",
+            "cantidad": 2,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Carne picada magra",
+            "cantidad": 300,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla picada",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Queso Havarti (16%)",
+            "cantidad": 30,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Hervir o ahuecar los zapallitos/berenjenas picando la pulpa extraída.",
+          "Cocinar la carne con la cebolla y la pulpa picada.",
+          "Rellenar los vegetales y colocar la lámina de queso Havarti arriba.",
+          "Gratinar al horno a 200°C por 15 minutos."
+        ]
+      }
+    },
+    {
+      "id": "risotto-de-quinoa",
+      "receta": {
+        "nombre": "Risotto de quinoa con pollo y brócoli",
+        "descripcion_breve": "Quinoa cocinada en caldo con pollo desmenuzado, brócoli y hytteost para lograr máxima cremosidad.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 440,
+          "proteina_g": 44,
+          "carbohidratos_g": 38,
+          "grasas_g": 12
+        },
+        "ingredientes": [
+          {
+            "item": "Quinoa en seco",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Pechuga de pollo hervida y desmenuzada",
+            "cantidad": 250,
+            "unidad": "g"
+          },
+          {
+            "item": "Brócoli picado",
+            "cantidad": 120,
+            "unidad": "g"
+          },
+          {
+            "item": "Hytteost",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Caldo de verduras bajo en sodio",
+            "cantidad": 400,
+            "unidad": "ml"
+          }
+        ],
+        "paso_a_paso": [
+          "Cocer la quinoa añadiendo caldo caliente gradualmente como en un risotto.",
+          "Agregar el pollo desmenuzado y el brócoli a mitad de cocción.",
+          "Cuando el líquido reduzca, retirar del fuego y mantecar con el hytteost.",
+          "Servir cremoso inmediatamente."
+        ]
+      }
+    },
+    {
+      "id": "bifes-a-la-criolla-magros",
+      "receta": {
+        "nombre": "Bifes a la criolla magros",
+        "descripcion_breve": "Bifes de ternera cocinados a la cacerola con rodajas de cebolla, morrón y tomate natural.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 380,
+          "proteina_g": 48,
+          "carbohidratos_g": 16,
+          "grasas_g": 14
+        },
+        "ingredientes": [
+          {
+            "item": "Bifes magros de ternera",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebollas cortadas en rodajas",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Pimiento morrón en tiras",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Puré de tomate natural",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Orégano, pimentón y laurel",
+            "cantidad": 5,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Hacer capas en una cacerola: cebolla, morrón, bifes y tomate.",
+          "Sazonar con sal, pimentón, orégano y la hoja de laurel.",
+          "Tapar y cocinar a fuego lento durante 30 minutos sin revolver.",
+          "Servir bien caliente con la salsa reducida."
+        ]
+      }
+    },
+    {
+      "id": "ensalada-cesar-adaptada",
+      "receta": {
+        "nombre": "Ensalada César fit con aderezo de skyr",
+        "descripcion_breve": "Pechuga grillada sobre espinaca fresca, crutones integrales y aderezo proteico de skyr y mostaza.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 350,
+          "proteina_g": 45,
+          "carbohidratos_g": 18,
+          "grasas_g": 10
+        },
+        "ingredientes": [
+          {
+            "item": "Pechuga de pollo a la plancha",
+            "cantidad": 350,
+            "unidad": "g"
+          },
+          {
+            "item": "Espinaca fresca limpia",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Pan integral tostado en cubos (crutones)",
+            "cantidad": 40,
+            "unidad": "g"
+          },
+          {
+            "item": "Skyr natural",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Mostaza de Dijon y ajo en polvo",
+            "cantidad": 15,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Mezclar el skyr, mostaza, ajo y sal para formar el aderezo.",
+          "Poner una base generosa de espinaca en dos bowls.",
+          "Añadir la pechuga cortada en tiras y los crutones tostados.",
+          "Bañar con el aderezo de skyr."
+        ]
+      }
+    },
+    {
+      "id": "brochettes-a-la-parrilla",
+      "receta": {
+        "nombre": "Brochettes de pollo y vegetales a la Ninja / Parrilla",
+        "descripcion_breve": "Pinchos intercalados de cubos de pollo, cebolla y morrón a la parrilla o airfryer.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 310,
+          "proteina_g": 45,
+          "carbohidratos_g": 10,
+          "grasas_g": 9
+        },
+        "ingredientes": [
+          {
+            "item": "Pechuga de pollo en cubos",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla en trozos grandes",
+            "cantidad": 120,
+            "unidad": "g"
+          },
+          {
+            "item": "Pimiento morrón en trozos",
+            "cantidad": 120,
+            "unidad": "g"
+          },
+          {
+            "item": "Orégano y ajo en polvo",
+            "cantidad": 5,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Armar brochettes en palitos de madera intercalando pollo y vegetales.",
+          "Condimentar bien con orégano, ajo y sal.",
+          "Asar a la parrilla o Ninja Grill a 200°C por 12-15 minutos.",
+          "Girar a mitad de cocción para un dorado parejo."
+        ]
+      }
+    },
+    {
+      "id": "pan-de-carne",
+      "receta": {
+        "nombre": "Pan de carne magro relleno",
+        "descripcion_breve": "Carne picada amasada con especias, rellena con huevos duros y morrón asado, horneada en budinera.",
+        "categoria": "almuerzo/cena",
+        "porciones": 4,
+        "macros_por_porcion": {
+          "calorias": 360,
+          "proteina_g": 42,
+          "carbohidratos_g": 6,
+          "grasas_g": 18
+        },
+        "ingredientes": [
+          {
+            "item": "Carne picada magra (3-7%)",
+            "cantidad": 600,
+            "unidad": "g"
+          },
+          {
+            "item": "Huevos duros",
+            "cantidad": 3,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Morrón asado en tiras",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Huevo crudo (para ligar)",
+            "cantidad": 1,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Ajo, perejil y sal",
+            "cantidad": 10,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Amasar la carne con el huevo crudo y los condimentos.",
+          "Colocar la mitad en una budinera, añadir los huevos duros y morrón en el centro.",
+          "Cubrir con el resto de la carne y presionar bien.",
+          "Hornear a 190°C por 35 minutos."
+        ]
+      }
+    },
+    {
+      "id": "tacos-de-salmon",
+      "receta": {
+        "nombre": "Tacos de salmón en hojas de spidskål (Día de oficina - Pablo)",
+        "descripcion_breve": "Salmón desmenuzado con palta y cebolla morada sobre hojas crujientes de repollo spidskål.",
+        "categoria": "almuerzo/cena",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 460,
+          "proteina_g": 36,
+          "carbohidratos_g": 10,
+          "grasas_g": 30
+        },
+        "ingredientes": [
+          {
+            "item": "Salmón cocido desmenuzado",
+            "cantidad": 160,
+            "unidad": "g"
+          },
+          {
+            "item": "Hojas de repollo spidskål",
+            "cantidad": 4,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Palta pisada",
+            "cantidad": 60,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla morada picada",
+            "cantidad": 30,
+            "unidad": "g"
+          },
+          {
+            "item": "Cilantro y limón",
+            "cantidad": 10,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Mezclar el salmón desmenuzado con la palta pisada, cebolla y limón.",
+          "Lavar y separar con cuidado las hojas frescas de spidskål.",
+          "Usar las hojas como tortillas y rellenar con la mezcla de salmón.",
+          "Espolvorear cilantro por encima antes de comer."
+        ]
+      }
+    },
+    {
+      "id": "fideos-de-arroz-bolonesa",
+      "receta": {
+        "nombre": "Fideos de arroz a la boloñesa magra",
+        "descripcion_breve": "Salsa boloñesa casera de carne magra y tomate sobre una porción medida de fideos de arroz.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 420,
+          "proteina_g": 38,
+          "carbohidratos_g": 46,
+          "grasas_g": 10
+        },
+        "ingredientes": [
+          {
+            "item": "Fideos de arroz (peso en seco)",
+            "cantidad": 110,
+            "unidad": "g"
+          },
+          {
+            "item": "Carne picada magra",
+            "cantidad": 300,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla rallada",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Tomate triturado",
+            "cantidad": 200,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Dorar la cebolla y agregar la carne picada magra.",
+          "Incorporar el tomate triturado y cocinar a fuego lento por 15 minutos.",
+          "Hervir los fideos de arroz y escurrir.",
+          "Servir los fideos cubiertos con la boloñesa."
+        ]
+      }
+    },
+    {
+      "id": "milanesas-de-pollo-al-horno",
+      "receta": {
+        "nombre": "Milanesas de pollo al horno fit",
+        "descripcion_breve": "Pechugas pasadas por huevo y avena extrafina, horneadas sobre placa precalentada súper crujientes.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 410,
+          "proteina_g": 48,
+          "carbohidratos_g": 30,
+          "grasas_g": 10
+        },
+        "ingredientes": [
+          {
+            "item": "Pechuga de pollo fileteada",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Avena extrafina o pan rallado integral",
+            "cantidad": 70,
+            "unidad": "g"
+          },
+          {
+            "item": "Huevo",
+            "cantidad": 1,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Ajo y provenzal",
+            "cantidad": 5,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Pasar los filetes por huevo batido con provenzal y luego empanar en avena.",
+          "Precalentar el horno a 220°C con la placa adentro.",
+          "Colocar las milanesas en la placa caliente con un toque de spray.",
+          "Cocinar 8 minutos por lado hasta dorar."
+        ]
+      }
+    },
+    {
+      "id": "revuelto-gramajo-fit",
+      "receta": {
+        "nombre": "Revuelto Gramajo fit",
+        "descripcion_breve": "Revuelto de muchas claras, pollo desmenuzado, cebolla y papas finas hechas a la freidora de aire.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 360,
+          "proteina_g": 42,
+          "carbohidratos_g": 24,
+          "grasas_g": 10
+        },
+        "ingredientes": [
+          {
+            "item": "Claras de huevo",
+            "cantidad": 6,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Pechuga desmenuzada",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Papa cortada en bastones finos",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla rehogada",
+            "cantidad": 100,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Cocinar las papas finas en Airfryer sin aceite a 200°C por 12 minutos.",
+          "Rehogar la cebolla y mezclar con el pollo desmenuzado.",
+          "Volcar las claras y revolver suavemente hasta cuajar.",
+          "Incorporar las papas crocantes justo antes de servir."
+        ]
+      }
+    },
+    {
+      "id": "ensalada-fresca-atun-garbanzos",
+      "receta": {
+        "nombre": "Ensalada fresca de atún y quinoa con skyr",
+        "descripcion_breve": "Atún, cebolla morada, morrón asado y espinaca sobre quinoa con aderezo fresco de skyr.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 370,
+          "proteina_g": 38,
+          "carbohidratos_g": 32,
+          "grasas_g": 9
+        },
+        "ingredientes": [
+          {
+            "item": "Atún al natural",
+            "cantidad": 240,
+            "unidad": "g"
+          },
+          {
+            "item": "Quinoa cocida",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Espinaca baby fresca",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Skyr natural",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla morada y morrón asado",
+            "cantidad": 80,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Mezclar el skyr con hierbas frescas y un chorrito de limón.",
+          "Juntar la quinoa, la espinaca, la cebolla y los morrones.",
+          "Agregar el atún escurrido.",
+          "Mezclar con la salsa de skyr y servir fresco."
+        ]
+      }
+    },
+    {
+      "id": "wok-de-carne-y-brocoli",
+      "receta": {
+        "nombre": "Wok de carne, brócoli y sésamo/chía",
+        "descripcion_breve": "Tiras de carne magra salteadas rápido con floretes de brócoli y salsa de soja.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 380,
+          "proteina_g": 46,
+          "carbohidratos_g": 14,
+          "grasas_g": 16
+        },
+        "ingredientes": [
+          {
+            "item": "Carne magra de ternera",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Brócoli en floretes",
+            "cantidad": 300,
+            "unidad": "g"
+          },
+          {
+            "item": "Salsa de soja baja en sodio",
+            "cantidad": 25,
+            "unidad": "ml"
+          },
+          {
+            "item": "Semillas de chía o sésamo",
+            "cantidad": 8,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Saltear la carne a fuego máximo en wok muy caliente.",
+          "Agregar el brócoli previamente blanqueado 2 minutos.",
+          "Añadir la salsa de soja y saltear 2 minutos más.",
+          "Servir espolvoreando con chía o sésamo."
+        ]
+      }
+    },
+    {
+      "id": "solomillo-cerdo-rodfrugter",
+      "receta": {
+        "nombre": "Solomillo de cerdo (Svinemørbrad) al horno con rodfrugter",
+        "descripcion_breve": "Solomillo entero asado acompañado de vegetales de raíz daneses cortados en bastones.",
+        "categoria": "almuerzo/cena",
+        "porciones": 3,
+        "macros_por_porcion": {
+          "calorias": 390,
+          "proteina_g": 42,
+          "carbohidratos_g": 28,
+          "grasas_g": 12
+        },
+        "ingredientes": [
+          {
+            "item": "Solomillo de cerdo (svinemørbrad)",
+            "cantidad": 500,
+            "unidad": "g"
+          },
+          {
+            "item": "Vegetales de raíz mixtos (rodfrugter: zanahoria, remolacha, pastinak)",
+            "cantidad": 450,
+            "unidad": "g"
+          },
+          {
+            "item": "Romero, tomillo y sal",
+            "cantidad": 5,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva",
+            "cantidad": 10,
+            "unidad": "ml"
+          }
+        ],
+        "paso_a_paso": [
+          "Cortar las raíces en bastones gruesos y mezclar con el aceite y hierbas.",
+          "Sellar el solomillo entero en sartén caliente.",
+          "Disponer el solomillo y los vegetales en una placa de horno.",
+          "Hornear a 200°C durante 25 minutos."
+        ]
+      }
+    },
+    {
+      "id": "zucchinis-rellenos-gratinados",
+      "receta": {
+        "nombre": "Zucchinis rellenos gratinados con Havarti Cheasy",
+        "descripcion_breve": "Zucchinis ahuecados rellenos con carne magra y gratinados con Havarti Cheasy.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 350,
+          "proteina_g": 40,
+          "carbohidratos_g": 12,
+          "grasas_g": 15
+        },
+        "ingredientes": [
+          {
+            "item": "Zucchinis medianos",
+            "cantidad": 2,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Carne picada magra",
+            "cantidad": 300,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Queso Havarti Cheasy",
+            "cantidad": 30,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Cortar los zucchinis a lo largo y extraer la pulpa con una cuchara.",
+          "Cocinar la carne picada con la cebolla y la pulpa de zucchini picada.",
+          "Rellenar las barquitas de zucchini.",
+          "Colocar el queso Havarti Cheasy encima y hornear a 200°C por 20 minutos."
+        ]
+      }
+    },
+    {
+      "id": "guiso-liviano-pollo-puerros",
+      "receta": {
+        "nombre": "Guiso liviano de pollo y puerros con skyr",
+        "descripcion_breve": "Cubos de pollo estofados con puerros finos y zanahoria, espesados al final con una cucharada de skyr.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 340,
+          "proteina_g": 44,
+          "carbohidratos_g": 18,
+          "grasas_g": 9
+        },
+        "ingredientes": [
+          {
+            "item": "Pechuga de pollo en cubos",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Puerros cortados finos",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Zanahoria en rodajas",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Skyr natural",
+            "cantidad": 40,
+            "unidad": "g"
+          },
+          {
+            "item": "Caldo de pollo",
+            "cantidad": 300,
+            "unidad": "ml"
+          }
+        ],
+        "paso_a_paso": [
+          "Dorar el pollo en una cacerola y retirar.",
+          "Rehogar los puerros y zanahorias hasta suavizar.",
+          "Volver el pollo, incorporar el caldo y cocinar 20 minutos.",
+          "Retirar del fuego e integrar el skyr antes de servir para dar cremosidad."
+        ]
+      }
+    },
+    {
+      "id": "zoodles-a-la-bolonesa",
+      "receta": {
+        "nombre": "Fideos de zucchini (Zoodles) a la boloñesa",
+        "descripcion_breve": "Tiras de zucchini salteadas un minuto con salsa boloñesa magra alta en proteína.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 310,
+          "proteina_g": 38,
+          "carbohidratos_g": 14,
+          "grasas_g": 11
+        },
+        "ingredientes": [
+          {
+            "item": "Zucchini (hechos zoodles)",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Carne picada magra",
+            "cantidad": 300,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla picada",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Tomate triturado",
+            "cantidad": 200,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Preparar la salsa boloñesa dorando la carne y la cebolla, sumando el tomate.",
+          "Hacer los zoodles con un espiralizador.",
+          "Saltear los zoodles solo 1 minuto a fuego fuerte para que queden al dente.",
+          "Servir con la boloñesa bien caliente por encima."
+        ]
+      }
+    },
+    {
+      "id": "kalroulader",
+      "receta": {
+        "nombre": "Kålroulader (Niños envueltos en spidskål)",
+        "descripcion_breve": "Hojas de repollo spidskål blanqueadas y rellenas de carne picada cocinadas en salsa de tomate.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 370,
+          "proteina_g": 42,
+          "carbohidratos_g": 18,
+          "grasas_g": 14
+        },
+        "ingredientes": [
+          {
+            "item": "Hojas grandes de spidskål",
+            "cantidad": 6,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Carne picada magra",
+            "cantidad": 350,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla rallada",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Salsa de tomate casera",
+            "cantidad": 200,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Blanquear las hojas de spidskål en agua hirviendo 2 minutos.",
+          "Mezclar la carne cruda con cebolla, sal y pimienta.",
+          "Envolver porciones de carne con las hojas de repollo.",
+          "Colocar en fuente con salsa de tomate y hornear 30 min a 190°C."
+        ]
+      }
+    },
+    {
+      "id": "wok-pollo-esparragos-couscous",
+      "receta": {
+        "nombre": "Wok de pollo, espárragos y cous cous",
+        "descripcion_breve": "Pollo dorado con espárragos y vegetas mezclados con una porción justa de cous cous.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 420,
+          "proteina_g": 45,
+          "carbohidratos_g": 38,
+          "grasas_g": 9
+        },
+        "ingredientes": [
+          {
+            "item": "Pechuga de pollo en tiras",
+            "cantidad": 380,
+            "unidad": "g"
+          },
+          {
+            "item": "Espárragos frescos cortados",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla y morrón",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Cous cous en seco",
+            "cantidad": 80,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Dorar las tiras de pollo en el wok.",
+          "Agregar los espárragos, cebolla y morrón hasta saltear al dente.",
+          "Hidratar el cous cous con caldo hirviendo por 5 minutos.",
+          "Integrar el cous cous desgranado al wok antes de servir."
+        ]
+      }
+    },
+    {
+      "id": "medallones-atun-airfryer",
+      "receta": {
+        "nombre": "Medallones de atún a la airfryer",
+        "descripcion_breve": "Hamburguesas de atún, huevo, cebolla y un toque de avena, acompañadas de puré de calabaza y brócoli.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 360,
+          "proteina_g": 42,
+          "carbohidratos_g": 26,
+          "grasas_g": 10
+        },
+        "ingredientes": [
+          {
+            "item": "Atún al natural",
+            "cantidad": 280,
+            "unidad": "g"
+          },
+          {
+            "item": "Huevo",
+            "cantidad": 1,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Avena extrafina",
+            "cantidad": 30,
+            "unidad": "g"
+          },
+          {
+            "item": "Calabaza y brócoli (para puré)",
+            "cantidad": 300,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Mezclar el atún con el huevo, la avena y cebolla picada.",
+          "Formar medallones y cocinar en freidora de aire a 190°C por 12 minutos.",
+          "Hacer un puré mixto de calabaza y brócoli hirviéndolos.",
+          "Servir los medallones con el puré al costado."
+        ]
+      }
+    },
+    {
+      "id": "tarta-sin-masa-esparragos-puerro",
+      "receta": {
+        "nombre": "Tarta sin masa de espárragos y puerro",
+        "descripcion_breve": "Mezcla liviana de huevos, claras, hytteost, espárragos y puerro salteado al horno.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 280,
+          "proteina_g": 30,
+          "carbohidratos_g": 12,
+          "grasas_g": 12
+        },
+        "ingredientes": [
+          {
+            "item": "Espárragos frescos",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Puerro",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Hytteost",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Huevos",
+            "cantidad": 2,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Claras de huevo",
+            "cantidad": 2,
+            "unidad": "unidad"
+          }
+        ],
+        "paso_a_paso": [
+          "Saltear el puerro y los espárragos troceados.",
+          "Batir los huevos, claras y hytteost.",
+          "Mezclar las verduras con el batido proteico.",
+          "Volcar en tartera antiadherente y hornear 25 minutos a 180°C."
+        ]
+      }
+    },
+    {
+      "id": "pollo-mostaza-repollitos-bruselas",
+      "receta": {
+        "nombre": "Pollo a la mostaza con repollitos de Bruselas (rosenkål)",
+        "descripcion_breve": "Pechugas doradas a la mostaza acompañadas de repollitos de Bruselas crujientes hechos en la Ninja.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 370,
+          "proteina_g": 48,
+          "carbohidratos_g": 16,
+          "grasas_g": 12
+        },
+        "ingredientes": [
+          {
+            "item": "Pechuga de pollo",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Repollitos de Bruselas (rosenkål)",
+            "cantidad": 250,
+            "unidad": "g"
+          },
+          {
+            "item": "Mostaza",
+            "cantidad": 25,
+            "unidad": "g"
+          },
+          {
+            "item": "Caldo de verduras",
+            "cantidad": 100,
+            "unidad": "ml"
+          }
+        ],
+        "paso_a_paso": [
+          "Cortar los rosenkål a la mitad y dorar en la Airfryer a 190°C por 12 min.",
+          "Dorar la pechuga en sartén, agregar la mostaza y el caldo.",
+          "Cocinar 10 minutos hasta reducir.",
+          "Servir el pollo bañado con la salsa y los repollitos crocantes."
+        ]
+      }
+    },
+    {
+      "id": "pastel-carne-base-coliflor",
+      "receta": {
+        "nombre": "Pastel de carne con cobertura de coliflor y hytteost",
+        "descripcion_breve": "Carne picada magra con sofrito, cubierta con un puré cremoso de coliflor y hytteost gratinado.",
+        "categoria": "almuerzo/cena",
+        "porciones": 3,
+        "macros_por_porcion": {
+          "calorias": 380,
+          "proteina_g": 44,
+          "carbohidratos_g": 12,
+          "grasas_g": 16
+        },
+        "ingredientes": [
+          {
+            "item": "Carne picada magra",
+            "cantidad": 500,
+            "unidad": "g"
+          },
+          {
+            "item": "Coliflor",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Hytteost",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla y morrón",
+            "cantidad": 150,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Cocinar la carne picada con cebolla y morrón.",
+          "Hervir la coliflor y procesar caliente con el hytteost hasta formar puré.",
+          "Colocar la carne en fuente, cubrir con el puré de coliflor.",
+          "Gratinar al horno 15 minutos a 200°C."
+        ]
+      }
+    },
+    {
+      "id": "rollitos-carne-esparragos",
+      "receta": {
+        "nombre": "Rollitos de carne y espárragos",
+        "descripcion_breve": "Espárragos enteros envueltos en bifes ultra finos de ternera, sellados a la plancha.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 330,
+          "proteina_g": 44,
+          "carbohidratos_g": 6,
+          "grasas_g": 14
+        },
+        "ingredientes": [
+          {
+            "item": "Bifes finos de ternera magra",
+            "cantidad": 350,
+            "unidad": "g"
+          },
+          {
+            "item": "Espárragos frescos",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Salsa de soja",
+            "cantidad": 15,
+            "unidad": "ml"
+          }
+        ],
+        "paso_a_paso": [
+          "Blanquear los espárragos 2 minutos en agua hirviendo.",
+          "Envolver pequeños manojos de espárragos con cada bife fino.",
+          "Dorar a la plancha a fuego medio-alto girando 6-8 minutos.",
+          "Pincelar con un toque de salsa de soja al finalizar."
+        ]
+      }
+    },
+    {
+      "id": "cazuela-al-horno-pollo-vegetales",
+      "receta": {
+        "nombre": "Cazuela al horno (Fad) de pollo y vegetales",
+        "descripcion_breve": "Cubos de pollo, brócoli, morrón y cebolla horneados con ligue de huevos y leche.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 360,
+          "proteina_g": 48,
+          "carbohidratos_g": 14,
+          "grasas_g": 12
+        },
+        "ingredientes": [
+          {
+            "item": "Pechuga de pollo en cubos",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Brócoli, morrón y cebolla",
+            "cantidad": 250,
+            "unidad": "g"
+          },
+          {
+            "item": "Huevos",
+            "cantidad": 2,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Leche descremada",
+            "cantidad": 80,
+            "unidad": "ml"
+          }
+        ],
+        "paso_a_paso": [
+          "Acomodar los cubos de pollo crudo y los vegetales en una fuente de horno.",
+          "Batir los huevos con la leche, sal y condimentos.",
+          "Volcar el batido sobre la fuente.",
+          "Hornear a 190°C durante 30 minutos."
+        ]
+      }
+    },
+    {
+      "id": "solomillo-cerdo-pure-manzana",
+      "receta": {
+        "nombre": "Solomillo de cerdo con puré de manzana sin azúcar",
+        "descripcion_breve": "Rodajas de svinemørbrad a la plancha acompañadas de puré casero de manzana verde y cebolla.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 350,
+          "proteina_g": 42,
+          "carbohidratos_g": 22,
+          "grasas_g": 10
+        },
+        "ingredientes": [
+          {
+            "item": "Solomillo de cerdo (svinemørbrad)",
+            "cantidad": 380,
+            "unidad": "g"
+          },
+          {
+            "item": "Manzana verde",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla",
+            "cantidad": 80,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Cocinar la manzana con la cebolla y un chorrito de agua hasta ablandar y pisar.",
+          "Cortar el solomillo en medallones gruesos.",
+          "Dorar los medallones a la plancha a fuego alto por ambos lados.",
+          "Servir la carne jugosa junto al puré de manzana."
+        ]
+      }
+    },
+    {
+      "id": "lasana-de-zucchini",
+      "receta": {
+        "nombre": "Lasaña de zucchini con boloñesa y crema de hytteost",
+        "descripcion_breve": "Láminas de zucchini intercaladas con boloñesa magra y una 'salsa blanca' procesada de hytteost.",
+        "categoria": "almuerzo/cena",
+        "porciones": 3,
+        "macros_por_porcion": {
+          "calorias": 360,
+          "proteina_g": 42,
+          "carbohidratos_g": 14,
+          "grasas_g": 14
+        },
+        "ingredientes": [
+          {
+            "item": "Zucchinis grandes cortados a lo largo",
+            "cantidad": 500,
+            "unidad": "g"
+          },
+          {
+            "item": "Carne picada magra",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Salsa de tomate casera",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Hytteost (licuado con nuez moscada)",
+            "cantidad": 200,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Grillar ligeramente las láminas de zucchini para quitar exceso de agua.",
+          "Preparar la boloñesa reducida con la carne y salsa de tomate.",
+          "Licuar el hytteost con sal y nuez moscada.",
+          "Armar capas en molde: zucchini, boloñesa, crema de hytteost y hornear 25 min."
+        ]
+      }
+    },
+    {
+      "id": "pollo-estofado-calabaza-espinaca",
+      "receta": {
+        "nombre": "Pollo estofado con calabaza y espinaca",
+        "descripcion_breve": "Dados de pechuga cocinados con calabaza que forma la salsa y espinaca agregada al final.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 380,
+          "proteina_g": 46,
+          "carbohidratos_g": 24,
+          "grasas_g": 10
+        },
+        "ingredientes": [
+          {
+            "item": "Pechuga de pollo",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Calabaza en cubos",
+            "cantidad": 300,
+            "unidad": "g"
+          },
+          {
+            "item": "Espinaca fresca",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Caldo de verduras",
+            "cantidad": 200,
+            "unidad": "ml"
+          }
+        ],
+        "paso_a_paso": [
+          "Dorar el pollo en una olla y añadir la calabaza.",
+          "Agregar el caldo, tapar y cocinar hasta que la calabaza esté tierna y deshacha.",
+          "Incorporar la espinaca fresca a último momento y revolver hasta marchitar.",
+          "Servir caliente."
+        ]
+      }
+    },
+    {
+      "id": "frikadeller-fit-repollo-colorado",
+      "receta": {
+        "nombre": "Frikadeller fit con repollo colorado casero",
+        "descripcion_breve": "Albóndigas danesas magras al horno con repollo colorado caliente (rødkål).",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 370,
+          "proteina_g": 44,
+          "carbohidratos_g": 18,
+          "grasas_g": 13
+        },
+        "ingredientes": [
+          {
+            "item": "Carne magra de cerdo/ternera (3-7%)",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla picada fina",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Repollo colorado (rødkål) en juliana",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Vinagre y edulcorante (para el rødkål)",
+            "cantidad": 15,
+            "unidad": "ml"
+          }
+        ],
+        "paso_a_paso": [
+          "Formar las frikadeller con carne, cebolla y sazón.",
+          "Hornear a 200°C por 20 minutos.",
+          "Cocinar el repollo colorado a fuego lento con vinagre, clavo de olor y edulcorante.",
+          "Servir las frikadeller acompañadas del rødkål caliente."
+        ]
+      }
+    },
+    {
+      "id": "tomates-rellenos-al-horno",
+      "receta": {
+        "nombre": "Tomates rellenos al horno con cous cous y atún",
+        "descripcion_breve": "Tomates ahuecados rellenos con cous cous, cebolla asada y atún, calentados en Ninja.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 330,
+          "proteina_g": 34,
+          "carbohidratos_g": 30,
+          "grasas_g": 8
+        },
+        "ingredientes": [
+          {
+            "item": "Tomates perita grandes",
+            "cantidad": 4,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Atún al natural",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Cous cous cocido",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla asada",
+            "cantidad": 60,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Ahuecar los tomates retirando el centro.",
+          "Mezclar el cous cous con el atún y la cebolla asada.",
+          "Rellenar los tomates firmemente.",
+          "Llevar a la Ninja / Airfryer a 180°C durante 10 minutos."
+        ]
+      }
+    },
+    {
+      "id": "bifes-criolla-con-zapallitos",
+      "receta": {
+        "nombre": "Bifes a la criolla con zucchinis",
+        "descripcion_breve": "Carne magra en cacerola con cebolla, morrón, tomate y zucchinis gruesos en lugar de papas.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 360,
+          "proteina_g": 46,
+          "carbohidratos_g": 14,
+          "grasas_g": 13
+        },
+        "ingredientes": [
+          {
+            "item": "Bifes magros",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Zucchinis en rodajas gruesas",
+            "cantidad": 250,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla y morrón",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Puré de tomate",
+            "cantidad": 150,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Colocar capas de carne, cebolla, morrón y rodajas gruesas de zucchini en una cacerola.",
+          "Bañar con el puré de tomate condimentado.",
+          "Tapar y cocinar 25 minutos a fuego medio.",
+          "Servir caliente."
+        ]
+      }
+    },
+    {
+      "id": "guiso-quinoa-carne-cuchillo",
+      "receta": {
+        "nombre": "Guiso de quinoa y carne cortada a cuchillo",
+        "descripcion_breve": "Guiso espeso de invierno con dados magros de carne, vegetales y quinoa en caldo.",
+        "categoria": "almuerzo/cena",
+        "porciones": 3,
+        "macros_por_porcion": {
+          "calorias": 410,
+          "proteina_g": 40,
+          "carbohidratos_g": 35,
+          "grasas_g": 12
+        },
+        "ingredientes": [
+          {
+            "item": "Carne magra en cubitos pequeños",
+            "cantidad": 450,
+            "unidad": "g"
+          },
+          {
+            "item": "Quinoa lavada",
+            "cantidad": 120,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla, morrón y zanahoria",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Caldo de verduras",
+            "cantidad": 600,
+            "unidad": "ml"
+          }
+        ],
+        "paso_a_paso": [
+          "Dorar la carne cortada a cuchillo y sofreír los vegetales en la misma cacerola.",
+          "Añadir la quinoa y cubrir con caldo hirviendo.",
+          "Cocinar a fuego bajo durante 20 minutos hasta que la quinoa esté tierna.",
+          "Servir bien espeso."
+        ]
+      }
+    },
+    {
+      "id": "pechuga-rellena-esparragos-havarti",
+      "receta": {
+        "nombre": "Pechuga rellena de espárragos y Havarti",
+        "descripcion_breve": "Pechugas abiertas con espárragos crudos y feta de queso Havarti, horneadas.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 380,
+          "proteina_g": 54,
+          "carbohidratos_g": 4,
+          "grasas_g": 16
+        },
+        "ingredientes": [
+          {
+            "item": "Pechuga de pollo",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Espárragos frescos",
+            "cantidad": 120,
+            "unidad": "g"
+          },
+          {
+            "item": "Queso Havarti (16%)",
+            "cantidad": 40,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Hacer un corte longitudinal en las pechugas para formar un bolsillo.",
+          "Introducir los espárragos y la feta de Havarti dentro de cada pechuga.",
+          "Cerrar con escarbadientes.",
+          "Hornear a 200°C durante 20 minutos."
+        ]
+      }
+    },
+    {
+      "id": "tortilla-al-reves-espinaca-zucchini",
+      "receta": {
+        "nombre": "Tortilla al revés de espinaca y zucchini",
+        "descripcion_breve": "Zucchinis en rodajas y espinaca hechos a la sartén con abundante claras y huevos.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 220,
+          "proteina_g": 24,
+          "carbohidratos_g": 8,
+          "grasas_g": 10
+        },
+        "ingredientes": [
+          {
+            "item": "Zucchini en rodajas",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Espinaca fresca",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Claras de huevo",
+            "cantidad": 4,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Huevos",
+            "cantidad": 2,
+            "unidad": "unidad"
+          }
+        ],
+        "paso_a_paso": [
+          "Cocinar los zucchinis y la espinaca en la sartén hasta ablandar.",
+          "Batir los huevos y claras con sal y pimienta.",
+          "Volcar la mezcla sobre las verduras.",
+          "Cocinar tapado a fuego lento, dar la vuelta y dorar 2 minutos más."
+        ]
+      }
+    },
+    {
+      "id": "estofado-rapido-fideos-arroz-cerdo",
+      "receta": {
+        "nombre": "Estofado rápido de fideos de arroz y cerdo",
+        "descripcion_breve": "Tiras de cerdo magro y vegetales en sopa/caldo asiático con fideos de arroz.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 420,
+          "proteina_g": 38,
+          "carbohidratos_g": 44,
+          "grasas_g": 10
+        },
+        "ingredientes": [
+          {
+            "item": "Solomillo de cerdo en tiras",
+            "cantidad": 300,
+            "unidad": "g"
+          },
+          {
+            "item": "Fideos de arroz",
+            "cantidad": 90,
+            "unidad": "g"
+          },
+          {
+            "item": "Vegetales asiáticos o mix de puerro y morrón",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Caldo con jengibre y soja",
+            "cantidad": 500,
+            "unidad": "ml"
+          }
+        ],
+        "paso_a_paso": [
+          "Saltear el cerdo y los vegetales en una olla profunda.",
+          "Añadir el caldo sazonado con soja y jengibre hasta hervir.",
+          "Sumar los fideos de arroz y apagar el fuego.",
+          "Dejar reposar 3 minutos tapado y servir."
+        ]
+      }
+    },
+    {
+      "id": "cous-cous-especiado-pollo",
+      "receta": {
+        "nombre": "Cous cous especiado con pollo desmenuzado",
+        "descripcion_breve": "Pollo desmenuzado con cous cous caliente, cúrcuma, cebolla pochada y chía.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 430,
+          "proteina_g": 46,
+          "carbohidratos_g": 40,
+          "grasas_g": 9
+        },
+        "ingredientes": [
+          {
+            "item": "Pechuga de pollo cocida y desmenuzada",
+            "cantidad": 380,
+            "unidad": "g"
+          },
+          {
+            "item": "Cous cous en seco",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla pochada",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Cúrcuma y chía",
+            "cantidad": 8,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Hidratar el cous cous con caldo hirviendo y cúrcuma.",
+          "Mezclar el cous cous con el pollo desmenuzado caliente y cebolla pochada.",
+          "Servir inmediatamente espolvoreando con semillas de chía."
+        ]
+      }
+    },
+    {
+      "id": "milanesas-de-cerdo-al-horno",
+      "receta": {
+        "nombre": "Milanesas de cerdo al horno con puré de calabaza",
+        "descripcion_breve": "Milanesas finas cortadas de solomillo con empanado liviano, servidas con puré de calabaza.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 390,
+          "proteina_g": 45,
+          "carbohidratos_g": 28,
+          "grasas_g": 10
+        },
+        "ingredientes": [
+          {
+            "item": "Solomillo de cerdo en filetes finos",
+            "cantidad": 350,
+            "unidad": "g"
+          },
+          {
+            "item": "Pan rallado integral o avena",
+            "cantidad": 50,
+            "unidad": "g"
+          },
+          {
+            "item": "Huevo",
+            "cantidad": 1,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Calabaza para puré",
+            "cantidad": 300,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Pasar los filetes de solomillo por huevo y luego por el empanado integral.",
+          "Hornea a 210°C por 12-15 minutos.",
+          "Hacer puré de calabaza hervida o al vapor.",
+          "Servir las milanesas crocantes con el puré de calabaza."
         ]
       }
     }
