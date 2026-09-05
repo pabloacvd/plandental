@@ -43,6 +43,16 @@
             "carbohidratos_g": 38,
             "grasas_g": 14
           }
+        },
+        "snack_tarde": {
+          "recipeId": "batido-ninja-pablo",
+          "recipeName": "Batido Ninja Pablo",
+          "macros": {
+            "calorias": 269,
+            "proteina_g": 54.2,
+            "carbohidratos_g": 9.7,
+            "grasas_g": 0.9
+          }
         }
       }
     }
