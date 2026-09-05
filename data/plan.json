@@ -43,16 +43,6 @@
             "carbohidratos_g": 38,
             "grasas_g": 14
           }
-        },
-        "snack_tarde": {
-          "recipeId": "batido-ninja-juli",
-          "recipeName": "Batido Ninja Juli",
-          "macros": {
-            "calorias": 161,
-            "proteina_g": 33.4,
-            "carbohidratos_g": 5,
-            "grasas_g": 0.5
-          }
         }
       }
     }
@@ -100,16 +90,6 @@
             "proteina_g": 25,
             "carbohidratos_g": 38,
             "grasas_g": 14
-          }
-        },
-        "snack_tarde": {
-          "recipeId": "batido-ninja-juli",
-          "recipeName": "Batido Ninja Juli",
-          "macros": {
-            "calorias": 161,
-            "proteina_g": 33.4,
-            "carbohidratos_g": 5,
-            "grasas_g": 0.5
           }
         }
       }
