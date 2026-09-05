@@ -24,12 +24,24 @@
         },
         "cena": {
           "recipeId": "pollo-al-curry",
-          "recipeName": "Pollo al curry con blomkålsris o quinoa",
+          "recipeName": "Pollo al curry con blomkÃ¥lsris o quinoa",
           "macros": {
             "calorias": 480,
             "proteina_g": 48,
             "carbohidratos_g": 32,
             "grasas_g": 12
+          }
+        }
+      },
+      "2026-09-05": {
+        "almuerzo": {
+          "recipeId": "tarta-integral-espinaca",
+          "recipeName": "Tarta integral de espinaca y hytteost",
+          "macros": {
+            "calorias": 380,
+            "proteina_g": 25,
+            "carbohidratos_g": 38,
+            "grasas_g": 14
           }
         }
       }
@@ -60,12 +72,24 @@
         },
         "cena": {
           "recipeId": "pollo-al-curry",
-          "recipeName": "Pollo al curry con blomkålsris o quinoa",
+          "recipeName": "Pollo al curry con blomkÃ¥lsris o quinoa",
           "macros": {
             "calorias": 480,
             "proteina_g": 48,
             "carbohidratos_g": 32,
             "grasas_g": 12
+          }
+        }
+      },
+      "2026-09-05": {
+        "almuerzo": {
+          "recipeId": "tarta-integral-espinaca",
+          "recipeName": "Tarta integral de espinaca y hytteost",
+          "macros": {
+            "calorias": 380,
+            "proteina_g": 25,
+            "carbohidratos_g": 38,
+            "grasas_g": 14
           }
         }
       }
