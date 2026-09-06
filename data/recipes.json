@@ -93,15 +93,15 @@
     {
       "id": "pollo-al-curry",
       "receta": {
-        "nombre": "Pollo al curry con blomkålsris o quinoa",
-        "descripcion_breve": "Pechuga en cubos con vegetal sofrito en leche de coco light y especias sobre arroz de coliflor o quinoa.",
+        "nombre": "Pollo al curry con blomkålsris",
+        "descripcion_breve": "Pollo al curry en leche de coco light sobre base de arroz de coliflor, ideal para mantener un aporte bajo en carbohidratos.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
-          "calorias": 480,
-          "proteina_g": 48,
-          "carbohidratos_g": 32,
-          "grasas_g": 12
+          "calorias": 460,
+          "proteina_g": 65.5,
+          "carbohidratos_g": 16,
+          "grasas_g": 12.8
         },
         "ingredientes": [
           {
@@ -130,7 +130,7 @@
             "unidad": "g"
           },
           {
-            "item": "Arroz de coliflor (blomkålsris) o quinoa cocida",
+            "item": "Blomkålsris (arroz de coliflor)",
             "cantidad": 200,
             "unidad": "g"
           },
@@ -144,7 +144,8 @@
           "Dorar la pechuga en cubos en una sartén con spray de oliva.",
           "Saltear la cebolla y el morrón picados finos hasta transparentar.",
           "Añadir el curry, la leche de coco light y cocinar a fuego lento por 10 minutos.",
-          "Servir caliente sobre la base de blomkålsris salteado o quinoa cocida."
+          "En una sartén aparte, saltear el blomkålsris unos 3-5 minutos.",
+          "Servir el curry bien caliente sobre la base de blomkålsris."
         ]
       }
     },
