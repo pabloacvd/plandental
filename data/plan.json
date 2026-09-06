@@ -65,6 +65,16 @@
             "carbohidratos_g": 27,
             "grasas_g": 3.5
           }
+        },
+        "almuerzo": {
+          "recipeId": "pollo-al-curry-con-blomkalsris-y-2-huevos",
+          "recipeName": "Pollo al curry con blomkålsris y 2 huevos",
+          "macros": {
+            "calorias": 475,
+            "proteina_g": 63,
+            "carbohidratos_g": 14.5,
+            "grasas_g": 17.5
+          }
         }
       }
     }
@@ -134,6 +144,16 @@
             "proteina_g": 10.8,
             "carbohidratos_g": 27,
             "grasas_g": 3.5
+          }
+        },
+        "almuerzo": {
+          "recipeId": "pollo-al-curry-con-blomkalsris-y-2-huevos",
+          "recipeName": "Pollo al curry con blomkålsris y 2 huevos",
+          "macros": {
+            "calorias": 475,
+            "proteina_g": 63,
+            "carbohidratos_g": 14.5,
+            "grasas_g": 17.5
           }
         }
       }
