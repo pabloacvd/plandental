@@ -24,7 +24,7 @@
         },
         "cena": {
           "recipeId": "pollo-al-curry",
-          "recipeName": "Pollo al curry con blomkÃÂÃÂ¥lsris o quinoa",
+          "recipeName": "Pollo al curry con blomkÃÂÃÂÃÂÃÂ¥lsris o quinoa",
           "macros": {
             "calorias": 480,
             "proteina_g": 48,
@@ -58,22 +58,12 @@
       "2026-09-06": {
         "desayuno": {
           "recipeId": "bowl-de-skyr-con-banana-y-chia",
-          "recipeName": "Bowl de Skyr con Banana y ChÃ­a",
+          "recipeName": "Bowl de Skyr con Banana y ChÃÂ­a",
           "macros": {
             "calorias": 175,
             "proteina_g": 10.8,
             "carbohidratos_g": 27,
             "grasas_g": 3.5
-          }
-        },
-        "almuerzo": {
-          "recipeId": "pollo-al-curry",
-          "recipeName": "Pollo al curry con blomkålsris",
-          "macros": {
-            "calorias": 460,
-            "proteina_g": 65.5,
-            "carbohidratos_g": 16,
-            "grasas_g": 12.8
           }
         }
       }
@@ -104,7 +94,7 @@
         },
         "cena": {
           "recipeId": "pollo-al-curry",
-          "recipeName": "Pollo al curry con blomkÃÂÃÂ¥lsris o quinoa",
+          "recipeName": "Pollo al curry con blomkÃÂÃÂÃÂÃÂ¥lsris o quinoa",
           "macros": {
             "calorias": 480,
             "proteina_g": 48,
@@ -138,22 +128,12 @@
       "2026-09-06": {
         "desayuno": {
           "recipeId": "bowl-de-skyr-con-banana-y-chia",
-          "recipeName": "Bowl de Skyr con Banana y ChÃ­a",
+          "recipeName": "Bowl de Skyr con Banana y ChÃÂ­a",
           "macros": {
             "calorias": 175,
             "proteina_g": 10.8,
             "carbohidratos_g": 27,
             "grasas_g": 3.5
-          }
-        },
-        "almuerzo": {
-          "recipeId": "pollo-al-curry",
-          "recipeName": "Pollo al curry con blomkålsris",
-          "macros": {
-            "calorias": 460,
-            "proteina_g": 65.5,
-            "carbohidratos_g": 16,
-            "grasas_g": 12.8
           }
         }
       }
