@@ -3820,6 +3820,45 @@
           "Servir el pollo al curry bien caliente sobre el blomkålsris revuelto con huevo."
         ]
       }
+    },
+    {
+      "id": "helado-creami-de-banana-y-pal-gschokolade",
+      "receta": {
+        "nombre": "Helado Creami de Banana y Pålægschokolade",
+        "descripcion_breve": "Base cremosa de banana y leche descremada sin lactosa con trozos crujientes de chocolate amargo Carletti procesado en Ninja Creami.",
+        "categoria": "postre/snack",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 89,
+          "proteina_g": 1.8,
+          "carbohidratos_g": 17.7,
+          "grasas_g": 1.8
+        },
+        "ingredientes": [
+          {
+            "item": "Banana",
+            "cantidad": 120,
+            "unidad": "g"
+          },
+          {
+            "item": "Arla Lactofree 0.5% fedt",
+            "cantidad": 50,
+            "unidad": "ml"
+          },
+          {
+            "item": "Carletti Mørk Pålægschokolade",
+            "cantidad": 10,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Mixear o procesar la banana con la leche Arla Lactofree en la tarrina de la Ninja Creami hasta integrar.",
+          "Congelar la tarrina durante 24 horas a -18°C.",
+          "Procesar en programa Lite Ice Cream.",
+          "Picar las 4 láminas de Pålægschokolade, agregarlas al centro y procesar con la función Mix-In.",
+          "Dividir en 2 porciones iguales para servir."
+        ]
+      }
     }
   ]
 }
