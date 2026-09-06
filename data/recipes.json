@@ -3756,6 +3756,70 @@
           "Servir el curry bien caliente sobre la base de quinoa cocida."
         ]
       }
+    },
+    {
+      "id": "pollo-al-curry-con-blomkalsris-y-2-huevos",
+      "receta": {
+        "nombre": "Pollo al curry con blomkålsris y 2 huevos",
+        "descripcion_breve": "Pollo al curry en leche de coco light acompañado de arroz de coliflor salteado con 2 huevos enteros para aportar cremosisad y proteína.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 475,
+          "proteina_g": 63,
+          "carbohidratos_g": 14.5,
+          "grasas_g": 17.5
+        },
+        "ingredientes": [
+          {
+            "item": "Pechuga de pollo",
+            "cantidad": 350,
+            "unidad": "g"
+          },
+          {
+            "item": "Huevo entero",
+            "cantidad": 2,
+            "unidad": "unidades"
+          },
+          {
+            "item": "Cebolla",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Pimiento morrón",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Leche de coco light",
+            "cantidad": 150,
+            "unidad": "ml"
+          },
+          {
+            "item": "Curry en polvo",
+            "cantidad": 10,
+            "unidad": "g"
+          },
+          {
+            "item": "Blomkålsris (arroz de coliflor)",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva spray",
+            "cantidad": 3,
+            "unidad": "ml"
+          }
+        ],
+        "paso_a_paso": [
+          "Dorar la pechuga en cubos en una sartén con spray de oliva.",
+          "Saltear la cebolla y el morrón picados finos hasta transparentar.",
+          "Añadir el curry, la leche de coco light y cocinar a fuego lento por 10 minutos.",
+          "En una sartén aparte, saltear el blomkålsris durante 2-3 minutos y agregar los 2 huevos batidos revolviendo enérgicamente hasta integrar.",
+          "Servir el pollo al curry bien caliente sobre el blomkålsris revuelto con huevo."
+        ]
+      }
     }
   ]
 }
