@@ -3698,6 +3698,64 @@
           "Espolvorear los 10g de semillas de chía por encima y mezclar antes de consumir."
         ]
       }
+    },
+    {
+      "id": "pollo-al-curry-con-quinoa",
+      "receta": {
+        "nombre": "Pollo al curry con quinoa",
+        "descripcion_breve": "Pollo al curry en leche de coco light acompañado de quinoa cocida para un aporte completo de carbohidratos complejos.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 555,
+          "proteina_g": 68,
+          "carbohidratos_g": 32,
+          "grasas_g": 14.5
+        },
+        "ingredientes": [
+          {
+            "item": "Pechuga de pollo",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Pimiento morrón",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Leche de coco light",
+            "cantidad": 150,
+            "unidad": "ml"
+          },
+          {
+            "item": "Curry en polvo",
+            "cantidad": 10,
+            "unidad": "g"
+          },
+          {
+            "item": "Quinoa cocida",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva spray",
+            "cantidad": 3,
+            "unidad": "ml"
+          }
+        ],
+        "paso_a_paso": [
+          "Dorar la pechuga en cubos en una sartén con spray de oliva.",
+          "Saltear la cebolla y el morrón picados finos hasta transparentar.",
+          "Añadir el curry, la leche de coco light y cocinar a fuego lento por 10 minutos.",
+          "Servir el curry bien caliente sobre la base de quinoa cocida."
+        ]
+      }
     }
   ]
 }
