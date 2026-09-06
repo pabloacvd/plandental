@@ -3660,6 +3660,43 @@
           "Dejar reposar 2 minutos y servir."
         ]
       }
+    },
+    {
+      "id": "bowl-de-skyr-con-banana-y-chia",
+      "receta": {
+        "nombre": "Bowl de Skyr con Banana y Chía",
+        "descripcion_breve": "Desayuno liviano y nutritivo con skyr, banana fresca y semillas de chía para aportar fibra y grasas saludables.",
+        "categoria": "desayuno/bowl",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 175,
+          "proteina_g": 10.8,
+          "carbohidratos_g": 27,
+          "grasas_g": 3.5
+        },
+        "ingredientes": [
+          {
+            "item": "Cheasy Skyr",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Banana",
+            "cantidad": 80,
+            "unidad": "g"
+          },
+          {
+            "item": "Semillas de chía",
+            "cantidad": 10,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Colocar los 100g de Cheasy Skyr en un bowl.",
+          "Cortar los 80g de banana en rodajas y agregar al bowl.",
+          "Espolvorear los 10g de semillas de chía por encima y mezclar antes de consumir."
+        ]
+      }
     }
   ]
 }
