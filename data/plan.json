@@ -24,7 +24,7 @@
         },
         "cena": {
           "recipeId": "pollo-al-curry",
-          "recipeName": "Pollo al curry con blomkÃ¥lsris o quinoa",
+          "recipeName": "Pollo al curry con blomkÃÂ¥lsris o quinoa",
           "macros": {
             "calorias": 480,
             "proteina_g": 48,
@@ -52,6 +52,18 @@
             "proteina_g": 54.2,
             "carbohidratos_g": 9.7,
             "grasas_g": 0.9
+          }
+        }
+      },
+      "2026-09-06": {
+        "desayuno": {
+          "recipeId": "bowl-de-skyr-con-banana-y-chia",
+          "recipeName": "Bowl de Skyr con Banana y Chía",
+          "macros": {
+            "calorias": 175,
+            "proteina_g": 10.8,
+            "carbohidratos_g": 27,
+            "grasas_g": 3.5
           }
         }
       }
@@ -82,7 +94,7 @@
         },
         "cena": {
           "recipeId": "pollo-al-curry",
-          "recipeName": "Pollo al curry con blomkÃ¥lsris o quinoa",
+          "recipeName": "Pollo al curry con blomkÃÂ¥lsris o quinoa",
           "macros": {
             "calorias": 480,
             "proteina_g": 48,
@@ -110,6 +122,18 @@
             "proteina_g": 33.4,
             "carbohidratos_g": 5,
             "grasas_g": 0.5
+          }
+        }
+      },
+      "2026-09-06": {
+        "desayuno": {
+          "recipeId": "bowl-de-skyr-con-banana-y-chia",
+          "recipeName": "Bowl de Skyr con Banana y Chía",
+          "macros": {
+            "calorias": 175,
+            "proteina_g": 10.8,
+            "carbohidratos_g": 27,
+            "grasas_g": 3.5
           }
         }
       }
