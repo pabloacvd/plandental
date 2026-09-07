@@ -115,14 +115,23 @@
     <div class="modal-box modal-box--sm">
       <button class="modal-close" id="btn-close-auth-modal">✕</button>
       <h3>Conectar con GitHub</h3>
-      <p>Ingresá tu <strong>Personal Access Token</strong> de GitHub con permisos de <code>repo</code>.</p>
-      <input type="password" id="input-gh-token" placeholder="ghp_xxxxxxxxxxxx" />
-      <div class="auth-repo-fields">
-        <input type="text" id="input-gh-owner" placeholder="usuario/org (owner)" />
-        <input type="text" id="input-gh-repo" placeholder="nombre del repositorio" />
-      </div>
+      <p>Ingresá tu <strong>Personal Access Token</strong> con permisos de <code>repo</code> (o <code>contents: write</code> en fine-grained).</p>
+      <input type="password" id="input-gh-token" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off" />
       <button id="btn-save-auth" class="btn-primary">Guardar y conectar</button>
-      <p class="auth-note">El token se guarda solo en localStorage de tu navegador.</p>
+      <p class="auth-note">El token se guarda en localStorage de este dispositivo.</p>
+
+      <!-- Quick-access link (shown only when already connected) -->
+      <div id="auth-quicklink-section" class="auth-quicklink-section hidden">
+        <hr class="auth-divider" />
+        <p class="auth-note"><strong>Acceso rápido en otro dispositivo</strong><br>
+        Copiá esta URL, abrila en el otro dispositivo y quedará conectado automáticamente.</p>
+        <div class="auth-quicklink-row">
+          <input type="text" id="auth-quicklink-url" class="auth-quicklink-input" readonly />
+          <button id="btn-copy-quicklink" class="btn-secondary btn-copy">Copiar</button>
+        </div>
+        <p class="auth-note auth-note--warn">⚠️ Tratala como una contraseña — no la compartas por canales inseguros.</p>
+        <button id="btn-disconnect" class="btn-danger">Desconectar este dispositivo</button>
+      </div>
     </div>
   </div>
 

@@ -2,6 +2,8 @@
  * recipes.js — loads and searches the recipe catalog
  */
 
+import { fetchRecipes } from './storage.js';
+
 let _recipes = [];
 let _nutrition = {};
 
@@ -25,14 +27,21 @@ export function slugify(name) {
 }
 
 export async function loadData() {
-  const [recRes, nutRes] = await Promise.all([
-    fetch('./data/recipes.json'),
-    fetch('./data/nutrition.json'),
-  ]);
-  const recData = await recRes.json();
+  // nutrition.json is always static (no user changes)
+  const nutRes  = await fetch('./data/nutrition.json');
   const nutData = await nutRes.json();
-  _recipes   = recData.recetas;
   _nutrition = nutData.nutrition;
+
+  // recipes: prefer GitHub / local cache; fall back to static file
+  const cached = await fetchRecipes();
+  if (cached?.recetas) {
+    _recipes = cached.recetas;
+  } else {
+    const recRes  = await fetch('./data/recipes.json');
+    const recData = await recRes.json();
+    _recipes = recData.recetas;
+  }
+
   return { recipes: _recipes, nutrition: _nutrition };
 }
 

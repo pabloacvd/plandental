@@ -6,8 +6,8 @@ import { loadData, searchRecipes, getRecipeById, addRecipe, updateRecipe, delete
 import { getWeekDays, toDateKey, toWeekKey, MEAL_SLOTS, MONTH_NAMES } from './calendar.js';
 import {
   fetchPlan, savePlan,
-  getCredentials, saveCredentials, isAuthenticated,
-  testConnection, saveRecipes,
+  getCredentials, saveCredentials, clearCredentials, isAuthenticated,
+  testConnection, saveRecipes, consumeTokenFromHash,
 } from './storage.js';
 import {
   renderRecipeCard, renderRecipeDetail,
@@ -47,6 +47,9 @@ let state = {
 // ══════════════════════════════════════════════════════════
 
 async function init() {
+  // Consume #token=… from URL before anything else
+  consumeTokenFromHash();
+
   // Load static data
   const { recipes, nutrition } = await loadData();
   state.recipes   = recipes;
@@ -476,11 +479,11 @@ async function assignMeal(dateKey, slotId, recipeId) {
     showToast(
       result.saved === 'github'
         ? `✅ Guardado en GitHub${extra}`
-        : `💾 Guardado localmente${extra}`,
-      result.saved === 'github' ? 'success' : ''
+        : `⚠️ Sin GitHub — guardado solo en este dispositivo${extra}`,
+      result.saved === 'github' ? 'success' : 'warn'
     );
   } catch (e) {
-    showToast('⚠️ Error al guardar: ' + e.message, 'error');
+    showToast('❌ Error al guardar en GitHub: ' + e.message, 'error');
   }
 }
 
@@ -505,11 +508,13 @@ async function removeMeal(dateKey, slotId, targetPerson = null) {
   try {
     const result = await savePlan(state.plan);
     showToast(
-      result.saved === 'github' ? '✅ Guardado en GitHub' : '💾 Guardado localmente',
-      result.saved === 'github' ? 'success' : ''
+      result.saved === 'github'
+        ? '✅ Guardado en GitHub'
+        : '⚠️ Sin GitHub — guardado solo en este dispositivo',
+      result.saved === 'github' ? 'success' : 'warn'
     );
   } catch (e) {
-    showToast('⚠️ Error al guardar', 'error');
+    showToast('❌ Error al guardar en GitHub: ' + e.message, 'error');
   }
 }
 
@@ -531,11 +536,13 @@ async function assignMealForPerson(dateKey, slotId, recipeId, targetPerson) {
   try {
     const result = await savePlan(state.plan);
     showToast(
-      result.saved === 'github' ? `✅ Guardado (${persons.join('+')})` : `💾 Guardado localmente`,
-      result.saved === 'github' ? 'success' : ''
+      result.saved === 'github'
+        ? `✅ Guardado en GitHub (${persons.join('+')})`
+        : `⚠️ Sin GitHub — guardado solo en este dispositivo`,
+      result.saved === 'github' ? 'success' : 'warn'
     );
   } catch (e) {
-    showToast('⚠️ Error al guardar: ' + e.message, 'error');
+    showToast('❌ Error al guardar en GitHub: ' + e.message, 'error');
   }
 }
 
@@ -575,11 +582,13 @@ async function handleDeleteRecipe(id, name) {
   try {
     const result = await saveRecipes(updated);
     showToast(
-      result.saved === 'github' ? '🗑 Receta eliminada (GitHub)' : '🗑 Receta eliminada (local)',
-      ''
+      result.saved === 'github'
+        ? '✅ Receta eliminada (GitHub)'
+        : '⚠️ Sin GitHub — eliminada solo en este dispositivo',
+      result.saved === 'github' ? 'success' : 'warn'
     );
   } catch (e) {
-    showToast('⚠️ Error al guardar: ' + e.message, 'error');
+    showToast('❌ Error al guardar en GitHub: ' + e.message, 'error');
   }
 }
 
@@ -765,11 +774,11 @@ async function saveRecipeFromForm() {
     showToast(
       result.saved === 'github'
         ? (isEditing ? '✅ Receta actualizada (GitHub)' : '✅ Receta guardada (GitHub)')
-        : (isEditing ? '💾 Receta actualizada (local)'  : '💾 Receta guardada (local)'),
-      'success'
+        : (isEditing ? '⚠️ Sin GitHub — actualizada solo en este dispositivo' : '⚠️ Sin GitHub — guardada solo en este dispositivo'),
+      result.saved === 'github' ? 'success' : 'warn'
     );
   } catch (e) {
-    showToast('⚠️ Error al guardar: ' + e.message, 'error');
+    showToast('❌ Error al guardar en GitHub: ' + e.message, 'error');
   }
 }
 
@@ -800,11 +809,13 @@ async function saveRecipeFromJSON() {
     try {
       const result = await saveRecipes(updated);
       showToast(
-        result.saved === 'github' ? '✅ Receta actualizada (GitHub)' : '💾 Receta actualizada (local)',
-        'success'
+        result.saved === 'github'
+          ? '✅ Receta actualizada (GitHub)'
+          : '⚠️ Sin GitHub — actualizada solo en este dispositivo',
+        result.saved === 'github' ? 'success' : 'warn'
       );
     } catch (e) {
-      showToast('⚠️ Error al guardar: ' + e.message, 'error');
+      showToast('❌ Error al guardar en GitHub: ' + e.message, 'error');
     }
     return;
   }
@@ -836,11 +847,11 @@ async function saveRecipeFromJSON() {
     showToast(
       result.saved === 'github'
         ? `✅ ${entries.length} receta(s) guardada(s) en GitHub`
-        : `💾 ${entries.length} receta(s) guardada(s) localmente`,
-      'success'
+        : `⚠️ Sin GitHub — ${entries.length} receta(s) guardada(s) solo en este dispositivo`,
+      result.saved === 'github' ? 'success' : 'warn'
     );
   } catch (e) {
-    showToast('⚠️ Error al guardar: ' + e.message, 'error');
+    showToast('❌ Error al guardar en GitHub: ' + e.message, 'error');
   }
 }
 
@@ -862,9 +873,17 @@ function previewJSON() {
 // ══════════════════════════════════════════════════════════
 
 function openAuthModal() {
-  const { owner, repo } = getCredentials();
-  if (owner) document.getElementById('input-gh-owner').value = owner;
-  if (repo)  document.getElementById('input-gh-repo').value  = repo;
+  // Pre-fill token field if already connected (masked)
+  const { token } = getCredentials();
+  if (token) document.getElementById('input-gh-token').value = token;
+  // Show quick-link section only when already connected
+  const ql = document.getElementById('auth-quicklink-section');
+  if (isAuthenticated()) {
+    ql.classList.remove('hidden');
+    refreshQuickLink();
+  } else {
+    ql.classList.add('hidden');
+  }
   document.getElementById('modal-auth').classList.remove('hidden');
 }
 
@@ -874,15 +893,13 @@ function closeAuthModal() {
 
 async function saveAuth() {
   const token = document.getElementById('input-gh-token').value.trim();
-  const owner = document.getElementById('input-gh-owner').value.trim();
-  const repo  = document.getElementById('input-gh-repo').value.trim();
 
-  if (!token || !owner || !repo) {
-    showToast('Completá todos los campos', 'error');
+  if (!token) {
+    showToast('Ingresá el token', 'error');
     return;
   }
 
-  saveCredentials({ token, owner, repo });
+  saveCredentials({ token });
 
   try {
     await testConnection();
@@ -890,16 +907,34 @@ async function saveAuth() {
     state.plan = await fetchPlan();
     renderWeek();
     updateAuthUI();
-    closeAuthModal();
+    // Show quick-link now that we're connected
+    document.getElementById('auth-quicklink-section').classList.remove('hidden');
+    refreshQuickLink();
     showToast('✅ Conectado a GitHub', 'success');
   } catch (e) {
     showToast('❌ ' + e.message, 'error');
   }
 }
 
+function refreshQuickLink() {
+  const { token } = getCredentials();
+  if (!token) return;
+  const base = window.location.origin + window.location.pathname;
+  const url  = `${base}#token=${encodeURIComponent(token)}`;
+  document.getElementById('auth-quicklink-url').value = url;
+}
+
+function disconnectGitHub() {
+  if (!confirm('¿Desconectar GitHub en este dispositivo? El token será eliminado del localStorage.')) return;
+  clearCredentials();
+  updateAuthUI();
+  closeAuthModal();
+  showToast('Desconectado de GitHub', '');
+}
+
 function updateAuthUI() {
   const connected = isAuthenticated();
-  const { owner, repo } = connected ? getCredentials() : {};
+  const { owner, repo } = getCredentials();
 
   // Desktop header button
   const btn    = document.getElementById('btn-github-auth');
@@ -1034,6 +1069,11 @@ function wireControls() {
   document.getElementById('btn-close-auth-modal').addEventListener('click', closeAuthModal);
   document.querySelector('#modal-auth .modal-backdrop').addEventListener('click', closeAuthModal);
   document.getElementById('btn-save-auth').addEventListener('click', saveAuth);
+  document.getElementById('btn-copy-quicklink').addEventListener('click', () => {
+    const url = document.getElementById('auth-quicklink-url').value;
+    navigator.clipboard.writeText(url).then(() => showToast('✅ URL copiada', 'success'));
+  });
+  document.getElementById('btn-disconnect').addEventListener('click', disconnectGitHub);
 
   // ESC key
   document.addEventListener('keydown', (e) => {

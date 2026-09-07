@@ -25,10 +25,12 @@
  */
 
 const LS_KEY_TOKEN    = 'plandental_gh_token';
-const LS_KEY_OWNER    = 'plandental_gh_owner';
-const LS_KEY_REPO     = 'plandental_gh_repo';
 const LS_KEY_PLAN     = 'plandental_plan_cache';
 const LS_KEY_RECIPES  = 'plandental_recipes_cache';
+
+// Repo is public — hardcoded so every device only needs the token.
+const DEFAULT_OWNER = 'pabloacvd';
+const DEFAULT_REPO  = 'plandental';
 
 const PLAN_FILE_PATH    = 'data/plan.json';
 const RECIPES_FILE_PATH = 'data/recipes.json';
@@ -36,26 +38,38 @@ const RECIPES_FILE_PATH = 'data/recipes.json';
 export function getCredentials() {
   return {
     token: localStorage.getItem(LS_KEY_TOKEN),
-    owner: localStorage.getItem(LS_KEY_OWNER),
-    repo:  localStorage.getItem(LS_KEY_REPO),
+    owner: DEFAULT_OWNER,
+    repo:  DEFAULT_REPO,
   };
 }
 
-export function saveCredentials({ token, owner, repo }) {
+export function saveCredentials({ token }) {
   localStorage.setItem(LS_KEY_TOKEN, token);
-  localStorage.setItem(LS_KEY_OWNER, owner);
-  localStorage.setItem(LS_KEY_REPO, repo);
 }
 
 export function clearCredentials() {
   localStorage.removeItem(LS_KEY_TOKEN);
-  localStorage.removeItem(LS_KEY_OWNER);
-  localStorage.removeItem(LS_KEY_REPO);
 }
 
 export function isAuthenticated() {
-  const { token, owner, repo } = getCredentials();
-  return !!(token && owner && repo);
+  const { token } = getCredentials();
+  return !!token;
+}
+
+/**
+ * Read a token from the URL hash (#token=ghp_xxx), persist it to localStorage,
+ * then remove it from the URL so it doesn't linger in history.
+ * Call once at app startup.
+ */
+export function consumeTokenFromHash() {
+  const hash = window.location.hash;
+  if (!hash.startsWith('#token=')) return;
+  const token = decodeURIComponent(hash.slice('#token='.length)).trim();
+  if (token) {
+    localStorage.setItem(LS_KEY_TOKEN, token);
+  }
+  // Replace history entry so the token is gone from the URL bar
+  history.replaceState(null, '', window.location.pathname + window.location.search);
 }
 
 // ── Local cache helpers ──────────────────────────────────
@@ -71,6 +85,15 @@ function loadLocalPlan() {
 
 function saveLocalPlan(plan) {
   localStorage.setItem(LS_KEY_PLAN, JSON.stringify(plan));
+}
+
+function loadLocalRecipes() {
+  try {
+    const raw = localStorage.getItem(LS_KEY_RECIPES);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
 }
 
 // ── GitHub API ───────────────────────────────────────────
@@ -124,7 +147,27 @@ export async function fetchPlan() {
 }
 
 /**
+ * Fetch recipes from GitHub. Falls back to local cache, then null (caller fetches static file).
+ */
+export async function fetchRecipes() {
+  if (!isAuthenticated()) return loadLocalRecipes();
+
+  try {
+    const data = await ghFetch(RECIPES_FILE_PATH);
+    if (!data) return null;
+    const content = JSON.parse(atob(data.content.replace(/\n/g, '')));
+    // Store under the same key saveRecipes uses so they stay in sync
+    localStorage.setItem(LS_KEY_RECIPES, JSON.stringify(content));
+    return content;
+  } catch (e) {
+    console.warn('GitHub recipes fetch failed, using local cache:', e.message);
+    return loadLocalRecipes();
+  }
+}
+
+/**
  * Save plan to both localStorage and GitHub.
+ * Throws on GitHub error so callers can surface the failure.
  */
 export async function savePlan(plan) {
   saveLocalPlan(plan);
@@ -150,6 +193,7 @@ export async function savePlan(plan) {
 
 /**
  * Save the full recipes array to localStorage and, if authenticated, to GitHub.
+ * Throws on GitHub error so callers can surface the failure.
  */
 export async function saveRecipes(recipesArray) {
   const payload = { recetas: recipesArray };
