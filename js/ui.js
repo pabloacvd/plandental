@@ -58,7 +58,7 @@ export function renderRecipeCard(recipeObj) {
 
 export function renderRecipeDetail(recipeObj) {
   const { receta } = recipeObj;
-  const { nombre, descripcion_breve, porciones, macros_por_porcion: m, ingredientes, paso_a_paso } = receta;
+  const { nombre, descripcion_breve, porciones, macros_por_porcion: m, ingredientes = [], paso_a_paso = [] } = receta;
 
   return `
     <div class="recipe-detail-name">${nombre}</div>
