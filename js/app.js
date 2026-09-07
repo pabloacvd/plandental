@@ -1002,15 +1002,21 @@ function wireControls() {
     }
   });
 
-  // Sidebar toggle — hamburger; on mobile also shows/hides overlay
-  document.getElementById('btn-toggle-sidebar').addEventListener('click', () => {
+  // Helper: toggle sidebar open/closed
+  function toggleSidebar() {
     const sidebar  = document.getElementById('sidebar');
     const backdrop = document.getElementById('sidebar-backdrop');
     sidebar.classList.toggle('collapsed');
     if (isMobile()) {
       backdrop.classList.toggle('hidden', sidebar.classList.contains('collapsed'));
     }
-  });
+  }
+
+  // Sidebar toggle — hamburger inside sidebar (desktop)
+  document.getElementById('btn-toggle-sidebar').addEventListener('click', toggleSidebar);
+
+  // Header hamburger button — open sidebar from mobile header
+  document.getElementById('btn-open-sidebar').addEventListener('click', toggleSidebar);
 
   // Sidebar backdrop tap → close sidebar
   document.getElementById('sidebar-backdrop').addEventListener('click', () => {

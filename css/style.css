@@ -183,6 +183,10 @@ input  { font: inherit; border: none; outline: none; }
   flex-shrink: 0;
   transition: var(--transition);
 }
+/* Header hamburger: hidden on desktop, visible on mobile */
+.btn-hamburger--header {
+  display: none;
+}
 .btn-hamburger span {
   display: block; height: 2px; background: var(--text-muted);
   border-radius: 1px; transition: var(--transition);
@@ -550,9 +554,8 @@ input  { font: inherit; border: none; outline: none; }
 
 /* ── Family summary ── */
 .family-summary {
-  display: table;
+  display: block;
   width: 100%;
-  border-collapse: collapse;
 }
 .family-summary-header,
 .family-summary-row {
@@ -1128,11 +1131,21 @@ input  { font: inherit; border: none; outline: none; }
     max-height: 50vh;
   }
 
+  /* ── Header hamburger: show on mobile ── */
+  .btn-hamburger--header {
+    display: flex;
+    flex-shrink: 0;
+  }
+
   /* ── Family summary ── */
   .family-summary-header,
   .family-summary-row {
     grid-template-columns: 90px 1fr 1fr;
     gap: 6px;
+  }
+  /* Make family-summary span all columns of the day-summary grid */
+  .day-summary > .family-summary {
+    grid-column: 1 / -1;
   }
 
   /* ── Modal boxes: full-width ── */
