@@ -31,16 +31,6 @@
             "carbohidratos_g": 3.7,
             "grasas_g": 0.5
           }
-        },
-        "cena": {
-          "recipeId": "pollo-al-curry-con-blomkalsris-y-2-huevos",
-          "recipeName": "Pollo al curry con blomkÃ¥lsris y 2 huevos",
-          "macros": {
-            "calorias": 475,
-            "proteina_g": 63,
-            "carbohidratos_g": 14.5,
-            "grasas_g": 17.5
-          }
         }
       }
     }
@@ -66,16 +56,6 @@
             "proteina_g": 24.4,
             "carbohidratos_g": 2,
             "grasas_g": 0.3
-          }
-        },
-        "cena": {
-          "recipeId": "pollo-al-curry-con-blomkalsris-y-2-huevos",
-          "recipeName": "Pollo al curry con blomkÃ¥lsris y 2 huevos",
-          "macros": {
-            "calorias": 475,
-            "proteina_g": 63,
-            "carbohidratos_g": 14.5,
-            "grasas_g": 17.5
           }
         }
       }
