@@ -4,7 +4,7 @@
       "2026-09-07": {
         "desayuno": {
           "recipeId": "skyr-con-semillas-de-chia",
-          "recipeName": "Skyr con semillas de chía",
+          "recipeName": "Skyr con semillas de chÃ­a",
           "macros": {
             "calorias": 134,
             "proteina_g": 17.3,
@@ -28,16 +28,6 @@
   "Juli": {
     "2026-W37": {
       "2026-09-07": {
-        "snack_tarde": {
-          "recipeId": "batido-ninja-juli",
-          "recipeName": "Batido Ninja Juli",
-          "macros": {
-            "calorias": 161,
-            "proteina_g": 33.4,
-            "carbohidratos_g": 5,
-            "grasas_g": 0.5
-          }
-        },
         "almuerzo": {
           "recipeId": "empanadas-de-carne-al-horno-4-unidades",
           "recipeName": "Empanadas de carne al horno (4 unidades)",
