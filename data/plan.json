@@ -21,6 +21,16 @@
             "carbohidratos_g": 11.1,
             "grasas_g": 2
           }
+        },
+        "almuerzo": {
+          "recipeId": "empanadas-de-carne-al-horno-4-unidades",
+          "recipeName": "Empanadas de carne al horno (4 unidades)",
+          "macros": {
+            "calorias": 1000,
+            "proteina_g": 38,
+            "carbohidratos_g": 82,
+            "grasas_g": 56
+          }
         }
       }
     }
@@ -36,6 +46,16 @@
             "proteina_g": 33.4,
             "carbohidratos_g": 5,
             "grasas_g": 0.5
+          }
+        },
+        "almuerzo": {
+          "recipeId": "empanadas-de-carne-al-horno-4-unidades",
+          "recipeName": "Empanadas de carne al horno (4 unidades)",
+          "macros": {
+            "calorias": 1000,
+            "proteina_g": 38,
+            "carbohidratos_g": 82,
+            "grasas_g": 56
           }
         }
       }
