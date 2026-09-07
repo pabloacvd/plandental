@@ -1,0 +1,34 @@
+{
+  "Pablo": {
+    "2026-W37": {
+      "2026-09-07": {
+        "snack_tarde": {
+          "recipeId": "batido-ninja-pablo",
+          "recipeName": "Batido Ninja Pablo",
+          "macros": {
+            "calorias": 269,
+            "proteina_g": 54.2,
+            "carbohidratos_g": 9.7,
+            "grasas_g": 0.9
+          }
+        }
+      }
+    }
+  },
+  "Juli": {
+    "2026-W37": {
+      "2026-09-07": {
+        "snack_tarde": {
+          "recipeId": "batido-ninja-pablo",
+          "recipeName": "Batido Ninja Pablo",
+          "macros": {
+            "calorias": 269,
+            "proteina_g": 54.2,
+            "carbohidratos_g": 9.7,
+            "grasas_g": 0.9
+          }
+        }
+      }
+    }
+  }
+}
