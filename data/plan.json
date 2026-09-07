@@ -37,16 +37,6 @@
             "carbohidratos_g": 5,
             "grasas_g": 0.5
           }
-        },
-        "desayuno": {
-          "recipeId": "skyr-con-semillas-de-chia",
-          "recipeName": "Skyr con semillas de chía",
-          "macros": {
-            "calorias": 134,
-            "proteina_g": 17.3,
-            "carbohidratos_g": 11.1,
-            "grasas_g": 2
-          }
         }
       }
     }
