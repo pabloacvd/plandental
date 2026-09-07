@@ -942,7 +942,7 @@ function updateAuthUI() {
   if (connected) {
     btn.textContent = '⚡ GitHub conectado';
     btn.classList.add('connected');
-    status.textContent = `${owner}/${repo}`;
+    status.textContent = '';
   } else {
     btn.textContent = 'Conectar GitHub';
     btn.classList.remove('connected');
@@ -955,7 +955,7 @@ function updateAuthUI() {
   if (connected) {
     btnF.textContent = '⚡ Conectado';
     btnF.classList.add('connected');
-    statusF.textContent = `${owner}/${repo}`;
+    statusF.textContent = '';
   } else {
     btnF.textContent = 'Conectar GitHub';
     btnF.classList.remove('connected');
