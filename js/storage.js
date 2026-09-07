@@ -137,7 +137,7 @@ export async function fetchPlan() {
   try {
     const data = await ghFetch(PLAN_FILE_PATH);
     if (!data) return {};
-    const content = JSON.parse(atob(data.content.replace(/\n/g, '')));
+    const content = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g, '')))));
     saveLocalPlan(content);
     return content;
   } catch (e) {
@@ -155,7 +155,7 @@ export async function fetchRecipes() {
   try {
     const data = await ghFetch(RECIPES_FILE_PATH);
     if (!data) return null;
-    const content = JSON.parse(atob(data.content.replace(/\n/g, '')));
+    const content = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g, '')))));
     // Store under the same key saveRecipes uses so they stay in sync
     localStorage.setItem(LS_KEY_RECIPES, JSON.stringify(content));
     return content;
