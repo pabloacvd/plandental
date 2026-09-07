@@ -31,6 +31,16 @@
             "carbohidratos_g": 3.7,
             "grasas_g": 0.5
           }
+        },
+        "cena": {
+          "recipeId": "pechuga-rellena-esparragos-havarti",
+          "recipeName": "Pechuga rellena de espÃ¡rragos y Havarti",
+          "macros": {
+            "calorias": 380,
+            "proteina_g": 54,
+            "carbohidratos_g": 4,
+            "grasas_g": 16
+          }
         }
       }
     }
@@ -56,6 +66,16 @@
             "proteina_g": 24.4,
             "carbohidratos_g": 2,
             "grasas_g": 0.3
+          }
+        },
+        "cena": {
+          "recipeId": "pechuga-rellena-esparragos-havarti",
+          "recipeName": "Pechuga rellena de espÃ¡rragos y Havarti",
+          "macros": {
+            "calorias": 380,
+            "proteina_g": 54,
+            "carbohidratos_g": 4,
+            "grasas_g": 16
           }
         }
       }
