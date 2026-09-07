@@ -31,6 +31,16 @@
             "carbohidratos_g": 3.7,
             "grasas_g": 0.5
           }
+        },
+        "cena": {
+          "recipeId": "pollo-al-curry",
+          "recipeName": "Pollo al curry con blomkÃ¥lsris",
+          "macros": {
+            "calorias": 460,
+            "proteina_g": 65.5,
+            "carbohidratos_g": 16,
+            "grasas_g": 12.8
+          }
         }
       }
     }
@@ -56,6 +66,16 @@
             "proteina_g": 24.4,
             "carbohidratos_g": 2,
             "grasas_g": 0.3
+          }
+        },
+        "cena": {
+          "recipeId": "pollo-al-curry",
+          "recipeName": "Pollo al curry con blomkÃ¥lsris",
+          "macros": {
+            "calorias": 460,
+            "proteina_g": 65.5,
+            "carbohidratos_g": 16,
+            "grasas_g": 12.8
           }
         }
       }
