@@ -3997,6 +3997,44 @@
           "Batir y tomar inmediatamente."
         ]
       }
+    },
+    {
+      "id": "shake-prote-pablo-sin-skyr",
+      "receta": {
+        "nombre": "Shake prote Pablo (sin skyr)",
+        "descripcion_breve": "Batido proteico simple de whey isolate con agua y hielo, ultra magro y de rápida digestión.",
+        "categoria": "batido/proteico",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 169,
+          "proteina_g": 36.2,
+          "carbohidratos_g": 3.7,
+          "grasas_g": 0.5
+        },
+        "ingredientes": [
+          {
+            "item": "Whey isolate",
+            "cantidad": 45,
+            "unidad": "g"
+          },
+          {
+            "item": "Agua fría",
+            "cantidad": 200,
+            "unidad": "ml"
+          },
+          {
+            "item": "Hielo",
+            "cantidad": 100,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Colocar los 200 ml de agua fría en el shaker.",
+          "Agregar los 45 g de whey isolate.",
+          "Añadir los 100 g de hielo.",
+          "Batir y tomar."
+        ]
+      }
     }
   ]
 }
