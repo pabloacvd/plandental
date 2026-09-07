@@ -4,7 +4,7 @@
       "id": "batido-ninja-pablo",
       "receta": {
         "nombre": "Batido Ninja Pablo",
-        "descripcion_breve": "Batido proteico diario de whey isolate y skyr de vainilla, con mÃ¡s de 54g de proteÃ­na y muy bajo contenido de grasas.",
+        "descripcion_breve": "Batido proteico diario de whey isolate y skyr de vainilla, con más de 54g de proteína y muy bajo contenido de grasas.",
         "categoria": "batido/proteico",
         "porciones": 1,
         "macros_por_porcion": {
@@ -25,7 +25,7 @@
             "unidad": "g"
           },
           {
-            "item": "Agua frÃ­a",
+            "item": "Agua fría",
             "cantidad": 200,
             "unidad": "ml"
           },
@@ -36,11 +36,11 @@
           }
         ],
         "paso_a_paso": [
-          "Colocar los 200ml de agua frÃ­a en la Ninja Blender.",
+          "Colocar los 200ml de agua fría en la Ninja Blender.",
           "Agregar los 200g de Cheasy Skyr Vanilje 0,2%.",
           "Agregar los 45g de whey isolate.",
-          "AÃ±adir los 100g de hielo.",
-          "Licuar durante 20-30 segundos hasta obtener una textura homogÃ©nea y cremosa.",
+          "Añadir los 100g de hielo.",
+          "Licuar durante 20-30 segundos hasta obtener una textura homogénea y cremosa.",
           "Servir inmediatamente."
         ]
       }
@@ -49,7 +49,7 @@
       "id": "batido-ninja-juli",
       "receta": {
         "nombre": "Batido Ninja Juli",
-        "descripcion_breve": "Batido proteico diario de whey isolate y skyr de vainilla, con mÃ¡s de 33g de proteÃ­na y muy bajo contenido de grasas.",
+        "descripcion_breve": "Batido proteico diario de whey isolate y skyr de vainilla, con más de 33g de proteína y muy bajo contenido de grasas.",
         "categoria": "batido/proteico",
         "porciones": 1,
         "macros_por_porcion": {
@@ -70,7 +70,7 @@
             "unidad": "g"
           },
           {
-            "item": "Agua frÃ­a",
+            "item": "Agua fría",
             "cantidad": 150,
             "unidad": "ml"
           },
@@ -81,11 +81,11 @@
           }
         ],
         "paso_a_paso": [
-          "Colocar los 150ml de agua frÃ­a en la Ninja Blender.",
+          "Colocar los 150ml de agua fría en la Ninja Blender.",
           "Agregar los 100g de Cheasy Skyr Vanilje 0,2%.",
           "Agregar los 30g de whey isolate.",
-          "AÃ±adir los 75g de hielo.",
-          "Licuar durante 20-30 segundos hasta obtener una textura homogÃ©nea y cremosa.",
+          "Añadir los 75g de hielo.",
+          "Licuar durante 20-30 segundos hasta obtener una textura homogénea y cremosa.",
           "Servir inmediatamente."
         ]
       }
@@ -93,7 +93,7 @@
     {
       "id": "pollo-al-curry",
       "receta": {
-        "nombre": "Pollo al curry con blomkÃ¥lsris",
+        "nombre": "Pollo al curry con blomkålsris",
         "descripcion_breve": "Pollo al curry en leche de coco light sobre base de arroz de coliflor, ideal para mantener un aporte bajo en carbohidratos.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
@@ -115,7 +115,7 @@
             "unidad": "g"
           },
           {
-            "item": "Pimiento morrÃ³n",
+            "item": "Pimiento morrón",
             "cantidad": 100,
             "unidad": "g"
           },
@@ -130,7 +130,7 @@
             "unidad": "g"
           },
           {
-            "item": "BlomkÃ¥lsris (arroz de coliflor)",
+            "item": "Blomkålsris (arroz de coliflor)",
             "cantidad": 200,
             "unidad": "g"
           },
@@ -141,11 +141,11 @@
           }
         ],
         "paso_a_paso": [
-          "Dorar la pechuga en cubos en una sartÃ©n con spray de oliva.",
-          "Saltear la cebolla y el morrÃ³n picados finos hasta transparentar.",
-          "AÃ±adir el curry, la leche de coco light y cocinar a fuego lento por 10 minutos.",
-          "En una sartÃ©n aparte, saltear el blomkÃ¥lsris unos 3-5 minutos.",
-          "Servir el curry bien caliente sobre la base de blomkÃ¥lsris."
+          "Dorar la pechuga en cubos en una sartén con spray de oliva.",
+          "Saltear la cebolla y el morrón picados finos hasta transparentar.",
+          "Añadir el curry, la leche de coco light y cocinar a fuego lento por 10 minutos.",
+          "En una sartén aparte, saltear el blomkålsris unos 3-5 minutos.",
+          "Servir el curry bien caliente sobre la base de blomkålsris."
         ]
       }
     },
@@ -169,7 +169,7 @@
             "unidad": "g"
           },
           {
-            "item": "Harina de trigo comÃºn",
+            "item": "Harina de trigo común",
             "cantidad": 65,
             "unidad": "g"
           },
@@ -205,12 +205,12 @@
           }
         ],
         "paso_a_paso": [
-          "Descongelar la espinaca y escurrirla con fuerza sobre un colador o paÃ±o limpio para retirar todo el lÃ­quido.",
+          "Descongelar la espinaca y escurrirla con fuerza sobre un colador o paño limpio para retirar todo el líquido.",
           "Mezclar las harinas con sal y polvo de hornear; agregar el aceite y agua tibia (100-105 ml) de a poco hasta formar un bollo. Reposar 15 min y estirar.",
           "Saltear la cebolla picada hasta dorar y mezclar con la espinaca escurrida.",
           "Batir los huevos con el hytteost, la sal y la nuez moscada.",
           "Unir las verduras con la mezcla de huevo y queso.",
-          "Forrar la tartera con la masa estirada, verter el relleno y hornear a 180Â°C durante 30 minutos."
+          "Forrar la tartera con la masa estirada, verter el relleno y hornear a 180°C durante 30 minutos."
         ]
       }
     },
@@ -218,7 +218,7 @@
       "id": "pechugas-rellenas-airfryer",
       "receta": {
         "nombre": "Pechugas rellenas a la Airfryer",
-        "descripcion_breve": "Pechuga abierta en mariposa rellena con hytteost y morrÃ³n asado, sellada y cocinada en la freidora de aire.",
+        "descripcion_breve": "Pechuga abierta en mariposa rellena con hytteost y morrón asado, sellada y cocinada en la freidora de aire.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -239,29 +239,29 @@
             "unidad": "g"
           },
           {
-            "item": "Pimiento morrÃ³n asado",
+            "item": "Pimiento morrón asado",
             "cantidad": 80,
             "unidad": "g"
           },
           {
-            "item": "Ajo en polvo, pimentÃ³n y sal",
+            "item": "Ajo en polvo, pimentón y sal",
             "cantidad": 5,
             "unidad": "g"
           }
         ],
         "paso_a_paso": [
           "Abrir las pechugas como un libro y condimentar por dentro y por fuera.",
-          "Rellenar con el hytteost y tiras de morrÃ³n asado.",
+          "Rellenar con el hytteost y tiras de morrón asado.",
           "Cerrar con escarbadientes para asegurar el relleno.",
-          "Cocinar en Ninja / Airfryer a 190Â°C durante 18-20 minutos girando a mitad de cocciÃ³n."
+          "Cocinar en Ninja / Airfryer a 190°C durante 18-20 minutos girando a mitad de cocción."
         ]
       }
     },
     {
       "id": "salmon-glaseado",
       "receta": {
-        "nombre": "SalmÃ³n glaseado con fideos de arroz y brÃ³coli (DÃ­a de oficina - Pablo)",
-        "descripcion_breve": "Filet de salmÃ³n horneado con soja y jengibre, servido con fideos de arroz y brÃ³coli al vapor.",
+        "nombre": "Salmón glaseado con fideos de arroz y brócoli (Día de oficina - Pablo)",
+        "descripcion_breve": "Filet de salmón horneado con soja y jengibre, servido con fideos de arroz y brócoli al vapor.",
         "categoria": "almuerzo/cena",
         "porciones": 1,
         "macros_por_porcion": {
@@ -272,7 +272,7 @@
         },
         "ingredientes": [
           {
-            "item": "Filet de salmÃ³n fresco",
+            "item": "Filet de salmón fresco",
             "cantidad": 200,
             "unidad": "g"
           },
@@ -292,24 +292,24 @@
             "unidad": "g"
           },
           {
-            "item": "BrÃ³coli",
+            "item": "Brócoli",
             "cantidad": 150,
             "unidad": "g"
           }
         ],
         "paso_a_paso": [
-          "Marinar el salmÃ³n con salsa de soja y jengibre rallado por 10 minutos.",
-          "Cocinar el salmÃ³n en airfryer u horno a 180Â°C durante 12 minutos.",
-          "Cocinar los fideos de arroz e hidratar segÃºn instrucciones del paquete.",
-          "Hacer el brÃ³coli al vapor y servir todo junto."
+          "Marinar el salmón con salsa de soja y jengibre rallado por 10 minutos.",
+          "Cocinar el salmón en airfryer u horno a 180°C durante 12 minutos.",
+          "Cocinar los fideos de arroz e hidratar según instrucciones del paquete.",
+          "Hacer el brócoli al vapor y servir todo junto."
         ]
       }
     },
     {
       "id": "pastel-de-carne-fit",
       "receta": {
-        "nombre": "Pastel de carne fit con purÃ© mixto",
-        "descripcion_breve": "Base de carne picada magra con sofrito, cubierta por un purÃ© liviano de calabaza y papa.",
+        "nombre": "Pastel de carne fit con puré mixto",
+        "descripcion_breve": "Base de carne picada magra con sofrito, cubierta por un puré liviano de calabaza y papa.",
         "categoria": "almuerzo/cena",
         "porciones": 3,
         "macros_por_porcion": {
@@ -325,7 +325,7 @@
             "unidad": "g"
           },
           {
-            "item": "Cebolla y morrÃ³n picados",
+            "item": "Cebolla y morrón picados",
             "cantidad": 200,
             "unidad": "g"
           },
@@ -346,10 +346,10 @@
           }
         ],
         "paso_a_paso": [
-          "Cocinar la carne magra con la cebolla y el morrÃ³n hasta dorar.",
-          "Hervir la calabaza y la papa; hacer un purÃ© firme pisÃ¡ndolas juntas.",
-          "Colocar la carne en una fuente para horno y cubrir con el purÃ©.",
-          "Gratinar en el horno a 200Â°C por 15 minutos."
+          "Cocinar la carne magra con la cebolla y el morrón hasta dorar.",
+          "Hervir la calabaza y la papa; hacer un puré firme pisándolas juntas.",
+          "Colocar la carne en una fuente para horno y cubrir con el puré.",
+          "Gratinar en el horno a 200°C por 15 minutos."
         ]
       }
     },
@@ -357,7 +357,7 @@
       "id": "ensalada-tibia-quinoa-pollo",
       "receta": {
         "nombre": "Ensalada tibia de quinoa y pollo",
-        "descripcion_breve": "Tiras de pechuga a la plancha sobre base de quinoa, brÃ³coli al vapor, palta y aderezo de limÃ³n.",
+        "descripcion_breve": "Tiras de pechuga a la plancha sobre base de quinoa, brócoli al vapor, palta y aderezo de limón.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -378,7 +378,7 @@
             "unidad": "g"
           },
           {
-            "item": "BrÃ³coli en floretes",
+            "item": "Brócoli en floretes",
             "cantidad": 150,
             "unidad": "g"
           },
@@ -388,16 +388,16 @@
             "unidad": "g"
           },
           {
-            "item": "Jugo de limÃ³n y sal",
+            "item": "Jugo de limón y sal",
             "cantidad": 10,
             "unidad": "ml"
           }
         ],
         "paso_a_paso": [
-          "Grillar las tiras de pollo a la plancha hasta que estÃ©n doradas.",
-          "Cocer el brÃ³coli al vapor dejando una textura crujiente.",
-          "Mezclar la quinoa tibia, el brÃ³coli, las tiras de pollo y la palta fileteada.",
-          "AliÃ±ar con jugo de limÃ³n fresco y sal al gusto."
+          "Grillar las tiras de pollo a la plancha hasta que estén doradas.",
+          "Cocer el brócoli al vapor dejando una textura crujiente.",
+          "Mezclar la quinoa tibia, el brócoli, las tiras de pollo y la palta fileteada.",
+          "Aliñar con jugo de limón fresco y sal al gusto."
         ]
       }
     },
@@ -479,7 +479,7 @@
             "unidad": "g"
           },
           {
-            "item": "Ajo en polvo y pimentÃ³n",
+            "item": "Ajo en polvo y pimentón",
             "cantidad": 5,
             "unidad": "g"
           },
@@ -491,7 +491,7 @@
         ],
         "paso_a_paso": [
           "Hervir los fideos de arroz al dente.",
-          "Licuar el hytteost con el Havarti, la leche en hilo, ajo en polvo y pimentÃ³n hasta homogenizar.",
+          "Licuar el hytteost con el Havarti, la leche en hilo, ajo en polvo y pimentón hasta homogenizar.",
           "Calentar la salsa a fuego muy bajo sin hervir para mantener la textura.",
           "Mezclar con los fideos calientes y servir de inmediato."
         ]
@@ -500,8 +500,8 @@
     {
       "id": "tomates-rellenos-proteicos",
       "receta": {
-        "nombre": "Tomates rellenos proteicos de atÃºn y quinoa",
-        "descripcion_breve": "Tomates ahuecados rellenos con atÃºn al natural, hytteost, cebollita picada y quinoa.",
+        "nombre": "Tomates rellenos proteicos de atún y quinoa",
+        "descripcion_breve": "Tomates ahuecados rellenos con atún al natural, hytteost, cebollita picada y quinoa.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -517,7 +517,7 @@
             "unidad": "unidad"
           },
           {
-            "item": "AtÃºn al natural escurrido",
+            "item": "Atún al natural escurrido",
             "cantidad": 160,
             "unidad": "g"
           },
@@ -539,17 +539,17 @@
         ],
         "paso_a_paso": [
           "Ahuecar los tomates retirando las semillas con una cuchara.",
-          "Mezclar el atÃºn con el hytteost, cebolla picada fina y la quinoa.",
+          "Mezclar el atún con el hytteost, cebolla picada fina y la quinoa.",
           "Rellenar los tomates generosamente.",
-          "Servir frÃ­os o llevar 5 minutos al horno si se prefieren tibios."
+          "Servir fríos o llevar 5 minutos al horno si se prefieren tibios."
         ]
       }
     },
     {
       "id": "poke-bowl-salmon",
       "receta": {
-        "nombre": "Poke bowl de salmÃ³n (DÃ­a de oficina - Pablo)",
-        "descripcion_breve": "Dados de salmÃ³n al horno sobre quinoa, acompaÃ±ados de palta, pepino fresco y chÃ­a.",
+        "nombre": "Poke bowl de salmón (Día de oficina - Pablo)",
+        "descripcion_breve": "Dados de salmón al horno sobre quinoa, acompañados de palta, pepino fresco y chía.",
         "categoria": "almuerzo/cena",
         "porciones": 1,
         "macros_por_porcion": {
@@ -560,7 +560,7 @@
         },
         "ingredientes": [
           {
-            "item": "SalmÃ³n en dados",
+            "item": "Salmón en dados",
             "cantidad": 150,
             "unidad": "g"
           },
@@ -570,7 +570,7 @@
             "unidad": "g"
           },
           {
-            "item": "Palta en lÃ¡minas",
+            "item": "Palta en láminas",
             "cantidad": 50,
             "unidad": "g"
           },
@@ -580,16 +580,16 @@
             "unidad": "g"
           },
           {
-            "item": "Semillas de chÃ­a",
+            "item": "Semillas de chía",
             "cantidad": 5,
             "unidad": "g"
           }
         ],
         "paso_a_paso": [
-          "Horneando los dados de salmÃ³n a 190Â°C por 10 minutos.",
+          "Horneando los dados de salmón a 190°C por 10 minutos.",
           "Disponer la quinoa cocida como base en un bowl.",
-          "AÃ±adir el salmÃ³n, la palta y el pepino distribuidos en sectores.",
-          "Espolvorear con semillas de chÃ­a y un chorrito de salsa de soja."
+          "Añadir el salmón, la palta y el pepino distribuidos en sectores.",
+          "Espolvorear con semillas de chía y un chorrito de salsa de soja."
         ]
       }
     },
@@ -597,7 +597,7 @@
       "id": "salteado-carne-fajitas",
       "receta": {
         "nombre": "Salteado de carne tipo fajitas",
-        "descripcion_breve": "Tiras de bife magro salteadas con abundante cebolla y morrÃ³n a fuego fuerte.",
+        "descripcion_breve": "Tiras de bife magro salteadas con abundante cebolla y morrón a fuego fuerte.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -618,26 +618,26 @@
             "unidad": "g"
           },
           {
-            "item": "MorrÃ³n rojo y verde en juliana",
+            "item": "Morrón rojo y verde en juliana",
             "cantidad": 150,
             "unidad": "g"
           },
           {
-            "item": "Comino, pimentÃ³n y ajÃ­",
+            "item": "Comino, pimentón y ají",
             "cantidad": 5,
             "unidad": "g"
           },
           {
-            "item": "Tortilla integral pequeÃ±a (opcional)",
+            "item": "Tortilla integral pequeña (opcional)",
             "cantidad": 1,
             "unidad": "unidad"
           }
         ],
         "paso_a_paso": [
-          "Calentar la sartÃ©n o wok a fuego mÃ¡ximo con un toque de spray.",
-          "Saltear la carne rÃ¡pidamente para sellar y retirar.",
-          "Dorar la cebolla y los morrones hasta que estÃ©n al dente.",
-          "Mezclar todo, sazonar con comino y pimentÃ³n, y servir al plato o con tortilla integral."
+          "Calentar la sartén o wok a fuego máximo con un toque de spray.",
+          "Saltear la carne rápidamente para sellar y retirar.",
+          "Dorar la cebolla y los morrones hasta que estén al dente.",
+          "Mezclar todo, sazonar con comino y pimentón, y servir al plato o con tortilla integral."
         ]
       }
     },
@@ -680,15 +680,15 @@
           "Estirar la pechuga aplanada y sazonar con sal y ajo en polvo.",
           "Colocar la espinaca y las lonchas de queso Havarti encima.",
           "Enrollar firmemente y envolver en papel aluminio.",
-          "Hornear a 200Â°C por 25 minutos, retirar el papel y cortar en rodajas."
+          "Hornear a 200°C por 25 minutos, retirar el papel y cortar en rodajas."
         ]
       }
     },
     {
       "id": "souffle-de-brocoli",
       "receta": {
-        "nombre": "SoufflÃ© de brÃ³coli con Havarti",
-        "descripcion_breve": "BrÃ³coli procesado integrado con claras a punto de nieve y un toque de Havarti, horneado y esponjoso.",
+        "nombre": "Soufflé de brócoli con Havarti",
+        "descripcion_breve": "Brócoli procesado integrado con claras a punto de nieve y un toque de Havarti, horneado y esponjoso.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -699,7 +699,7 @@
         },
         "ingredientes": [
           {
-            "item": "BrÃ³coli cocido",
+            "item": "Brócoli cocido",
             "cantidad": 350,
             "unidad": "g"
           },
@@ -725,17 +725,17 @@
           }
         ],
         "paso_a_paso": [
-          "Procesar o picar muy fino el brÃ³coli y mezclar con la yema y el queso.",
+          "Procesar o picar muy fino el brócoli y mezclar con la yema y el queso.",
           "Batir las 4 claras a punto de nieve con una pizca de sal.",
-          "Integrar las claras a la mezcla de brÃ³coli con movimientos envolventes.",
-          "Volcar en un molde y hornear a 180Â°C por 20 minutos hasta que infle."
+          "Integrar las claras a la mezcla de brócoli con movimientos envolventes.",
+          "Volcar en un molde y hornear a 180°C por 20 minutos hasta que infle."
         ]
       }
     },
     {
       "id": "pechuga-a-la-mostaza",
       "receta": {
-        "nombre": "Pechuga a la mostaza con blomkÃ¥lsris",
+        "nombre": "Pechuga a la mostaza con blomkålsris",
         "descripcion_breve": "Pollo dorado desglasado con salsa de mostaza y un toque de leche de coco light, servido sobre arroz de coliflor.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
@@ -762,7 +762,7 @@
             "unidad": "ml"
           },
           {
-            "item": "Arroz de coliflor (blomkÃ¥lsris)",
+            "item": "Arroz de coliflor (blomkålsris)",
             "cantidad": 250,
             "unidad": "g"
           },
@@ -773,18 +773,18 @@
           }
         ],
         "paso_a_paso": [
-          "Dorar las pechugas en una sartÃ©n antiadherente por ambos lados.",
+          "Dorar las pechugas en una sartén antiadherente por ambos lados.",
           "Desglasar agregando el caldo, la mostaza y la leche de coco light.",
           "Cocinar a fuego bajo 8 minutos hasta reducir la salsa.",
-          "Servir junto con el blomkÃ¥lsris previamente salteado."
+          "Servir junto con el blomkålsris previamente salteado."
         ]
       }
     },
     {
       "id": "empanadas-arabes-abiertas",
       "receta": {
-        "nombre": "Empanadas Ã¡rabes (Fatay) abiertas integrales",
-        "descripcion_breve": "Masa integral con relleno de carne picada magra, cebolla, tomate y jugo de limÃ³n cocinadas abiertas.",
+        "nombre": "Empanadas árabes (Fatay) abiertas integrales",
+        "descripcion_breve": "Masa integral con relleno de carne picada magra, cebolla, tomate y jugo de limón cocinadas abiertas.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -815,7 +815,7 @@
             "unidad": "g"
           },
           {
-            "item": "Jugo de limÃ³n",
+            "item": "Jugo de limón",
             "cantidad": 30,
             "unidad": "ml"
           },
@@ -826,18 +826,18 @@
           }
         ],
         "paso_a_paso": [
-          "Macerar la carne cruda con cebolla, tomate, jugo de limÃ³n y especias por 30 min.",
+          "Macerar la carne cruda con cebolla, tomate, jugo de limón y especias por 30 min.",
           "Acomodar las tapas integrales en una placa y colocar el relleno en el centro.",
-          "Pizcar los bordes formando triÃ¡ngulos abiertos.",
-          "Hornear a 200Â°C por 18 minutos."
+          "Pizcar los bordes formando triángulos abiertos.",
+          "Hornear a 200°C por 18 minutos."
         ]
       }
     },
     {
       "id": "salmon-al-papillote",
       "receta": {
-        "nombre": "SalmÃ³n al papillote (DÃ­a de oficina - Pablo)",
-        "descripcion_breve": "Filet de salmÃ³n en papillote horneado con juliana de morrones, cebolla y limÃ³n.",
+        "nombre": "Salmón al papillote (Día de oficina - Pablo)",
+        "descripcion_breve": "Filet de salmón en papillote horneado con juliana de morrones, cebolla y limón.",
         "categoria": "almuerzo/cena",
         "porciones": 1,
         "macros_por_porcion": {
@@ -848,7 +848,7 @@
         },
         "ingredientes": [
           {
-            "item": "SalmÃ³n fresco",
+            "item": "Salmón fresco",
             "cantidad": 180,
             "unidad": "g"
           },
@@ -858,21 +858,21 @@
             "unidad": "g"
           },
           {
-            "item": "MorrÃ³n en juliana",
+            "item": "Morrón en juliana",
             "cantidad": 60,
             "unidad": "g"
           },
           {
-            "item": "Rodajas de limÃ³n y eneldo",
+            "item": "Rodajas de limón y eneldo",
             "cantidad": 20,
             "unidad": "g"
           }
         ],
         "paso_a_paso": [
           "Colocar un paquete de papel manteca o aluminio con los vegetales de base.",
-          "Disponer el salmÃ³n salpimentado por encima y cubrir con rodajas de limÃ³n.",
-          "Cerrar hermÃ©ticamente el paquete.",
-          "Hornear a 190Â°C durante 15-18 minutos."
+          "Disponer el salmón salpimentado por encima y cubrir con rodajas de limón.",
+          "Cerrar herméticamente el paquete.",
+          "Hornear a 190°C durante 15-18 minutos."
         ]
       }
     },
@@ -880,7 +880,7 @@
       "id": "zapallitos-o-berenjenas-rellenas",
       "receta": {
         "nombre": "Zapallitos o berenjenas rellenas gratinadas",
-        "descripcion_breve": "Verduras ahuecadas rellenas de carne picada magra y su pulpa, gratinadas con lÃ¡mina de Havarti.",
+        "descripcion_breve": "Verduras ahuecadas rellenas de carne picada magra y su pulpa, gratinadas con lámina de Havarti.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -912,18 +912,18 @@
           }
         ],
         "paso_a_paso": [
-          "Hervir o ahuecar los zapallitos/berenjenas picando la pulpa extraÃ­da.",
+          "Hervir o ahuecar los zapallitos/berenjenas picando la pulpa extraída.",
           "Cocinar la carne con la cebolla y la pulpa picada.",
-          "Rellenar los vegetales y colocar la lÃ¡mina de queso Havarti arriba.",
-          "Gratinar al horno a 200Â°C por 15 minutos."
+          "Rellenar los vegetales y colocar la lámina de queso Havarti arriba.",
+          "Gratinar al horno a 200°C por 15 minutos."
         ]
       }
     },
     {
       "id": "risotto-de-quinoa",
       "receta": {
-        "nombre": "Risotto de quinoa con pollo y brÃ³coli",
-        "descripcion_breve": "Quinoa cocinada en caldo con pollo desmenuzado, brÃ³coli y hytteost para lograr mÃ¡xima cremosidad.",
+        "nombre": "Risotto de quinoa con pollo y brócoli",
+        "descripcion_breve": "Quinoa cocinada en caldo con pollo desmenuzado, brócoli y hytteost para lograr máxima cremosidad.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -944,7 +944,7 @@
             "unidad": "g"
           },
           {
-            "item": "BrÃ³coli picado",
+            "item": "Brócoli picado",
             "cantidad": 120,
             "unidad": "g"
           },
@@ -960,9 +960,9 @@
           }
         ],
         "paso_a_paso": [
-          "Cocer la quinoa aÃ±adiendo caldo caliente gradualmente como en un risotto.",
-          "Agregar el pollo desmenuzado y el brÃ³coli a mitad de cocciÃ³n.",
-          "Cuando el lÃ­quido reduzca, retirar del fuego y mantecar con el hytteost.",
+          "Cocer la quinoa añadiendo caldo caliente gradualmente como en un risotto.",
+          "Agregar el pollo desmenuzado y el brócoli a mitad de cocción.",
+          "Cuando el líquido reduzca, retirar del fuego y mantecar con el hytteost.",
           "Servir cremoso inmediatamente."
         ]
       }
@@ -971,7 +971,7 @@
       "id": "bifes-a-la-criolla-magros",
       "receta": {
         "nombre": "Bifes a la criolla magros",
-        "descripcion_breve": "Bifes de ternera cocinados a la cacerola con rodajas de cebolla, morrÃ³n y tomate natural.",
+        "descripcion_breve": "Bifes de ternera cocinados a la cacerola con rodajas de cebolla, morrón y tomate natural.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -992,24 +992,24 @@
             "unidad": "g"
           },
           {
-            "item": "Pimiento morrÃ³n en tiras",
+            "item": "Pimiento morrón en tiras",
             "cantidad": 150,
             "unidad": "g"
           },
           {
-            "item": "PurÃ© de tomate natural",
+            "item": "Puré de tomate natural",
             "cantidad": 150,
             "unidad": "g"
           },
           {
-            "item": "OrÃ©gano, pimentÃ³n y laurel",
+            "item": "Orégano, pimentón y laurel",
             "cantidad": 5,
             "unidad": "g"
           }
         ],
         "paso_a_paso": [
-          "Hacer capas en una cacerola: cebolla, morrÃ³n, bifes y tomate.",
-          "Sazonar con sal, pimentÃ³n, orÃ©gano y la hoja de laurel.",
+          "Hacer capas en una cacerola: cebolla, morrón, bifes y tomate.",
+          "Sazonar con sal, pimentón, orégano y la hoja de laurel.",
           "Tapar y cocinar a fuego lento durante 30 minutos sin revolver.",
           "Servir bien caliente con la salsa reducida."
         ]
@@ -1018,7 +1018,7 @@
     {
       "id": "ensalada-cesar-adaptada",
       "receta": {
-        "nombre": "Ensalada CÃ©sar fit con aderezo de skyr",
+        "nombre": "Ensalada César fit con aderezo de skyr",
         "descripcion_breve": "Pechuga grillada sobre espinaca fresca, crutones integrales y aderezo proteico de skyr y mostaza.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
@@ -1058,8 +1058,8 @@
         "paso_a_paso": [
           "Mezclar el skyr, mostaza, ajo y sal para formar el aderezo.",
           "Poner una base generosa de espinaca en dos bowls.",
-          "AÃ±adir la pechuga cortada en tiras y los crutones tostados.",
-          "BaÃ±ar con el aderezo de skyr."
+          "Añadir la pechuga cortada en tiras y los crutones tostados.",
+          "Bañar con el aderezo de skyr."
         ]
       }
     },
@@ -1067,7 +1067,7 @@
       "id": "brochettes-a-la-parrilla",
       "receta": {
         "nombre": "Brochettes de pollo y vegetales a la Ninja / Parrilla",
-        "descripcion_breve": "Pinchos intercalados de cubos de pollo, cebolla y morrÃ³n a la parrilla o airfryer.",
+        "descripcion_breve": "Pinchos intercalados de cubos de pollo, cebolla y morrón a la parrilla o airfryer.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -1088,21 +1088,21 @@
             "unidad": "g"
           },
           {
-            "item": "Pimiento morrÃ³n en trozos",
+            "item": "Pimiento morrón en trozos",
             "cantidad": 120,
             "unidad": "g"
           },
           {
-            "item": "OrÃ©gano y ajo en polvo",
+            "item": "Orégano y ajo en polvo",
             "cantidad": 5,
             "unidad": "g"
           }
         ],
         "paso_a_paso": [
           "Armar brochettes en palitos de madera intercalando pollo y vegetales.",
-          "Condimentar bien con orÃ©gano, ajo y sal.",
-          "Asar a la parrilla o Ninja Grill a 200Â°C por 12-15 minutos.",
-          "Girar a mitad de cocciÃ³n para un dorado parejo."
+          "Condimentar bien con orégano, ajo y sal.",
+          "Asar a la parrilla o Ninja Grill a 200°C por 12-15 minutos.",
+          "Girar a mitad de cocción para un dorado parejo."
         ]
       }
     },
@@ -1110,7 +1110,7 @@
       "id": "pan-de-carne",
       "receta": {
         "nombre": "Pan de carne magro relleno",
-        "descripcion_breve": "Carne picada amasada con especias, rellena con huevos duros y morrÃ³n asado, horneada en budinera.",
+        "descripcion_breve": "Carne picada amasada con especias, rellena con huevos duros y morrón asado, horneada en budinera.",
         "categoria": "almuerzo/cena",
         "porciones": 4,
         "macros_por_porcion": {
@@ -1131,7 +1131,7 @@
             "unidad": "unidad"
           },
           {
-            "item": "MorrÃ³n asado en tiras",
+            "item": "Morrón asado en tiras",
             "cantidad": 80,
             "unidad": "g"
           },
@@ -1148,17 +1148,17 @@
         ],
         "paso_a_paso": [
           "Amasar la carne con el huevo crudo y los condimentos.",
-          "Colocar la mitad en una budinera, aÃ±adir los huevos duros y morrÃ³n en el centro.",
+          "Colocar la mitad en una budinera, añadir los huevos duros y morrón en el centro.",
           "Cubrir con el resto de la carne y presionar bien.",
-          "Hornear a 190Â°C por 35 minutos."
+          "Hornear a 190°C por 35 minutos."
         ]
       }
     },
     {
       "id": "tacos-de-salmon",
       "receta": {
-        "nombre": "Tacos de salmÃ³n en hojas de spidskÃ¥l (DÃ­a de oficina - Pablo)",
-        "descripcion_breve": "SalmÃ³n desmenuzado con palta y cebolla morada sobre hojas crujientes de repollo spidskÃ¥l.",
+        "nombre": "Tacos de salmón en hojas de spidskål (Día de oficina - Pablo)",
+        "descripcion_breve": "Salmón desmenuzado con palta y cebolla morada sobre hojas crujientes de repollo spidskål.",
         "categoria": "almuerzo/cena",
         "porciones": 1,
         "macros_por_porcion": {
@@ -1169,12 +1169,12 @@
         },
         "ingredientes": [
           {
-            "item": "SalmÃ³n cocido desmenuzado",
+            "item": "Salmón cocido desmenuzado",
             "cantidad": 160,
             "unidad": "g"
           },
           {
-            "item": "Hojas de repollo spidskÃ¥l",
+            "item": "Hojas de repollo spidskål",
             "cantidad": 4,
             "unidad": "unidad"
           },
@@ -1189,15 +1189,15 @@
             "unidad": "g"
           },
           {
-            "item": "Cilantro y limÃ³n",
+            "item": "Cilantro y limón",
             "cantidad": 10,
             "unidad": "g"
           }
         ],
         "paso_a_paso": [
-          "Mezclar el salmÃ³n desmenuzado con la palta pisada, cebolla y limÃ³n.",
-          "Lavar y separar con cuidado las hojas frescas de spidskÃ¥l.",
-          "Usar las hojas como tortillas y rellenar con la mezcla de salmÃ³n.",
+          "Mezclar el salmón desmenuzado con la palta pisada, cebolla y limón.",
+          "Lavar y separar con cuidado las hojas frescas de spidskål.",
+          "Usar las hojas como tortillas y rellenar con la mezcla de salmón.",
           "Espolvorear cilantro por encima antes de comer."
         ]
       }
@@ -1205,8 +1205,8 @@
     {
       "id": "fideos-de-arroz-bolonesa",
       "receta": {
-        "nombre": "Fideos de arroz a la boloÃ±esa magra",
-        "descripcion_breve": "Salsa boloÃ±esa casera de carne magra y tomate sobre una porciÃ³n medida de fideos de arroz.",
+        "nombre": "Fideos de arroz a la boloñesa magra",
+        "descripcion_breve": "Salsa boloñesa casera de carne magra y tomate sobre una porción medida de fideos de arroz.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -1241,7 +1241,7 @@
           "Dorar la cebolla y agregar la carne picada magra.",
           "Incorporar el tomate triturado y cocinar a fuego lento por 15 minutos.",
           "Hervir los fideos de arroz y escurrir.",
-          "Servir los fideos cubiertos con la boloÃ±esa."
+          "Servir los fideos cubiertos con la boloñesa."
         ]
       }
     },
@@ -1249,7 +1249,7 @@
       "id": "milanesas-de-pollo-al-horno",
       "receta": {
         "nombre": "Milanesas de pollo al horno fit",
-        "descripcion_breve": "Pechugas pasadas por huevo y avena extrafina, horneadas sobre placa precalentada sÃºper crujientes.",
+        "descripcion_breve": "Pechugas pasadas por huevo y avena extrafina, horneadas sobre placa precalentada súper crujientes.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -1282,7 +1282,7 @@
         ],
         "paso_a_paso": [
           "Pasar los filetes por huevo batido con provenzal y luego empanar en avena.",
-          "Precalentar el horno a 220Â°C con la placa adentro.",
+          "Precalentar el horno a 220°C con la placa adentro.",
           "Colocar las milanesas en la placa caliente con un toque de spray.",
           "Cocinar 8 minutos por lado hasta dorar."
         ]
@@ -1324,7 +1324,7 @@
           }
         ],
         "paso_a_paso": [
-          "Cocinar las papas finas en Airfryer sin aceite a 200Â°C por 12 minutos.",
+          "Cocinar las papas finas en Airfryer sin aceite a 200°C por 12 minutos.",
           "Rehogar la cebolla y mezclar con el pollo desmenuzado.",
           "Volcar las claras y revolver suavemente hasta cuajar.",
           "Incorporar las papas crocantes justo antes de servir."
@@ -1334,8 +1334,8 @@
     {
       "id": "ensalada-fresca-atun-garbanzos",
       "receta": {
-        "nombre": "Ensalada fresca de atÃºn y quinoa con skyr",
-        "descripcion_breve": "AtÃºn, cebolla morada, morrÃ³n asado y espinaca sobre quinoa con aderezo fresco de skyr.",
+        "nombre": "Ensalada fresca de atún y quinoa con skyr",
+        "descripcion_breve": "Atún, cebolla morada, morrón asado y espinaca sobre quinoa con aderezo fresco de skyr.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -1346,7 +1346,7 @@
         },
         "ingredientes": [
           {
-            "item": "AtÃºn al natural",
+            "item": "Atún al natural",
             "cantidad": 240,
             "unidad": "g"
           },
@@ -1366,15 +1366,15 @@
             "unidad": "g"
           },
           {
-            "item": "Cebolla morada y morrÃ³n asado",
+            "item": "Cebolla morada y morrón asado",
             "cantidad": 80,
             "unidad": "g"
           }
         ],
         "paso_a_paso": [
-          "Mezclar el skyr con hierbas frescas y un chorrito de limÃ³n.",
+          "Mezclar el skyr con hierbas frescas y un chorrito de limón.",
           "Juntar la quinoa, la espinaca, la cebolla y los morrones.",
-          "Agregar el atÃºn escurrido.",
+          "Agregar el atún escurrido.",
           "Mezclar con la salsa de skyr y servir fresco."
         ]
       }
@@ -1382,8 +1382,8 @@
     {
       "id": "wok-de-carne-y-brocoli",
       "receta": {
-        "nombre": "Wok de carne, brÃ³coli y sÃ©samo/chÃ­a",
-        "descripcion_breve": "Tiras de carne magra salteadas rÃ¡pido con floretes de brÃ³coli y salsa de soja.",
+        "nombre": "Wok de carne, brócoli y sésamo/chía",
+        "descripcion_breve": "Tiras de carne magra salteadas rápido con floretes de brócoli y salsa de soja.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -1399,7 +1399,7 @@
             "unidad": "g"
           },
           {
-            "item": "BrÃ³coli en floretes",
+            "item": "Brócoli en floretes",
             "cantidad": 300,
             "unidad": "g"
           },
@@ -1409,24 +1409,24 @@
             "unidad": "ml"
           },
           {
-            "item": "Semillas de chÃ­a o sÃ©samo",
+            "item": "Semillas de chía o sésamo",
             "cantidad": 8,
             "unidad": "g"
           }
         ],
         "paso_a_paso": [
-          "Saltear la carne a fuego mÃ¡ximo en wok muy caliente.",
-          "Agregar el brÃ³coli previamente blanqueado 2 minutos.",
-          "AÃ±adir la salsa de soja y saltear 2 minutos mÃ¡s.",
-          "Servir espolvoreando con chÃ­a o sÃ©samo."
+          "Saltear la carne a fuego máximo en wok muy caliente.",
+          "Agregar el brócoli previamente blanqueado 2 minutos.",
+          "Añadir la salsa de soja y saltear 2 minutos más.",
+          "Servir espolvoreando con chía o sésamo."
         ]
       }
     },
     {
       "id": "solomillo-cerdo-rodfrugter",
       "receta": {
-        "nombre": "Solomillo de cerdo (SvinemÃ¸rbrad) al horno con rodfrugter",
-        "descripcion_breve": "Solomillo entero asado acompaÃ±ado de vegetales de raÃ­z daneses cortados en bastones.",
+        "nombre": "Solomillo de cerdo (Svinemørbrad) al horno con rodfrugter",
+        "descripcion_breve": "Solomillo entero asado acompañado de vegetales de raíz daneses cortados en bastones.",
         "categoria": "almuerzo/cena",
         "porciones": 3,
         "macros_por_porcion": {
@@ -1437,12 +1437,12 @@
         },
         "ingredientes": [
           {
-            "item": "Solomillo de cerdo (svinemÃ¸rbrad)",
+            "item": "Solomillo de cerdo (svinemørbrad)",
             "cantidad": 500,
             "unidad": "g"
           },
           {
-            "item": "Vegetales de raÃ­z mixtos (rodfrugter: zanahoria, remolacha, pastinak)",
+            "item": "Vegetales de raíz mixtos (rodfrugter: zanahoria, remolacha, pastinak)",
             "cantidad": 450,
             "unidad": "g"
           },
@@ -1458,10 +1458,10 @@
           }
         ],
         "paso_a_paso": [
-          "Cortar las raÃ­ces en bastones gruesos y mezclar con el aceite y hierbas.",
-          "Sellar el solomillo entero en sartÃ©n caliente.",
+          "Cortar las raíces en bastones gruesos y mezclar con el aceite y hierbas.",
+          "Sellar el solomillo entero en sartén caliente.",
           "Disponer el solomillo y los vegetales en una placa de horno.",
-          "Hornear a 200Â°C durante 25 minutos."
+          "Hornear a 200°C durante 25 minutos."
         ]
       }
     },
@@ -1504,15 +1504,15 @@
           "Cortar los zucchinis a lo largo y extraer la pulpa con una cuchara.",
           "Cocinar la carne picada con la cebolla y la pulpa de zucchini picada.",
           "Rellenar las barquitas de zucchini.",
-          "Colocar el queso Havarti Cheasy encima y hornear a 200Â°C por 20 minutos."
+          "Colocar el queso Havarti Cheasy encima y hornear a 200°C por 20 minutos."
         ]
       }
     },
     {
       "id": "boller-karry",
       "receta": {
-        "nombre": "Boller i karry (versiÃ³n fit)",
-        "descripcion_breve": "AlbÃ³ndigas de pechuga de pollo en salsa de curry con leche de coco light, servidas sobre cous cous.",
+        "nombre": "Boller i karry (versión fit)",
+        "descripcion_breve": "Albóndigas de pechuga de pollo en salsa de curry con leche de coco light, servidas sobre cous cous.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -1565,10 +1565,10 @@
         ],
         "paso_a_paso": [
           "Procesar los 400g de pechuga con la mitad de la cebolla y salpimentar.",
-          "Formar albÃ³ndigas medianas y dorarlas superficialmente en una sartÃ©n.",
-          "SofreÃ­r el resto de la cebolla con el curry e incorporar el caldo y la leche de coco light.",
-          "Cocinar las albÃ³ndigas dentro de la salsa a fuego bajo por 15 minutos.",
-          "Hidratar el cous cous con agua hirviendo y servir como base junto con las albÃ³ndigas."
+          "Formar albóndigas medianas y dorarlas superficialmente en una sartén.",
+          "Sofreír el resto de la cebolla con el curry e incorporar el caldo y la leche de coco light.",
+          "Cocinar las albóndigas dentro de la salsa a fuego bajo por 15 minutos.",
+          "Hidratar el cous cous con agua hirviendo y servir como base junto con las albóndigas."
         ]
       }
     },
@@ -1623,8 +1623,8 @@
     {
       "id": "zoodles-a-la-bolonesa",
       "receta": {
-        "nombre": "Fideos de zucchini (Zoodles) a la boloÃ±esa",
-        "descripcion_breve": "Tiras de zucchini salteadas un minuto con salsa boloÃ±esa magra alta en proteÃ­na.",
+        "nombre": "Fideos de zucchini (Zoodles) a la boloñesa",
+        "descripcion_breve": "Tiras de zucchini salteadas un minuto con salsa boloñesa magra alta en proteína.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -1656,18 +1656,18 @@
           }
         ],
         "paso_a_paso": [
-          "Preparar la salsa boloÃ±esa dorando la carne y la cebolla, sumando el tomate.",
+          "Preparar la salsa boloñesa dorando la carne y la cebolla, sumando el tomate.",
           "Hacer los zoodles con un espiralizador.",
           "Saltear los zoodles solo 1 minuto a fuego fuerte para que queden al dente.",
-          "Servir con la boloÃ±esa bien caliente por encima."
+          "Servir con la boloñesa bien caliente por encima."
         ]
       }
     },
     {
       "id": "kalroulader",
       "receta": {
-        "nombre": "KÃ¥lroulader (NiÃ±os envueltos en spidskÃ¥l)",
-        "descripcion_breve": "Hojas de repollo spidskÃ¥l blanqueadas y rellenas de carne picada cocinadas en salsa de tomate.",
+        "nombre": "Kålroulader (Niños envueltos en spidskål)",
+        "descripcion_breve": "Hojas de repollo spidskål blanqueadas y rellenas de carne picada cocinadas en salsa de tomate.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -1678,7 +1678,7 @@
         },
         "ingredientes": [
           {
-            "item": "Hojas grandes de spidskÃ¥l",
+            "item": "Hojas grandes de spidskål",
             "cantidad": 6,
             "unidad": "unidad"
           },
@@ -1699,18 +1699,18 @@
           }
         ],
         "paso_a_paso": [
-          "Blanquear las hojas de spidskÃ¥l en agua hirviendo 2 minutos.",
+          "Blanquear las hojas de spidskål en agua hirviendo 2 minutos.",
           "Mezclar la carne cruda con cebolla, sal y pimienta.",
           "Envolver porciones de carne con las hojas de repollo.",
-          "Colocar en fuente con salsa de tomate y hornear 30 min a 190Â°C."
+          "Colocar en fuente con salsa de tomate y hornear 30 min a 190°C."
         ]
       }
     },
     {
       "id": "wok-pollo-esparragos-couscous",
       "receta": {
-        "nombre": "Wok de pollo, espÃ¡rragos y cous cous",
-        "descripcion_breve": "Pollo dorado con espÃ¡rragos y vegetas mezclados con una porciÃ³n justa de cous cous.",
+        "nombre": "Wok de pollo, espárragos y cous cous",
+        "descripcion_breve": "Pollo dorado con espárragos y vegetas mezclados con una porción justa de cous cous.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -1726,12 +1726,12 @@
             "unidad": "g"
           },
           {
-            "item": "EspÃ¡rragos frescos cortados",
+            "item": "Espárragos frescos cortados",
             "cantidad": 200,
             "unidad": "g"
           },
           {
-            "item": "Cebolla y morrÃ³n",
+            "item": "Cebolla y morrón",
             "cantidad": 100,
             "unidad": "g"
           },
@@ -1743,7 +1743,7 @@
         ],
         "paso_a_paso": [
           "Dorar las tiras de pollo en el wok.",
-          "Agregar los espÃ¡rragos, cebolla y morrÃ³n hasta saltear al dente.",
+          "Agregar los espárragos, cebolla y morrón hasta saltear al dente.",
           "Hidratar el cous cous con caldo hirviendo por 5 minutos.",
           "Integrar el cous cous desgranado al wok antes de servir."
         ]
@@ -1752,8 +1752,8 @@
     {
       "id": "medallones-atun-airfryer",
       "receta": {
-        "nombre": "Medallones de atÃºn a la airfryer",
-        "descripcion_breve": "Hamburguesas de atÃºn, huevo, cebolla y un toque de avena, acompaÃ±adas de purÃ© de calabaza y brÃ³coli.",
+        "nombre": "Medallones de atún a la airfryer",
+        "descripcion_breve": "Hamburguesas de atún, huevo, cebolla y un toque de avena, acompañadas de puré de calabaza y brócoli.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -1764,7 +1764,7 @@
         },
         "ingredientes": [
           {
-            "item": "AtÃºn al natural",
+            "item": "Atún al natural",
             "cantidad": 280,
             "unidad": "g"
           },
@@ -1779,24 +1779,24 @@
             "unidad": "g"
           },
           {
-            "item": "Calabaza y brÃ³coli (para purÃ©)",
+            "item": "Calabaza y brócoli (para puré)",
             "cantidad": 300,
             "unidad": "g"
           }
         ],
         "paso_a_paso": [
-          "Mezclar el atÃºn con el huevo, la avena y cebolla picada.",
-          "Formar medallones y cocinar en freidora de aire a 190Â°C por 12 minutos.",
-          "Hacer un purÃ© mixto de calabaza y brÃ³coli hirviÃ©ndolos.",
-          "Servir los medallones con el purÃ© al costado."
+          "Mezclar el atún con el huevo, la avena y cebolla picada.",
+          "Formar medallones y cocinar en freidora de aire a 190°C por 12 minutos.",
+          "Hacer un puré mixto de calabaza y brócoli hirviéndolos.",
+          "Servir los medallones con el puré al costado."
         ]
       }
     },
     {
       "id": "tarta-sin-masa-esparragos-puerro",
       "receta": {
-        "nombre": "Tarta sin masa de espÃ¡rragos y puerro",
-        "descripcion_breve": "Mezcla liviana de huevos, claras, hytteost, espÃ¡rragos y puerro salteado al horno.",
+        "nombre": "Tarta sin masa de espárragos y puerro",
+        "descripcion_breve": "Mezcla liviana de huevos, claras, hytteost, espárragos y puerro salteado al horno.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -1807,7 +1807,7 @@
         },
         "ingredientes": [
           {
-            "item": "EspÃ¡rragos frescos",
+            "item": "Espárragos frescos",
             "cantidad": 200,
             "unidad": "g"
           },
@@ -1833,18 +1833,18 @@
           }
         ],
         "paso_a_paso": [
-          "Saltear el puerro y los espÃ¡rragos troceados.",
+          "Saltear el puerro y los espárragos troceados.",
           "Batir los huevos, claras y hytteost.",
           "Mezclar las verduras con el batido proteico.",
-          "Volcar en tartera antiadherente y hornear 25 minutos a 180Â°C."
+          "Volcar en tartera antiadherente y hornear 25 minutos a 180°C."
         ]
       }
     },
     {
       "id": "pollo-mostaza-repollitos-bruselas",
       "receta": {
-        "nombre": "Pollo a la mostaza con repollitos de Bruselas (rosenkÃ¥l)",
-        "descripcion_breve": "Pechugas doradas a la mostaza acompaÃ±adas de repollitos de Bruselas crujientes hechos en la Ninja.",
+        "nombre": "Pollo a la mostaza con repollitos de Bruselas (rosenkål)",
+        "descripcion_breve": "Pechugas doradas a la mostaza acompañadas de repollitos de Bruselas crujientes hechos en la Ninja.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -1860,7 +1860,7 @@
             "unidad": "g"
           },
           {
-            "item": "Repollitos de Bruselas (rosenkÃ¥l)",
+            "item": "Repollitos de Bruselas (rosenkål)",
             "cantidad": 250,
             "unidad": "g"
           },
@@ -1876,10 +1876,10 @@
           }
         ],
         "paso_a_paso": [
-          "Cortar los rosenkÃ¥l a la mitad y dorar en la Airfryer a 190Â°C por 12 min.",
-          "Dorar la pechuga en sartÃ©n, agregar la mostaza y el caldo.",
+          "Cortar los rosenkål a la mitad y dorar en la Airfryer a 190°C por 12 min.",
+          "Dorar la pechuga en sartén, agregar la mostaza y el caldo.",
           "Cocinar 10 minutos hasta reducir.",
-          "Servir el pollo baÃ±ado con la salsa y los repollitos crocantes."
+          "Servir el pollo bañado con la salsa y los repollitos crocantes."
         ]
       }
     },
@@ -1887,7 +1887,7 @@
       "id": "pastel-carne-base-coliflor",
       "receta": {
         "nombre": "Pastel de carne con cobertura de coliflor y hytteost",
-        "descripcion_breve": "Carne picada magra con sofrito, cubierta con un purÃ© cremoso de coliflor y hytteost gratinado.",
+        "descripcion_breve": "Carne picada magra con sofrito, cubierta con un puré cremoso de coliflor y hytteost gratinado.",
         "categoria": "almuerzo/cena",
         "porciones": 3,
         "macros_por_porcion": {
@@ -1913,24 +1913,24 @@
             "unidad": "g"
           },
           {
-            "item": "Cebolla y morrÃ³n",
+            "item": "Cebolla y morrón",
             "cantidad": 150,
             "unidad": "g"
           }
         ],
         "paso_a_paso": [
-          "Cocinar la carne picada con cebolla y morrÃ³n.",
-          "Hervir la coliflor y procesar caliente con el hytteost hasta formar purÃ©.",
-          "Colocar la carne en fuente, cubrir con el purÃ© de coliflor.",
-          "Gratinar al horno 15 minutos a 200Â°C."
+          "Cocinar la carne picada con cebolla y morrón.",
+          "Hervir la coliflor y procesar caliente con el hytteost hasta formar puré.",
+          "Colocar la carne en fuente, cubrir con el puré de coliflor.",
+          "Gratinar al horno 15 minutos a 200°C."
         ]
       }
     },
     {
       "id": "rollitos-carne-esparragos",
       "receta": {
-        "nombre": "Rollitos de carne y espÃ¡rragos",
-        "descripcion_breve": "EspÃ¡rragos enteros envueltos en bifes ultra finos de ternera, sellados a la plancha.",
+        "nombre": "Rollitos de carne y espárragos",
+        "descripcion_breve": "Espárragos enteros envueltos en bifes ultra finos de ternera, sellados a la plancha.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -1946,7 +1946,7 @@
             "unidad": "g"
           },
           {
-            "item": "EspÃ¡rragos frescos",
+            "item": "Espárragos frescos",
             "cantidad": 200,
             "unidad": "g"
           },
@@ -1957,8 +1957,8 @@
           }
         ],
         "paso_a_paso": [
-          "Blanquear los espÃ¡rragos 2 minutos en agua hirviendo.",
-          "Envolver pequeÃ±os manojos de espÃ¡rragos con cada bife fino.",
+          "Blanquear los espárragos 2 minutos en agua hirviendo.",
+          "Envolver pequeños manojos de espárragos con cada bife fino.",
           "Dorar a la plancha a fuego medio-alto girando 6-8 minutos.",
           "Pincelar con un toque de salsa de soja al finalizar."
         ]
@@ -1968,7 +1968,7 @@
       "id": "cazuela-al-horno-pollo-vegetales",
       "receta": {
         "nombre": "Cazuela al horno (Fad) de pollo y vegetales",
-        "descripcion_breve": "Cubos de pollo, brÃ³coli, morrÃ³n y cebolla horneados con ligue de huevos y leche.",
+        "descripcion_breve": "Cubos de pollo, brócoli, morrón y cebolla horneados con ligue de huevos y leche.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -1984,7 +1984,7 @@
             "unidad": "g"
           },
           {
-            "item": "BrÃ³coli, morrÃ³n y cebolla",
+            "item": "Brócoli, morrón y cebolla",
             "cantidad": 250,
             "unidad": "g"
           },
@@ -2003,15 +2003,15 @@
           "Acomodar los cubos de pollo crudo y los vegetales en una fuente de horno.",
           "Batir los huevos con la leche, sal y condimentos.",
           "Volcar el batido sobre la fuente.",
-          "Hornear a 190Â°C durante 30 minutos."
+          "Hornear a 190°C durante 30 minutos."
         ]
       }
     },
     {
       "id": "solomillo-cerdo-pure-manzana",
       "receta": {
-        "nombre": "Solomillo de cerdo con purÃ© de manzana sin azÃºcar",
-        "descripcion_breve": "Rodajas de svinemÃ¸rbrad a la plancha acompaÃ±adas de purÃ© casero de manzana verde y cebolla.",
+        "nombre": "Solomillo de cerdo con puré de manzana sin azúcar",
+        "descripcion_breve": "Rodajas de svinemørbrad a la plancha acompañadas de puré casero de manzana verde y cebolla.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -2022,7 +2022,7 @@
         },
         "ingredientes": [
           {
-            "item": "Solomillo de cerdo (svinemÃ¸rbrad)",
+            "item": "Solomillo de cerdo (svinemørbrad)",
             "cantidad": 380,
             "unidad": "g"
           },
@@ -2041,15 +2041,15 @@
           "Cocinar la manzana con la cebolla y un chorrito de agua hasta ablandar y pisar.",
           "Cortar el solomillo en medallones gruesos.",
           "Dorar los medallones a la plancha a fuego alto por ambos lados.",
-          "Servir la carne jugosa junto al purÃ© de manzana."
+          "Servir la carne jugosa junto al puré de manzana."
         ]
       }
     },
     {
       "id": "lasana-de-zucchini",
       "receta": {
-        "nombre": "LasaÃ±a de zucchini con boloÃ±esa y crema de hytteost",
-        "descripcion_breve": "LÃ¡minas de zucchini intercaladas con boloÃ±esa magra y una 'salsa blanca' procesada de hytteost.",
+        "nombre": "Lasaña de zucchini con boloñesa y crema de hytteost",
+        "descripcion_breve": "Láminas de zucchini intercaladas con boloñesa magra y una 'salsa blanca' procesada de hytteost.",
         "categoria": "almuerzo/cena",
         "porciones": 3,
         "macros_por_porcion": {
@@ -2081,10 +2081,10 @@
           }
         ],
         "paso_a_paso": [
-          "Grillar ligeramente las lÃ¡minas de zucchini para quitar exceso de agua.",
-          "Preparar la boloÃ±esa reducida con la carne y salsa de tomate.",
+          "Grillar ligeramente las láminas de zucchini para quitar exceso de agua.",
+          "Preparar la boloñesa reducida con la carne y salsa de tomate.",
           "Licuar el hytteost con sal y nuez moscada.",
-          "Armar capas en molde: zucchini, boloÃ±esa, crema de hytteost y hornear 25 min."
+          "Armar capas en molde: zucchini, boloñesa, crema de hytteost y hornear 25 min."
         ]
       }
     },
@@ -2124,9 +2124,9 @@
           }
         ],
         "paso_a_paso": [
-          "Dorar el pollo en una olla y aÃ±adir la calabaza.",
-          "Agregar el caldo, tapar y cocinar hasta que la calabaza estÃ© tierna y deshacha.",
-          "Incorporar la espinaca fresca a Ãºltimo momento y revolver hasta marchitar.",
+          "Dorar el pollo en una olla y añadir la calabaza.",
+          "Agregar el caldo, tapar y cocinar hasta que la calabaza esté tierna y deshacha.",
+          "Incorporar la espinaca fresca a último momento y revolver hasta marchitar.",
           "Servir caliente."
         ]
       }
@@ -2135,7 +2135,7 @@
       "id": "frikadeller-fit-repollo-colorado",
       "receta": {
         "nombre": "Frikadeller fit con repollo colorado casero",
-        "descripcion_breve": "AlbÃ³ndigas danesas magras al horno con repollo colorado caliente (rÃ¸dkÃ¥l).",
+        "descripcion_breve": "Albóndigas danesas magras al horno con repollo colorado caliente (rødkål).",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -2156,29 +2156,29 @@
             "unidad": "g"
           },
           {
-            "item": "Repollo colorado (rÃ¸dkÃ¥l) en juliana",
+            "item": "Repollo colorado (rødkål) en juliana",
             "cantidad": 200,
             "unidad": "g"
           },
           {
-            "item": "Vinagre y edulcorante (para el rÃ¸dkÃ¥l)",
+            "item": "Vinagre y edulcorante (para el rødkål)",
             "cantidad": 15,
             "unidad": "ml"
           }
         ],
         "paso_a_paso": [
-          "Formar las frikadeller con carne, cebolla y sazÃ³n.",
-          "Hornear a 200Â°C por 20 minutos.",
+          "Formar las frikadeller con carne, cebolla y sazón.",
+          "Hornear a 200°C por 20 minutos.",
           "Cocinar el repollo colorado a fuego lento con vinagre, clavo de olor y edulcorante.",
-          "Servir las frikadeller acompaÃ±adas del rÃ¸dkÃ¥l caliente."
+          "Servir las frikadeller acompañadas del rødkål caliente."
         ]
       }
     },
     {
       "id": "tomates-rellenos-al-horno",
       "receta": {
-        "nombre": "Tomates rellenos al horno con cous cous y atÃºn",
-        "descripcion_breve": "Tomates ahuecados rellenos con cous cous, cebolla asada y atÃºn, calentados en Ninja.",
+        "nombre": "Tomates rellenos al horno con cous cous y atún",
+        "descripcion_breve": "Tomates ahuecados rellenos con cous cous, cebolla asada y atún, calentados en Ninja.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -2194,7 +2194,7 @@
             "unidad": "unidad"
           },
           {
-            "item": "AtÃºn al natural",
+            "item": "Atún al natural",
             "cantidad": 200,
             "unidad": "g"
           },
@@ -2211,9 +2211,9 @@
         ],
         "paso_a_paso": [
           "Ahuecar los tomates retirando el centro.",
-          "Mezclar el cous cous con el atÃºn y la cebolla asada.",
+          "Mezclar el cous cous con el atún y la cebolla asada.",
           "Rellenar los tomates firmemente.",
-          "Llevar a la Ninja / Airfryer a 180Â°C durante 10 minutos."
+          "Llevar a la Ninja / Airfryer a 180°C durante 10 minutos."
         ]
       }
     },
@@ -2221,7 +2221,7 @@
       "id": "bifes-criolla-con-zapallitos",
       "receta": {
         "nombre": "Bifes a la criolla con zucchinis",
-        "descripcion_breve": "Carne magra en cacerola con cebolla, morrÃ³n, tomate y zucchinis gruesos en lugar de papas.",
+        "descripcion_breve": "Carne magra en cacerola con cebolla, morrón, tomate y zucchinis gruesos en lugar de papas.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -2242,19 +2242,19 @@
             "unidad": "g"
           },
           {
-            "item": "Cebolla y morrÃ³n",
+            "item": "Cebolla y morrón",
             "cantidad": 150,
             "unidad": "g"
           },
           {
-            "item": "PurÃ© de tomate",
+            "item": "Puré de tomate",
             "cantidad": 150,
             "unidad": "g"
           }
         ],
         "paso_a_paso": [
-          "Colocar capas de carne, cebolla, morrÃ³n y rodajas gruesas de zucchini en una cacerola.",
-          "BaÃ±ar con el purÃ© de tomate condimentado.",
+          "Colocar capas de carne, cebolla, morrón y rodajas gruesas de zucchini en una cacerola.",
+          "Bañar con el puré de tomate condimentado.",
           "Tapar y cocinar 25 minutos a fuego medio.",
           "Servir caliente."
         ]
@@ -2275,7 +2275,7 @@
         },
         "ingredientes": [
           {
-            "item": "Carne magra en cubitos pequeÃ±os",
+            "item": "Carne magra en cubitos pequeños",
             "cantidad": 450,
             "unidad": "g"
           },
@@ -2285,7 +2285,7 @@
             "unidad": "g"
           },
           {
-            "item": "Cebolla, morrÃ³n y zanahoria",
+            "item": "Cebolla, morrón y zanahoria",
             "cantidad": 200,
             "unidad": "g"
           },
@@ -2296,9 +2296,9 @@
           }
         ],
         "paso_a_paso": [
-          "Dorar la carne cortada a cuchillo y sofreÃ­r los vegetales en la misma cacerola.",
-          "AÃ±adir la quinoa y cubrir con caldo hirviendo.",
-          "Cocinar a fuego bajo durante 20 minutos hasta que la quinoa estÃ© tierna.",
+          "Dorar la carne cortada a cuchillo y sofreír los vegetales en la misma cacerola.",
+          "Añadir la quinoa y cubrir con caldo hirviendo.",
+          "Cocinar a fuego bajo durante 20 minutos hasta que la quinoa esté tierna.",
           "Servir bien espeso."
         ]
       }
@@ -2306,8 +2306,8 @@
     {
       "id": "pechuga-rellena-esparragos-havarti",
       "receta": {
-        "nombre": "Pechuga rellena de espÃ¡rragos y Havarti",
-        "descripcion_breve": "Pechugas abiertas con espÃ¡rragos crudos y feta de queso Havarti, horneadas.",
+        "nombre": "Pechuga rellena de espárragos y Havarti",
+        "descripcion_breve": "Pechugas abiertas con espárragos crudos y feta de queso Havarti, horneadas.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -2323,7 +2323,7 @@
             "unidad": "g"
           },
           {
-            "item": "EspÃ¡rragos frescos",
+            "item": "Espárragos frescos",
             "cantidad": 120,
             "unidad": "g"
           },
@@ -2335,17 +2335,17 @@
         ],
         "paso_a_paso": [
           "Hacer un corte longitudinal en las pechugas para formar un bolsillo.",
-          "Introducir los espÃ¡rragos y la feta de Havarti dentro de cada pechuga.",
+          "Introducir los espárragos y la feta de Havarti dentro de cada pechuga.",
           "Cerrar con escarbadientes.",
-          "Hornear a 200Â°C durante 20 minutos."
+          "Hornear a 200°C durante 20 minutos."
         ]
       }
     },
     {
       "id": "tortilla-al-reves-espinaca-zucchini",
       "receta": {
-        "nombre": "Tortilla al revÃ©s de espinaca y zucchini",
-        "descripcion_breve": "Zucchinis en rodajas y espinaca hechos a la sartÃ©n con abundante claras y huevos.",
+        "nombre": "Tortilla al revés de espinaca y zucchini",
+        "descripcion_breve": "Zucchinis en rodajas y espinaca hechos a la sartén con abundante claras y huevos.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -2377,18 +2377,18 @@
           }
         ],
         "paso_a_paso": [
-          "Cocinar los zucchinis y la espinaca en la sartÃ©n hasta ablandar.",
+          "Cocinar los zucchinis y la espinaca en la sartén hasta ablandar.",
           "Batir los huevos y claras con sal y pimienta.",
           "Volcar la mezcla sobre las verduras.",
-          "Cocinar tapado a fuego lento, dar la vuelta y dorar 2 minutos mÃ¡s."
+          "Cocinar tapado a fuego lento, dar la vuelta y dorar 2 minutos más."
         ]
       }
     },
     {
       "id": "estofado-rapido-fideos-arroz-cerdo",
       "receta": {
-        "nombre": "Estofado rÃ¡pido de fideos de arroz y cerdo",
-        "descripcion_breve": "Tiras de cerdo magro y vegetales en sopa/caldo asiÃ¡tico con fideos de arroz.",
+        "nombre": "Estofado rápido de fideos de arroz y cerdo",
+        "descripcion_breve": "Tiras de cerdo magro y vegetales en sopa/caldo asiático con fideos de arroz.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -2409,7 +2409,7 @@
             "unidad": "g"
           },
           {
-            "item": "Vegetales asiÃ¡ticos o mix de puerro y morrÃ³n",
+            "item": "Vegetales asiáticos o mix de puerro y morrón",
             "cantidad": 150,
             "unidad": "g"
           },
@@ -2421,7 +2421,7 @@
         ],
         "paso_a_paso": [
           "Saltear el cerdo y los vegetales en una olla profunda.",
-          "AÃ±adir el caldo sazonado con soja y jengibre hasta hervir.",
+          "Añadir el caldo sazonado con soja y jengibre hasta hervir.",
           "Sumar los fideos de arroz y apagar el fuego.",
           "Dejar reposar 3 minutos tapado y servir."
         ]
@@ -2431,7 +2431,7 @@
       "id": "cous-cous-especiado-pollo",
       "receta": {
         "nombre": "Cous cous especiado con pollo desmenuzado",
-        "descripcion_breve": "Pollo desmenuzado con cous cous caliente, cÃºrcuma, cebolla pochada y chÃ­a.",
+        "descripcion_breve": "Pollo desmenuzado con cous cous caliente, cúrcuma, cebolla pochada y chía.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -2457,23 +2457,23 @@
             "unidad": "g"
           },
           {
-            "item": "CÃºrcuma y chÃ­a",
+            "item": "Cúrcuma y chía",
             "cantidad": 8,
             "unidad": "g"
           }
         ],
         "paso_a_paso": [
-          "Hidratar el cous cous con caldo hirviendo y cÃºrcuma.",
+          "Hidratar el cous cous con caldo hirviendo y cúrcuma.",
           "Mezclar el cous cous con el pollo desmenuzado caliente y cebolla pochada.",
-          "Servir inmediatamente espolvoreando con semillas de chÃ­a."
+          "Servir inmediatamente espolvoreando con semillas de chía."
         ]
       }
     },
     {
       "id": "milanesas-de-cerdo-al-horno",
       "receta": {
-        "nombre": "Milanesas de cerdo al horno con purÃ© de calabaza",
-        "descripcion_breve": "Milanesas finas cortadas de solomillo con empanado liviano, servidas con purÃ© de calabaza.",
+        "nombre": "Milanesas de cerdo al horno con puré de calabaza",
+        "descripcion_breve": "Milanesas finas cortadas de solomillo con empanado liviano, servidas con puré de calabaza.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -2499,24 +2499,24 @@
             "unidad": "unidad"
           },
           {
-            "item": "Calabaza para purÃ©",
+            "item": "Calabaza para puré",
             "cantidad": 300,
             "unidad": "g"
           }
         ],
         "paso_a_paso": [
           "Pasar los filetes de solomillo por huevo y luego por el empanado integral.",
-          "Hornea a 210Â°C por 12-15 minutos.",
-          "Hacer purÃ© de calabaza hervida o al vapor.",
-          "Servir las milanesas crocantes con el purÃ© de calabaza."
+          "Hornea a 210°C por 12-15 minutos.",
+          "Hacer puré de calabaza hervida o al vapor.",
+          "Servir las milanesas crocantes con el puré de calabaza."
         ]
       }
     },
     {
       "id": "pollo-batata-asado",
       "receta": {
-        "nombre": "Pollo al horno con batata y pimentÃ³n",
-        "descripcion_breve": "Muslos de pollo al horno con batata asada y pimentÃ³n ahumado. Reconfortante, alto en proteÃ­na y sin complicaciones.",
+        "nombre": "Pollo al horno con batata y pimentón",
+        "descripcion_breve": "Muslos de pollo al horno con batata asada y pimentón ahumado. Reconfortante, alto en proteína y sin complicaciones.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -2537,7 +2537,7 @@
             "unidad": "g"
           },
           {
-            "item": "PimentÃ³n ahumado",
+            "item": "Pimentón ahumado",
             "cantidad": 8,
             "unidad": "g"
           },
@@ -2563,11 +2563,11 @@
           }
         ],
         "paso_a_paso": [
-          "Precalentar el horno a 200Â°C.",
+          "Precalentar el horno a 200°C.",
           "Pelar y cortar la batata en cubos de 2cm. Mezclar con 5ml de aceite, sal y ajo en polvo.",
-          "Adobar los muslos con el pimentÃ³n ahumado, pimienta y el aceite restante.",
+          "Adobar los muslos con el pimentón ahumado, pimienta y el aceite restante.",
           "Disponer todo en una bandeja. Primero la batata; a los 10 minutos incorporar el pollo.",
-          "Hornear 35-40 minutos hasta que el pollo estÃ© dorado y la batata tierna.",
+          "Hornear 35-40 minutos hasta que el pollo esté dorado y la batata tierna.",
           "Servir caliente."
         ]
       }
@@ -2575,8 +2575,8 @@
     {
       "id": "salmon-quinoa",
       "receta": {
-        "nombre": "SalmÃ³n con quinoa y espinacas salteadas",
-        "descripcion_breve": "Filete de salmÃ³n a la plancha sobre cama de quinoa con espinacas salteadas al ajo. Rico en omega-3 y proteÃ­nas completas.",
+        "nombre": "Salmón con quinoa y espinacas salteadas",
+        "descripcion_breve": "Filete de salmón a la plancha sobre cama de quinoa con espinacas salteadas al ajo. Rico en omega-3 y proteínas completas.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -2587,7 +2587,7 @@
         },
         "ingredientes": [
           {
-            "item": "Filete de salmÃ³n",
+            "item": "Filete de salmón",
             "cantidad": 400,
             "unidad": "g"
           },
@@ -2612,7 +2612,7 @@
             "unidad": "ml"
           },
           {
-            "item": "LimÃ³n",
+            "item": "Limón",
             "cantidad": 1,
             "unidad": "unidad"
           },
@@ -2624,9 +2624,9 @@
         ],
         "paso_a_paso": [
           "Cocinar la quinoa en 240ml de agua con sal durante 15 minutos. Reposar tapada 5 minutos.",
-          "Calentar una plancha o sartÃ©n con 5ml de aceite. Salpimentar el salmÃ³n y cocinar 4 minutos por lado.",
-          "En otra sartÃ©n, dorar el ajo laminado en el aceite restante. Agregar las espinacas y saltear 2 minutos.",
-          "Servir la quinoa como base, colocar las espinacas y el salmÃ³n. Exprimir limÃ³n al gusto."
+          "Calentar una plancha o sartén con 5ml de aceite. Salpimentar el salmón y cocinar 4 minutos por lado.",
+          "En otra sartén, dorar el ajo laminado en el aceite restante. Agregar las espinacas y saltear 2 minutos.",
+          "Servir la quinoa como base, colocar las espinacas y el salmón. Exprimir limón al gusto."
         ]
       }
     },
@@ -2634,7 +2634,7 @@
       "id": "omelette-claras",
       "receta": {
         "nombre": "Omelette de claras con vegetales",
-        "descripcion_breve": "Omelette proteico hecho con claras de huevo, champiÃ±ones, pimiento rojo y queso fresco. Ideal para desayuno o cena liviana.",
+        "descripcion_breve": "Omelette proteico hecho con claras de huevo, champiñones, pimiento rojo y queso fresco. Ideal para desayuno o cena liviana.",
         "categoria": "desayuno/cena liviana",
         "porciones": 1,
         "macros_por_porcion": {
@@ -2650,7 +2650,7 @@
             "unidad": "unidades"
           },
           {
-            "item": "ChampiÃ±ones",
+            "item": "Champiñones",
             "cantidad": 80,
             "unidad": "g"
           },
@@ -2676,19 +2676,19 @@
           }
         ],
         "paso_a_paso": [
-          "Batir las claras con una pizca de sal hasta que estÃ©n ligeramente espumosas.",
-          "Saltear los champiÃ±ones y el pimiento en el aceite durante 3 minutos.",
-          "Verter las claras sobre los vegetales en la sartÃ©n a fuego medio-bajo.",
-          "Cuando los bordes estÃ©n cuajados, agregar el queso fresco y doblar el omelette.",
-          "Cocinar 1 minuto mÃ¡s y servir."
+          "Batir las claras con una pizca de sal hasta que estén ligeramente espumosas.",
+          "Saltear los champiñones y el pimiento en el aceite durante 3 minutos.",
+          "Verter las claras sobre los vegetales en la sartén a fuego medio-bajo.",
+          "Cuando los bordes estén cuajados, agregar el queso fresco y doblar el omelette.",
+          "Cocinar 1 minuto más y servir."
         ]
       }
     },
     {
       "id": "bowl-atun-arroz",
       "receta": {
-        "nombre": "Bowl de atÃºn con arroz integral",
-        "descripcion_breve": "Bowl rÃ¡pido y nutritivo con atÃºn al natural, arroz integral, edamame y pepino. Sin cocciÃ³n de proteÃ­na necesaria.",
+        "nombre": "Bowl de atún con arroz integral",
+        "descripcion_breve": "Bowl rápido y nutritivo con atún al natural, arroz integral, edamame y pepino. Sin cocción de proteína necesaria.",
         "categoria": "almuerzo/cena",
         "porciones": 1,
         "macros_por_porcion": {
@@ -2699,7 +2699,7 @@
         },
         "ingredientes": [
           {
-            "item": "AtÃºn al natural en lata",
+            "item": "Atún al natural en lata",
             "cantidad": 160,
             "unidad": "g"
           },
@@ -2724,22 +2724,22 @@
             "unidad": "ml"
           },
           {
-            "item": "Aceite de sÃ©samo",
+            "item": "Aceite de sésamo",
             "cantidad": 5,
             "unidad": "ml"
           },
           {
-            "item": "Semillas de sÃ©samo",
+            "item": "Semillas de sésamo",
             "cantidad": 5,
             "unidad": "g"
           }
         ],
         "paso_a_paso": [
           "Colocar el arroz integral cocido como base del bowl.",
-          "Escurrir el atÃºn y disponerlo sobre el arroz.",
+          "Escurrir el atún y disponerlo sobre el arroz.",
           "Agregar el edamame y el pepino cortado en rodajas.",
-          "Mezclar la salsa de soja con el aceite de sÃ©samo y verter sobre el bowl.",
-          "Terminar con semillas de sÃ©samo."
+          "Mezclar la salsa de soja con el aceite de sésamo y verter sobre el bowl.",
+          "Terminar con semillas de sésamo."
         ]
       }
     },
@@ -2747,7 +2747,7 @@
       "id": "lentejas-espinacas",
       "receta": {
         "nombre": "Lentejas con espinacas y huevo pochado",
-        "descripcion_breve": "Lentejas cocidas con espinacas frescas y coronadas con un huevo pochado. Plato vegetariano completo con hierro y proteÃ­na.",
+        "descripcion_breve": "Lentejas cocidas con espinacas frescas y coronadas con un huevo pochado. Plato vegetariano completo con hierro y proteína.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -2804,7 +2804,7 @@
           }
         ],
         "paso_a_paso": [
-          "SofreÃ­r la cebolla y el ajo en aceite de oliva hasta transparentar.",
+          "Sofreír la cebolla y el ajo en aceite de oliva hasta transparentar.",
           "Agregar el comino y las lentejas cocidas. Mezclar y calentar 5 minutos.",
           "Incorporar las espinacas y cocinar hasta que se marchiten.",
           "Para el huevo pochado: hervir agua con vinagre, crear un remolino y depositar el huevo 3 minutos.",
@@ -2815,8 +2815,8 @@
     {
       "id": "pollo-brocoli-sweet-potato",
       "receta": {
-        "nombre": "Pechugas de pollo con brÃ³coli y purÃ© de batata",
-        "descripcion_breve": "El clÃ¡sico fit. Pechuga de pollo a la plancha, brÃ³coli al vapor y purÃ© de batata. Simple, efectivo y muy nutritivo.",
+        "nombre": "Pechugas de pollo con brócoli y puré de batata",
+        "descripcion_breve": "El clásico fit. Pechuga de pollo a la plancha, brócoli al vapor y puré de batata. Simple, efectivo y muy nutritivo.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -2832,7 +2832,7 @@
             "unidad": "g"
           },
           {
-            "item": "BrÃ³coli",
+            "item": "Brócoli",
             "cantidad": 300,
             "unidad": "g"
           },
@@ -2859,9 +2859,9 @@
         ],
         "paso_a_paso": [
           "Hervir la batata pelada hasta tierna (20 min). Pisarla con sal y una pizca de aceite.",
-          "Cocinar el brÃ³coli al vapor o hervido 5-7 minutos. Salpimentar.",
+          "Cocinar el brócoli al vapor o hervido 5-7 minutos. Salpimentar.",
           "Adobar las pechugas con ajo en polvo, sal y pimienta. Cocinar a la plancha 5-6 min por lado.",
-          "Servir con el purÃ© de batata y el brÃ³coli."
+          "Servir con el puré de batata y el brócoli."
         ]
       }
     },
@@ -2869,7 +2869,7 @@
       "id": "pasta-pavo",
       "receta": {
         "nombre": "Pasta integral con salsa de pavo y tomate",
-        "descripcion_breve": "Pasta integral con salsa boloÃ±esa de pavo magro. Alta en proteÃ­nas y carbohidratos complejos, ideal post-entrenamiento.",
+        "descripcion_breve": "Pasta integral con salsa boloñesa de pavo magro. Alta en proteínas y carbohidratos complejos, ideal post-entrenamiento.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -2905,7 +2905,7 @@
             "unidad": "dientes"
           },
           {
-            "item": "OrÃ©gano",
+            "item": "Orégano",
             "cantidad": 4,
             "unidad": "g"
           },
@@ -2921,10 +2921,10 @@
           }
         ],
         "paso_a_paso": [
-          "SofreÃ­r la cebolla y ajo en aceite hasta dorar.",
+          "Sofreír la cebolla y ajo en aceite hasta dorar.",
           "Agregar el pavo molido y cocinar hasta que cambie de color, desmenuzando bien.",
-          "Incorporar el tomate triturado y orÃ©gano. Cocinar a fuego bajo 20 minutos.",
-          "Cocinar la pasta al dente segÃºn indicaciones del paquete.",
+          "Incorporar el tomate triturado y orégano. Cocinar a fuego bajo 20 minutos.",
+          "Cocinar la pasta al dente según indicaciones del paquete.",
           "Servir la pasta con la salsa encima."
         ]
       }
@@ -2933,7 +2933,7 @@
       "id": "wok-pollo-vegetales",
       "receta": {
         "nombre": "Wok de pollo con vegetales y salsa de ostras",
-        "descripcion_breve": "Salteado rÃ¡pido de tiras de pollo con zanahorias, morrones y arvejas en salsa de ostras. Listo en 20 minutos.",
+        "descripcion_breve": "Salteado rápido de tiras de pollo con zanahorias, morrones y arvejas en salsa de ostras. Listo en 20 minutos.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -2954,7 +2954,7 @@
             "unidad": "g"
           },
           {
-            "item": "MorrÃ³n rojo",
+            "item": "Morrón rojo",
             "cantidad": 100,
             "unidad": "g"
           },
@@ -2979,16 +2979,16 @@
             "unidad": "g"
           },
           {
-            "item": "Aceite de sÃ©samo",
+            "item": "Aceite de sésamo",
             "cantidad": 10,
             "unidad": "ml"
           }
         ],
         "paso_a_paso": [
-          "Calentar el wok o sartÃ©n grande a fuego muy alto con el aceite de sÃ©samo.",
+          "Calentar el wok o sartén grande a fuego muy alto con el aceite de sésamo.",
           "Saltear el pollo en tiras 3-4 minutos hasta dorado. Retirar.",
           "Saltear los vegetales 3 minutos. Agregar el jengibre rallado.",
-          "Devolver el pollo, agregar la salsa de ostras y soja. Saltear 2 minutos mÃ¡s.",
+          "Devolver el pollo, agregar la salsa de ostras y soja. Saltear 2 minutos más.",
           "Servir solo o sobre arroz blanco."
         ]
       }
@@ -2996,8 +2996,8 @@
     {
       "id": "tortilla-espanola-fit",
       "receta": {
-        "nombre": "Tortilla espaÃ±ola fit (mixta)",
-        "descripcion_breve": "Tortilla espaÃ±ola con patata cocida y clara de huevo extra para reducir grasas sin perder esponjosidad. Perfecta caliente o frÃ­a.",
+        "nombre": "Tortilla española fit (mixta)",
+        "descripcion_breve": "Tortilla española con patata cocida y clara de huevo extra para reducir grasas sin perder esponjosidad. Perfecta caliente o fría.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -3039,10 +3039,10 @@
           }
         ],
         "paso_a_paso": [
-          "Cocinar las papas con cÃ¡scara hasta tiernas. Pelar y cortar en rodajas.",
-          "SofreÃ­r la cebolla en aceite hasta transparentar.",
+          "Cocinar las papas con cáscara hasta tiernas. Pelar y cortar en rodajas.",
+          "Sofreír la cebolla en aceite hasta transparentar.",
           "Batir huevos y claras con sal. Incorporar papas y cebolla.",
-          "Verter la mezcla en sartÃ©n antiadherente a fuego medio. Cuajar los bordes.",
+          "Verter la mezcla en sartén antiadherente a fuego medio. Cuajar los bordes.",
           "Dar vuelta con ayuda de un plato. Cocinar el otro lado 2-3 minutos.",
           "Dejar reposar 5 minutos antes de cortar."
         ]
@@ -3052,7 +3052,7 @@
       "id": "curry-garbanzos",
       "receta": {
         "nombre": "Curry de garbanzos con leche de coco",
-        "descripcion_breve": "Curry vegetariano de garbanzos con tomate, espinacas y leche de coco light. Abundante en fibra, proteÃ­na vegetal y sabor.",
+        "descripcion_breve": "Curry vegetariano de garbanzos con tomate, espinacas y leche de coco light. Abundante en fibra, proteína vegetal y sabor.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -3104,9 +3104,9 @@
           }
         ],
         "paso_a_paso": [
-          "SofreÃ­r la cebolla hasta dorar. Agregar curry y comino, cocinar 1 minuto.",
+          "Sofreír la cebolla hasta dorar. Agregar curry y comino, cocinar 1 minuto.",
           "Incorporar los garbanzos y el tomate triturado. Cocinar 10 minutos.",
-          "Agregar la leche de coco y las espinacas. Cocinar 5 minutos mÃ¡s.",
+          "Agregar la leche de coco y las espinacas. Cocinar 5 minutos más.",
           "Servir con arroz basmati o naan."
         ]
       }
@@ -3161,7 +3161,7 @@
             "unidad": "unidad"
           },
           {
-            "item": "Comino y pimentÃ³n",
+            "item": "Comino y pimentón",
             "cantidad": 6,
             "unidad": "g"
           },
@@ -3172,9 +3172,9 @@
           }
         ],
         "paso_a_paso": [
-          "Cocinar la carne picada con comino, pimentÃ³n y sal hasta dorar bien.",
+          "Cocinar la carne picada con comino, pimentón y sal hasta dorar bien.",
           "Preparar el pico de gallo con tomate, cebolla morada, cilantro y jugo de lima.",
-          "Pisar la palta con limÃ³n y sal para el guacamole.",
+          "Pisar la palta con limón y sal para el guacamole.",
           "Armar el bowl: arroz de base, carne, frijoles, guacamole y pico de gallo."
         ]
       }
@@ -3183,7 +3183,7 @@
       "id": "ensalada-pollo-greek",
       "receta": {
         "nombre": "Ensalada griega con pollo a la plancha",
-        "descripcion_breve": "Ensalada mediterrÃ¡nea con pollo a la plancha, tomate cherry, pepino, aceitunas y queso feta light. Fresca y proteica.",
+        "descripcion_breve": "Ensalada mediterránea con pollo a la plancha, tomate cherry, pepino, aceitunas y queso feta light. Fresca y proteica.",
         "categoria": "almuerzo/cena liviana",
         "porciones": 1,
         "macros_por_porcion": {
@@ -3224,16 +3224,16 @@
             "unidad": "ml"
           },
           {
-            "item": "OrÃ©gano y limÃ³n",
+            "item": "Orégano y limón",
             "cantidad": 1,
             "unidad": "al gusto"
           }
         ],
         "paso_a_paso": [
-          "Cocinar el pollo a la plancha con orÃ©gano y sal. Cortar en tiras.",
+          "Cocinar el pollo a la plancha con orégano y sal. Cortar en tiras.",
           "Combinar tomate cherry, pepino en rodajas y aceitunas.",
           "Agregar el feta desmenuzado.",
-          "AliÃ±ar con aceite de oliva y jugo de limÃ³n. Coronar con el pollo."
+          "Aliñar con aceite de oliva y jugo de limón. Coronar con el pollo."
         ]
       }
     },
@@ -3241,7 +3241,7 @@
       "id": "avena-proteica",
       "receta": {
         "nombre": "Avena proteica con frutas y miel",
-        "descripcion_breve": "Porridge de avena cocida con proteÃ­na de suero, banana, arÃ¡ndanos y un toque de miel. El mejor desayuno energÃ©tico.",
+        "descripcion_breve": "Porridge de avena cocida con proteína de suero, banana, arándanos y un toque de miel. El mejor desayuno energético.",
         "categoria": "desayuno",
         "porciones": 1,
         "macros_por_porcion": {
@@ -3262,7 +3262,7 @@
             "unidad": "ml"
           },
           {
-            "item": "ProteÃ­na de suero (whey vanilla)",
+            "item": "Proteína de suero (whey vanilla)",
             "cantidad": 30,
             "unidad": "g"
           },
@@ -3272,7 +3272,7 @@
             "unidad": "g"
           },
           {
-            "item": "ArÃ¡ndanos",
+            "item": "Arándanos",
             "cantidad": 50,
             "unidad": "g"
           },
@@ -3284,8 +3284,8 @@
         ],
         "paso_a_paso": [
           "Cocinar la avena en la leche a fuego medio, revolviendo, hasta espesar (5 min).",
-          "Retirar del fuego y mezclar con la proteÃ­na de suero.",
-          "Servir en un bowl con la banana en rodajas y los arÃ¡ndanos.",
+          "Retirar del fuego y mezclar con la proteína de suero.",
+          "Servir en un bowl con la banana en rodajas y los arándanos.",
           "Terminar con la miel."
         ]
       }
@@ -3320,7 +3320,7 @@
             "unidad": "unidades"
           },
           {
-            "item": "LimÃ³n",
+            "item": "Limón",
             "cantidad": 0.5,
             "unidad": "unidad"
           },
@@ -3337,8 +3337,8 @@
         ],
         "paso_a_paso": [
           "Tostar el pan.",
-          "Pisar la palta con limÃ³n, sal y pimienta.",
-          "Batir los huevos con sal. En sartÃ©n a fuego muy bajo, revolver lentamente con espÃ¡tula.",
+          "Pisar la palta con limón, sal y pimienta.",
+          "Batir los huevos con sal. En sartén a fuego muy bajo, revolver lentamente con espátula.",
           "Untar la palta en las tostadas y colocar los huevos revueltos encima.",
           "Terminar con hojuelas de chile si se desea."
         ]
@@ -3348,7 +3348,7 @@
       "id": "snack-cottage-frutas",
       "receta": {
         "nombre": "Snack: Cottage cheese con frutas y granola",
-        "descripcion_breve": "Bowl de queso cottage con frutos rojos, rodajas de pera y una cucharada de granola. Alto en proteÃ­na, sin cocciÃ³n.",
+        "descripcion_breve": "Bowl de queso cottage con frutos rojos, rodajas de pera y una cucharada de granola. Alto en proteína, sin cocción.",
         "categoria": "snack",
         "porciones": 1,
         "macros_por_porcion": {
@@ -3364,7 +3364,7 @@
             "unidad": "g"
           },
           {
-            "item": "Frutos rojos (frutillas, arÃ¡ndanos)",
+            "item": "Frutos rojos (frutillas, arándanos)",
             "cantidad": 80,
             "unidad": "g"
           },
@@ -3374,7 +3374,7 @@
             "unidad": "g"
           },
           {
-            "item": "Granola sin azÃºcar",
+            "item": "Granola sin azúcar",
             "cantidad": 20,
             "unidad": "g"
           },
@@ -3394,8 +3394,8 @@
     {
       "id": "snack-yogur-proteico",
       "receta": {
-        "nombre": "Snack: Yogur griego con proteÃ­na y nueces",
-        "descripcion_breve": "Yogur griego natural mezclado con proteÃ­na de suero y nueces picadas. Snack saciante entre comidas.",
+        "nombre": "Snack: Yogur griego con proteína y nueces",
+        "descripcion_breve": "Yogur griego natural mezclado con proteína de suero y nueces picadas. Snack saciante entre comidas.",
         "categoria": "snack",
         "porciones": 1,
         "macros_por_porcion": {
@@ -3406,12 +3406,12 @@
         },
         "ingredientes": [
           {
-            "item": "Yogur griego 0% sin azÃºcar",
+            "item": "Yogur griego 0% sin azúcar",
             "cantidad": 150,
             "unidad": "g"
           },
           {
-            "item": "ProteÃ­na de suero (whey)",
+            "item": "Proteína de suero (whey)",
             "cantidad": 20,
             "unidad": "g"
           },
@@ -3427,17 +3427,17 @@
           }
         ],
         "paso_a_paso": [
-          "Mezclar el yogur con la proteÃ­na de suero hasta integrar.",
+          "Mezclar el yogur con la proteína de suero hasta integrar.",
           "Agregar las nueces picadas y la canela.",
-          "Servir frÃ­o."
+          "Servir frío."
         ]
       }
     },
     {
       "id": "snack-batido-platano",
       "receta": {
-        "nombre": "Snack: Batido de banana y mantequilla de manÃ­",
-        "descripcion_breve": "Batido espeso de banana con leche, proteÃ­na de suero y mantequilla de manÃ­. El snack post-entrenamiento perfecto.",
+        "nombre": "Snack: Batido de banana y mantequilla de maní",
+        "descripcion_breve": "Batido espeso de banana con leche, proteína de suero y mantequilla de maní. El snack post-entrenamiento perfecto.",
         "categoria": "snack",
         "porciones": 1,
         "macros_por_porcion": {
@@ -3458,19 +3458,19 @@
             "unidad": "ml"
           },
           {
-            "item": "ProteÃ­na de suero (whey)",
+            "item": "Proteína de suero (whey)",
             "cantidad": 25,
             "unidad": "g"
           },
           {
-            "item": "Mantequilla de manÃ­ natural",
+            "item": "Mantequilla de maní natural",
             "cantidad": 15,
             "unidad": "g"
           }
         ],
         "paso_a_paso": [
           "Colocar todos los ingredientes en la licuadora.",
-          "Procesar hasta obtener una mezcla homogÃ©nea.",
+          "Procesar hasta obtener una mezcla homogénea.",
           "Servir inmediatamente."
         ]
       }
@@ -3479,7 +3479,7 @@
       "id": "snack-hummus-vegetales",
       "receta": {
         "nombre": "Snack: Hummus casero con bastones de vegetales",
-        "descripcion_breve": "Hummus suave de garbanzos con ajo y limÃ³n, acompaÃ±ado de bastones de zanahoria, apio y morrÃ³n. Snack saludable y saciante.",
+        "descripcion_breve": "Hummus suave de garbanzos con ajo y limón, acompañado de bastones de zanahoria, apio y morrón. Snack saludable y saciante.",
         "categoria": "snack",
         "porciones": 2,
         "macros_por_porcion": {
@@ -3500,7 +3500,7 @@
             "unidad": "g"
           },
           {
-            "item": "LimÃ³n",
+            "item": "Limón",
             "cantidad": 1,
             "unidad": "unidad"
           },
@@ -3525,14 +3525,14 @@
             "unidad": "g"
           },
           {
-            "item": "MorrÃ³n rojo",
+            "item": "Morrón rojo",
             "cantidad": 80,
             "unidad": "g"
           }
         ],
         "paso_a_paso": [
-          "Procesar los garbanzos con tahini, ajo, jugo de limÃ³n y aceite hasta suave.",
-          "Ajustar sal y consistencia con agua frÃ­a.",
+          "Procesar los garbanzos con tahini, ajo, jugo de limón y aceite hasta suave.",
+          "Ajustar sal y consistencia con agua fría.",
           "Cortar los vegetales en bastones.",
           "Servir el hummus con los bastones."
         ]
@@ -3542,7 +3542,7 @@
       "id": "caldo-pollo-verduras",
       "receta": {
         "nombre": "Caldo de pollo con verduras y fideos",
-        "descripcion_breve": "Sopa reconfortante de caldo de pollo casero con zanahoria, apio, zapallito y fideos cabello de Ã¡ngel. Ideal para dÃ­as frÃ­os.",
+        "descripcion_breve": "Sopa reconfortante de caldo de pollo casero con zanahoria, apio, zapallito y fideos cabello de ángel. Ideal para días fríos.",
         "categoria": "almuerzo/cena liviana",
         "porciones": 2,
         "macros_por_porcion": {
@@ -3573,7 +3573,7 @@
             "unidad": "g"
           },
           {
-            "item": "Fideos cabello de Ã¡ngel",
+            "item": "Fideos cabello de ángel",
             "cantidad": 60,
             "unidad": "g"
           },
@@ -3592,7 +3592,7 @@
           "Hervir el caldo con la pechuga entera, laurel y sal 20 minutos.",
           "Retirar el pollo, desmenuzar y reservar.",
           "Agregar las verduras cortadas al caldo. Cocinar 10 minutos.",
-          "Incorporar los fideos y el pollo desmenuzado. Cocinar 3-4 minutos mÃ¡s.",
+          "Incorporar los fideos y el pollo desmenuzado. Cocinar 3-4 minutos más.",
           "Servir caliente con perejil fresco."
         ]
       }
@@ -3600,8 +3600,8 @@
     {
       "id": "risotto-champignones-fit",
       "receta": {
-        "nombre": "Risotto de champiÃ±ones fit",
-        "descripcion_breve": "Risotto cremoso de champiÃ±ones preparado con arroz arbÃ³reo, caldo de verduras y queso parmesano en cantidad moderada. Sin crema de leche.",
+        "nombre": "Risotto de champiñones fit",
+        "descripcion_breve": "Risotto cremoso de champiñones preparado con arroz arbóreo, caldo de verduras y queso parmesano en cantidad moderada. Sin crema de leche.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -3612,12 +3612,12 @@
         },
         "ingredientes": [
           {
-            "item": "Arroz arbÃ³reo",
+            "item": "Arroz arbóreo",
             "cantidad": 150,
             "unidad": "g"
           },
           {
-            "item": "ChampiÃ±ones",
+            "item": "Champiñones",
             "cantidad": 200,
             "unidad": "g"
           },
@@ -3654,10 +3654,10 @@
         ],
         "paso_a_paso": [
           "Calentar el caldo en una olla a fuego bajo.",
-          "SofreÃ­r la cebolla en aceite. Agregar los champiÃ±ones y saltear 4 minutos.",
+          "Sofreír la cebolla en aceite. Agregar los champiñones y saltear 4 minutos.",
           "Incorporar el arroz, tostar 1 minuto. Agregar el vino y dejar evaporar.",
           "Agregar el caldo caliente de a cucharones, revolviendo constantemente hasta absorber.",
-          "DespuÃ©s de 18-20 minutos, retirar del fuego. Incorporar el parmesano.",
+          "Después de 18-20 minutos, retirar del fuego. Incorporar el parmesano.",
           "Dejar reposar 2 minutos y servir."
         ]
       }
@@ -3665,8 +3665,8 @@
     {
       "id": "bowl-de-skyr-con-banana-y-chia",
       "receta": {
-        "nombre": "Bowl de Skyr con Banana y ChÃ­a",
-        "descripcion_breve": "Desayuno liviano y nutritivo con skyr, banana fresca y semillas de chÃ­a para aportar fibra y grasas saludables.",
+        "nombre": "Bowl de Skyr con Banana y Chía",
+        "descripcion_breve": "Desayuno liviano y nutritivo con skyr, banana fresca y semillas de chía para aportar fibra y grasas saludables.",
         "categoria": "desayuno/bowl",
         "porciones": 1,
         "macros_por_porcion": {
@@ -3687,7 +3687,7 @@
             "unidad": "g"
           },
           {
-            "item": "Semillas de chÃ­a",
+            "item": "Semillas de chía",
             "cantidad": 10,
             "unidad": "g"
           }
@@ -3695,7 +3695,7 @@
         "paso_a_paso": [
           "Colocar los 100g de Cheasy Skyr en un bowl.",
           "Cortar los 80g de banana en rodajas y agregar al bowl.",
-          "Espolvorear los 10g de semillas de chÃ­a por encima y mezclar antes de consumir."
+          "Espolvorear los 10g de semillas de chía por encima y mezclar antes de consumir."
         ]
       }
     },
@@ -3703,7 +3703,7 @@
       "id": "pollo-al-curry-con-quinoa",
       "receta": {
         "nombre": "Pollo al curry con quinoa",
-        "descripcion_breve": "Pollo al curry en leche de coco light acompaÃ±ado de quinoa cocida para un aporte completo de carbohidratos complejos.",
+        "descripcion_breve": "Pollo al curry en leche de coco light acompañado de quinoa cocida para un aporte completo de carbohidratos complejos.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -3724,7 +3724,7 @@
             "unidad": "g"
           },
           {
-            "item": "Pimiento morrÃ³n",
+            "item": "Pimiento morrón",
             "cantidad": 100,
             "unidad": "g"
           },
@@ -3750,9 +3750,9 @@
           }
         ],
         "paso_a_paso": [
-          "Dorar la pechuga en cubos en una sartÃ©n con spray de oliva.",
-          "Saltear la cebolla y el morrÃ³n picados finos hasta transparentar.",
-          "AÃ±adir el curry, la leche de coco light y cocinar a fuego lento por 10 minutos.",
+          "Dorar la pechuga en cubos en una sartén con spray de oliva.",
+          "Saltear la cebolla y el morrón picados finos hasta transparentar.",
+          "Añadir el curry, la leche de coco light y cocinar a fuego lento por 10 minutos.",
           "Servir el curry bien caliente sobre la base de quinoa cocida."
         ]
       }
@@ -3760,8 +3760,8 @@
     {
       "id": "pollo-al-curry-con-blomkalsris-y-2-huevos",
       "receta": {
-        "nombre": "Pollo al curry con blomkÃ¥lsris y 2 huevos",
-        "descripcion_breve": "Pollo al curry en leche de coco light acompaÃ±ado de arroz de coliflor salteado con 2 huevos enteros para aportar cremosisad y proteÃ­na.",
+        "nombre": "Pollo al curry con blomkålsris y 2 huevos",
+        "descripcion_breve": "Pollo al curry en leche de coco light acompañado de arroz de coliflor salteado con 2 huevos enteros para aportar cremosisad y proteína.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -3787,7 +3787,7 @@
             "unidad": "g"
           },
           {
-            "item": "Pimiento morrÃ³n",
+            "item": "Pimiento morrón",
             "cantidad": 100,
             "unidad": "g"
           },
@@ -3802,7 +3802,7 @@
             "unidad": "g"
           },
           {
-            "item": "BlomkÃ¥lsris (arroz de coliflor)",
+            "item": "Blomkålsris (arroz de coliflor)",
             "cantidad": 150,
             "unidad": "g"
           },
@@ -3813,18 +3813,18 @@
           }
         ],
         "paso_a_paso": [
-          "Dorar la pechuga en cubos en una sartÃ©n con spray de oliva.",
-          "Saltear la cebolla y el morrÃ³n picados finos hasta transparentar.",
-          "AÃ±adir el curry, la leche de coco light y cocinar a fuego lento por 10 minutos.",
-          "En una sartÃ©n aparte, saltear el blomkÃ¥lsris durante 2-3 minutos y agregar los 2 huevos batidos revolviendo enÃ©rgicamente hasta integrar.",
-          "Servir el pollo al curry bien caliente sobre el blomkÃ¥lsris revuelto con huevo."
+          "Dorar la pechuga en cubos en una sartén con spray de oliva.",
+          "Saltear la cebolla y el morrón picados finos hasta transparentar.",
+          "Añadir el curry, la leche de coco light y cocinar a fuego lento por 10 minutos.",
+          "En una sartén aparte, saltear el blomkålsris durante 2-3 minutos y agregar los 2 huevos batidos revolviendo enérgicamente hasta integrar.",
+          "Servir el pollo al curry bien caliente sobre el blomkålsris revuelto con huevo."
         ]
       }
     },
     {
       "id": "helado-creami-de-banana-y-pal-gschokolade",
       "receta": {
-        "nombre": "Helado Creami de Banana y PÃ¥lÃ¦gschokolade",
+        "nombre": "Helado Creami de Banana y Pålægschokolade",
         "descripcion_breve": "Base cremosa de banana y leche descremada sin lactosa con trozos crujientes de chocolate amargo Carletti procesado en Ninja Creami.",
         "categoria": "postre/snack",
         "porciones": 2,
@@ -3846,16 +3846,16 @@
             "unidad": "ml"
           },
           {
-            "item": "Carletti MÃ¸rk PÃ¥lÃ¦gschokolade",
+            "item": "Carletti Mørk Pålægschokolade",
             "cantidad": 10,
             "unidad": "g"
           }
         ],
         "paso_a_paso": [
           "Mixear o procesar la banana con la leche Arla Lactofree en la tarrina de la Ninja Creami hasta integrar.",
-          "Congelar la tarrina durante 24 horas a -18Â°C.",
+          "Congelar la tarrina durante 24 horas a -18°C.",
           "Procesar en programa Lite Ice Cream.",
-          "Picar las 4 lÃ¡minas de PÃ¥lÃ¦gschokolade, agregarlas al centro y procesar con la funciÃ³n Mix-In.",
+          "Picar las 4 láminas de Pålægschokolade, agregarlas al centro y procesar con la función Mix-In.",
           "Dividir en 2 porciones iguales para servir."
         ]
       }
