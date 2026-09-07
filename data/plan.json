@@ -31,6 +31,16 @@
             "carbohidratos_g": 3.7,
             "grasas_g": 0.5
           }
+        },
+        "cena": {
+          "recipeId": "pechugas-rellenas-airfryer",
+          "recipeName": "Pechugas rellenas a la Airfryer",
+          "macros": {
+            "calorias": 390,
+            "proteina_g": 56,
+            "carbohidratos_g": 6,
+            "grasas_g": 14
+          }
         }
       }
     }
@@ -56,6 +66,16 @@
             "proteina_g": 24.4,
             "carbohidratos_g": 2,
             "grasas_g": 0.3
+          }
+        },
+        "cena": {
+          "recipeId": "pechugas-rellenas-airfryer",
+          "recipeName": "Pechugas rellenas a la Airfryer",
+          "macros": {
+            "calorias": 390,
+            "proteina_g": 56,
+            "carbohidratos_g": 6,
+            "grasas_g": 14
           }
         }
       }
