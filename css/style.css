@@ -26,7 +26,7 @@
   --radius-sm:   6px;
   --shadow-sm:   0 1px 3px rgba(0,0,0,.08);
   --shadow-md:   0 4px 12px rgba(0,0,0,.12);
-  --header-h:    56px;
+  --header-h:    68px;
   --sidebar-w:   300px;
   --transition:  160ms ease;
   font-size: 14px;
@@ -57,9 +57,9 @@ input  { font: inherit; border: none; outline: none; }
   max-width: 1600px;
   height: 100%;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 10px 16px 6px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 16px;
 }
 .header-brand {
@@ -1016,13 +1016,13 @@ input  { font: inherit; border: none; outline: none; }
 @media (max-width: 700px) {
   :root {
     --sidebar-w: 290px;
-    --header-h: 50px;
+    --header-h: 58px;
     --footer-h: 52px;
   }
 
   /* ── Header ── */
   .app-header { height: var(--header-h); }
-  .header-inner { padding: 0 10px; gap: 8px; }
+  .header-inner { padding: 8px 10px 5px; gap: 8px; }
   .brand-name { font-size: .95rem; }
   .brand-icon { font-size: 1.2rem; }
   .auth-area--desktop { display: none; }
