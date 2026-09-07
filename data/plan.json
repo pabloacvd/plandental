@@ -4,7 +4,7 @@
       "2026-09-07": {
         "desayuno": {
           "recipeId": "skyr-con-semillas-de-chia",
-          "recipeName": "Skyr con semillas de chía",
+          "recipeName": "Skyr con semillas de chÃ­a",
           "macros": {
             "calorias": 134,
             "proteina_g": 17.3,
@@ -20,6 +20,16 @@
             "proteina_g": 38,
             "carbohidratos_g": 82,
             "grasas_g": 56
+          }
+        },
+        "snack_tarde": {
+          "recipeId": "shake-prote-pablo-sin-skyr",
+          "recipeName": "Shake prote Pablo (sin skyr)",
+          "macros": {
+            "calorias": 169,
+            "proteina_g": 36.2,
+            "carbohidratos_g": 3.7,
+            "grasas_g": 0.5
           }
         }
       }
