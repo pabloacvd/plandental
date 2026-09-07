@@ -58,7 +58,9 @@ export function renderRecipeCard(recipeObj) {
 
 export function renderRecipeDetail(recipeObj) {
   const { receta } = recipeObj;
-  const { nombre, descripcion_breve, porciones, macros_por_porcion: m, ingredientes = [], paso_a_paso = [] } = receta;
+  const { nombre, descripcion_breve, porciones, macros_por_porcion: m, ingredientes, paso_a_paso } = receta;
+  const safeIngredientes = Array.isArray(ingredientes) ? ingredientes : [];
+  const safePasoAPaso   = Array.isArray(paso_a_paso)   ? paso_a_paso   : [];
 
   return `
     <div class="recipe-detail-name">${nombre}</div>
@@ -84,7 +86,7 @@ export function renderRecipeDetail(recipeObj) {
     <p style="font-size:.75rem;color:var(--text-muted);margin-bottom:10px">Porciones: ${porciones}</p>
     <div class="recipe-detail-section">Ingredientes</div>
     <table class="ingredient-table">
-      ${ingredientes.map(ing => `
+      ${safeIngredientes.map(ing => `
         <tr>
           <td>${ing.item}</td>
           <td>${ing.cantidad} ${ing.unidad}</td>
@@ -93,7 +95,7 @@ export function renderRecipeDetail(recipeObj) {
     </table>
     <div class="recipe-detail-section">Preparación</div>
     <ol class="step-list">
-      ${paso_a_paso.map((step, i) => `
+      ${safePasoAPaso.map((step, i) => `
         <li><span class="step-num">${i + 1}</span><span>${step}</span></li>
       `).join('')}
     </ol>
