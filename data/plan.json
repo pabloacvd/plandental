@@ -31,6 +31,16 @@
             "carbohidratos_g": 3.7,
             "grasas_g": 0.5
           }
+        },
+        "cena": {
+          "recipeId": "pollo-al-curry-con-quinoa",
+          "recipeName": "Pollo al curry con quinoa",
+          "macros": {
+            "calorias": 555,
+            "proteina_g": 68,
+            "carbohidratos_g": 32,
+            "grasas_g": 14.5
+          }
         }
       }
     }
@@ -56,6 +66,16 @@
             "proteina_g": 24.4,
             "carbohidratos_g": 2,
             "grasas_g": 0.3
+          }
+        },
+        "cena": {
+          "recipeId": "pollo-al-curry-con-quinoa",
+          "recipeName": "Pollo al curry con quinoa",
+          "macros": {
+            "calorias": 555,
+            "proteina_g": 68,
+            "carbohidratos_g": 32,
+            "grasas_g": 14.5
           }
         }
       }
