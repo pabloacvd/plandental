@@ -88,7 +88,7 @@ export function renderRecipeDetail(recipeObj) {
     <table class="ingredient-table">
       ${safeIngredientes.map(ing => `
         <tr>
-          <td>${ing.item}</td>
+          <td>${ing.item ?? ing.ingrediente ?? ''}</td>
           <td>${ing.cantidad} ${ing.unidad}</td>
         </tr>
       `).join('')}
