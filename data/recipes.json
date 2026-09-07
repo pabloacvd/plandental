@@ -3927,6 +3927,38 @@
           "Servir calientes."
         ]
       }
+    },
+    {
+      "id": "skyr-con-semillas-de-chia",
+      "receta": {
+        "nombre": "Skyr con semillas de chía",
+        "descripcion_breve": "Tazón de skyr magro acompañado de semillas de chía, alto en proteínas y fuente de fibra.",
+        "categoria": "desayuno/merienda",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 134,
+          "proteina_g": 17.3,
+          "carbohidratos_g": 11.1,
+          "grasas_g": 2
+        },
+        "ingredientes": [
+          {
+            "item": "Skyr",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Semillas de chía",
+            "cantidad": 5,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Servir los 200 g de skyr en un tazón.",
+          "Añadir los 5 g de semillas de chía por encima.",
+          "Mezclar bien y dejar reposar 5 minutos si preferís que las semillas se hidraten un poco antes de consumir."
+        ]
+      }
     }
   ]
 }
