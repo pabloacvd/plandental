@@ -4115,6 +4115,41 @@
           "Reincorporar el pollo, añadir los fideos de arroz cocidos y el resto de la salsa de soja. Mezclar todo bien durante 1-2 minutos a fuego fuerte antes de servir."
         ]
       }
+    },
+    {
+      "id": "helado-ninja-creami-de-banana-dulce-de-leche-y-chocolate-2-p",
+      "receta": {
+        "nombre": "Helado Ninja Creami de Banana, Dulce de Leche y Chocolate (2 porciones)",
+        "descripcion_breve": "Helado artesanal en Ninja Creami a base de banana congelada procesada con dulce de leche y trozos de chocolate amargo.",
+        "categoria": "postre/helado",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 147,
+          "proteina_g": 1.9,
+          "carbohidratos_g": 30.5,
+          "grasas_g": 2.9
+        },
+        "macros_totales": {
+          "calorias": 294,
+          "proteina_g": 3.8,
+          "carbohidratos_g": 61.1,
+          "grasas_g": 5.7
+        },
+        "ingredientes": [
+          {
+            "nombre": "Banana congelada",
+            "cantidad": "180g"
+          },
+          {
+            "nombre": "Dulce de leche",
+            "cantidad": "20g (1 cucharada)"
+          },
+          {
+            "nombre": "Chocolate amargo",
+            "cantidad": "14g"
+          }
+        ]
+      }
     }
   ]
 }
