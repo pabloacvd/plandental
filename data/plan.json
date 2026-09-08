@@ -73,16 +73,6 @@
             "carbohidratos_g": 65.2,
             "grasas_g": 14.3
           }
-        },
-        "snack_noche": {
-          "recipeId": "helado-creami-de-banana-y-pal-gschokolade",
-          "recipeName": "Helado Creami de Banana y Pålægschokolade",
-          "macros": {
-            "calorias": 89,
-            "proteina_g": 1.8,
-            "carbohidratos_g": 17.7,
-            "grasas_g": 1.8
-          }
         }
       }
     }
