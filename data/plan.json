@@ -44,16 +44,6 @@
         }
       },
       "2026-09-08": {
-        "snack_tarde": {
-          "recipeId": "shake-prote-juli-sin-skyr",
-          "recipeName": "Shake prote Juli (sin skyr)",
-          "macros": {
-            "calorias": 111,
-            "proteina_g": 24.4,
-            "carbohidratos_g": 2,
-            "grasas_g": 0.3
-          }
-        },
         "almuerzo": {
           "recipeId": "mac-and-cheese-proteico",
           "recipeName": "Mac & Cheese proteico",
@@ -150,16 +140,6 @@
             "proteina_g": 102.6,
             "carbohidratos_g": 78.3,
             "grasas_g": 19.2
-          }
-        },
-        "snack_tarde": {
-          "recipeId": "shake-prote-juli-sin-skyr",
-          "recipeName": "Shake prote Juli (sin skyr)",
-          "macros": {
-            "calorias": 111,
-            "proteina_g": 24.4,
-            "carbohidratos_g": 2,
-            "grasas_g": 0.3
           }
         }
       }
