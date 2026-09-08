@@ -63,6 +63,16 @@
             "carbohidratos_g": 35,
             "grasas_g": 8
           }
+        },
+        "almuerzo": {
+          "recipeId": "mac-and-cheese-proteico",
+          "recipeName": "Mac & Cheese proteico",
+          "macros": {
+            "calorias": 430,
+            "proteina_g": 28,
+            "carbohidratos_g": 48,
+            "grasas_g": 12
+          }
         }
       }
     }
@@ -120,6 +130,16 @@
             "proteina_g": 30,
             "carbohidratos_g": 35,
             "grasas_g": 8
+          }
+        },
+        "almuerzo": {
+          "recipeId": "mac-and-cheese-proteico",
+          "recipeName": "Mac & Cheese proteico",
+          "macros": {
+            "calorias": 430,
+            "proteina_g": 28,
+            "carbohidratos_g": 48,
+            "grasas_g": 12
           }
         }
       }
