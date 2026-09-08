@@ -633,13 +633,14 @@ function openRecipeEditorForEdit(id) {
 
   // Ingredients
   (receta.ingredientes || []).forEach(ing => {
-    addIngredientRow(ing.item, ing.cantidad, ing.unidad);
+    addIngredientRow(ing.nombre ?? ing.item, ing.cantidad, ing.unidad);
   });
   if (!(receta.ingredientes || []).length) addIngredientRow();
 
   // Steps
-  (receta.paso_a_paso || []).forEach(step => addStepRow(step));
-  if (!(receta.paso_a_paso || []).length) addStepRow();
+  const steps = receta.paso_a_paso || receta.pasos || receta.instrucciones || [];
+  steps.forEach(step => addStepRow(step));
+  if (!steps.length) addStepRow();
 
   // Also pre-fill JSON tab with the current recipe JSON
   document.getElementById('rf-json').value = JSON.stringify({ receta: receta }, null, 2);
