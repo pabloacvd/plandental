@@ -53,6 +53,16 @@
             "carbohidratos_g": 16,
             "grasas_g": 12.8
           }
+        },
+        "snack_tarde": {
+          "recipeId": "shake-prote-pablo-sin-skyr",
+          "recipeName": "Shake prote Pablo (sin skyr)",
+          "macros": {
+            "calorias": 169,
+            "proteina_g": 36.2,
+            "carbohidratos_g": 3.7,
+            "grasas_g": 0.5
+          }
         }
       }
     }
