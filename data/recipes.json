@@ -4150,6 +4150,45 @@
           }
         ]
       }
+    },
+    {
+      "id": "pollo-al-horno-con-papas-y-vegetales-asados-2-porciones",
+      "receta": {
+        "nombre": "Pollo al horno con papas y vegetales asados (2 porciones)",
+        "descripcion_breve": "Pechuga de pollo jugosa al horno acompañada de papas doradas y vegetales salteados (zucchini, berenjena, cebolla y morrón) con toque de aceite de oliva.",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 906,
+          "proteina_g": 102.6,
+          "carbohidratos_g": 78.3,
+          "grasas_g": 19.2
+        },
+        "macros_totales": {
+          "calorias": 1812,
+          "proteina_g": 205.2,
+          "carbohidratos_g": 156.6,
+          "grasas_g": 38.4
+        },
+        "ingredientes": [
+          {
+            "nombre": "Pechuga de pollo (cocida)",
+            "cantidad": "600g"
+          },
+          {
+            "nombre": "Papa",
+            "cantidad": "600g"
+          },
+          {
+            "nombre": "Vegetales mixtos (zucchini, berenjena, cebolla, morrón)",
+            "cantidad": "600g"
+          },
+          {
+            "nombre": "Aceite de oliva",
+            "cantidad": "15g (1 cucharada)"
+          }
+        ]
+      }
     }
   ]
 }
