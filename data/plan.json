@@ -73,6 +73,16 @@
             "carbohidratos_g": 38,
             "grasas_g": 14
           }
+        },
+        "snack_noche": {
+          "recipeId": "snack-batido-platano",
+          "recipeName": "Snack: Batido de banana y mantequilla de maní",
+          "macros": {
+            "calorias": 310,
+            "proteina_g": 30,
+            "carbohidratos_g": 35,
+            "grasas_g": 8
+          }
         }
       }
     }
@@ -140,6 +150,16 @@
             "proteina_g": 25,
             "carbohidratos_g": 38,
             "grasas_g": 14
+          }
+        },
+        "snack_noche": {
+          "recipeId": "snack-batido-platano",
+          "recipeName": "Snack: Batido de banana y mantequilla de maní",
+          "macros": {
+            "calorias": 310,
+            "proteina_g": 30,
+            "carbohidratos_g": 35,
+            "grasas_g": 8
           }
         }
       }
