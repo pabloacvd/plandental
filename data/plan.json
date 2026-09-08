@@ -74,16 +74,6 @@
             "grasas_g": 2.9
           }
         },
-        "desayuno": {
-          "recipeId": "skyr-con-semillas-de-chia",
-          "recipeName": "200g Skyr con chía (para 1)",
-          "macros": {
-            "calorias": 134,
-            "proteina_g": 17.3,
-            "carbohidratos_g": 11.1,
-            "grasas_g": 2
-          }
-        },
         "cena": {
           "recipeId": "pollo-al-horno-con-papas-y-vegetales-asados-2-porciones",
           "recipeName": "Pollo al horno con papas y vegetales asados (2 porciones)",
@@ -160,16 +150,6 @@
             "proteina_g": 1.9,
             "carbohidratos_g": 30.5,
             "grasas_g": 2.9
-          }
-        },
-        "desayuno": {
-          "recipeId": "skyr-con-semillas-de-chia",
-          "recipeName": "200g Skyr con chía (para 1)",
-          "macros": {
-            "calorias": 134,
-            "proteina_g": 17.3,
-            "carbohidratos_g": 11.1,
-            "grasas_g": 2
           }
         },
         "cena": {
