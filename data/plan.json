@@ -64,16 +64,6 @@
             "grasas_g": 2.9
           }
         },
-        "cena": {
-          "recipeId": "pollo-al-horno-con-papas-y-vegetales-asados-2-porciones",
-          "recipeName": "Pollo al horno con papas y vegetales asados (2 porciones)",
-          "macros": {
-            "calorias": 906,
-            "proteina_g": 102.6,
-            "carbohidratos_g": 78.3,
-            "grasas_g": 19.2
-          }
-        },
         "snack_tarde": {
           "recipeId": "shake-prote-pablo-sin-skyr",
           "recipeName": "Shake prote Pablo (sin skyr)",
@@ -140,16 +130,6 @@
             "proteina_g": 1.9,
             "carbohidratos_g": 30.5,
             "grasas_g": 2.9
-          }
-        },
-        "cena": {
-          "recipeId": "pollo-al-horno-con-papas-y-vegetales-asados-2-porciones",
-          "recipeName": "Pollo al horno con papas y vegetales asados (2 porciones)",
-          "macros": {
-            "calorias": 906,
-            "proteina_g": 102.6,
-            "carbohidratos_g": 78.3,
-            "grasas_g": 19.2
           }
         },
         "snack_tarde": {
