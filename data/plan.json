@@ -54,16 +54,6 @@
             "grasas_g": 12
           }
         },
-        "snack_noche": {
-          "recipeId": "helado-ninja-creami-de-banana-dulce-de-leche-y-chocolate-2-p",
-          "recipeName": "Helado Ninja Creami de Banana, Dulce de Leche y Chocolate (2 porciones)",
-          "macros": {
-            "calorias": 147,
-            "proteina_g": 1.9,
-            "carbohidratos_g": 30.5,
-            "grasas_g": 2.9
-          }
-        },
         "snack_tarde": {
           "recipeId": "shake-prote-pablo-sin-skyr",
           "recipeName": "Shake prote Pablo (sin skyr)",
@@ -130,16 +120,6 @@
             "proteina_g": 28,
             "carbohidratos_g": 48,
             "grasas_g": 12
-          }
-        },
-        "snack_noche": {
-          "recipeId": "helado-ninja-creami-de-banana-dulce-de-leche-y-chocolate-2-p",
-          "recipeName": "Helado Ninja Creami de Banana, Dulce de Leche y Chocolate (2 porciones)",
-          "macros": {
-            "calorias": 147,
-            "proteina_g": 1.9,
-            "carbohidratos_g": 30.5,
-            "grasas_g": 2.9
           }
         },
         "snack_tarde": {
