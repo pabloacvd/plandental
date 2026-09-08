@@ -4197,6 +4197,45 @@
           "Servir dividiendo las porciones según los requerimientos individuales."
         ]
       }
+    },
+    {
+      "id": "yogur-griego-con-dulce-de-leche",
+      "receta": {
+        "nombre": "Yogur Griego con Dulce de Leche",
+        "descripcion_breve": "Postre cremoso de yogur griego al 2% combinado con dulce de leche tradicional.",
+        "categoria": "postre/snack",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 256,
+          "proteina_g": 16.2,
+          "carbohidratos_g": 31.4,
+          "grasas_g": 7.2
+        },
+        "ingredientes": [
+          {
+            "nombre": "Thise Græsk Inspireret Yoghurt 2%",
+            "cantidad": 200,
+            "unidad": "g",
+            "macros": {
+              "calorias": 130,
+              "proteina_g": 16,
+              "carbohidratos_g": 7.4,
+              "grasas_g": 4
+            }
+          },
+          {
+            "nombre": "Dulce de leche tradicional",
+            "cantidad": 40,
+            "unidad": "g",
+            "macros": {
+              "calorias": 126,
+              "proteina_g": 0.2,
+              "carbohidratos_g": 24,
+              "grasas_g": 3.2
+            }
+          }
+        ]
+      }
     }
   ]
 }
