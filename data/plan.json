@@ -54,16 +54,6 @@
             "grasas_g": 0.5
           }
         },
-        "snack_noche": {
-          "recipeId": "snack-batido-platano",
-          "recipeName": "Snack: Batido de banana y mantequilla de maní",
-          "macros": {
-            "calorias": 310,
-            "proteina_g": 30,
-            "carbohidratos_g": 35,
-            "grasas_g": 8
-          }
-        },
         "almuerzo": {
           "recipeId": "mac-and-cheese-proteico",
           "recipeName": "Mac & Cheese proteico",
@@ -130,16 +120,6 @@
             "proteina_g": 24.4,
             "carbohidratos_g": 2,
             "grasas_g": 0.3
-          }
-        },
-        "snack_noche": {
-          "recipeId": "snack-batido-platano",
-          "recipeName": "Snack: Batido de banana y mantequilla de maní",
-          "macros": {
-            "calorias": 310,
-            "proteina_g": 30,
-            "carbohidratos_g": 35,
-            "grasas_g": 8
           }
         },
         "almuerzo": {
