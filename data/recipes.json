@@ -4155,38 +4155,45 @@
       "id": "pollo-al-horno-con-papas-y-vegetales-asados-2-porciones",
       "receta": {
         "nombre": "Pollo al horno con papas y vegetales asados (2 porciones)",
-        "descripcion_breve": "Pechuga de pollo jugosa al horno acompañada de papas doradas y vegetales salteados (zucchini, berenjena, cebolla y morrón) con toque de aceite de oliva.",
+        "descripcion_breve": "Pechuga de pollo jugosa al horno acompañada de papas doradas y vegetales salteados (zucchini, berenjena, cebolla y morrón) al oliva.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
-          "calorias": 906,
-          "proteina_g": 102.6,
-          "carbohidratos_g": 78.3,
-          "grasas_g": 19.2
+          "calorias": 712,
+          "proteina_g": 77.8,
+          "carbohidratos_g": 65.2,
+          "grasas_g": 14.3
         },
         "macros_totales": {
-          "calorias": 1812,
-          "proteina_g": 205.2,
-          "carbohidratos_g": 156.6,
-          "grasas_g": 38.4
+          "calorias": 1424,
+          "proteina_g": 155.5,
+          "carbohidratos_g": 130.5,
+          "grasas_g": 28.7
         },
         "ingredientes": [
           {
             "nombre": "Pechuga de pollo (cocida)",
-            "cantidad": "600g"
+            "cantidad": "450g"
           },
           {
             "nombre": "Papa",
-            "cantidad": "600g"
+            "cantidad": "500g"
           },
           {
             "nombre": "Vegetales mixtos (zucchini, berenjena, cebolla, morrón)",
-            "cantidad": "600g"
+            "cantidad": "500g"
           },
           {
             "nombre": "Aceite de oliva",
-            "cantidad": "15g (1 cucharada)"
+            "cantidad": "12g (1 cucharada sopera)"
           }
+        ],
+        "pasos": [
+          "Lavar y cortar las papas en cuñas o cubos medianos, y los vegetales (zucchini, berenjena, cebolla y morrón) en trozos parejos.",
+          "Colocar las papas y los vegetales en una bandeja para horno, rociar con el aceite de oliva, condimentos a gusto (sal, pimienta, orégano, pimentón) y mezclar bien.",
+          "Precalentar el horno a 200°C y hornear las verduras y papas durante 25-30 minutos hasta que estén tiernas y doradas.",
+          "Sazonar las pechugas de pollo y cocinarlas al horno junto a las verduras o en una sartén/plancha antiadherente a fuego medio hasta que estén doradas por fuera y jugosas por dentro.",
+          "Servir dividiendo las porciones según los requerimientos individuales."
         ]
       }
     }
