@@ -83,6 +83,16 @@
             "carbohidratos_g": 11.1,
             "grasas_g": 2
           }
+        },
+        "cena": {
+          "recipeId": "pollo-al-horno-con-papas-y-vegetales-asados-2-porciones",
+          "recipeName": "Pollo al horno con papas y vegetales asados (2 porciones)",
+          "macros": {
+            "calorias": 906,
+            "proteina_g": 102.6,
+            "carbohidratos_g": 78.3,
+            "grasas_g": 19.2
+          }
         }
       }
     }
@@ -160,6 +170,16 @@
             "proteina_g": 17.3,
             "carbohidratos_g": 11.1,
             "grasas_g": 2
+          }
+        },
+        "cena": {
+          "recipeId": "pollo-al-horno-con-papas-y-vegetales-asados-2-porciones",
+          "recipeName": "Pollo al horno con papas y vegetales asados (2 porciones)",
+          "macros": {
+            "calorias": 906,
+            "proteina_g": 102.6,
+            "carbohidratos_g": 78.3,
+            "grasas_g": 19.2
           }
         }
       }
