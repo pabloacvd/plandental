@@ -105,6 +105,16 @@
             "carbohidratos_g": 3.7,
             "grasas_g": 0.5
           }
+        },
+        "snack_noche": {
+          "recipeId": "avena-proteica",
+          "recipeName": "Avena proteica con frutas y miel",
+          "macros": {
+            "calorias": 420,
+            "proteina_g": 35,
+            "carbohidratos_g": 58,
+            "grasas_g": 6
+          }
         }
       }
     }
