@@ -4003,7 +4003,7 @@
       "receta": {
         "nombre": "Shake prote Pablo (sin skyr)",
         "descripcion_breve": "Batido proteico simple de whey isolate con agua y hielo, ultra magro y de rápida digestión.",
-        "categoria": "batido/proteico",
+        "categoria": "snack",
         "porciones": 1,
         "macros_por_porcion": {
           "calorias": 169,
