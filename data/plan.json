@@ -45,13 +45,13 @@
       },
       "2026-09-08": {
         "snack_tarde": {
-          "recipeId": "shake-prote-pablo-sin-skyr",
-          "recipeName": "Shake prote Pablo (sin skyr)",
+          "recipeId": "shake-prote-juli-sin-skyr",
+          "recipeName": "Shake prote Juli (sin skyr)",
           "macros": {
-            "calorias": 169,
-            "proteina_g": 36.2,
-            "carbohidratos_g": 3.7,
-            "grasas_g": 0.5
+            "calorias": 111,
+            "proteina_g": 24.4,
+            "carbohidratos_g": 2,
+            "grasas_g": 0.3
           }
         },
         "almuerzo": {
@@ -150,6 +150,16 @@
             "proteina_g": 102.6,
             "carbohidratos_g": 78.3,
             "grasas_g": 19.2
+          }
+        },
+        "snack_tarde": {
+          "recipeId": "shake-prote-juli-sin-skyr",
+          "recipeName": "Shake prote Juli (sin skyr)",
+          "macros": {
+            "calorias": 111,
+            "proteina_g": 24.4,
+            "carbohidratos_g": 2,
+            "grasas_g": 0.3
           }
         }
       }
