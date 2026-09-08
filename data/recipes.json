@@ -4121,7 +4121,7 @@
       "receta": {
         "nombre": "Helado Ninja Creami de Banana, Dulce de Leche y Chocolate (2 porciones)",
         "descripcion_breve": "Helado artesanal en Ninja Creami a base de banana congelada procesada con dulce de leche y trozos de chocolate amargo.",
-        "categoria": "postre/helado",
+        "categoria": "desayuno",
         "porciones": 2,
         "macros_por_porcion": {
           "calorias": 147,
@@ -4129,25 +4129,26 @@
           "carbohidratos_g": 30.5,
           "grasas_g": 2.9
         },
-        "macros_totales": {
-          "calorias": 294,
-          "proteina_g": 3.8,
-          "carbohidratos_g": 61.1,
-          "grasas_g": 5.7
-        },
         "ingredientes": [
           {
-            "nombre": "Banana congelada",
-            "cantidad": "180g"
+            "item": "Banana congelada",
+            "cantidad": 0,
+            "unidad": "g"
           },
           {
-            "nombre": "Dulce de leche",
-            "cantidad": "20g (1 cucharada)"
+            "item": "Dulce de leche",
+            "cantidad": 0,
+            "unidad": "g"
           },
           {
-            "nombre": "Chocolate amargo",
-            "cantidad": "14g"
+            "item": "Chocolate amargo",
+            "cantidad": 0,
+            "unidad": "g"
           }
+        ],
+        "paso_a_paso": [
+          "Hacer el helado con la creami.",
+          "Agregar el dulce de leche y chocolate y poner mix-in en la ninja."
         ]
       }
     },
