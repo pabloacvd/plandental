@@ -3931,9 +3931,9 @@
     {
       "id": "skyr-con-semillas-de-chia",
       "receta": {
-        "nombre": "Skyr con semillas de chía",
+        "nombre": "200g Skyr con chía (para 1)",
         "descripcion_breve": "Tazón de skyr magro acompañado de semillas de chía, alto en proteínas y fuente de fibra.",
-        "categoria": "desayuno/merienda",
+        "categoria": "desayuno",
         "porciones": 1,
         "macros_por_porcion": {
           "calorias": 134,
