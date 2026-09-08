@@ -4132,17 +4132,17 @@
         "ingredientes": [
           {
             "item": "Banana congelada",
-            "cantidad": 0,
+            "cantidad": 180,
             "unidad": "g"
           },
           {
             "item": "Dulce de leche",
-            "cantidad": 0,
+            "cantidad": 20,
             "unidad": "g"
           },
           {
             "item": "Chocolate amargo",
-            "cantidad": 0,
+            "cantidad": 14,
             "unidad": "g"
           }
         ],
