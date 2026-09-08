@@ -115,16 +115,6 @@
             "carbohidratos_g": 58,
             "grasas_g": 6
           }
-        },
-        "almuerzo": {
-          "recipeId": "pastel-de-carne-fit",
-          "recipeName": "Pastel de carne fit con puré mixto",
-          "macros": {
-            "calorias": 420,
-            "proteina_g": 38,
-            "carbohidratos_g": 30,
-            "grasas_g": 14
-          }
         }
       }
     }
@@ -214,16 +204,6 @@
             "proteina_g": 24.4,
             "carbohidratos_g": 2,
             "grasas_g": 0.3
-          }
-        },
-        "almuerzo": {
-          "recipeId": "pastel-de-carne-fit",
-          "recipeName": "Pastel de carne fit con puré mixto",
-          "macros": {
-            "calorias": 420,
-            "proteina_g": 38,
-            "carbohidratos_g": 30,
-            "grasas_g": 14
           }
         }
       }
