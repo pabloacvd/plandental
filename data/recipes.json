@@ -5,7 +5,7 @@
       "receta": {
         "nombre": "Batido Ninja Pablo",
         "descripcion_breve": "Batido proteico diario de whey isolate y skyr de vainilla, con más de 54g de proteína y muy bajo contenido de grasas.",
-        "categoria": "batido/proteico",
+        "categoria": "snack",
         "porciones": 1,
         "macros_por_porcion": {
           "calorias": 269,
