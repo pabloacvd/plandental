@@ -301,7 +301,6 @@ input  { font: inherit; border: none; outline: none; }
 .cat--desayuno      { background: #fef9c3; color: #a16207; }
 .cat--almuerzo      { background: var(--green-bg); color: #15803d; }
 .cat--snack         { background: var(--purple-bg); color: #6d28d9; }
-.cat--liviana       { background: var(--accent-bg); color: var(--accent-dark); }
 .cat--cena          { background: var(--orange-bg); color: #c2410c; }
 
 /* ── CONTENT AREA ── */

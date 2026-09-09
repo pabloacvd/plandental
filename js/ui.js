@@ -10,7 +10,6 @@ function catClass(cat = '') {
   const c = cat.toLowerCase();
   if (c.includes('desayuno'))    return 'cat--desayuno';
   if (c.includes('snack'))       return 'cat--snack';
-  if (c.includes('liviana'))     return 'cat--liviana';
   if (c.includes('almuerzo'))    return 'cat--almuerzo';
   return 'cat--cena';
 }
@@ -19,7 +18,6 @@ function catLabel(cat = '') {
   const c = cat.toLowerCase();
   if (c.includes('desayuno'))    return 'Desayuno';
   if (c.includes('snack'))       return 'Snack';
-  if (c.includes('liviana'))     return 'Liviana';
   if (c.includes('almuerzo') && c.includes('cena')) return 'Alm/Cena';
   if (c.includes('almuerzo'))    return 'Almuerzo';
   return 'Cena';

@@ -1924,8 +1924,8 @@
       "id": "omelette-claras",
       "receta": {
         "nombre": "Omelette de claras con vegetales",
-        "descripcion_breve": "Omelette proteico hecho con claras de huevo, champiñones, pimiento rojo y queso fresco. Ideal para desayuno o cena liviana.",
-        "categoria": "desayuno/cena liviana",
+        "descripcion_breve": "Omelette proteico hecho con claras de huevo, champiñones, pimiento rojo y queso fresco. Ideal para desayuno o cena.",
+        "categoria": "desayuno",
         "porciones": 1,
         "macros_por_porcion": {
           "calorias": 280,
@@ -2751,7 +2751,7 @@
       "receta": {
         "nombre": "Bowl de Skyr con Banana y Chía",
         "descripcion_breve": "Desayuno liviano y nutritivo con skyr, banana fresca y semillas de chía para aportar fibra y grasas saludables.",
-        "categoria": "desayuno/bowl",
+        "categoria": "desayuno",
         "porciones": 1,
         "macros_por_porcion": {
           "calorias": 175,
