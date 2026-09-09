@@ -2133,49 +2133,6 @@
       }
     },
     {
-      "id": "tomates-rellenos-al-horno",
-      "receta": {
-        "nombre": "Tomates rellenos al horno con cous cous y atún",
-        "descripcion_breve": "Tomates ahuecados rellenos con cous cous, cebolla asada y atún, calentados en Ninja.",
-        "categoria": "almuerzo/cena",
-        "porciones": 2,
-        "macros_por_porcion": {
-          "calorias": 330,
-          "proteina_g": 34,
-          "carbohidratos_g": 30,
-          "grasas_g": 8
-        },
-        "ingredientes": [
-          {
-            "item": "Tomates perita grandes",
-            "cantidad": 4,
-            "unidad": "unidad"
-          },
-          {
-            "item": "Atún al natural",
-            "cantidad": 200,
-            "unidad": "g"
-          },
-          {
-            "item": "Cous cous cocido",
-            "cantidad": 100,
-            "unidad": "g"
-          },
-          {
-            "item": "Cebolla asada",
-            "cantidad": 60,
-            "unidad": "g"
-          }
-        ],
-        "paso_a_paso": [
-          "Ahuecar los tomates retirando el centro.",
-          "Mezclar el cous cous con el atún y la cebolla asada.",
-          "Rellenar los tomates firmemente.",
-          "Llevar a la Ninja / Airfryer a 180°C durante 10 minutos."
-        ]
-      }
-    },
-    {
       "id": "bifes-criolla-con-zapallitos",
       "receta": {
         "nombre": "Bifes a la criolla con zucchinis",
