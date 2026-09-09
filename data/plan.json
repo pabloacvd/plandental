@@ -86,16 +86,6 @@
         }
       },
       "2026-09-09": {
-        "desayuno": {
-          "recipeId": "yogur-griego-con-dulce-de-leche",
-          "recipeName": "Yogur Griego con Dulce de Leche",
-          "macros": {
-            "calorias": 256,
-            "proteina_g": 16.2,
-            "carbohidratos_g": 31.4,
-            "grasas_g": 7.2
-          }
-        },
         "snack_tarde": {
           "recipeId": "shake-prote-pablo-sin-skyr",
           "recipeName": "Shake prote Pablo (sin skyr)",
