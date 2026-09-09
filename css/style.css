@@ -756,8 +756,11 @@ input  { font: inherit; border: none; outline: none; }
   border-radius: var(--radius-sm);
   transition: var(--transition);
   color: var(--text-muted);
+  flex-shrink: 0;
 }
 .btn-shopping:hover { background: var(--bg); color: var(--accent); }
+/* Hide header shopping button on mobile — footer button is used instead */
+.btn-shopping--header { display: inline-flex; align-items: center; }
 
 /* ── Recipe editor modal ── */
 .modal-box--editor {
@@ -1088,6 +1091,7 @@ input  { font: inherit; border: none; outline: none; }
   .brand-name { font-size: .95rem; }
   .brand-icon { font-size: 1.2rem; }
   .auth-area--desktop { display: none; }
+  .btn-shopping--header { display: none; }
 
   /* ── Person switcher compact ── */
   .person-btn { padding: 4px 10px; font-size: .78rem; }
