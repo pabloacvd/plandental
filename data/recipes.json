@@ -1222,49 +1222,6 @@
       }
     },
     {
-      "id": "kalroulader",
-      "receta": {
-        "nombre": "Kålroulader (Niños envueltos en spidskål)",
-        "descripcion_breve": "Hojas de repollo spidskål blanqueadas y rellenas de carne picada cocinadas en salsa de tomate.",
-        "categoria": "almuerzo/cena",
-        "porciones": 2,
-        "macros_por_porcion": {
-          "calorias": 370,
-          "proteina_g": 42,
-          "carbohidratos_g": 18,
-          "grasas_g": 14
-        },
-        "ingredientes": [
-          {
-            "item": "Hojas grandes de spidskål",
-            "cantidad": 6,
-            "unidad": "unidad"
-          },
-          {
-            "item": "Carne picada magra",
-            "cantidad": 350,
-            "unidad": "g"
-          },
-          {
-            "item": "Cebolla rallada",
-            "cantidad": 80,
-            "unidad": "g"
-          },
-          {
-            "item": "Salsa de tomate casera",
-            "cantidad": 200,
-            "unidad": "g"
-          }
-        ],
-        "paso_a_paso": [
-          "Blanquear las hojas de spidskål en agua hirviendo 2 minutos.",
-          "Mezclar la carne cruda con cebolla, sal y pimienta.",
-          "Envolver porciones de carne con las hojas de repollo.",
-          "Colocar en fuente con salsa de tomate y hornear 30 min a 190°C."
-        ]
-      }
-    },
-    {
       "id": "wok-pollo-esparragos-couscous",
       "receta": {
         "nombre": "Wok de pollo, espárragos y cous cous",
