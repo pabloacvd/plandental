@@ -260,20 +260,20 @@
     {
       "id": "pastel-de-carne-fit",
       "receta": {
-        "nombre": "Pastel de carne fit con puré mixto",
-        "descripcion_breve": "Base de carne picada magra con sofrito, cubierta por un puré liviano de calabaza y papa.",
+        "nombre": "Pastel de carne fit tradicional (solo papa)",
+        "descripcion_breve": "Base de carne picada magra con sofrito, 2 huevos duros y aceitunas, cubierta por puré de papa liviano.",
         "categoria": "almuerzo/cena",
         "porciones": 3,
         "macros_por_porcion": {
-          "calorias": 420,
-          "proteina_g": 38,
-          "carbohidratos_g": 30,
-          "grasas_g": 14
+          "calorias": 386,
+          "proteina_g": 35.5,
+          "carbohidratos_g": 31.6,
+          "grasas_g": 12.9
         },
         "ingredientes": [
           {
             "item": "Carne picada magra (3-7% grasa)",
-            "cantidad": 500,
+            "cantidad": 386,
             "unidad": "g"
           },
           {
@@ -282,13 +282,18 @@
             "unidad": "g"
           },
           {
-            "item": "Calabaza (Anco)",
-            "cantidad": 300,
+            "item": "Papa",
+            "cantidad": 450,
             "unidad": "g"
           },
           {
-            "item": "Papa",
-            "cantidad": 150,
+            "item": "Huevo duro picado",
+            "cantidad": 2,
+            "unidad": "unidades (~112g netos)"
+          },
+          {
+            "item": "Aceitunas picadas",
+            "cantidad": 30,
             "unidad": "g"
           },
           {
@@ -298,10 +303,11 @@
           }
         ],
         "paso_a_paso": [
-          "Cocinar la carne magra con la cebolla y el morrón hasta dorar.",
-          "Hervir la calabaza y la papa; hacer un puré firme pisándolas juntas.",
-          "Colocar la carne en una fuente para horno y cubrir con el puré.",
-          "Gratinar en el horno a 200°C por 15 minutos."
+          "Cocinar la carne magra con la cebolla y el morrón hasta dorar. Condimentar al gusto.",
+          "Hervir las papas y pisarlas bien hasta obtener un puré firme.",
+          "Mezclar los 2 huevos duros picados y las aceitunas con el relleno de carne salteada.",
+          "Colocar la mezcla de carne en una fuente para horno y cubrir homogéneamente con el puré de papa.",
+          "Gratinar en el horno precalentado a 200°C durante 15 a 20 minutos hasta que la superficie esté dorada."
         ]
       }
     },
