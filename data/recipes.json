@@ -2747,65 +2747,6 @@
       }
     },
     {
-      "id": "caldo-pollo-verduras",
-      "receta": {
-        "nombre": "Caldo de pollo con verduras y fideos",
-        "descripcion_breve": "Sopa reconfortante de caldo de pollo casero con zanahoria, apio, zapallito y fideos cabello de ángel. Ideal para días fríos.",
-        "categoria": "almuerzo/cena liviana",
-        "porciones": 2,
-        "macros_por_porcion": {
-          "calorias": 290,
-          "proteina_g": 28,
-          "carbohidratos_g": 30,
-          "grasas_g": 5
-        },
-        "ingredientes": [
-          {
-            "item": "Pechuga de pollo",
-            "cantidad": 300,
-            "unidad": "g"
-          },
-          {
-            "item": "Zanahoria",
-            "cantidad": 100,
-            "unidad": "g"
-          },
-          {
-            "item": "Apio",
-            "cantidad": 80,
-            "unidad": "g"
-          },
-          {
-            "item": "Zapallito verde",
-            "cantidad": 100,
-            "unidad": "g"
-          },
-          {
-            "item": "Fideos cabello de ángel",
-            "cantidad": 60,
-            "unidad": "g"
-          },
-          {
-            "item": "Caldo de pollo bajo en sodio",
-            "cantidad": 1000,
-            "unidad": "ml"
-          },
-          {
-            "item": "Sal, perejil y laurel",
-            "cantidad": 1,
-            "unidad": "al gusto"
-          }
-        ],
-        "paso_a_paso": [
-          "Hervir el caldo con la pechuga entera, laurel y sal 20 minutos.",
-          "Retirar el pollo, desmenuzar y reservar.",
-          "Agregar las verduras cortadas al caldo. Cocinar 10 minutos.",
-          "Incorporar los fideos y el pollo desmenuzado. Cocinar 3-4 minutos más.",
-          "Servir caliente con perejil fresco."
-        ]
-      }
-    },
-    {
       "id": "risotto-champignones-fit",
       "receta": {
         "nombre": "Risotto de champiñones fit",
