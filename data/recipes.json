@@ -1265,49 +1265,6 @@
       }
     },
     {
-      "id": "medallones-atun-airfryer",
-      "receta": {
-        "nombre": "Medallones de atún a la airfryer",
-        "descripcion_breve": "Hamburguesas de atún, huevo, cebolla y un toque de avena, acompañadas de puré de calabaza y brócoli.",
-        "categoria": "almuerzo/cena",
-        "porciones": 2,
-        "macros_por_porcion": {
-          "calorias": 360,
-          "proteina_g": 42,
-          "carbohidratos_g": 26,
-          "grasas_g": 10
-        },
-        "ingredientes": [
-          {
-            "item": "Atún al natural",
-            "cantidad": 280,
-            "unidad": "g"
-          },
-          {
-            "item": "Huevo",
-            "cantidad": 1,
-            "unidad": "unidad"
-          },
-          {
-            "item": "Avena extrafina",
-            "cantidad": 30,
-            "unidad": "g"
-          },
-          {
-            "item": "Calabaza y brócoli (para puré)",
-            "cantidad": 300,
-            "unidad": "g"
-          }
-        ],
-        "paso_a_paso": [
-          "Mezclar el atún con el huevo, la avena y cebolla picada.",
-          "Formar medallones y cocinar en freidora de aire a 190°C por 12 minutos.",
-          "Hacer un puré mixto de calabaza y brócoli hirviéndolos.",
-          "Servir los medallones con el puré al costado."
-        ]
-      }
-    },
-    {
       "id": "tarta-sin-masa-esparragos-puerro",
       "receta": {
         "nombre": "Tarta sin masa de espárragos y puerro",
