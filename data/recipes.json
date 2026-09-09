@@ -643,49 +643,6 @@
       }
     },
     {
-      "id": "salmon-al-papillote",
-      "receta": {
-        "nombre": "Salmón al papillote (Día de oficina - Pablo)",
-        "descripcion_breve": "Filet de salmón en papillote horneado con juliana de morrones, cebolla y limón.",
-        "categoria": "almuerzo/cena",
-        "porciones": 1,
-        "macros_por_porcion": {
-          "calorias": 440,
-          "proteina_g": 38,
-          "carbohidratos_g": 12,
-          "grasas_g": 26
-        },
-        "ingredientes": [
-          {
-            "item": "Salmón fresco",
-            "cantidad": 180,
-            "unidad": "g"
-          },
-          {
-            "item": "Cebolla en juliana",
-            "cantidad": 60,
-            "unidad": "g"
-          },
-          {
-            "item": "Morrón en juliana",
-            "cantidad": 60,
-            "unidad": "g"
-          },
-          {
-            "item": "Rodajas de limón y eneldo",
-            "cantidad": 20,
-            "unidad": "g"
-          }
-        ],
-        "paso_a_paso": [
-          "Colocar un paquete de papel manteca o aluminio con los vegetales de base.",
-          "Disponer el salmón salpimentado por encima y cubrir con rodajas de limón.",
-          "Cerrar herméticamente el paquete.",
-          "Hornear a 190°C durante 15-18 minutos."
-        ]
-      }
-    },
-    {
       "id": "zapallitos-o-berenjenas-rellenas",
       "receta": {
         "nombre": "Zapallitos o berenjenas rellenas gratinadas",
