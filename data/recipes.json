@@ -3192,53 +3192,47 @@
     {
       "id": "avena-proteica",
       "receta": {
-        "nombre": "Avena proteica con frutas y miel",
-        "descripcion_breve": "Porridge de avena cocida con proteína de suero, banana, arándanos y un toque de miel. El mejor desayuno energético.",
-        "categoria": "desayuno",
+        "nombre": "Avena con Oatly y banana",
+        "descripcion_breve": "Tazón rápido de avena fina Änglamark con leche de avena Oatly Barista y banana fresca.",
+        "categoria": "desayuno/merienda",
         "porciones": 1,
         "macros_por_porcion": {
-          "calorias": 420,
-          "proteina_g": 35,
-          "carbohidratos_g": 58,
-          "grasas_g": 6
+          "calorias": 361,
+          "proteina_g": 9.3,
+          "carbohidratos_g": 59.8,
+          "grasas_g": 8
         },
         "ingredientes": [
           {
-            "item": "Avena arrollada",
-            "cantidad": 70,
-            "unidad": "g"
+            "nombre": "Änglamark Finvalsede Havregryn",
+            "cantidad_g": 40,
+            "macros": {
+              "calorias": 148,
+              "proteina_g": 5.2,
+              "carbohidratos_g": 23.6,
+              "grasas_g": 2.8
+            }
           },
           {
-            "item": "Leche descremada",
-            "cantidad": 200,
-            "unidad": "ml"
+            "nombre": "Oatly Barista Edition (oat milk)",
+            "cantidad_ml": 150,
+            "macros": {
+              "calorias": 104,
+              "proteina_g": 1.7,
+              "carbohidratos_g": 9.9,
+              "grasas_g": 4.5
+            }
           },
           {
-            "item": "Proteína de suero (whey vanilla)",
-            "cantidad": 30,
-            "unidad": "g"
-          },
-          {
-            "item": "Banana",
-            "cantidad": 80,
-            "unidad": "g"
-          },
-          {
-            "item": "Arándanos",
-            "cantidad": 50,
-            "unidad": "g"
-          },
-          {
-            "item": "Miel",
-            "cantidad": 10,
-            "unidad": "g"
+            "nombre": "Banana",
+            "cantidad_g": 100,
+            "macros": {
+              "calorias": 89,
+              "proteina_g": 1.1,
+              "carbohidratos_g": 22.8,
+              "grasas_g": 0.3
+            }
           }
-        ],
-        "paso_a_paso": [
-          "Cocinar la avena en la leche a fuego medio, revolviendo, hasta espesar (5 min).",
-          "Retirar del fuego y mezclar con la proteína de suero.",
-          "Servir en un bowl con la banana en rodajas y los arándanos.",
-          "Terminar con la miel."
         ]
       }
     },
