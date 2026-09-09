@@ -825,54 +825,6 @@
       }
     },
     {
-      "id": "tacos-de-salmon",
-      "receta": {
-        "nombre": "Tacos de salmón en hojas de spidskål (Día de oficina - Pablo)",
-        "descripcion_breve": "Salmón desmenuzado con palta y cebolla morada sobre hojas crujientes de repollo spidskål.",
-        "categoria": "almuerzo/cena",
-        "porciones": 1,
-        "macros_por_porcion": {
-          "calorias": 460,
-          "proteina_g": 36,
-          "carbohidratos_g": 10,
-          "grasas_g": 30
-        },
-        "ingredientes": [
-          {
-            "item": "Salmón cocido desmenuzado",
-            "cantidad": 160,
-            "unidad": "g"
-          },
-          {
-            "item": "Hojas de repollo spidskål",
-            "cantidad": 4,
-            "unidad": "unidad"
-          },
-          {
-            "item": "Palta pisada",
-            "cantidad": 60,
-            "unidad": "g"
-          },
-          {
-            "item": "Cebolla morada picada",
-            "cantidad": 30,
-            "unidad": "g"
-          },
-          {
-            "item": "Cilantro y limón",
-            "cantidad": 10,
-            "unidad": "g"
-          }
-        ],
-        "paso_a_paso": [
-          "Mezclar el salmón desmenuzado con la palta pisada, cebolla y limón.",
-          "Lavar y separar con cuidado las hojas frescas de spidskål.",
-          "Usar las hojas como tortillas y rellenar con la mezcla de salmón.",
-          "Espolvorear cilantro por encima antes de comer."
-        ]
-      }
-    },
-    {
       "id": "fideos-de-arroz-bolonesa",
       "receta": {
         "nombre": "Fideos de arroz a la boloñesa magra",
