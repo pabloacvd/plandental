@@ -643,59 +643,6 @@
       }
     },
     {
-      "id": "empanadas-arabes-abiertas",
-      "receta": {
-        "nombre": "Empanadas árabes (Fatay) abiertas integrales",
-        "descripcion_breve": "Masa integral con relleno de carne picada magra, cebolla, tomate y jugo de limón cocinadas abiertas.",
-        "categoria": "almuerzo/cena",
-        "porciones": 2,
-        "macros_por_porcion": {
-          "calorias": 420,
-          "proteina_g": 36,
-          "carbohidratos_g": 38,
-          "grasas_g": 14
-        },
-        "ingredientes": [
-          {
-            "item": "Tapas de empanada integrales",
-            "cantidad": 4,
-            "unidad": "unidad"
-          },
-          {
-            "item": "Carne picada magra (3-7%)",
-            "cantidad": 300,
-            "unidad": "g"
-          },
-          {
-            "item": "Cebolla picada fina",
-            "cantidad": 100,
-            "unidad": "g"
-          },
-          {
-            "item": "Tomate picado",
-            "cantidad": 80,
-            "unidad": "g"
-          },
-          {
-            "item": "Jugo de limón",
-            "cantidad": 30,
-            "unidad": "ml"
-          },
-          {
-            "item": "Menta fresca, sal y siete especias",
-            "cantidad": 5,
-            "unidad": "g"
-          }
-        ],
-        "paso_a_paso": [
-          "Macerar la carne cruda con cebolla, tomate, jugo de limón y especias por 30 min.",
-          "Acomodar las tapas integrales en una placa y colocar el relleno en el centro.",
-          "Pizcar los bordes formando triángulos abiertos.",
-          "Hornear a 200°C por 18 minutos."
-        ]
-      }
-    },
-    {
       "id": "salmon-al-papillote",
       "receta": {
         "nombre": "Salmón al papillote (Día de oficina - Pablo)",
