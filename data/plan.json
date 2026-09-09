@@ -145,6 +145,16 @@
             "carbohidratos_g": 24.3,
             "grasas_g": 19.3
           }
+        },
+        "snack_noche": {
+          "recipeId": "yogur-griego-con-dulce-de-leche",
+          "recipeName": "Yogur Griego con Dulce de Leche",
+          "macros": {
+            "calorias": 256,
+            "proteina_g": 16.2,
+            "carbohidratos_g": 31.4,
+            "grasas_g": 7.2
+          }
         }
       },
       "2026-09-10": {
