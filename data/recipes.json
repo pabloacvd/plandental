@@ -643,54 +643,6 @@
       }
     },
     {
-      "id": "pechuga-a-la-mostaza",
-      "receta": {
-        "nombre": "Pechuga a la mostaza con blomkålsris",
-        "descripcion_breve": "Pollo dorado desglasado con salsa de mostaza y un toque de leche de coco light, servido sobre arroz de coliflor.",
-        "categoria": "almuerzo/cena",
-        "porciones": 2,
-        "macros_por_porcion": {
-          "calorias": 360,
-          "proteina_g": 46,
-          "carbohidratos_g": 12,
-          "grasas_g": 14
-        },
-        "ingredientes": [
-          {
-            "item": "Pechuga de pollo",
-            "cantidad": 400,
-            "unidad": "g"
-          },
-          {
-            "item": "Mostaza de Dijon",
-            "cantidad": 30,
-            "unidad": "g"
-          },
-          {
-            "item": "Leche de coco light",
-            "cantidad": 100,
-            "unidad": "ml"
-          },
-          {
-            "item": "Arroz de coliflor (blomkålsris)",
-            "cantidad": 250,
-            "unidad": "g"
-          },
-          {
-            "item": "Caldo de verduras",
-            "cantidad": 50,
-            "unidad": "ml"
-          }
-        ],
-        "paso_a_paso": [
-          "Dorar las pechugas en una sartén antiadherente por ambos lados.",
-          "Desglasar agregando el caldo, la mostaza y la leche de coco light.",
-          "Cocinar a fuego bajo 8 minutos hasta reducir la salsa.",
-          "Servir junto con el blomkålsris previamente salteado."
-        ]
-      }
-    },
-    {
       "id": "empanadas-arabes-abiertas",
       "receta": {
         "nombre": "Empanadas árabes (Fatay) abiertas integrales",
