@@ -258,54 +258,6 @@
       }
     },
     {
-      "id": "salmon-glaseado",
-      "receta": {
-        "nombre": "Salmón glaseado con fideos de arroz y brócoli (Día de oficina - Pablo)",
-        "descripcion_breve": "Filet de salmón horneado con soja y jengibre, servido con fideos de arroz y brócoli al vapor.",
-        "categoria": "almuerzo/cena",
-        "porciones": 1,
-        "macros_por_porcion": {
-          "calorias": 550,
-          "proteina_g": 42,
-          "carbohidratos_g": 45,
-          "grasas_g": 20
-        },
-        "ingredientes": [
-          {
-            "item": "Filet de salmón fresco",
-            "cantidad": 200,
-            "unidad": "g"
-          },
-          {
-            "item": "Salsa de soja baja en sodio",
-            "cantidad": 20,
-            "unidad": "ml"
-          },
-          {
-            "item": "Jengibre rallado",
-            "cantidad": 5,
-            "unidad": "g"
-          },
-          {
-            "item": "Fideos de arroz (peso en seco)",
-            "cantidad": 50,
-            "unidad": "g"
-          },
-          {
-            "item": "Brócoli",
-            "cantidad": 150,
-            "unidad": "g"
-          }
-        ],
-        "paso_a_paso": [
-          "Marinar el salmón con salsa de soja y jengibre rallado por 10 minutos.",
-          "Cocinar el salmón en airfryer u horno a 180°C durante 12 minutos.",
-          "Cocinar los fideos de arroz e hidratar según instrucciones del paquete.",
-          "Hacer el brócoli al vapor y servir todo junto."
-        ]
-      }
-    },
-    {
       "id": "pastel-de-carne-fit",
       "receta": {
         "nombre": "Pastel de carne fit con puré mixto",
