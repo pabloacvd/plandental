@@ -245,6 +245,16 @@
             "carbohidratos_g": 17.7,
             "grasas_g": 1.8
           }
+        },
+        "desayuno": {
+          "recipeId": "avena-proteica",
+          "recipeName": "Avena con Oatly y banana",
+          "macros": {
+            "calorias": 361,
+            "proteina_g": 9.3,
+            "carbohidratos_g": 59.8,
+            "grasas_g": 8
+          }
         }
       }
     }
