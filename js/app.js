@@ -873,6 +873,167 @@ function previewJSON() {
 // AUTH MODAL
 // ══════════════════════════════════════════════════════════
 
+// ══════════════════════════════════════════════════════════
+// SHOPPING LIST
+// ══════════════════════════════════════════════════════════
+
+const DAY_NAMES_ES = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
+
+/**
+ * Build the shopping list from today (or Monday if today is past Sunday) through
+ * Sunday of the current anchor week.
+ * Returns an array of { dateKey, dayName, items: [{ name, qty, unit }] }
+ * One entry per ingredient per day (not aggregated across days).
+ */
+function buildShoppingList() {
+  const weekDays = getWeekDays(state.anchorDate);
+  const weekKey  = toWeekKey(state.anchorDate);
+  const todayKey = toDateKey(new Date());
+
+  // Only days from today onwards (inclusive) within the displayed week
+  const relevantDays = weekDays.filter(d => toDateKey(d) >= todayKey);
+
+  const result = [];
+
+  for (let i = 0; i < relevantDays.length; i++) {
+    const date    = relevantDays[i];
+    const dateKey = toDateKey(date);
+    // ISO weekday index: Mon=0 … Sun=6
+    const dayIdx  = weekDays.indexOf(date);
+    const dayName = DAY_NAMES_ES[dayIdx] ?? dateKey;
+
+    // Gather all meals for this day across persons
+    const persons = state.person === 'Familia' ? ['Pablo', 'Juli'] : [state.person];
+    const seenRecipes = new Set();
+    const dayItems    = [];
+
+    for (const p of persons) {
+      const dayEntry = state.plan?.[p]?.[weekKey]?.[dateKey];
+      if (!dayEntry) continue;
+
+      for (const slotId of Object.keys(dayEntry)) {
+        const meal = dayEntry[slotId];
+        if (!meal?.recipeId) continue;
+
+        // Deduplicate: same recipe shown once per day even in Familia mode
+        const key = `${meal.recipeId}__${slotId.replace(/_juli$/, '')}`;
+        if (seenRecipes.has(key)) continue;
+        seenRecipes.add(key);
+
+        const recipe = getRecipeById(meal.recipeId);
+        if (!recipe?.receta?.ingredientes) continue;
+
+        for (const ing of recipe.receta.ingredientes) {
+          if (!ing.item) continue;
+          dayItems.push({
+            name: ing.item,
+            qty:  ing.cantidad ?? '',
+            unit: ing.unidad  ?? '',
+          });
+        }
+      }
+    }
+
+    if (dayItems.length > 0) {
+      result.push({ dateKey, dayName, items: dayItems });
+    }
+  }
+
+  return result;
+}
+
+/**
+ * Render the shopping list modal content and open it.
+ */
+function openShoppingModal() {
+  const list = buildShoppingList();
+
+  // Date range label
+  const weekDays  = getWeekDays(state.anchorDate);
+  const todayKey  = toDateKey(new Date());
+  const firstDay  = weekDays.find(d => toDateKey(d) >= todayKey) ?? weekDays[0];
+  const lastDay   = weekDays[6];
+  const fmt = d => `${d.getDate()}/${d.getMonth() + 1}`;
+  document.getElementById('shopping-date-range').textContent =
+    `${fmt(firstDay)} – ${fmt(lastDay)}`;
+
+  // Build content
+  const container = document.getElementById('shopping-list-content');
+  container.innerHTML = '';
+
+  if (list.length === 0) {
+    container.innerHTML = '<div class="shopping-empty">No hay comidas planificadas desde hoy hasta el domingo 🍽️</div>';
+  } else {
+    for (const { dayName, items } of list) {
+      const group = document.createElement('div');
+      group.className = 'shopping-day-group';
+
+      const title = document.createElement('div');
+      title.className = 'shopping-day-title';
+      title.textContent = dayName.charAt(0).toUpperCase() + dayName.slice(1);
+      group.appendChild(title);
+
+      for (const { name, qty, unit } of items) {
+        const row = document.createElement('div');
+        row.className = 'shopping-item';
+        row.innerHTML = `
+          <span class="shopping-item-name">${name}</span>
+          <span class="shopping-item-qty">${qty}${unit}</span>
+        `;
+        group.appendChild(row);
+      }
+
+      container.appendChild(group);
+    }
+  }
+
+  // Store list for share
+  document.getElementById('modal-shopping').dataset.list = buildShoppingListText(list);
+
+  document.getElementById('modal-shopping').classList.remove('hidden');
+}
+
+function closeShoppingModal() {
+  document.getElementById('modal-shopping').classList.add('hidden');
+}
+
+/**
+ * Convert the structured list to plain text: "Ingrediente cantidad+unidad día"
+ */
+function buildShoppingListText(list) {
+  const lines = [];
+  for (const { dayName, items } of list) {
+    for (const { name, qty, unit } of items) {
+      lines.push(`${name} ${qty}${unit} ${dayName}`);
+    }
+  }
+  return lines.join('\n');
+}
+
+async function shareShoppingList() {
+  const text = document.getElementById('modal-shopping').dataset.list || '';
+  if (!text) {
+    showToast('No hay ingredientes para compartir', 'warn');
+    return;
+  }
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: 'Compras del super', text });
+    } catch (e) {
+      // User cancelled or share failed — ignore AbortError
+      if (e.name !== 'AbortError') showToast('❌ No se pudo compartir', 'error');
+    }
+  } else {
+    // Fallback: copy to clipboard
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast('✅ Lista copiada al portapapeles', 'success');
+    } catch {
+      showToast('❌ No se pudo copiar', 'error');
+    }
+  }
+}
+
 function openAuthModal() {
   // Pre-fill token field if already connected (masked)
   const { token } = getCredentials();
@@ -1071,6 +1232,13 @@ function wireControls() {
     tab.addEventListener('click', () => setEditorTab(tab.dataset.tab));
   });
 
+  // Shopping list
+  document.getElementById('btn-shopping-list').addEventListener('click', openShoppingModal);
+  document.getElementById('btn-shopping-list-footer').addEventListener('click', openShoppingModal);
+  document.getElementById('btn-close-shopping-modal').addEventListener('click', closeShoppingModal);
+  document.querySelector('#modal-shopping .modal-backdrop').addEventListener('click', closeShoppingModal);
+  document.getElementById('btn-share-shopping').addEventListener('click', shareShoppingList);
+
   // Auth
   document.getElementById('btn-github-auth').addEventListener('click', openAuthModal);
   document.getElementById('btn-close-auth-modal').addEventListener('click', closeAuthModal);
@@ -1088,6 +1256,7 @@ function wireControls() {
       closeRecipeModal();
       closeAuthModal();
       closeRecipeEditor();
+      closeShoppingModal();
       const picker = document.querySelector('.slot-picker');
       if (picker) picker.remove();
     }

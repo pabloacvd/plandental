@@ -33,6 +33,7 @@
         </div>
         <!-- Auth moved to footer on mobile; shown here on desktop -->
         <div class="auth-area auth-area--desktop">
+          <button id="btn-shopping-list" class="btn-shopping" title="Lista de compras">🛒</button>
           <button id="btn-github-auth" class="btn-auth">Conectar GitHub</button>
           <span id="auth-status" class="auth-status"></span>
         </div>
@@ -93,6 +94,7 @@
        FOOTER (mobile: GitHub auth)
   ═══════════════════════════════════════════════ -->
   <footer class="app-footer" id="app-footer">
+    <button id="btn-shopping-list-footer" class="btn-shopping" title="Lista de compras">🛒 Compras</button>
     <button id="btn-github-auth-footer" class="btn-auth">Conectar GitHub</button>
     <span id="auth-status-footer" class="auth-status"></span>
   </footer>
@@ -223,6 +225,24 @@
           <button id="btn-load-json" class="btn-secondary">Previsualizar</button>
           <button id="btn-save-json-recipe" class="btn-primary">Guardar</button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shopping List Modal -->
+  <div id="modal-shopping" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-box modal-box--shopping">
+      <button class="modal-close" id="btn-close-shopping-modal">✕</button>
+      <div class="shopping-modal-header">
+        <h3>🛒 Lista de compras</h3>
+        <span id="shopping-date-range" class="shopping-date-range"></span>
+      </div>
+      <div id="shopping-list-content" class="shopping-list-content"></div>
+      <div class="shopping-actions">
+        <button id="btn-share-shopping" class="btn-primary btn-share">
+          <span>📤</span> Compartir
+        </button>
       </div>
     </div>
   </div>

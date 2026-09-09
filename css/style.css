@@ -697,6 +697,68 @@ input  { font: inherit; border: none; outline: none; }
   flex-shrink: 0; margin-top: 1px;
 }
 
+/* ── Shopping list modal ── */
+.modal-box--shopping {
+  max-width: 480px;
+}
+.shopping-modal-header {
+  display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px;
+}
+.shopping-modal-header h3 {
+  font-size: 1.05rem; font-weight: 700;
+}
+.shopping-date-range {
+  font-size: .78rem; color: var(--text-muted);
+}
+.shopping-list-content {
+  max-height: 55vh;
+  overflow-y: auto;
+  margin-bottom: 16px;
+}
+.shopping-empty {
+  text-align: center; padding: 32px 0;
+  color: var(--text-muted); font-size: .9rem;
+}
+.shopping-day-group {
+  margin-bottom: 14px;
+}
+.shopping-day-title {
+  font-size: .72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .06em;
+  color: var(--text-muted);
+  padding: 4px 0 6px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 6px;
+}
+.shopping-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 5px 4px;
+  border-radius: var(--radius-sm);
+  font-size: .88rem;
+}
+.shopping-item:hover { background: var(--surface-alt); }
+.shopping-item-name { flex: 1; font-weight: 500; }
+.shopping-item-qty {
+  color: var(--accent); font-weight: 600; font-size: .82rem;
+  white-space: nowrap;
+}
+.shopping-actions {
+  display: flex; justify-content: flex-end;
+}
+.btn-share {
+  display: flex; align-items: center; gap: 6px;
+  width: auto; padding: 8px 20px; margin-top: 0;
+}
+/* Shopping button in header */
+.btn-shopping {
+  font-size: 1.15rem;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  color: var(--text-muted);
+}
+.btn-shopping:hover { background: var(--bg); color: var(--accent); }
+
 /* ── Recipe editor modal ── */
 .modal-box--editor {
   max-width: 700px;
@@ -1118,6 +1180,10 @@ input  { font: inherit; border: none; outline: none; }
   }
   .app-footer .auth-status {
     font-size: .75rem;
+  }
+  .app-footer .btn-shopping {
+    font-size: .82rem; font-weight: 600;
+    color: var(--accent);
   }
 
   /* ── Toast: above footer ── */
