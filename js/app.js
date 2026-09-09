@@ -879,6 +879,16 @@ function previewJSON() {
 
 const DAY_NAMES_ES = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
 
+// Ingredients always excluded from the shopping list (case-insensitive substring match)
+const SHOPPING_EXCLUDE = [
+  'agua', 'hielo', 'whey isolate', 'proteína de suero', 'condimento',
+];
+
+function isExcludedIngredient(name) {
+  const lower = name.toLowerCase();
+  return SHOPPING_EXCLUDE.some(ex => lower.includes(ex));
+}
+
 /**
  * Build the shopping list from today (or Monday if today is past Sunday) through
  * Sunday of the current anchor week.
@@ -925,6 +935,7 @@ function buildShoppingList() {
 
         for (const ing of recipe.receta.ingredientes) {
           if (!ing.item) continue;
+          if (isExcludedIngredient(ing.item)) continue;
           dayItems.push({
             name: ing.item,
             qty:  ing.cantidad ?? '',
