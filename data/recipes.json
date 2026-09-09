@@ -734,54 +734,6 @@
       }
     },
     {
-      "id": "bifes-a-la-criolla-magros",
-      "receta": {
-        "nombre": "Bifes a la criolla magros",
-        "descripcion_breve": "Bifes de ternera cocinados a la cacerola con rodajas de cebolla, morrón y tomate natural.",
-        "categoria": "almuerzo/cena",
-        "porciones": 2,
-        "macros_por_porcion": {
-          "calorias": 380,
-          "proteina_g": 48,
-          "carbohidratos_g": 16,
-          "grasas_g": 14
-        },
-        "ingredientes": [
-          {
-            "item": "Bifes magros de ternera",
-            "cantidad": 400,
-            "unidad": "g"
-          },
-          {
-            "item": "Cebollas cortadas en rodajas",
-            "cantidad": 200,
-            "unidad": "g"
-          },
-          {
-            "item": "Pimiento morrón en tiras",
-            "cantidad": 150,
-            "unidad": "g"
-          },
-          {
-            "item": "Puré de tomate natural",
-            "cantidad": 150,
-            "unidad": "g"
-          },
-          {
-            "item": "Orégano, pimentón y laurel",
-            "cantidad": 5,
-            "unidad": "g"
-          }
-        ],
-        "paso_a_paso": [
-          "Hacer capas en una cacerola: cebolla, morrón, bifes y tomate.",
-          "Sazonar con sal, pimentón, orégano y la hoja de laurel.",
-          "Tapar y cocinar a fuego lento durante 30 minutos sin revolver.",
-          "Servir bien caliente con la salsa reducida."
-        ]
-      }
-    },
-    {
       "id": "ensalada-cesar-adaptada",
       "receta": {
         "nombre": "Ensalada César fit con aderezo de skyr",
