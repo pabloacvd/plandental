@@ -96,16 +96,6 @@
             "grasas_g": 0.5
           }
         },
-        "almuerzo": {
-          "recipeId": "pastel-de-carne-fit",
-          "recipeName": "Pastel de carne fit tradicional (solo papa)",
-          "macros": {
-            "calorias": 386,
-            "proteina_g": 35.5,
-            "carbohidratos_g": 31.6,
-            "grasas_g": 12.9
-          }
-        },
         "cena": {
           "recipeId": "tomates-rellenos-proteicos",
           "recipeName": "Tomates rellenos proteicos de atún y quinoa",
@@ -214,16 +204,6 @@
             "proteina_g": 24.4,
             "carbohidratos_g": 2,
             "grasas_g": 0.3
-          }
-        },
-        "almuerzo": {
-          "recipeId": "pastel-de-carne-fit",
-          "recipeName": "Pastel de carne fit tradicional (solo papa)",
-          "macros": {
-            "calorias": 386,
-            "proteina_g": 35.5,
-            "carbohidratos_g": 31.6,
-            "grasas_g": 12.9
           }
         },
         "cena": {
