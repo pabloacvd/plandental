@@ -3,6 +3,7 @@
  */
 
 import { loadData, searchRecipes, getRecipeById, addRecipe, updateRecipe, deleteRecipe, getAllRecipes, slugify } from './recipes.js';
+import { autoFillWeek } from './planner.js';
 import { getWeekDays, toDateKey, toWeekKey, MEAL_SLOTS, MONTH_NAMES } from './calendar.js';
 import {
   fetchPlan, savePlan,
@@ -1137,6 +1138,34 @@ function updateAuthUI() {
 }
 
 // ══════════════════════════════════════════════════════════
+// AUTO-PLAN
+// ══════════════════════════════════════════════════════════
+
+async function handleAutoPlan() {
+  const btn = document.getElementById('btn-auto-plan');
+  btn.disabled = true;
+  btn.textContent = '⏳ Planificando…';
+
+  try {
+    autoFillWeek(state.plan, state.anchorDate);
+    renderWeek();
+    if (state.activeDay) refreshDayDetail();
+    const result = await savePlan(state.plan);
+    showToast(
+      result.saved === 'github'
+        ? '✅ Semana planificada y guardada en GitHub'
+        : '⚠️ Semana planificada — guardada solo en este dispositivo',
+      result.saved === 'github' ? 'success' : 'warn'
+    );
+  } catch (e) {
+    showToast('❌ Error al planificar: ' + e.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '✨ Planificar';
+  }
+}
+
+// ══════════════════════════════════════════════════════════
 // CONTROLS WIRING
 // ══════════════════════════════════════════════════════════
 
@@ -1242,6 +1271,9 @@ function wireControls() {
   document.querySelectorAll('.editor-tab').forEach(tab => {
     tab.addEventListener('click', () => setEditorTab(tab.dataset.tab));
   });
+
+  // Auto-plan
+  document.getElementById('btn-auto-plan').addEventListener('click', handleAutoPlan);
 
   // Shopping list
   document.getElementById('btn-shopping-list').addEventListener('click', openShoppingModal);

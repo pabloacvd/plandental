@@ -761,6 +761,21 @@ input  { font: inherit; border: none; outline: none; }
 /* Hide header shopping button on mobile — footer button is used instead */
 .btn-shopping--header { display: inline-flex; align-items: center; }
 
+/* Auto-plan button */
+.btn-auto-plan {
+  font-size: .82rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: #fff;
+  transition: var(--transition);
+  flex-shrink: 0;
+  letter-spacing: .01em;
+}
+.btn-auto-plan:hover:not(:disabled) { opacity: .88; }
+.btn-auto-plan:disabled { opacity: .55; cursor: not-allowed; }
+
 /* ── Recipe editor modal ── */
 .modal-box--editor {
   max-width: 700px;
@@ -1091,6 +1106,7 @@ input  { font: inherit; border: none; outline: none; }
   .brand-icon { font-size: 1.2rem; }
   .auth-area--desktop { display: none; }
   .btn-shopping--header { display: none; }
+  .btn-auto-plan { display: none; }
 
   /* ── Person switcher compact ── */
   .person-btn { padding: 4px 10px; font-size: .78rem; }
