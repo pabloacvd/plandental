@@ -504,54 +504,6 @@
       }
     },
     {
-      "id": "poke-bowl-salmon",
-      "receta": {
-        "nombre": "Poke bowl de salmón (Día de oficina - Pablo)",
-        "descripcion_breve": "Dados de salmón al horno sobre quinoa, acompañados de palta, pepino fresco y chía.",
-        "categoria": "almuerzo/cena",
-        "porciones": 1,
-        "macros_por_porcion": {
-          "calorias": 520,
-          "proteina_g": 38,
-          "carbohidratos_g": 36,
-          "grasas_g": 24
-        },
-        "ingredientes": [
-          {
-            "item": "Salmón en dados",
-            "cantidad": 150,
-            "unidad": "g"
-          },
-          {
-            "item": "Quinoa cocida",
-            "cantidad": 120,
-            "unidad": "g"
-          },
-          {
-            "item": "Palta en láminas",
-            "cantidad": 50,
-            "unidad": "g"
-          },
-          {
-            "item": "Pepino rodajas",
-            "cantidad": 80,
-            "unidad": "g"
-          },
-          {
-            "item": "Semillas de chía",
-            "cantidad": 5,
-            "unidad": "g"
-          }
-        ],
-        "paso_a_paso": [
-          "Horneando los dados de salmón a 190°C por 10 minutos.",
-          "Disponer la quinoa cocida como base en un bowl.",
-          "Añadir el salmón, la palta y el pepino distribuidos en sectores.",
-          "Espolvorear con semillas de chía y un chorrito de salsa de soja."
-        ]
-      }
-    },
-    {
       "id": "salteado-carne-fajitas",
       "receta": {
         "nombre": "Salteado de carne tipo fajitas",
