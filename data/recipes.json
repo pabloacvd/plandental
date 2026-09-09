@@ -2410,7 +2410,7 @@
       "receta": {
         "nombre": "Ensalada griega con pollo a la plancha",
         "descripcion_breve": "Ensalada mediterránea con pollo a la plancha, tomate cherry, pepino, aceitunas y queso feta light. Fresca y proteica.",
-        "categoria": "almuerzo/cena liviana",
+        "categoria": "almuerzo/cena",
         "porciones": 1,
         "macros_por_porcion": {
           "calorias": 380,
