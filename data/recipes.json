@@ -734,54 +734,6 @@
       }
     },
     {
-      "id": "ensalada-cesar-adaptada",
-      "receta": {
-        "nombre": "Ensalada César fit con aderezo de skyr",
-        "descripcion_breve": "Pechuga grillada sobre espinaca fresca, crutones integrales y aderezo proteico de skyr y mostaza.",
-        "categoria": "almuerzo/cena",
-        "porciones": 2,
-        "macros_por_porcion": {
-          "calorias": 350,
-          "proteina_g": 45,
-          "carbohidratos_g": 18,
-          "grasas_g": 10
-        },
-        "ingredientes": [
-          {
-            "item": "Pechuga de pollo a la plancha",
-            "cantidad": 350,
-            "unidad": "g"
-          },
-          {
-            "item": "Espinaca fresca limpia",
-            "cantidad": 200,
-            "unidad": "g"
-          },
-          {
-            "item": "Pan integral tostado en cubos (crutones)",
-            "cantidad": 40,
-            "unidad": "g"
-          },
-          {
-            "item": "Skyr natural",
-            "cantidad": 100,
-            "unidad": "g"
-          },
-          {
-            "item": "Mostaza de Dijon y ajo en polvo",
-            "cantidad": 15,
-            "unidad": "g"
-          }
-        ],
-        "paso_a_paso": [
-          "Mezclar el skyr, mostaza, ajo y sal para formar el aderezo.",
-          "Poner una base generosa de espinaca en dos bowls.",
-          "Añadir la pechuga cortada en tiras y los crutones tostados.",
-          "Bañar con el aderezo de skyr."
-        ]
-      }
-    },
-    {
       "id": "brochettes-a-la-parrilla",
       "receta": {
         "nombre": "Brochettes de pollo y vegetales a la Ninja / Parrilla",
