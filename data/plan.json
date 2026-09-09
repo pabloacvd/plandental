@@ -494,16 +494,6 @@
             "grasas_g": 19.3
           }
         },
-        "snack_noche": {
-          "recipeId": "helado-creami-de-banana-y-pal-gschokolade",
-          "recipeName": "Helado Creami de Banana y Pålægschokolade",
-          "macros": {
-            "calorias": 89,
-            "proteina_g": 1.8,
-            "carbohidratos_g": 17.7,
-            "grasas_g": 1.8
-          }
-        },
         "desayuno": {
           "recipeId": "avena-proteica",
           "recipeName": "Avena con Oatly y banana",
