@@ -1921,64 +1921,6 @@
       }
     },
     {
-      "id": "salmon-quinoa",
-      "receta": {
-        "nombre": "Salmón con quinoa y espinacas salteadas",
-        "descripcion_breve": "Filete de salmón a la plancha sobre cama de quinoa con espinacas salteadas al ajo. Rico en omega-3 y proteínas completas.",
-        "categoria": "almuerzo/cena",
-        "porciones": 2,
-        "macros_por_porcion": {
-          "calorias": 580,
-          "proteina_g": 46,
-          "carbohidratos_g": 34,
-          "grasas_g": 22
-        },
-        "ingredientes": [
-          {
-            "item": "Filete de salmón",
-            "cantidad": 400,
-            "unidad": "g"
-          },
-          {
-            "item": "Quinoa (seca)",
-            "cantidad": 120,
-            "unidad": "g"
-          },
-          {
-            "item": "Espinacas frescas",
-            "cantidad": 150,
-            "unidad": "g"
-          },
-          {
-            "item": "Ajo",
-            "cantidad": 2,
-            "unidad": "dientes"
-          },
-          {
-            "item": "Aceite de oliva",
-            "cantidad": 10,
-            "unidad": "ml"
-          },
-          {
-            "item": "Limón",
-            "cantidad": 1,
-            "unidad": "unidad"
-          },
-          {
-            "item": "Sal",
-            "cantidad": 4,
-            "unidad": "g"
-          }
-        ],
-        "paso_a_paso": [
-          "Cocinar la quinoa en 240ml de agua con sal durante 15 minutos. Reposar tapada 5 minutos.",
-          "Calentar una plancha o sartén con 5ml de aceite. Salpimentar el salmón y cocinar 4 minutos por lado.",
-          "En otra sartén, dorar el ajo laminado en el aceite restante. Agregar las espinacas y saltear 2 minutos.",
-          "Servir la quinoa como base, colocar las espinacas y el salmón. Exprimir limón al gusto."
-        ]
-      }
-    },
-    {
       "id": "omelette-claras",
       "receta": {
         "nombre": "Omelette de claras con vegetales",
