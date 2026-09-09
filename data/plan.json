@@ -41,6 +41,16 @@
             "carbohidratos_g": 85,
             "grasas_g": 3
           }
+        },
+        "snack_noche": {
+          "recipeId": "helado-creami-de-banana-y-pal-gschokolade",
+          "recipeName": "Helado Creami de Banana y Pålægschokolade",
+          "macros": {
+            "calorias": 89,
+            "proteina_g": 1.8,
+            "carbohidratos_g": 17.7,
+            "grasas_g": 1.8
+          }
         }
       },
       "2026-09-08": {
@@ -83,6 +93,16 @@
             "carbohidratos_g": 31.4,
             "grasas_g": 7.2
           }
+        },
+        "desayuno": {
+          "recipeId": "bowl-de-skyr-con-banana-y-chia",
+          "recipeName": "Bowl de Skyr con Banana y Chía",
+          "macros": {
+            "calorias": 175,
+            "proteina_g": 10.8,
+            "carbohidratos_g": 27,
+            "grasas_g": 3.5
+          }
         }
       },
       "2026-09-09": {
@@ -125,6 +145,224 @@
             "carbohidratos_g": 24.3,
             "grasas_g": 19.3
           }
+        },
+        "snack_noche": {
+          "recipeId": "shake-prote-juli-sin-skyr",
+          "recipeName": "Shake prote Juli (sin skyr)",
+          "macros": {
+            "calorias": 111,
+            "proteina_g": 24.4,
+            "carbohidratos_g": 2,
+            "grasas_g": 0.3
+          }
+        }
+      },
+      "2026-09-10": {
+        "desayuno": {
+          "recipeId": "omelette-claras",
+          "recipeName": "Omelette de claras con vegetales",
+          "macros": {
+            "calorias": 280,
+            "proteina_g": 32,
+            "carbohidratos_g": 8,
+            "grasas_g": 12
+          }
+        },
+        "almuerzo": {
+          "recipeId": "brochettes-a-la-parrilla",
+          "recipeName": "Brochettes de pollo y vegetales a la Ninja / Parrilla",
+          "macros": {
+            "calorias": 310,
+            "proteina_g": 45,
+            "carbohidratos_g": 10,
+            "grasas_g": 9
+          }
+        },
+        "snack_tarde": {
+          "recipeId": "batido-ninja-pablo",
+          "recipeName": "Batido Ninja Pablo",
+          "macros": {
+            "calorias": 269,
+            "proteina_g": 54.2,
+            "carbohidratos_g": 9.7,
+            "grasas_g": 0.9
+          }
+        },
+        "cena": {
+          "recipeId": "tortilla-al-reves-espinaca-zucchini",
+          "recipeName": "Tortilla al revés de espinaca y zucchini",
+          "macros": {
+            "calorias": 220,
+            "proteina_g": 24,
+            "carbohidratos_g": 8,
+            "grasas_g": 10
+          }
+        },
+        "snack_noche": {
+          "recipeId": "helado-ninja-creami-de-banana-dulce-de-leche-y-chocolate-2-p",
+          "recipeName": "Helado Ninja Creami de Banana, Dulce de Leche y Chocolate (2 porciones)",
+          "macros": {
+            "calorias": 147,
+            "proteina_g": 1.9,
+            "carbohidratos_g": 30.5,
+            "grasas_g": 2.9
+          }
+        }
+      },
+      "2026-09-11": {
+        "desayuno": {
+          "recipeId": "tostadas-palta-huevo",
+          "recipeName": "Tostadas de palta con huevo revuelto",
+          "macros": {
+            "calorias": 360,
+            "proteina_g": 22,
+            "carbohidratos_g": 30,
+            "grasas_g": 16
+          }
+        },
+        "almuerzo": {
+          "recipeId": "pechugas-rellenas-airfryer",
+          "recipeName": "Pechugas rellenas a la Airfryer",
+          "macros": {
+            "calorias": 390,
+            "proteina_g": 56,
+            "carbohidratos_g": 6,
+            "grasas_g": 14
+          }
+        },
+        "snack_tarde": {
+          "recipeId": "batido-ninja-pablo",
+          "recipeName": "Batido Ninja Pablo",
+          "macros": {
+            "calorias": 269,
+            "proteina_g": 54.2,
+            "carbohidratos_g": 9.7,
+            "grasas_g": 0.9
+          }
+        },
+        "cena": {
+          "recipeId": "souffle-de-brocoli",
+          "recipeName": "Soufflé de brócoli con Havarti",
+          "macros": {
+            "calorias": 240,
+            "proteina_g": 22,
+            "carbohidratos_g": 10,
+            "grasas_g": 12
+          }
+        },
+        "snack_noche": {
+          "recipeId": "snack-hummus-vegetales",
+          "recipeName": "Snack: Hummus casero con bastones de vegetales",
+          "macros": {
+            "calorias": 180,
+            "proteina_g": 8,
+            "carbohidratos_g": 20,
+            "grasas_g": 7
+          }
+        }
+      },
+      "2026-09-12": {
+        "desayuno": {
+          "recipeId": "skyr-con-semillas-de-chia",
+          "recipeName": "200g Skyr con chía (para 1)",
+          "macros": {
+            "calorias": 134,
+            "proteina_g": 17.3,
+            "carbohidratos_g": 11.1,
+            "grasas_g": 2
+          }
+        },
+        "almuerzo": {
+          "recipeId": "pollo-al-curry",
+          "recipeName": "Pollo al curry con blomkålsris",
+          "macros": {
+            "calorias": 460,
+            "proteina_g": 65.5,
+            "carbohidratos_g": 16,
+            "grasas_g": 12.8
+          }
+        },
+        "snack_tarde": {
+          "recipeId": "batido-ninja-pablo",
+          "recipeName": "Batido Ninja Pablo",
+          "macros": {
+            "calorias": 269,
+            "proteina_g": 54.2,
+            "carbohidratos_g": 9.7,
+            "grasas_g": 0.9
+          }
+        },
+        "cena": {
+          "recipeId": "curry-garbanzos",
+          "recipeName": "Curry de garbanzos con leche de coco",
+          "macros": {
+            "calorias": 390,
+            "proteina_g": 18,
+            "carbohidratos_g": 52,
+            "grasas_g": 10
+          }
+        },
+        "snack_noche": {
+          "recipeId": "snack-cottage-frutas",
+          "recipeName": "Snack: Cottage cheese con frutas y granola",
+          "macros": {
+            "calorias": 210,
+            "proteina_g": 18,
+            "carbohidratos_g": 24,
+            "grasas_g": 4
+          }
+        }
+      },
+      "2026-09-13": {
+        "desayuno": {
+          "recipeId": "skyr-con-semillas-de-chia",
+          "recipeName": "200g Skyr con chía (para 1)",
+          "macros": {
+            "calorias": 134,
+            "proteina_g": 17.3,
+            "carbohidratos_g": 11.1,
+            "grasas_g": 2
+          }
+        },
+        "almuerzo": {
+          "recipeId": "pechuga-rellena-esparragos-havarti",
+          "recipeName": "Pechuga rellena de espárragos y Havarti",
+          "macros": {
+            "calorias": 380,
+            "proteina_g": 54,
+            "carbohidratos_g": 4,
+            "grasas_g": 16
+          }
+        },
+        "snack_tarde": {
+          "recipeId": "batido-ninja-pablo",
+          "recipeName": "Batido Ninja Pablo",
+          "macros": {
+            "calorias": 269,
+            "proteina_g": 54.2,
+            "carbohidratos_g": 9.7,
+            "grasas_g": 0.9
+          }
+        },
+        "cena": {
+          "recipeId": "tarta-sin-masa-esparragos-puerro",
+          "recipeName": "Tarta sin masa de espárragos y puerro",
+          "macros": {
+            "calorias": 280,
+            "proteina_g": 30,
+            "carbohidratos_g": 12,
+            "grasas_g": 12
+          }
+        },
+        "snack_noche": {
+          "recipeId": "batido-ninja-juli",
+          "recipeName": "Batido Ninja Juli",
+          "macros": {
+            "calorias": 161,
+            "proteina_g": 33.4,
+            "carbohidratos_g": 5,
+            "grasas_g": 0.5
+          }
         }
       }
     }
@@ -160,6 +398,26 @@
             "proteina_g": 65.5,
             "carbohidratos_g": 85,
             "grasas_g": 3
+          }
+        },
+        "desayuno": {
+          "recipeId": "skyr-con-semillas-de-chia",
+          "recipeName": "200g Skyr con chía (para 1)",
+          "macros": {
+            "calorias": 134,
+            "proteina_g": 17.3,
+            "carbohidratos_g": 11.1,
+            "grasas_g": 2
+          }
+        },
+        "snack_noche": {
+          "recipeId": "helado-ninja-creami-de-banana-dulce-de-leche-y-chocolate-2-p",
+          "recipeName": "Helado Ninja Creami de Banana, Dulce de Leche y Chocolate (2 porciones)",
+          "macros": {
+            "calorias": 147,
+            "proteina_g": 1.9,
+            "carbohidratos_g": 30.5,
+            "grasas_g": 2.9
           }
         }
       },
@@ -203,6 +461,16 @@
             "carbohidratos_g": 17.7,
             "grasas_g": 1.8
           }
+        },
+        "desayuno": {
+          "recipeId": "bowl-de-skyr-con-banana-y-chia",
+          "recipeName": "Bowl de Skyr con Banana y Chía",
+          "macros": {
+            "calorias": 175,
+            "proteina_g": 10.8,
+            "carbohidratos_g": 27,
+            "grasas_g": 3.5
+          }
         }
       },
       "2026-09-09": {
@@ -253,6 +521,214 @@
             "calorias": 361,
             "proteina_g": 9.3,
             "carbohidratos_g": 59.8,
+            "grasas_g": 8
+          }
+        }
+      },
+      "2026-09-10": {
+        "desayuno": {
+          "recipeId": "omelette-claras",
+          "recipeName": "Omelette de claras con vegetales",
+          "macros": {
+            "calorias": 280,
+            "proteina_g": 32,
+            "carbohidratos_g": 8,
+            "grasas_g": 12
+          }
+        },
+        "almuerzo": {
+          "recipeId": "brochettes-a-la-parrilla",
+          "recipeName": "Brochettes de pollo y vegetales a la Ninja / Parrilla",
+          "macros": {
+            "calorias": 310,
+            "proteina_g": 45,
+            "carbohidratos_g": 10,
+            "grasas_g": 9
+          }
+        },
+        "snack_tarde": {
+          "recipeId": "batido-ninja-juli",
+          "recipeName": "Batido Ninja Juli",
+          "macros": {
+            "calorias": 161,
+            "proteina_g": 33.4,
+            "carbohidratos_g": 5,
+            "grasas_g": 0.5
+          }
+        },
+        "cena": {
+          "recipeId": "curry-garbanzos",
+          "recipeName": "Curry de garbanzos con leche de coco",
+          "macros": {
+            "calorias": 390,
+            "proteina_g": 18,
+            "carbohidratos_g": 52,
+            "grasas_g": 10
+          }
+        },
+        "snack_noche": {
+          "recipeId": "snack-hummus-vegetales",
+          "recipeName": "Snack: Hummus casero con bastones de vegetales",
+          "macros": {
+            "calorias": 180,
+            "proteina_g": 8,
+            "carbohidratos_g": 20,
+            "grasas_g": 7
+          }
+        }
+      },
+      "2026-09-11": {
+        "desayuno": {
+          "recipeId": "tostadas-palta-huevo",
+          "recipeName": "Tostadas de palta con huevo revuelto",
+          "macros": {
+            "calorias": 360,
+            "proteina_g": 22,
+            "carbohidratos_g": 30,
+            "grasas_g": 16
+          }
+        },
+        "almuerzo": {
+          "recipeId": "pechugas-rellenas-airfryer",
+          "recipeName": "Pechugas rellenas a la Airfryer",
+          "macros": {
+            "calorias": 390,
+            "proteina_g": 56,
+            "carbohidratos_g": 6,
+            "grasas_g": 14
+          }
+        },
+        "snack_tarde": {
+          "recipeId": "batido-ninja-juli",
+          "recipeName": "Batido Ninja Juli",
+          "macros": {
+            "calorias": 161,
+            "proteina_g": 33.4,
+            "carbohidratos_g": 5,
+            "grasas_g": 0.5
+          }
+        },
+        "cena": {
+          "recipeId": "souffle-de-brocoli",
+          "recipeName": "Soufflé de brócoli con Havarti",
+          "macros": {
+            "calorias": 240,
+            "proteina_g": 22,
+            "carbohidratos_g": 10,
+            "grasas_g": 12
+          }
+        },
+        "snack_noche": {
+          "recipeId": "yogur-griego-con-dulce-de-leche",
+          "recipeName": "Yogur Griego con Dulce de Leche",
+          "macros": {
+            "calorias": 256,
+            "proteina_g": 16.2,
+            "carbohidratos_g": 31.4,
+            "grasas_g": 7.2
+          }
+        }
+      },
+      "2026-09-12": {
+        "desayuno": {
+          "recipeId": "skyr-con-semillas-de-chia",
+          "recipeName": "200g Skyr con chía (para 1)",
+          "macros": {
+            "calorias": 134,
+            "proteina_g": 17.3,
+            "carbohidratos_g": 11.1,
+            "grasas_g": 2
+          }
+        },
+        "almuerzo": {
+          "recipeId": "pollo-al-curry",
+          "recipeName": "Pollo al curry con blomkålsris",
+          "macros": {
+            "calorias": 460,
+            "proteina_g": 65.5,
+            "carbohidratos_g": 16,
+            "grasas_g": 12.8
+          }
+        },
+        "snack_tarde": {
+          "recipeId": "batido-ninja-juli",
+          "recipeName": "Batido Ninja Juli",
+          "macros": {
+            "calorias": 161,
+            "proteina_g": 33.4,
+            "carbohidratos_g": 5,
+            "grasas_g": 0.5
+          }
+        },
+        "cena": {
+          "recipeId": "tortilla-al-reves-espinaca-zucchini",
+          "recipeName": "Tortilla al revés de espinaca y zucchini",
+          "macros": {
+            "calorias": 220,
+            "proteina_g": 24,
+            "carbohidratos_g": 8,
+            "grasas_g": 10
+          }
+        },
+        "snack_noche": {
+          "recipeId": "snack-cottage-frutas",
+          "recipeName": "Snack: Cottage cheese con frutas y granola",
+          "macros": {
+            "calorias": 210,
+            "proteina_g": 18,
+            "carbohidratos_g": 24,
+            "grasas_g": 4
+          }
+        }
+      },
+      "2026-09-13": {
+        "desayuno": {
+          "recipeId": "skyr-con-semillas-de-chia",
+          "recipeName": "200g Skyr con chía (para 1)",
+          "macros": {
+            "calorias": 134,
+            "proteina_g": 17.3,
+            "carbohidratos_g": 11.1,
+            "grasas_g": 2
+          }
+        },
+        "almuerzo": {
+          "recipeId": "pechuga-rellena-esparragos-havarti",
+          "recipeName": "Pechuga rellena de espárragos y Havarti",
+          "macros": {
+            "calorias": 380,
+            "proteina_g": 54,
+            "carbohidratos_g": 4,
+            "grasas_g": 16
+          }
+        },
+        "snack_tarde": {
+          "recipeId": "batido-ninja-juli",
+          "recipeName": "Batido Ninja Juli",
+          "macros": {
+            "calorias": 161,
+            "proteina_g": 33.4,
+            "carbohidratos_g": 5,
+            "grasas_g": 0.5
+          }
+        },
+        "cena": {
+          "recipeId": "tarta-integral-espinaca",
+          "recipeName": "Tarta integral de espinaca y hytteost",
+          "macros": {
+            "calorias": 380,
+            "proteina_g": 25,
+            "carbohidratos_g": 38,
+            "grasas_g": 14
+          }
+        },
+        "snack_noche": {
+          "recipeId": "snack-yogur-proteico",
+          "recipeName": "Snack: Yogur griego con proteína y nueces",
+          "macros": {
+            "calorias": 240,
+            "proteina_g": 28,
+            "carbohidratos_g": 12,
             "grasas_g": 8
           }
         }
