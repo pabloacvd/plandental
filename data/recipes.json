@@ -1566,49 +1566,6 @@
       }
     },
     {
-      "id": "frikadeller-fit-repollo-colorado",
-      "receta": {
-        "nombre": "Frikadeller fit con repollo colorado casero",
-        "descripcion_breve": "Albóndigas danesas magras al horno con repollo colorado caliente (rødkål).",
-        "categoria": "almuerzo/cena",
-        "porciones": 2,
-        "macros_por_porcion": {
-          "calorias": 370,
-          "proteina_g": 44,
-          "carbohidratos_g": 18,
-          "grasas_g": 13
-        },
-        "ingredientes": [
-          {
-            "item": "Carne magra de cerdo/ternera (3-7%)",
-            "cantidad": 400,
-            "unidad": "g"
-          },
-          {
-            "item": "Cebolla picada fina",
-            "cantidad": 80,
-            "unidad": "g"
-          },
-          {
-            "item": "Repollo colorado (rødkål) en juliana",
-            "cantidad": 200,
-            "unidad": "g"
-          },
-          {
-            "item": "Vinagre y edulcorante (para el rødkål)",
-            "cantidad": 15,
-            "unidad": "ml"
-          }
-        ],
-        "paso_a_paso": [
-          "Formar las frikadeller con carne, cebolla y sazón.",
-          "Hornear a 200°C por 20 minutos.",
-          "Cocinar el repollo colorado a fuego lento con vinagre, clavo de olor y edulcorante.",
-          "Servir las frikadeller acompañadas del rødkål caliente."
-        ]
-      }
-    },
-    {
       "id": "bifes-criolla-con-zapallitos",
       "receta": {
         "nombre": "Bifes a la criolla con zucchinis",
