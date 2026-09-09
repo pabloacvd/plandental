@@ -3157,7 +3157,7 @@
       "receta": {
         "nombre": "Avena con Oatly y banana",
         "descripcion_breve": "Tazón rápido de avena fina Änglamark con leche de avena Oatly Barista y banana fresca.",
-        "categoria": "desayuno/merienda",
+        "categoria": "desayuno",
         "porciones": 1,
         "macros_por_porcion": {
           "calorias": 361,
@@ -3167,35 +3167,23 @@
         },
         "ingredientes": [
           {
-            "nombre": "Änglamark Finvalsede Havregryn",
-            "cantidad_g": 40,
-            "macros": {
-              "calorias": 148,
-              "proteina_g": 5.2,
-              "carbohidratos_g": 23.6,
-              "grasas_g": 2.8
-            }
+            "item": "Änglamark Finvalsede Havregryn",
+            "cantidad": 40,
+            "unidad": "g"
           },
           {
-            "nombre": "Oatly Barista Edition (oat milk)",
-            "cantidad_ml": 150,
-            "macros": {
-              "calorias": 104,
-              "proteina_g": 1.7,
-              "carbohidratos_g": 9.9,
-              "grasas_g": 4.5
-            }
+            "item": "Oatly Barista Edition (oat milk)",
+            "cantidad": 150,
+            "unidad": "ml"
           },
           {
-            "nombre": "Banana",
-            "cantidad_g": 100,
-            "macros": {
-              "calorias": 89,
-              "proteina_g": 1.1,
-              "carbohidratos_g": 22.8,
-              "grasas_g": 0.3
-            }
+            "item": "Banana",
+            "cantidad": 100,
+            "unidad": "g"
           }
+        ],
+        "paso_a_paso": [
+          "Mezclar todo y servir."
         ]
       }
     },
