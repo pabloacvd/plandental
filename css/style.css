@@ -1112,13 +1112,22 @@ input  { font: inherit; border: none; outline: none; }
   }
 
   /* ── Header ── */
-  .app-header { height: calc(var(--header-h) + var(--safe-top)); }
+  .app-header { height: calc(var(--header-h) + var(--safe-top)); position: relative; }
   .header-inner { padding: 8px 10px 5px; gap: 8px; align-items: center; }
   .brand-name { font-size: .95rem; }
   .brand-icon { font-size: 1.2rem; }
   .auth-area--desktop { display: none; }
   .btn-shopping--header { display: none; }
   .btn-auto-plan { display: none; }
+
+  /* ── Header controls: anchored to top-right corner ── */
+  .header-controls {
+    position: absolute;
+    top: calc(var(--safe-top) + 5px);
+    right: 12px;
+    margin-left: 0;
+    gap: 6px;
+  }
 
   /* ── Person switcher compact ── */
   .person-btn { padding: 4px 10px; font-size: .78rem; }
