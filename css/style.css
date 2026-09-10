@@ -1107,24 +1107,33 @@ input  { font: inherit; border: none; outline: none; }
 @media (max-width: 700px) {
   :root {
     --sidebar-w: 290px;
-    --header-h: 58px;
+    --header-h: 92px;  /* row1 ~42px brand + row2 ~38px switcher + gaps */
     --footer-h: 52px;
   }
 
-  /* ── Header ── */
-  .app-header { height: calc(var(--header-h) + var(--safe-top)); position: relative; }
-  .header-inner { padding: 8px 10px 5px; gap: 8px; align-items: center; }
+  /* ── Header: two-row layout ── */
+  .app-header { height: calc(var(--header-h) + var(--safe-top)); }
+  .header-inner {
+    padding: 6px 12px 8px;
+    gap: 4px 8px;
+    flex-wrap: wrap;      /* row 1: hamburger + brand / row 2: controls */
+    align-items: center;
+  }
+
+  /* Row 1: hamburger + brand */
+  .header-brand { font-size: 1rem; }
   .brand-name { font-size: .95rem; }
   .brand-icon { font-size: 1.2rem; }
   .auth-area--desktop { display: none; }
   .btn-shopping--header { display: none; }
   .btn-auto-plan { display: none; }
 
-  /* ── Header controls: anchored to top-right corner ── */
+  /* Row 2: controls fill full width, switcher aligned right */
   .header-controls {
-    position: absolute;
-    top: calc(var(--safe-top) + 5px);
-    right: 12px;
+    flex-basis: 100%;     /* forces a new row */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     margin-left: 0;
     gap: 6px;
   }
