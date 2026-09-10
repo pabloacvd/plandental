@@ -1108,7 +1108,7 @@ input  { font: inherit; border: none; outline: none; }
 
   /* ── Header ── */
   .app-header { height: calc(var(--header-h) + var(--safe-top)); }
-  .header-inner { padding: 8px 10px 5px; gap: 8px; }
+  .header-inner { padding: 8px 10px 5px; gap: 8px; align-items: center; }
   .brand-name { font-size: .95rem; }
   .brand-icon { font-size: 1.2rem; }
   .auth-area--desktop { display: none; }
@@ -1170,6 +1170,8 @@ input  { font: inherit; border: none; outline: none; }
     max-height: none;
     flex: 1;
     overflow-y: auto;
+    /* Extra bottom padding so the last row is not hidden under the fixed footer */
+    padding-bottom: calc(var(--footer-h) + 16px);
   }
   .day-detail.hidden-panel { display: none; }
 

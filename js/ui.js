@@ -483,7 +483,7 @@ export function renderDaySummary(dayEntry, nutrition, container) {
       color: 'var(--accent)',
     },
     {
-      label: 'Carbohidratos',
+      label: 'Carbos',
       value: `${macros.carbohidratos_g} g`,
       target: nutrition?.carbs_g || null,
       current: macros.carbohidratos_g,
@@ -539,7 +539,7 @@ function renderFamilySummary(pabloEntry, juliEntry, nutritionAll, container) {
   const rows = [
     { label: 'Calorías',      key: 'calorias',           pabloTarget: pablo.daily_calories_kcal, juliTarget: juli.daily_calories_kcal, unit: 'kcal', color: 'var(--orange)' },
     { label: 'Proteína',      key: 'proteina_g',          pabloTarget: pablo.protein_g,           juliTarget: juli.protein_g,           unit: 'g',    color: 'var(--accent)' },
-    { label: 'Carbohidratos', key: 'carbohidratos_g',     pabloTarget: pablo.carbs_g,             juliTarget: juli.carbs_g,             unit: 'g',    color: 'var(--green)'  },
+    { label: 'Carbos',        key: 'carbohidratos_g',     pabloTarget: pablo.carbs_g,             juliTarget: juli.carbs_g,             unit: 'g',    color: 'var(--green)'  },
     { label: 'Grasas',        key: 'grasas_g',            pabloTarget: pablo.fat_g,               juliTarget: juli.fat_g,               unit: 'g',    color: 'var(--purple)' },
   ];
 
