@@ -29,6 +29,9 @@
   --header-h:    68px;
   --sidebar-w:   300px;
   --transition:  160ms ease;
+  /* Safe-area inset top (Dynamic Island / notch).
+     Defaults to 0 on desktop and non-notched devices. */
+  --safe-top:    env(safe-area-inset-top, 0px);
   font-size: 14px;
 }
 
@@ -38,6 +41,7 @@ body {
   color: var(--text);
   line-height: 1.5;
   min-height: 100vh;
+  min-height: 100dvh; /* preferred on modern browsers; 100vh falls back silently */
 }
 
 button { cursor: pointer; border: none; background: none; font: inherit; }
@@ -48,7 +52,10 @@ input  { font: inherit; border: none; outline: none; }
 ═══════════════════════════════════════════ */
 .app-header {
   position: sticky; top: 0; z-index: 100;
-  height: var(--header-h);
+  /* In standalone PWA mode on iPhone, viewport-fit=cover extends the app under
+     the status bar / Dynamic Island.  padding-top pushes content below the notch. */
+  padding-top: var(--safe-top);
+  height: calc(var(--header-h) + var(--safe-top));
   background: var(--surface);
   border-bottom: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
@@ -132,7 +139,7 @@ input  { font: inherit; border: none; outline: none; }
 ═══════════════════════════════════════════ */
 .app-main {
   display: flex;
-  height: calc(100vh - var(--header-h));
+  height: calc(100dvh - var(--header-h) - var(--safe-top));
   overflow: hidden;
 }
 
@@ -1100,7 +1107,7 @@ input  { font: inherit; border: none; outline: none; }
   }
 
   /* ── Header ── */
-  .app-header { height: var(--header-h); }
+  .app-header { height: calc(var(--header-h) + var(--safe-top)); }
   .header-inner { padding: 8px 10px 5px; gap: 8px; }
   .brand-name { font-size: .95rem; }
   .brand-icon { font-size: 1.2rem; }
@@ -1116,15 +1123,15 @@ input  { font: inherit; border: none; outline: none; }
 
   /* ── Main layout ── */
   .app-main {
-    height: calc(100dvh - var(--header-h) - var(--footer-h));
+    height: calc(100dvh - var(--header-h) - var(--safe-top) - var(--footer-h));
   }
 
   /* ── Sidebar: slides in as overlay ── */
   .sidebar {
     position: fixed;
-    top: var(--header-h);
+    top: calc(var(--header-h) + var(--safe-top));
     left: 0;
-    height: calc(100dvh - var(--header-h) - var(--footer-h));
+    height: calc(100dvh - var(--header-h) - var(--safe-top) - var(--footer-h));
     z-index: 99;
     transform: translateX(0);
     transition: transform 220ms ease, width 220ms ease, min-width 220ms ease;
