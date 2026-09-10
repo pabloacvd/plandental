@@ -467,6 +467,8 @@ input  { font: inherit; border: none; outline: none; }
   border-radius: var(--radius-sm);
   padding: 10px 12px;
   min-height: 80px;
+  min-width: 0;        /* prevent grid blowout */
+  width: 100%;         /* stay inside the grid cell */
   display: flex; flex-direction: column; gap: 6px;
   transition: var(--transition);
 }
@@ -485,6 +487,9 @@ input  { font: inherit; border: none; outline: none; }
 .slot-meal-name {
   font-size: .82rem; font-weight: 600; color: var(--text);
   flex: 1;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  min-width: 0;
 }
 .slot-meal-macros {
   font-size: .7rem; color: var(--text-muted);
