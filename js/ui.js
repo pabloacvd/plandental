@@ -470,6 +470,7 @@ export function renderDaySummary(dayEntry, nutrition, container) {
       label: 'Calorías',
       value: `${Math.round(macros.calorias)} kcal`,
       target: nutrition?.daily_calories_kcal || null,
+      bmr: nutrition?.bmr_kcal || null,
       current: macros.calorias,
       unit: 'kcal',
       color: 'var(--orange)',
@@ -514,6 +515,7 @@ export function renderDaySummary(dayEntry, nutrition, container) {
       <div class="summary-stat">
         <div class="summary-stat-label">${s.label}</div>
         <div class="summary-stat-value" style="color:${s.color}">${s.value}</div>
+        ${s.bmr ? `<div class="summary-stat-sub">TMB: ${s.bmr} ${s.unit}</div>` : ''}
         ${s.target ? `<div class="summary-stat-sub">meta: ${s.target} ${s.unit}</div>` : ''}
         ${pct !== null ? `
           <div class="summary-stat-bar">
@@ -537,7 +539,7 @@ function renderFamilySummary(pabloEntry, juliEntry, nutritionAll, container) {
   const juli    = nutritionAll?.Juli  || {};
 
   const rows = [
-    { label: 'Calorías',      key: 'calorias',           pabloTarget: pablo.daily_calories_kcal, juliTarget: juli.daily_calories_kcal, unit: 'kcal', color: 'var(--orange)' },
+    { label: 'Calorías',      key: 'calorias',           pabloTarget: pablo.daily_calories_kcal, juliTarget: juli.daily_calories_kcal, pabloBmr: pablo.bmr_kcal || null, juliBmr: juli.bmr_kcal || null, unit: 'kcal', color: 'var(--orange)' },
     { label: 'Proteína',      key: 'proteina_g',          pabloTarget: pablo.protein_g,           juliTarget: juli.protein_g,           unit: 'g',    color: 'var(--accent)' },
     { label: 'Carbos',        key: 'carbohidratos_g',     pabloTarget: pablo.carbs_g,             juliTarget: juli.carbs_g,             unit: 'g',    color: 'var(--green)'  },
     { label: 'Grasas',        key: 'grasas_g',            pabloTarget: pablo.fat_g,               juliTarget: juli.fat_g,               unit: 'g',    color: 'var(--purple)' },
@@ -573,12 +575,14 @@ function renderFamilySummary(pabloEntry, juliEntry, nutritionAll, container) {
             <div class="family-row-label" style="color:${r.color}">${r.label}</div>
             <div class="family-row-cell">
               <div class="family-row-value">${disp(pVal, r.unit)}</div>
+              ${r.pabloBmr ? `<div class="family-row-sub">TMB: ${r.pabloBmr} ${r.unit}</div>` : ''}
               ${r.pabloTarget ? `<div class="family-row-sub">meta: ${r.pabloTarget} ${r.unit}</div>` : ''}
               ${r.pabloTarget ? `<div class="summary-stat-bar"><div class="summary-stat-bar-fill" style="width:${pPct}%;background:${r.color}"></div></div>` : ''}
               ${remDisp(pVal, r.pabloTarget, r.unit)}
             </div>
             <div class="family-row-cell">
               <div class="family-row-value">${disp(jVal, r.unit)}</div>
+              ${r.juliBmr ? `<div class="family-row-sub">TMB: ${r.juliBmr} ${r.unit}</div>` : ''}
               ${r.juliTarget ? `<div class="family-row-sub">meta: ${r.juliTarget} ${r.unit}</div>` : ''}
               ${r.juliTarget ? `<div class="summary-stat-bar"><div class="summary-stat-bar-fill" style="width:${jPct}%;background:${r.color}"></div></div>` : ''}
               ${remDisp(jVal, r.juliTarget, r.unit)}

@@ -1,6 +1,7 @@
 {
   "nutrition": {
     "Pablo": {
+      "bmr_kcal": 1680,
       "daily_calories_kcal": 2080,
       "protein_g": 160,
       "carbs_g": 215,
@@ -11,6 +12,7 @@
       "notes": "Batido Ninja Creami (tarde): ~50-55g proteína. Almuerzo y cena: ~800 kcal c/u con 50-55g proteína."
     },
     "Juli": {
+      "bmr_kcal": 1354,
       "daily_calories_kcal": 1690,
       "protein_g": 125,
       "carbs_g": 175,
