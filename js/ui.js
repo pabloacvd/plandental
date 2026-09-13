@@ -503,6 +503,7 @@ export function renderDaySummary(dayEntry, nutrition, container) {
 
   container.innerHTML = stats.map(s => {
     const pct       = s.target ? Math.min((s.current / s.target) * 100, 100) : null;
+    const bmrPct    = (s.bmr && s.target) ? ((s.bmr / s.target) * 100).toFixed(1) : null;
     const remaining = s.target != null ? s.target - s.current : null;
     const remRound  = remaining != null
       ? (s.unit === 'kcal' ? Math.round(remaining) : Math.round(remaining * 10) / 10)
@@ -511,17 +512,22 @@ export function renderDaySummary(dayEntry, nutrition, container) {
     const remLabel  = remaining != null && remaining < 0
       ? `Exceso: ${Math.abs(remRound)} ${s.unit}`
       : `Disponible: ${remRound} ${s.unit}`;
+    const subLine   = (s.bmr && s.target)
+      ? `<div class="summary-stat-sub">TMB: ${s.bmr} ${s.unit} &nbsp;|&nbsp; meta: ${s.target} ${s.unit}</div>`
+      : s.target
+        ? `<div class="summary-stat-sub">meta: ${s.target} ${s.unit}</div>`
+        : '';
     return `
       <div class="summary-stat">
         <div class="summary-stat-label">${s.label}</div>
         <div class="summary-stat-value" style="color:${s.color}">${s.value}</div>
-        ${s.bmr ? `<div class="summary-stat-sub">TMB: ${s.bmr} ${s.unit}</div>` : ''}
-        ${s.target ? `<div class="summary-stat-sub">meta: ${s.target} ${s.unit}</div>` : ''}
+        ${subLine}
         ${pct !== null ? `
           <div class="summary-stat-bar">
             <div class="summary-stat-bar-fill"
                  style="width:${pct.toFixed(1)}%;background:${s.color}">
             </div>
+            ${bmrPct ? `<div class="summary-stat-bar-bmr" style="left:${bmrPct}%"></div>` : ''}
           </div>
         ` : ''}
         ${remRound !== null ? `<div class="summary-stat-remaining" style="color:${remColor}">${remLabel}</div>` : ''}
@@ -570,21 +576,27 @@ function renderFamilySummary(pabloEntry, juliEntry, nutritionAll, container) {
           return `<div class="family-row-remaining" style="color:${color}">${label}</div>`;
         };
 
+        const pBmrPct = (r.pabloBmr && r.pabloTarget) ? ((r.pabloBmr / r.pabloTarget) * 100).toFixed(1) : null;
+        const jBmrPct = (r.juliBmr  && r.juliTarget)  ? ((r.juliBmr  / r.juliTarget)  * 100).toFixed(1) : null;
+        const pSubLine = (r.pabloBmr && r.pabloTarget)
+          ? `<div class="family-row-sub">TMB: ${r.pabloBmr} ${r.unit} &nbsp;|&nbsp; meta: ${r.pabloTarget} ${r.unit}</div>`
+          : r.pabloTarget ? `<div class="family-row-sub">meta: ${r.pabloTarget} ${r.unit}</div>` : '';
+        const jSubLine = (r.juliBmr && r.juliTarget)
+          ? `<div class="family-row-sub">TMB: ${r.juliBmr} ${r.unit} &nbsp;|&nbsp; meta: ${r.juliTarget} ${r.unit}</div>`
+          : r.juliTarget ? `<div class="family-row-sub">meta: ${r.juliTarget} ${r.unit}</div>` : '';
         return `
           <div class="family-summary-row">
             <div class="family-row-label" style="color:${r.color}">${r.label}</div>
             <div class="family-row-cell">
               <div class="family-row-value">${disp(pVal, r.unit)}</div>
-              ${r.pabloBmr ? `<div class="family-row-sub">TMB: ${r.pabloBmr} ${r.unit}</div>` : ''}
-              ${r.pabloTarget ? `<div class="family-row-sub">meta: ${r.pabloTarget} ${r.unit}</div>` : ''}
-              ${r.pabloTarget ? `<div class="summary-stat-bar"><div class="summary-stat-bar-fill" style="width:${pPct}%;background:${r.color}"></div></div>` : ''}
+              ${pSubLine}
+              ${r.pabloTarget ? `<div class="summary-stat-bar"><div class="summary-stat-bar-fill" style="width:${pPct}%;background:${r.color}"></div>${pBmrPct ? `<div class="summary-stat-bar-bmr" style="left:${pBmrPct}%"></div>` : ''}</div>` : ''}
               ${remDisp(pVal, r.pabloTarget, r.unit)}
             </div>
             <div class="family-row-cell">
               <div class="family-row-value">${disp(jVal, r.unit)}</div>
-              ${r.juliBmr ? `<div class="family-row-sub">TMB: ${r.juliBmr} ${r.unit}</div>` : ''}
-              ${r.juliTarget ? `<div class="family-row-sub">meta: ${r.juliTarget} ${r.unit}</div>` : ''}
-              ${r.juliTarget ? `<div class="summary-stat-bar"><div class="summary-stat-bar-fill" style="width:${jPct}%;background:${r.color}"></div></div>` : ''}
+              ${jSubLine}
+              ${r.juliTarget ? `<div class="summary-stat-bar"><div class="summary-stat-bar-fill" style="width:${jPct}%;background:${r.color}"></div>${jBmrPct ? `<div class="summary-stat-bar-bmr" style="left:${jBmrPct}%"></div>` : ''}</div>` : ''}
               ${remDisp(jVal, r.juliTarget, r.unit)}
             </div>
           </div>
