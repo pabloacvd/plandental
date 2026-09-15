@@ -387,6 +387,16 @@
             "carbohidratos_g": 3.7,
             "grasas_g": 0.5
           }
+        },
+        "cena": {
+          "recipeId": "milanesa-de-nalga-al-horno-con-pure-de-papas-y-huevo-a-la-pl",
+          "recipeName": "Milanesa de nalga al horno con puré de papas y huevo a la plancha",
+          "macros": {
+            "calorias": 578,
+            "proteina_g": 46.3,
+            "carbohidratos_g": 57.9,
+            "grasas_g": 17.6
+          }
         }
       }
     }
@@ -734,6 +744,20 @@
             "proteina_g": 28,
             "carbohidratos_g": 12,
             "grasas_g": 8
+          }
+        }
+      }
+    },
+    "2026-W38": {
+      "2026-09-15": {
+        "cena": {
+          "recipeId": "milanesa-de-nalga-al-horno-con-pure-de-papas-y-huevo-a-la-pl",
+          "recipeName": "Milanesa de nalga al horno con puré de papas y huevo a la plancha",
+          "macros": {
+            "calorias": 578,
+            "proteina_g": 46.3,
+            "carbohidratos_g": 57.9,
+            "grasas_g": 17.6
           }
         }
       }
