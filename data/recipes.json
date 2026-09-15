@@ -3388,6 +3388,59 @@
           "Aderezar la ensalada con un chorrito de aceite de oliva."
         ]
       }
+    },
+    {
+      "id": "milanesa-de-nalga-al-horno-con-pure-de-papas-y-huevo-a-la-pl",
+      "receta": {
+        "nombre": "Milanesa de nalga al horno con puré de papas y huevo a la plancha",
+        "descripcion_breve": "Milanesa magra horneada con un toque de aceite de oliva, acompañada de puré de papa rústico liviano y huevo a la sartén sin aceite.",
+        "categoria": "almuerzo/cena",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 578,
+          "proteina_g": 46.3,
+          "carbohidratos_g": 57.9,
+          "grasas_g": 17.6
+        },
+        "ingredientes": [
+          {
+            "item": "Nalga de ternera magra",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Pan rallado",
+            "cantidad": 30,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva",
+            "cantidad": 5,
+            "unidad": "g"
+          },
+          {
+            "item": "Papa",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Leche descremada (Mini Mælk)",
+            "cantidad": 30,
+            "unidad": "ml"
+          },
+          {
+            "item": "Huevo mediano",
+            "cantidad": 1,
+            "unidad": "unidad"
+          }
+        ],
+        "paso_a_paso": [
+          "Pasar la nalga de ternera por huevo batido y empanar con el pan rallado.",
+          "Colocar la milanesa sobre una placa con el chorrito de aceite de oliva y hornear a 200°C hasta dorar de ambos lados.",
+          "Hervir la papa en agua con sal hasta que esté suave, pisarla e integrar con la leche descremada hasta formar el puré.",
+          "Cocinar el huevo a la plancha en una sartén antiadherente caliente sin agregar aceite."
+        ]
+      }
     }
   ]
 }
