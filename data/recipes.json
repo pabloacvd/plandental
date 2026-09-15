@@ -3320,6 +3320,55 @@
           }
         ]
       }
+    },
+    {
+      "id": "salmon-a-la-airfryer-con-ensalada",
+      "receta": {
+        "nombre": "Salmón a la airfryer con ensalada",
+        "descripcion_breve": "Salmón jugoso a la freidora de aire acompañado de ensalada fresca de rúcula y zanahoria con aceite de oliva.",
+        "categoria": "almuerzo/cena",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 934,
+          "proteina_g": 80.1,
+          "carbohidratos_g": 21,
+          "grasas_g": 57.2
+        },
+        "ingredientes": [
+          {
+            "item": "Salmón cocido",
+            "cantidad": 350,
+            "unidad": "g"
+          },
+          {
+            "item": "Zanahoria",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Rúcula",
+            "cantidad": 50,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva (total)",
+            "cantidad": 15,
+            "unidad": "ml"
+          },
+          {
+            "item": "Sal",
+            "cantidad": 1,
+            "unidad": "pizca"
+          }
+        ],
+        "paso_a_paso": [
+          "Sazonar el salmón con sal y aplicar un splash de aceite de oliva.",
+          "Cocinar el salmón en la airfryer hasta obtener el punto deseado.",
+          "Servir 350 g del salmón cocido en el plato.",
+          "Añadir la rúcula y la zanahoria al costado.",
+          "Aderezar la ensalada con un chorrito de aceite de oliva."
+        ]
+      }
     }
   ]
 }
