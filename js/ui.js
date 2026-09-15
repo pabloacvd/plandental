@@ -28,7 +28,7 @@ function catLabel(cat = '') {
 export function renderRecipeCard(recipeObj) {
   const { id, receta } = recipeObj;
   const { nombre, descripcion_breve, categoria, macros_por_porcion } = receta;
-  const m = macros_por_porcion;
+  const m = macros_por_porcion || { calorias: 0, proteina_g: 0, carbohidratos_g: 0, grasas_g: 0 };
 
   const card = document.createElement('div');
   card.className = 'recipe-card';
