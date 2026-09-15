@@ -365,6 +365,20 @@
           }
         }
       }
+    },
+    "2026-W38": {
+      "2026-09-15": {
+        "almuerzo": {
+          "recipeId": "salmon-a-la-airfryer-con-ensalada",
+          "recipeName": "Salmón a la airfryer con ensalada",
+          "macros": {
+            "calorias": 934,
+            "proteina_g": 80.1,
+            "carbohidratos_g": 21,
+            "grasas_g": 57.2
+          }
+        }
+      }
     }
   },
   "Juli": {
