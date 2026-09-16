@@ -429,6 +429,16 @@
             "carbohidratos_g": 3.7,
             "grasas_g": 0.5
           }
+        },
+        "cena": {
+          "recipeId": "entrana-con-algo",
+          "recipeName": "Entraña con algo",
+          "macros": {
+            "calorias": 330,
+            "proteina_g": 47,
+            "carbohidratos_g": 0,
+            "grasas_g": 14
+          }
         }
       }
     }
@@ -802,6 +812,16 @@
             "proteina_g": 28,
             "carbohidratos_g": 48,
             "grasas_g": 12
+          }
+        },
+        "cena": {
+          "recipeId": "entrana-con-algo",
+          "recipeName": "Entraña con algo",
+          "macros": {
+            "calorias": 330,
+            "proteina_g": 47,
+            "carbohidratos_g": 0,
+            "grasas_g": 14
           }
         }
       }
