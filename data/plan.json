@@ -824,16 +824,6 @@
             "grasas_g": 0.3
           }
         },
-        "cena": {
-          "recipeId": "entrana-con-algo",
-          "recipeName": "Entraña con algo",
-          "macros": {
-            "calorias": 330,
-            "proteina_g": 47,
-            "carbohidratos_g": 0,
-            "grasas_g": 14
-          }
-        },
         "snack_noche": {
           "recipeId": "helado-ninja-creami-de-banana-dulce-de-leche-y-chocolate-2-p",
           "recipeName": "Helado Ninja Creami de Banana, Dulce de Leche y Chocolate (2 porciones)",
