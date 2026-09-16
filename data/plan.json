@@ -439,6 +439,16 @@
             "carbohidratos_g": 51.5,
             "grasas_g": 30
           }
+        },
+        "snack_tarde": {
+          "recipeId": "skyr-con-semillas-de-chia",
+          "recipeName": "200g Skyr con chía y 45g prote",
+          "macros": {
+            "calorias": 303,
+            "proteina_g": 53.5,
+            "carbohidratos_g": 14.8,
+            "grasas_g": 2.5
+          }
         }
       }
     }
