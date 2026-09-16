@@ -3379,6 +3379,31 @@
           "Cocinar el huevo a la plancha en una sartén antiadherente caliente sin agregar aceite."
         ]
       }
+    },
+    {
+      "id": "snack-beef-jerky",
+      "receta": {
+        "nombre": "Snack beef jerky",
+        "descripcion_breve": "snack beef jerky",
+        "categoria": "snack",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 165,
+          "proteina_g": 21,
+          "carbohidratos_g": 15.6,
+          "grasas_g": 2.1
+        },
+        "ingredientes": [
+          {
+            "item": "beef jerky (bolsa de 60g",
+            "cantidad": 1,
+            "unidad": "paquete"
+          }
+        ],
+        "paso_a_paso": [
+          "Abrir y comer"
+        ]
+      }
     }
   ]
 }
