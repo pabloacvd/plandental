@@ -3404,6 +3404,31 @@
           "Abrir y comer"
         ]
       }
+    },
+    {
+      "id": "entrana-con-algo",
+      "receta": {
+        "nombre": "Entraña con algo",
+        "descripcion_breve": "",
+        "categoria": "almuerzo/cena",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 330,
+          "proteina_g": 47,
+          "carbohidratos_g": 0,
+          "grasas_g": 14
+        },
+        "ingredientes": [
+          {
+            "item": "entraña",
+            "cantidad": 150,
+            "unidad": "gramos"
+          }
+        ],
+        "paso_a_paso": [
+          "comer"
+        ]
+      }
     }
   ]
 }
