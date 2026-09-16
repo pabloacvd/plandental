@@ -3408,21 +3408,36 @@
     {
       "id": "entrana-con-algo",
       "receta": {
-        "nombre": "Entraña con algo",
+        "nombre": "Entraña, morrón con huevo y papas a la airfryer",
         "descripcion_breve": "",
         "categoria": "almuerzo/cena",
         "porciones": 1,
         "macros_por_porcion": {
-          "calorias": 330,
-          "proteina_g": 47,
-          "carbohidratos_g": 0,
-          "grasas_g": 14
+          "calorias": 738,
+          "proteina_g": 60.3,
+          "carbohidratos_g": 51.5,
+          "grasas_g": 30
         },
         "ingredientes": [
           {
             "item": "entraña",
             "cantidad": 150,
             "unidad": "gramos"
+          },
+          {
+            "item": "medio morrón",
+            "cantidad": 1,
+            "unidad": "unidad"
+          },
+          {
+            "item": "huevo",
+            "cantidad": 1,
+            "unidad": "unidad"
+          },
+          {
+            "item": "papas prefritas de bolsa",
+            "cantidad": 250,
+            "unidad": "g"
           }
         ],
         "paso_a_paso": [
