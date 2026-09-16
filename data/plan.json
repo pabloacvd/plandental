@@ -429,6 +429,16 @@
             "carbohidratos_g": 3.7,
             "grasas_g": 0.5
           }
+        },
+        "snack_noche": {
+          "recipeId": "helado-ninja-creami-de-banana-dulce-de-leche-y-chocolate-2-p",
+          "recipeName": "Helado Ninja Creami de Banana, Dulce de Leche y Chocolate (2 porciones)",
+          "macros": {
+            "calorias": 147,
+            "proteina_g": 1.9,
+            "carbohidratos_g": 30.5,
+            "grasas_g": 2.9
+          }
         }
       }
     }
@@ -822,6 +832,16 @@
             "proteina_g": 47,
             "carbohidratos_g": 0,
             "grasas_g": 14
+          }
+        },
+        "snack_noche": {
+          "recipeId": "helado-ninja-creami-de-banana-dulce-de-leche-y-chocolate-2-p",
+          "recipeName": "Helado Ninja Creami de Banana, Dulce de Leche y Chocolate (2 porciones)",
+          "macros": {
+            "calorias": 147,
+            "proteina_g": 1.9,
+            "carbohidratos_g": 30.5,
+            "grasas_g": 2.9
           }
         }
       }
