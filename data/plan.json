@@ -409,6 +409,16 @@
             "carbohidratos_g": 48,
             "grasas_g": 12
           }
+        },
+        "desayuno": {
+          "recipeId": "snack-beef-jerky",
+          "recipeName": "Snack beef jerky",
+          "macros": {
+            "calorias": 165,
+            "proteina_g": 21,
+            "carbohidratos_g": 15.6,
+            "grasas_g": 2.1
+          }
         }
       }
     }
