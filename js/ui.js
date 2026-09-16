@@ -27,8 +27,14 @@ function catLabel(cat = '') {
 
 export function renderRecipeCard(recipeObj) {
   const { id, receta } = recipeObj;
-  const { nombre, descripcion_breve, categoria, macros_por_porcion } = receta;
-  const m = macros_por_porcion || { calorias: 0, proteina_g: 0, carbohidratos_g: 0, grasas_g: 0 };
+  const nombre = receta?.nombre || receta?.plato || 'Receta sin nombre';
+  const categoria = receta?.categoria || '';
+  const m = receta?.macros_por_porcion || {
+    calorias: receta?.totales?.calorias_kcal || 0,
+    proteina_g: receta?.totales?.proteinas_g || 0,
+    carbohidratos_g: receta?.totales?.carbohidratos_g || 0,
+    grasas_g: receta?.totales?.grasas_g || 0,
+  };
 
   const card = document.createElement('div');
   card.className = 'recipe-card';
@@ -55,8 +61,17 @@ export function renderRecipeCard(recipeObj) {
 // ── Recipe Detail Modal content ───────────────────────────
 
 export function renderRecipeDetail(recipeObj) {
-  const { receta } = recipeObj;
-  const { nombre, descripcion_breve, porciones, macros_por_porcion: m, ingredientes, paso_a_paso, pasos, instrucciones } = receta;
+  const { receta = {} } = recipeObj;
+  const nombre = receta.nombre || receta.plato || 'Receta sin nombre';
+  const descripcion_breve = receta.descripcion_breve || '';
+  const porciones = receta.porciones || 1;
+  const m = receta.macros_por_porcion || {
+    calorias: receta.totales?.calorias_kcal || 0,
+    proteina_g: receta.totales?.proteinas_g || 0,
+    carbohidratos_g: receta.totales?.carbohidratos_g || 0,
+    grasas_g: receta.totales?.grasas_g || 0,
+  };
+  const { ingredientes, paso_a_paso, pasos, instrucciones } = receta;
   const safeIngredientes = Array.isArray(ingredientes) ? ingredientes : [];
   const safePasoAPaso   = Array.isArray(paso_a_paso) ? paso_a_paso
                         : Array.isArray(pasos)        ? pasos

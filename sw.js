@@ -16,7 +16,7 @@
  *   the user needing to close all tabs before updates take effect.
  */
 
-const CACHE_NAME = 'plandental-v2';
+const CACHE_NAME = 'plandental-v3';
 
 /** Static app shell — all assets needed to boot the app offline. */
 const APP_SHELL = [
