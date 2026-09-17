@@ -3449,6 +3449,31 @@
           "comer"
         ]
       }
+    },
+    {
+      "id": "comida-random-del-dia",
+      "receta": {
+        "nombre": "Comida random del dia",
+        "descripcion_breve": "Wrap de salmón",
+        "categoria": "almuerzo/cena",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 685,
+          "proteina_g": 60.5,
+          "carbohidratos_g": 34.5,
+          "grasas_g": 31.5
+        },
+        "ingredientes": [
+          {
+            "item": "Salmón, huevo, wrap integral, havarti, hytteost, semillas",
+            "cantidad": 1,
+            "unidad": "unidad"
+          }
+        ],
+        "paso_a_paso": [
+          "armar y comer"
+        ]
+      }
     }
   ]
 }
