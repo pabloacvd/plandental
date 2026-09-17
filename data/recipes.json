@@ -3474,6 +3474,31 @@
           "armar y comer"
         ]
       }
+    },
+    {
+      "id": "latte-cafe-con-leche",
+      "receta": {
+        "nombre": "Latte - Café con leche",
+        "descripcion_breve": "Con minimaelk",
+        "categoria": "desayuno",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 75,
+          "proteina_g": 7.5,
+          "carbohidratos_g": 9.6,
+          "grasas_g": 0.8
+        },
+        "ingredientes": [
+          {
+            "item": "minimaelk y café",
+            "cantidad": 1,
+            "unidad": "u"
+          }
+        ],
+        "paso_a_paso": [
+          "preparar en casa y servir"
+        ]
+      }
     }
   ]
 }
