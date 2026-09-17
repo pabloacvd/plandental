@@ -450,6 +450,18 @@
             "grasas_g": 2.5
           }
         }
+      },
+      "2026-09-17": {
+        "almuerzo": {
+          "recipeId": "comida-random-del-dia",
+          "recipeName": "Comida random del dia",
+          "macros": {
+            "calorias": 685,
+            "proteina_g": 60.5,
+            "carbohidratos_g": 34.5,
+            "grasas_g": 31.5
+          }
+        }
       }
     }
   },
