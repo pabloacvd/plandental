@@ -496,16 +496,6 @@
     },
     "2026-W40": {
       "2026-09-28": {
-        "almuerzo": {
-          "recipeId": "pollo-al-curry",
-          "recipeName": "Pollo al curry con blomkålsris",
-          "macros": {
-            "calorias": 460,
-            "proteina_g": 65.5,
-            "carbohidratos_g": 16,
-            "grasas_g": 12.8
-          }
-        },
         "cena": {
           "recipeId": "salteado-al-wok-con-fideos-de-arroz-y-kyllingebryst-2-porcio",
           "recipeName": "Salteado al wok con fideos de arroz y kyllingebryst (2 porciones)",
@@ -976,16 +966,6 @@
     },
     "2026-W40": {
       "2026-09-28": {
-        "almuerzo": {
-          "recipeId": "pollo-al-curry",
-          "recipeName": "Pollo al curry con blomkålsris",
-          "macros": {
-            "calorias": 460,
-            "proteina_g": 65.5,
-            "carbohidratos_g": 16,
-            "grasas_g": 12.8
-          }
-        },
         "cena": {
           "recipeId": "salteado-al-wok-con-fideos-de-arroz-y-kyllingebryst-2-porcio",
           "recipeName": "Salteado al wok con fideos de arroz y kyllingebryst (2 porciones)",
