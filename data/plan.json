@@ -995,16 +995,6 @@
             "carbohidratos_g": 85,
             "grasas_g": 3
           }
-        },
-        "snack_tarde": {
-          "recipeId": "shake-prote-juli-sin-skyr",
-          "recipeName": "Shake prote Juli (sin skyr)",
-          "macros": {
-            "calorias": 111,
-            "proteina_g": 24.4,
-            "carbohidratos_g": 2,
-            "grasas_g": 0.3
-          }
         }
       }
     }
