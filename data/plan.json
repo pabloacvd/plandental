@@ -493,6 +493,20 @@
           }
         }
       }
+    },
+    "2026-W40": {
+      "2026-09-28": {
+        "almuerzo": {
+          "recipeId": "pollo-al-curry",
+          "recipeName": "Pollo al curry con blomkålsris",
+          "macros": {
+            "calorias": 460,
+            "proteina_g": 65.5,
+            "carbohidratos_g": 16,
+            "grasas_g": 12.8
+          }
+        }
+      }
     }
   },
   "Juli": {
@@ -936,6 +950,20 @@
             "proteina_g": 24.4,
             "carbohidratos_g": 2,
             "grasas_g": 0.3
+          }
+        }
+      }
+    },
+    "2026-W40": {
+      "2026-09-28": {
+        "almuerzo": {
+          "recipeId": "pollo-al-curry",
+          "recipeName": "Pollo al curry con blomkålsris",
+          "macros": {
+            "calorias": 460,
+            "proteina_g": 65.5,
+            "carbohidratos_g": 16,
+            "grasas_g": 12.8
           }
         }
       }
