@@ -3403,6 +3403,39 @@
           "preparar en casa y servir"
         ]
       }
+    },
+    {
+      "id": "latte-con-oatly-barista",
+      "receta": {
+        "nombre": "Latte con Oatly Barista",
+        "descripcion_breve": "Café latte elaborado con espresso doble y leche de avena Oatly Barista cremada.",
+        "categoria": "bebida",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 123,
+          "proteina_g": 2.2,
+          "carbohidratos_g": 14.2,
+          "grasas_g": 6.1
+        },
+        "ingredientes": [
+          {
+            "item": "Oatly Barista Edition",
+            "cantidad": 200,
+            "unidad": "ml"
+          },
+          {
+            "item": "Espresso (doble)",
+            "cantidad": 30,
+            "unidad": "ml"
+          }
+        ],
+        "paso_a_paso": [
+          "Extraer un shot doble de espresso (30 ml) directamente en la taza.",
+          "Vaporizar o calentar los 200 ml de leche Oatly Barista hasta obtener una textura cremosa (aprox. 60-65 °C).",
+          "Mover la jarra para homogeneizar la crema de la leche.",
+          "Verter la leche suavemente sobre el espresso en la taza."
+        ]
+      }
     }
   ]
 }
