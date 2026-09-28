@@ -98,10 +98,10 @@
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
-          "calorias": 460,
-          "proteina_g": 65.5,
-          "carbohidratos_g": 16,
-          "grasas_g": 12.8
+          "calorias": 469,
+          "proteina_g": 65.7,
+          "carbohidratos_g": 16.7,
+          "grasas_g": 13.4
         },
         "ingredientes": [
           {
@@ -121,7 +121,7 @@
           },
           {
             "item": "Leche de coco light",
-            "cantidad": 150,
+            "cantidad": 200,
             "unidad": "ml"
           },
           {
