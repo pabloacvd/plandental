@@ -515,6 +515,16 @@
             "carbohidratos_g": 85,
             "grasas_g": 3
           }
+        },
+        "snack_noche": {
+          "recipeId": "bowl-de-skyr-con-banana-y-chia",
+          "recipeName": "Bowl de Skyr con Banana y Chía",
+          "macros": {
+            "calorias": 175,
+            "proteina_g": 10.8,
+            "carbohidratos_g": 27,
+            "grasas_g": 3.5
+          }
         }
       }
     }
@@ -984,6 +994,16 @@
             "proteina_g": 65.5,
             "carbohidratos_g": 85,
             "grasas_g": 3
+          }
+        },
+        "snack_noche": {
+          "recipeId": "bowl-de-skyr-con-banana-y-chia",
+          "recipeName": "Bowl de Skyr con Banana y Chía",
+          "macros": {
+            "calorias": 175,
+            "proteina_g": 10.8,
+            "carbohidratos_g": 27,
+            "grasas_g": 3.5
           }
         }
       }
