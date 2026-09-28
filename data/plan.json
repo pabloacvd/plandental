@@ -515,6 +515,16 @@
             "carbohidratos_g": 27,
             "grasas_g": 3.5
           }
+        },
+        "almuerzo": {
+          "recipeId": "pollo-al-curry",
+          "recipeName": "Pollo al curry con blomkålsris",
+          "macros": {
+            "calorias": 469,
+            "proteina_g": 65.7,
+            "carbohidratos_g": 16.7,
+            "grasas_g": 13.4
+          }
         }
       }
     }
@@ -974,6 +984,16 @@
             "proteina_g": 65.5,
             "carbohidratos_g": 85,
             "grasas_g": 3
+          }
+        },
+        "almuerzo": {
+          "recipeId": "pollo-al-curry",
+          "recipeName": "Pollo al curry con blomkålsris",
+          "macros": {
+            "calorias": 469,
+            "proteina_g": 65.7,
+            "carbohidratos_g": 16.7,
+            "grasas_g": 13.4
           }
         }
       }
