@@ -1131,54 +1131,6 @@
       }
     },
     {
-      "id": "guiso-liviano-pollo-puerros",
-      "receta": {
-        "nombre": "Guiso liviano de pollo y puerros con skyr",
-        "descripcion_breve": "Cubos de pollo estofados con puerros finos y zanahoria, espesados al final con una cucharada de skyr.",
-        "categoria": "almuerzo/cena",
-        "porciones": 2,
-        "macros_por_porcion": {
-          "calorias": 340,
-          "proteina_g": 44,
-          "carbohidratos_g": 18,
-          "grasas_g": 9
-        },
-        "ingredientes": [
-          {
-            "item": "Pechuga de pollo en cubos",
-            "cantidad": 400,
-            "unidad": "g"
-          },
-          {
-            "item": "Puerros cortados finos",
-            "cantidad": 200,
-            "unidad": "g"
-          },
-          {
-            "item": "Zanahoria en rodajas",
-            "cantidad": 100,
-            "unidad": "g"
-          },
-          {
-            "item": "Skyr natural",
-            "cantidad": 40,
-            "unidad": "g"
-          },
-          {
-            "item": "Caldo de pollo",
-            "cantidad": 300,
-            "unidad": "ml"
-          }
-        ],
-        "paso_a_paso": [
-          "Dorar el pollo en una cacerola y retirar.",
-          "Rehogar los puerros y zanahorias hasta suavizar.",
-          "Volver el pollo, incorporar el caldo y cocinar 20 minutos.",
-          "Retirar del fuego e integrar el skyr antes de servir para dar cremosidad."
-        ]
-      }
-    },
-    {
       "id": "zoodles-a-la-bolonesa",
       "receta": {
         "nombre": "Fideos de zucchini (Zoodles) a la boloñesa",
