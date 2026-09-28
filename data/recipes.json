@@ -954,54 +954,6 @@
       }
     },
     {
-      "id": "ensalada-fresca-atun-garbanzos",
-      "receta": {
-        "nombre": "Ensalada fresca de atún y quinoa con skyr",
-        "descripcion_breve": "Atún, cebolla morada, morrón asado y espinaca sobre quinoa con aderezo fresco de skyr.",
-        "categoria": "almuerzo/cena",
-        "porciones": 2,
-        "macros_por_porcion": {
-          "calorias": 370,
-          "proteina_g": 38,
-          "carbohidratos_g": 32,
-          "grasas_g": 9
-        },
-        "ingredientes": [
-          {
-            "item": "Atún al natural",
-            "cantidad": 240,
-            "unidad": "g"
-          },
-          {
-            "item": "Quinoa cocida",
-            "cantidad": 150,
-            "unidad": "g"
-          },
-          {
-            "item": "Espinaca baby fresca",
-            "cantidad": 100,
-            "unidad": "g"
-          },
-          {
-            "item": "Skyr natural",
-            "cantidad": 80,
-            "unidad": "g"
-          },
-          {
-            "item": "Cebolla morada y morrón asado",
-            "cantidad": 80,
-            "unidad": "g"
-          }
-        ],
-        "paso_a_paso": [
-          "Mezclar el skyr con hierbas frescas y un chorrito de limón.",
-          "Juntar la quinoa, la espinaca, la cebolla y los morrones.",
-          "Agregar el atún escurrido.",
-          "Mezclar con la salsa de skyr y servir fresco."
-        ]
-      }
-    },
-    {
       "id": "wok-de-carne-y-brocoli",
       "receta": {
         "nombre": "Wok de carne, brócoli y sésamo/chía",
