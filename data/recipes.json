@@ -3442,7 +3442,7 @@
       "receta": {
         "nombre": "Salmón al horno con costra de Philadelphia Light y espárragos",
         "descripcion_breve": "Filete de salmón al horno cubierto con queso Philadelphia Light, ajo en polvo y eneldo fresco, acompañado de espárragos verdes.",
-        "categoria": "cena",
+        "categoria": "almuerzo/cena",
         "porciones": 1,
         "macros_por_porcion": {
           "calorias": 1135,
