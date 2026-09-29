@@ -536,6 +536,18 @@
             "grasas_g": 0.8
           }
         }
+      },
+      "2026-09-29": {
+        "almuerzo": {
+          "recipeId": "salmon-al-horno-con-costra-de-philadelphia-light-y-esparrago",
+          "recipeName": "Salmón al horno con costra de Philadelphia Light y espárragos",
+          "macros": {
+            "calorias": 1135,
+            "proteina_g": 102.4,
+            "carbohidratos_g": 15.4,
+            "grasas_g": 70.3
+          }
+        }
       }
     }
   },
