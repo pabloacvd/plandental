@@ -591,6 +591,16 @@
             "carbohidratos_g": 9.5,
             "grasas_g": 11
           }
+        },
+        "desayuno": {
+          "recipeId": "latte-con-oatly-barista",
+          "recipeName": "Latte con Oatly Barista",
+          "macros": {
+            "calorias": 123,
+            "proteina_g": 2.2,
+            "carbohidratos_g": 14.2,
+            "grasas_g": 6.1
+          }
         }
       }
     }
@@ -1116,6 +1126,16 @@
             "proteina_g": 48,
             "carbohidratos_g": 9.5,
             "grasas_g": 11
+          }
+        },
+        "desayuno": {
+          "recipeId": "latte-con-oatly-barista",
+          "recipeName": "Latte con Oatly Barista",
+          "macros": {
+            "calorias": 123,
+            "proteina_g": 2.2,
+            "carbohidratos_g": 14.2,
+            "grasas_g": 6.1
           }
         }
       }
