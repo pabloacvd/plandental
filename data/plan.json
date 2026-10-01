@@ -581,6 +581,16 @@
             "carbohidratos_g": 38,
             "grasas_g": 14
           }
+        },
+        "cena": {
+          "recipeId": "wok-de-pollo-zucchini-y-cebolla-con-salsa-de-soja",
+          "recipeName": "Wok de Pollo, Zucchini y Cebolla con Salsa de Soja",
+          "macros": {
+            "calorias": 335,
+            "proteina_g": 48,
+            "carbohidratos_g": 9.5,
+            "grasas_g": 11
+          }
         }
       }
     }
@@ -1096,6 +1106,16 @@
             "proteina_g": 25,
             "carbohidratos_g": 38,
             "grasas_g": 14
+          }
+        },
+        "cena": {
+          "recipeId": "wok-de-pollo-zucchini-y-cebolla-con-salsa-de-soja",
+          "recipeName": "Wok de Pollo, Zucchini y Cebolla con Salsa de Soja",
+          "macros": {
+            "calorias": 335,
+            "proteina_g": 48,
+            "carbohidratos_g": 9.5,
+            "grasas_g": 11
           }
         }
       }
