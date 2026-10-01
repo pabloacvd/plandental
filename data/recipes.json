@@ -992,49 +992,6 @@
       }
     },
     {
-      "id": "zucchinis-rellenos-gratinados",
-      "receta": {
-        "nombre": "Zucchinis rellenos gratinados con Havarti Cheasy",
-        "descripcion_breve": "Zucchinis ahuecados rellenos con carne magra y gratinados con Havarti Cheasy.",
-        "categoria": "almuerzo/cena",
-        "porciones": 2,
-        "macros_por_porcion": {
-          "calorias": 350,
-          "proteina_g": 40,
-          "carbohidratos_g": 12,
-          "grasas_g": 15
-        },
-        "ingredientes": [
-          {
-            "item": "Zucchinis medianos",
-            "cantidad": 2,
-            "unidad": "unidad"
-          },
-          {
-            "item": "Carne picada magra",
-            "cantidad": 300,
-            "unidad": "g"
-          },
-          {
-            "item": "Cebolla",
-            "cantidad": 100,
-            "unidad": "g"
-          },
-          {
-            "item": "Queso Havarti Cheasy",
-            "cantidad": 30,
-            "unidad": "g"
-          }
-        ],
-        "paso_a_paso": [
-          "Cortar los zucchinis a lo largo y extraer la pulpa con una cuchara.",
-          "Cocinar la carne picada con la cebolla y la pulpa de zucchini picada.",
-          "Rellenar las barquitas de zucchini.",
-          "Colocar el queso Havarti Cheasy encima y hornear a 200°C por 20 minutos."
-        ]
-      }
-    },
-    {
       "id": "zoodles-a-la-bolonesa",
       "receta": {
         "nombre": "Fideos de zucchini (Zoodles) a la boloñesa",
