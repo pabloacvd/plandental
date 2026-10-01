@@ -3407,7 +3407,7 @@
       "receta": {
         "nombre": "Wok de Pollo, Zucchini y Cebolla con Salsa de Soja",
         "descripcion_breve": "Salteado rápido estilo wok alto en proteína, muy bajo en carbohidratos y calorías, perfecto para una cena ligera para 2 personas.",
-        "categoria": "cena",
+        "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
           "calorias": 335,
@@ -3452,7 +3452,7 @@
             "unidad": "ml"
           },
           {
-            "item": "Ajo picado / Pimienta negra al gusto",
+            "item": "Ajo picado al gusto",
             "cantidad": 1,
             "unidad": "al gusto"
           }
@@ -3463,7 +3463,7 @@
           "Añadir las tiras de pechuga de pollo y el ajo picado. Cocinar a fuego alto durante 5-6 minutos revolviendo constantemente hasta que el pollo esté dorado por fuera y cocido.",
           "Incorporar los bastones de zucchini y verter la salsa de soja. Saltear por 3 minutos más para que el zucchini quede tierno pero crujiente (al dente).",
           "Empujar los ingredientes hacia los bordes del wok dejando un hueco en el centro. Cascar los 2 huevos en el centro y revolver rápidamente hasta que comiencen a cuajarse.",
-          "Integrar todo el salteado con el huevo cuajado, sazonar con pimienta negra al gusto, retirar del fuego y servir de inmediato dividido en 2 porciones iguales."
+          "Integrar todo el salteado con el huevo cuajado, retirar del fuego y servir de inmediato dividido en 2 porciones iguales."
         ]
       }
     }
