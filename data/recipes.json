@@ -3401,6 +3401,71 @@
           "Servir inmediatamente."
         ]
       }
+    },
+    {
+      "id": "wok-de-pollo-zucchini-y-cebolla-con-salsa-de-soja",
+      "receta": {
+        "nombre": "Wok de Pollo, Zucchini y Cebolla con Salsa de Soja",
+        "descripcion_breve": "Salteado rápido estilo wok alto en proteína, muy bajo en carbohidratos y calorías, perfecto para una cena ligera para 2 personas.",
+        "categoria": "cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 335,
+          "proteina_g": 48,
+          "carbohidratos_g": 9.5,
+          "grasas_g": 11
+        },
+        "ingredientes": [
+          {
+            "item": "Pechuga de pollo (deshuesada y sin piel, cortada en tiras)",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Zucchini (cortado en bastones o medias lunas gruesas)",
+            "cantidad": 400,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla (picada y congelada)",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Pimiento / Morrón rojo (cortado en tiras)",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Huevos enteros grandes",
+            "cantidad": 2,
+            "unidad": "unidades"
+          },
+          {
+            "item": "Aceite de oliva virgen extra (o spray para cocinar)",
+            "cantidad": 10,
+            "unidad": "ml"
+          },
+          {
+            "item": "Salsa de soja (de preferencia reducida en sodio)",
+            "cantidad": 30,
+            "unidad": "ml"
+          },
+          {
+            "item": "Ajo picado / Pimienta negra al gusto",
+            "cantidad": 1,
+            "unidad": "al gusto"
+          }
+        ],
+        "paso_a_paso": [
+          "Calentar un wok o sartén grande antiadherente a fuego alto con la mitad del aceite de oliva (5 ml).",
+          "Agregar la cebolla picada congelada y el pimiento en tiras. Saltear a fuego fuerte durante 3-4 minutos hasta que evapore la humedad y comiencen a dorarse.",
+          "Añadir las tiras de pechuga de pollo y el ajo picado. Cocinar a fuego alto durante 5-6 minutos revolviendo constantemente hasta que el pollo esté dorado por fuera y cocido.",
+          "Incorporar los bastones de zucchini y verter la salsa de soja. Saltear por 3 minutos más para que el zucchini quede tierno pero crujiente (al dente).",
+          "Empujar los ingredientes hacia los bordes del wok dejando un hueco en el centro. Cascar los 2 huevos en el centro y revolver rápidamente hasta que comiencen a cuajarse.",
+          "Integrar todo el salteado con el huevo cuajado, sazonar con pimienta negra al gusto, retirar del fuego y servir de inmediato dividido en 2 porciones iguales."
+        ]
+      }
     }
   ]
 }
