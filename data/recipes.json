@@ -3318,7 +3318,7 @@
       "receta": {
         "nombre": "Latte con Oatly Barista",
         "descripcion_breve": "Café latte elaborado con espresso doble y leche de avena Oatly Barista cremada.",
-        "categoria": "bebida",
+        "categoria": "snack",
         "porciones": 1,
         "macros_por_porcion": {
           "calorias": 123,
