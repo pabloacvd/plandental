@@ -623,6 +623,16 @@
             "carbohidratos_g": 38,
             "grasas_g": 14
           }
+        },
+        "cena": {
+          "recipeId": "polenta-cremosa-con-oatly-barista-manteca-queso-y-salsa-roja",
+          "recipeName": "Polenta cremosa con Oatly Barista, manteca, queso y salsa roja",
+          "macros": {
+            "calorias": 655,
+            "proteina_g": 20.8,
+            "carbohidratos_g": 62.5,
+            "grasas_g": 35.8
+          }
         }
       }
     }
@@ -1170,6 +1180,16 @@
             "proteina_g": 25,
             "carbohidratos_g": 38,
             "grasas_g": 14
+          }
+        },
+        "cena": {
+          "recipeId": "polenta-cremosa-con-oatly-barista-manteca-queso-y-salsa-roja",
+          "recipeName": "Polenta cremosa con Oatly Barista, manteca, queso y salsa roja",
+          "macros": {
+            "calorias": 655,
+            "proteina_g": 20.8,
+            "carbohidratos_g": 62.5,
+            "grasas_g": 35.8
           }
         }
       }
