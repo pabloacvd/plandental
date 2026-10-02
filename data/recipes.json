@@ -1078,54 +1078,6 @@
       }
     },
     {
-      "id": "tarta-sin-masa-esparragos-puerro",
-      "receta": {
-        "nombre": "Tarta sin masa de espárragos y puerro",
-        "descripcion_breve": "Mezcla liviana de huevos, claras, hytteost, espárragos y puerro salteado al horno.",
-        "categoria": "almuerzo/cena",
-        "porciones": 2,
-        "macros_por_porcion": {
-          "calorias": 280,
-          "proteina_g": 30,
-          "carbohidratos_g": 12,
-          "grasas_g": 12
-        },
-        "ingredientes": [
-          {
-            "item": "Espárragos frescos",
-            "cantidad": 200,
-            "unidad": "g"
-          },
-          {
-            "item": "Puerro",
-            "cantidad": 100,
-            "unidad": "g"
-          },
-          {
-            "item": "Hytteost",
-            "cantidad": 200,
-            "unidad": "g"
-          },
-          {
-            "item": "Huevos",
-            "cantidad": 2,
-            "unidad": "unidad"
-          },
-          {
-            "item": "Claras de huevo",
-            "cantidad": 2,
-            "unidad": "unidad"
-          }
-        ],
-        "paso_a_paso": [
-          "Saltear el puerro y los espárragos troceados.",
-          "Batir los huevos, claras y hytteost.",
-          "Mezclar las verduras con el batido proteico.",
-          "Volcar en tartera antiadherente y hornear 25 minutos a 180°C."
-        ]
-      }
-    },
-    {
       "id": "pollo-mostaza-repollitos-bruselas",
       "receta": {
         "nombre": "Pollo a la mostaza con repollitos de Bruselas (rosenkål)",
