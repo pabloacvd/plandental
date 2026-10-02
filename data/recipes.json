@@ -3362,6 +3362,61 @@
           "Integrar todo el salteado con el huevo cuajado, retirar del fuego y servir de inmediato dividido en 2 porciones iguales."
         ]
       }
+    },
+    {
+      "id": "polenta-cremosa-con-oatly-barista-manteca-queso-y-salsa-roja",
+      "receta": {
+        "nombre": "Polenta cremosa con Oatly Barista, manteca, queso y salsa roja",
+        "descripcion_breve": "Versión cremosa con leche de avena Oatly Barista, manteca y abundante queso rallado, servida con salsa de tomate casera.",
+        "categoria": "almuerzo/cena",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 655,
+          "proteina_g": 20.8,
+          "carbohidratos_g": 62.5,
+          "grasas_g": 35.8
+        },
+        "ingredientes": [
+          {
+            "item": "Polenta (harina de maíz seca)",
+            "cantidad": 60,
+            "unidad": "g"
+          },
+          {
+            "item": "Oatly Barista",
+            "cantidad": 100,
+            "unidad": "ml"
+          },
+          {
+            "item": "Manteca",
+            "cantidad": 15,
+            "unidad": "g"
+          },
+          {
+            "item": "Queso duro rallado (tipo Reggianito/Sardo)",
+            "cantidad": 35,
+            "unidad": "g"
+          },
+          {
+            "item": "Salsa de tomate casera (tomate, cebolla, especias)",
+            "cantidad": 150,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva (para el sofrito de la salsa)",
+            "cantidad": 5,
+            "unidad": "ml"
+          }
+        ],
+        "paso_a_paso": [
+          "Picar la cebolla y sofreírla en una sartén con el aceite de oliva a fuego medio hasta que esté transparente.",
+          "Agregar el tomate triturado y las especias a gusto. Cocinar a fuego lento durante 10-15 minutos hasta reducir.",
+          "En una olla, calentar agua (o caldo) junto con el chorrito de Oatly Barista.",
+          "Verter la polenta en forma de lluvia revolviendo constantemente para evitar grumos hasta lograr la consistencia deseada.",
+          "Retirar del fuego e incorporar la manteca y la mitad del queso rallado, mezclando enérgicamente hasta emulsionar.",
+          "Servir la polenta en un plato hondo, cubrir con la salsa roja y terminar con el resto del queso abundante por encima."
+        ]
+      }
     }
   ]
 }
