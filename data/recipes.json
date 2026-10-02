@@ -3299,62 +3299,6 @@
       }
     },
     {
-      "id": "salmon-al-horno-con-costra-de-philadelphia-light-y-esparrago",
-      "receta": {
-        "nombre": "Salmón al horno con costra de Philadelphia Light y espárragos",
-        "descripcion_breve": "Filete de salmón al horno cubierto con queso Philadelphia Light, ajo en polvo y eneldo fresco, acompañado de espárragos verdes.",
-        "categoria": "almuerzo/cena",
-        "porciones": 1,
-        "macros_por_porcion": {
-          "calorias": 1135,
-          "proteina_g": 102.4,
-          "carbohidratos_g": 15.4,
-          "grasas_g": 70.3
-        },
-        "ingredientes": [
-          {
-            "item": "Salmón crudo",
-            "cantidad": 450,
-            "unidad": "g"
-          },
-          {
-            "item": "Espárragos verdes",
-            "cantidad": 218,
-            "unidad": "g"
-          },
-          {
-            "item": "Philadelphia Light",
-            "cantidad": 100,
-            "unidad": "g"
-          },
-          {
-            "item": "Jugo de limón",
-            "cantidad": 15,
-            "unidad": "ml"
-          },
-          {
-            "item": "Eneldo fresco (dill)",
-            "cantidad": 5,
-            "unidad": "g"
-          },
-          {
-            "item": "Ajo en polvo",
-            "cantidad": 3,
-            "unidad": "g"
-          }
-        ],
-        "paso_a_paso": [
-          "Precalentar el horno a 200 °C y preparar una bandeja con papel de hornear (bagepapir).",
-          "En un bol pequeño, mezclar los 100g de Philadelphia Light con el ajo en polvo, el eneldo fresco picado y el jugo de limón.",
-          "Colocar los 450g de salmón en el centro de la bandeja y acomodar los 218g de espárragos alrededor.",
-          "Esparcir la mezcla de queso cream light uniformemente sobre la superficie del salmón.",
-          "Sazonar los espárragos con una pizca de sal y pimienta.",
-          "Hornear durante 12-15 minutos a 200 °C hasta que la costra de queso esté dorada y el salmón jugoso.",
-          "Servir inmediatamente."
-        ]
-      }
-    },
-    {
       "id": "wok-de-pollo-zucchini-y-cebolla-con-salsa-de-soja",
       "receta": {
         "nombre": "Wok de Pollo, Zucchini y Cebolla con Salsa de Soja",
