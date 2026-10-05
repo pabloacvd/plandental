@@ -638,16 +638,6 @@
     },
     "2026-W41": {
       "2026-10-05": {
-        "almuerzo": {
-          "recipeId": "brochettes-a-la-parrilla",
-          "recipeName": "Brochettes de pollo y vegetales a la Ninja / Parrilla",
-          "macros": {
-            "calorias": 310,
-            "proteina_g": 45,
-            "carbohidratos_g": 10,
-            "grasas_g": 9
-          }
-        },
         "snack_tarde": {
           "recipeId": "batido-ninja-pablo",
           "recipeName": "Batido Ninja Pablo",
@@ -1552,16 +1542,6 @@
     },
     "2026-W41": {
       "2026-10-05": {
-        "almuerzo": {
-          "recipeId": "brochettes-a-la-parrilla",
-          "recipeName": "Brochettes de pollo y vegetales a la Ninja / Parrilla",
-          "macros": {
-            "calorias": 310,
-            "proteina_g": 45,
-            "carbohidratos_g": 10,
-            "grasas_g": 9
-          }
-        },
         "snack_tarde": {
           "recipeId": "batido-ninja-juli",
           "recipeName": "Batido Ninja Juli",
