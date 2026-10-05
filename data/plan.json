@@ -869,16 +869,6 @@
             "carbohidratos_g": 38,
             "grasas_g": 14
           }
-        },
-        "snack_noche": {
-          "recipeId": "snack-beef-jerky",
-          "recipeName": "Snack beef jerky",
-          "macros": {
-            "calorias": 165,
-            "proteina_g": 21,
-            "carbohidratos_g": 15.6,
-            "grasas_g": 2.1
-          }
         }
       }
     }
@@ -1672,16 +1662,6 @@
             "proteina_g": 28,
             "carbohidratos_g": 48,
             "grasas_g": 12
-          }
-        },
-        "snack_noche": {
-          "recipeId": "yogur-griego-con-dulce-de-leche",
-          "recipeName": "Yogur Griego con Dulce de Leche",
-          "macros": {
-            "calorias": 256,
-            "proteina_g": 16.2,
-            "carbohidratos_g": 31.4,
-            "grasas_g": 7.2
           }
         }
       }
