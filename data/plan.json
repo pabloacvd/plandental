@@ -1526,16 +1526,6 @@
             "grasas_g": 0.5
           }
         },
-        "cena": {
-          "recipeId": "tortilla-al-reves-espinaca-zucchini",
-          "recipeName": "Tortilla al revés de espinaca y zucchini",
-          "macros": {
-            "calorias": 220,
-            "proteina_g": 24,
-            "carbohidratos_g": 8,
-            "grasas_g": 10
-          }
-        },
         "snack_noche": {
           "recipeId": "bowl-de-skyr-con-banana-y-chia",
           "recipeName": "Bowl de Skyr con Banana y Chía",
