@@ -704,16 +704,6 @@
         }
       },
       "2026-10-08": {
-        "desayuno": {
-          "recipeId": "tostadas-palta-huevo",
-          "recipeName": "Tostadas de palta con huevo revuelto",
-          "macros": {
-            "calorias": 360,
-            "proteina_g": 22,
-            "carbohidratos_g": 30,
-            "grasas_g": 16
-          }
-        },
         "snack_tarde": {
           "recipeId": "batido-ninja-pablo",
           "recipeName": "Batido Ninja Pablo",
@@ -1518,16 +1508,6 @@
         }
       },
       "2026-10-08": {
-        "desayuno": {
-          "recipeId": "tostadas-palta-huevo",
-          "recipeName": "Tostadas de palta con huevo revuelto",
-          "macros": {
-            "calorias": 360,
-            "proteina_g": 22,
-            "carbohidratos_g": 30,
-            "grasas_g": 16
-          }
-        },
         "snack_tarde": {
           "recipeId": "batido-ninja-juli",
           "recipeName": "Batido Ninja Juli",
