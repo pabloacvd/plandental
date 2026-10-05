@@ -461,49 +461,6 @@
       }
     },
     {
-      "id": "arrollado-de-pollo",
-      "receta": {
-        "nombre": "Arrollado de pollo relleno de espinaca y Havarti",
-        "descripcion_breve": "Pechuga aplanada enrollada con espinaca fresca y queso Havarti, cortada en rodajas.",
-        "categoria": "almuerzo/cena",
-        "porciones": 2,
-        "macros_por_porcion": {
-          "calorias": 370,
-          "proteina_g": 52,
-          "carbohidratos_g": 4,
-          "grasas_g": 16
-        },
-        "ingredientes": [
-          {
-            "item": "Pechuga de pollo aplanada",
-            "cantidad": 400,
-            "unidad": "g"
-          },
-          {
-            "item": "Espinaca fresca",
-            "cantidad": 100,
-            "unidad": "g"
-          },
-          {
-            "item": "Queso Havarti (16%)",
-            "cantidad": 40,
-            "unidad": "g"
-          },
-          {
-            "item": "Ajo en polvo y sal",
-            "cantidad": 5,
-            "unidad": "g"
-          }
-        ],
-        "paso_a_paso": [
-          "Estirar la pechuga aplanada y sazonar con sal y ajo en polvo.",
-          "Colocar la espinaca y las lonchas de queso Havarti encima.",
-          "Enrollar firmemente y envolver en papel aluminio.",
-          "Hornear a 200°C por 25 minutos, retirar el papel y cortar en rodajas."
-        ]
-      }
-    },
-    {
       "id": "souffle-de-brocoli",
       "receta": {
         "nombre": "Soufflé de brócoli con Havarti",
