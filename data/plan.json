@@ -689,16 +689,6 @@
             "carbohidratos_g": 10,
             "grasas_g": 12
           }
-        },
-        "snack_noche": {
-          "recipeId": "helado-creami-de-banana-y-pal-gschokolade",
-          "recipeName": "Helado Creami de Banana y Pålægschokolade",
-          "macros": {
-            "calorias": 89,
-            "proteina_g": 1.8,
-            "carbohidratos_g": 17.7,
-            "grasas_g": 1.8
-          }
         }
       },
       "2026-10-07": {
@@ -1530,16 +1520,6 @@
             "proteina_g": 33.4,
             "carbohidratos_g": 5,
             "grasas_g": 0.5
-          }
-        },
-        "snack_noche": {
-          "recipeId": "helado-creami-de-banana-y-pal-gschokolade",
-          "recipeName": "Helado Creami de Banana y Pålægschokolade",
-          "macros": {
-            "calorias": 89,
-            "proteina_g": 1.8,
-            "carbohidratos_g": 17.7,
-            "grasas_g": 1.8
           }
         }
       },
