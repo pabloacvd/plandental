@@ -1568,16 +1568,6 @@
             "grasas_g": 0.5
           }
         },
-        "cena": {
-          "recipeId": "tarta-integral-espinaca",
-          "recipeName": "Tarta integral de espinaca y hytteost",
-          "macros": {
-            "calorias": 380,
-            "proteina_g": 25,
-            "carbohidratos_g": 38,
-            "grasas_g": 14
-          }
-        },
         "snack_noche": {
           "recipeId": "helado-ninja-creami-de-banana-dulce-de-leche-y-chocolate-2-p",
           "recipeName": "Helado Ninja Creami de Banana, Dulce de Leche y Chocolate (2 porciones)",
