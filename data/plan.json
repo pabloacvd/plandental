@@ -648,16 +648,6 @@
             "grasas_g": 0.9
           }
         },
-        "cena": {
-          "recipeId": "curry-garbanzos",
-          "recipeName": "Curry de garbanzos con leche de coco",
-          "macros": {
-            "calorias": 390,
-            "proteina_g": 18,
-            "carbohidratos_g": 52,
-            "grasas_g": 10
-          }
-        },
         "snack_noche": {
           "recipeId": "latte-cafe-con-leche",
           "recipeName": "Latte - Café con leche",
@@ -1550,16 +1540,6 @@
             "proteina_g": 33.4,
             "carbohidratos_g": 5,
             "grasas_g": 0.5
-          }
-        },
-        "cena": {
-          "recipeId": "curry-garbanzos",
-          "recipeName": "Curry de garbanzos con leche de coco",
-          "macros": {
-            "calorias": 390,
-            "proteina_g": 18,
-            "carbohidratos_g": 52,
-            "grasas_g": 10
           }
         },
         "snack_noche": {
