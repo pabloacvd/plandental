@@ -650,16 +650,6 @@
         }
       },
       "2026-10-06": {
-        "desayuno": {
-          "recipeId": "omelette-claras",
-          "recipeName": "Omelette de claras con vegetales",
-          "macros": {
-            "calorias": 280,
-            "proteina_g": 32,
-            "carbohidratos_g": 8,
-            "grasas_g": 12
-          }
-        },
         "snack_tarde": {
           "recipeId": "batido-ninja-pablo",
           "recipeName": "Batido Ninja Pablo",
@@ -1504,16 +1494,6 @@
         }
       },
       "2026-10-06": {
-        "desayuno": {
-          "recipeId": "omelette-claras",
-          "recipeName": "Omelette de claras con vegetales",
-          "macros": {
-            "calorias": 280,
-            "proteina_g": 32,
-            "carbohidratos_g": 8,
-            "grasas_g": 12
-          }
-        },
         "snack_tarde": {
           "recipeId": "batido-ninja-juli",
           "recipeName": "Batido Ninja Juli",
