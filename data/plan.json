@@ -692,16 +692,6 @@
             "grasas_g": 0.9
           }
         },
-        "cena": {
-          "recipeId": "rollitos-carne-esparragos",
-          "recipeName": "Rollitos de carne y espárragos",
-          "macros": {
-            "calorias": 330,
-            "proteina_g": 44,
-            "carbohidratos_g": 6,
-            "grasas_g": 14
-          }
-        },
         "snack_noche": {
           "recipeId": "latte-con-oatly-barista",
           "recipeName": "Latte con Oatly Barista",
