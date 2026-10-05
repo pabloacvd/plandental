@@ -647,16 +647,6 @@
             "carbohidratos_g": 9.7,
             "grasas_g": 0.9
           }
-        },
-        "snack_noche": {
-          "recipeId": "latte-cafe-con-leche",
-          "recipeName": "Latte - Café con leche",
-          "macros": {
-            "calorias": 75,
-            "proteina_g": 7.5,
-            "carbohidratos_g": 9.6,
-            "grasas_g": 0.8
-          }
         }
       },
       "2026-10-06": {
