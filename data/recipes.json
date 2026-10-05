@@ -215,49 +215,6 @@
       }
     },
     {
-      "id": "pechugas-rellenas-airfryer",
-      "receta": {
-        "nombre": "Pechugas rellenas a la Airfryer",
-        "descripcion_breve": "Pechuga abierta en mariposa rellena con hytteost y morrón asado, sellada y cocinada en la freidora de aire.",
-        "categoria": "almuerzo/cena",
-        "porciones": 2,
-        "macros_por_porcion": {
-          "calorias": 390,
-          "proteina_g": 56,
-          "carbohidratos_g": 6,
-          "grasas_g": 14
-        },
-        "ingredientes": [
-          {
-            "item": "Pechuga de pollo entera",
-            "cantidad": 400,
-            "unidad": "g"
-          },
-          {
-            "item": "Hytteost",
-            "cantidad": 120,
-            "unidad": "g"
-          },
-          {
-            "item": "Pimiento morrón asado",
-            "cantidad": 80,
-            "unidad": "g"
-          },
-          {
-            "item": "Ajo en polvo, pimentón y sal",
-            "cantidad": 5,
-            "unidad": "g"
-          }
-        ],
-        "paso_a_paso": [
-          "Abrir las pechugas como un libro y condimentar por dentro y por fuera.",
-          "Rellenar con el hytteost y tiras de morrón asado.",
-          "Cerrar con escarbadientes para asegurar el relleno.",
-          "Cocinar en Ninja / Airfryer a 190°C durante 18-20 minutos girando a mitad de cocción."
-        ]
-      }
-    },
-    {
       "id": "pastel-de-carne-fit",
       "receta": {
         "nombre": "Pastel de carne fit (versión reducida en carbohidratos)",
