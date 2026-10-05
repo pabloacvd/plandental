@@ -714,16 +714,6 @@
             "grasas_g": 16
           }
         },
-        "almuerzo": {
-          "recipeId": "pechuga-rellena-esparragos-havarti",
-          "recipeName": "Pechuga rellena de espárragos y Havarti",
-          "macros": {
-            "calorias": 380,
-            "proteina_g": 54,
-            "carbohidratos_g": 4,
-            "grasas_g": 16
-          }
-        },
         "snack_tarde": {
           "recipeId": "batido-ninja-pablo",
           "recipeName": "Batido Ninja Pablo",
@@ -732,16 +722,6 @@
             "proteina_g": 54.2,
             "carbohidratos_g": 9.7,
             "grasas_g": 0.9
-          }
-        },
-        "cena": {
-          "recipeId": "tortilla-al-reves-espinaca-zucchini",
-          "recipeName": "Tortilla al revés de espinaca y zucchini",
-          "macros": {
-            "calorias": 220,
-            "proteina_g": 24,
-            "carbohidratos_g": 8,
-            "grasas_g": 10
           }
         },
         "snack_noche": {
@@ -1545,16 +1525,6 @@
             "calorias": 360,
             "proteina_g": 22,
             "carbohidratos_g": 30,
-            "grasas_g": 16
-          }
-        },
-        "almuerzo": {
-          "recipeId": "pechuga-rellena-esparragos-havarti",
-          "recipeName": "Pechuga rellena de espárragos y Havarti",
-          "macros": {
-            "calorias": 380,
-            "proteina_g": 54,
-            "carbohidratos_g": 4,
             "grasas_g": 16
           }
         },
