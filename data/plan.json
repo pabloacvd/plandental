@@ -660,16 +660,6 @@
             "grasas_g": 12
           }
         },
-        "almuerzo": {
-          "recipeId": "pechugas-rellenas-airfryer",
-          "recipeName": "Pechugas rellenas a la Airfryer",
-          "macros": {
-            "calorias": 390,
-            "proteina_g": 56,
-            "carbohidratos_g": 6,
-            "grasas_g": 14
-          }
-        },
         "snack_tarde": {
           "recipeId": "batido-ninja-pablo",
           "recipeName": "Batido Ninja Pablo",
@@ -1534,16 +1524,6 @@
             "grasas_g": 12
           }
         },
-        "almuerzo": {
-          "recipeId": "pechugas-rellenas-airfryer",
-          "recipeName": "Pechugas rellenas a la Airfryer",
-          "macros": {
-            "calorias": 390,
-            "proteina_g": 56,
-            "carbohidratos_g": 6,
-            "grasas_g": 14
-          }
-        },
         "snack_tarde": {
           "recipeId": "batido-ninja-juli",
           "recipeName": "Batido Ninja Juli",
@@ -1562,16 +1542,6 @@
             "proteina_g": 22,
             "carbohidratos_g": 10,
             "grasas_g": 12
-          }
-        },
-        "snack_noche": {
-          "recipeId": "latte-con-oatly-barista",
-          "recipeName": "Latte con Oatly Barista",
-          "macros": {
-            "calorias": 123,
-            "proteina_g": 2.2,
-            "carbohidratos_g": 14.2,
-            "grasas_g": 6.1
           }
         }
       },
