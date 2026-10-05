@@ -602,8 +602,8 @@
     {
       "id": "brochettes-a-la-parrilla",
       "receta": {
-        "nombre": "Brochettes de pollo y vegetales a la Ninja / Parrilla",
-        "descripcion_breve": "Pinchos intercalados de cubos de pollo, cebolla y morrón a la parrilla o airfryer.",
+        "nombre": "Salteado de pollo y vegetales a la Ninja / Parrilla",
+        "descripcion_breve": "Cubos de pollo, cebolla y morrón a la parrilla o airfryer.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
         "macros_por_porcion": {
@@ -635,7 +635,7 @@
           }
         ],
         "paso_a_paso": [
-          "Armar brochettes en palitos de madera intercalando pollo y vegetales.",
+          "Cortar en cubos el pollo y vegetales.",
           "Condimentar bien con orégano, ajo y sal.",
           "Asar a la parrilla o Ninja Grill a 200°C por 12-15 minutos.",
           "Girar a mitad de cocción para un dorado parejo."
