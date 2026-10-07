@@ -971,16 +971,6 @@
             "carbohidratos_g": 48,
             "grasas_g": 12
           }
-        },
-        "cena": {
-          "recipeId": "salteado-al-wok-con-fideos-de-arroz-y-kyllingebryst-2-porcio",
-          "recipeName": "Wok de pollo con fideos de arroz",
-          "macros": {
-            "calorias": 630,
-            "proteina_g": 65.5,
-            "carbohidratos_g": 85,
-            "grasas_g": 3
-          }
         }
       }
     }
@@ -1856,16 +1846,6 @@
             "proteina_g": 28,
             "carbohidratos_g": 48,
             "grasas_g": 12
-          }
-        },
-        "cena": {
-          "recipeId": "salteado-al-wok-con-fideos-de-arroz-y-kyllingebryst-2-porcio",
-          "recipeName": "Wok de pollo con fideos de arroz",
-          "macros": {
-            "calorias": 630,
-            "proteina_g": 65.5,
-            "carbohidratos_g": 85,
-            "grasas_g": 3
           }
         }
       }
