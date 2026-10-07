@@ -917,6 +917,16 @@
             "carbohidratos_g": 38,
             "grasas_g": 14
           }
+        },
+        "cena": {
+          "recipeId": "entrana-con-algo",
+          "recipeName": "Entraña, morrón con huevo y papas a la airfryer",
+          "macros": {
+            "calorias": 738,
+            "proteina_g": 60.3,
+            "carbohidratos_g": 51.5,
+            "grasas_g": 30
+          }
         }
       },
       "2026-10-16": {
@@ -1746,6 +1756,16 @@
             "proteina_g": 25,
             "carbohidratos_g": 38,
             "grasas_g": 14
+          }
+        },
+        "cena": {
+          "recipeId": "entrana-con-algo",
+          "recipeName": "Entraña, morrón con huevo y papas a la airfryer",
+          "macros": {
+            "calorias": 738,
+            "proteina_g": 60.3,
+            "carbohidratos_g": 51.5,
+            "grasas_g": 30
           }
         }
       },
