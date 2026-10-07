@@ -907,18 +907,6 @@
           }
         }
       },
-      "2026-10-12": {
-        "almuerzo": {
-          "recipeId": "tarta-integral-espinaca",
-          "recipeName": "Tarta integral de espinaca y hytteost",
-          "macros": {
-            "calorias": 380,
-            "proteina_g": 25,
-            "carbohidratos_g": 38,
-            "grasas_g": 14
-          }
-        }
-      },
       "2026-10-14": {
         "almuerzo": {
           "recipeId": "tarta-integral-espinaca",
@@ -1737,18 +1725,6 @@
       }
     },
     "2026-W42": {
-      "2026-10-12": {
-        "almuerzo": {
-          "recipeId": "tarta-integral-espinaca",
-          "recipeName": "Tarta integral de espinaca y hytteost",
-          "macros": {
-            "calorias": 380,
-            "proteina_g": 25,
-            "carbohidratos_g": 38,
-            "grasas_g": 14
-          }
-        }
-      },
       "2026-10-14": {
         "almuerzo": {
           "recipeId": "tarta-integral-espinaca",
