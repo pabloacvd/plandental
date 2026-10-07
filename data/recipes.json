@@ -3275,6 +3275,101 @@
           "Servir la polenta en un plato hondo, cubrir con la salsa roja y terminar con el resto del queso abundante por encima."
         ]
       }
+    },
+    {
+      "id": "tarta-fit-de-atun-con-bechamel-de-avena-y-oatly",
+      "receta": {
+        "nombre": "Tarta fit de atún con bechamel de avena y Oatly",
+        "descripcion_breve": "Tarta fit de atún con masa casera mitad harina integral y mitad harina 0000, relleno cargado de cebolla y atún, cubierta con una bechamel saludable a base de avena, leche de avena Oatly Barista y aceite de oliva.",
+        "categoria": "almuerzo/cena",
+        "porciones": 4,
+        "macros_por_porcion": {
+          "calorias": 485,
+          "proteina_g": 26.5,
+          "carbohidratos_g": 51.2,
+          "grasas_g": 18.4
+        },
+        "ingredientes": [
+          {
+            "item": "Harina integral",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Harina 0000",
+            "cantidad": 100,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva (para la masa)",
+            "cantidad": 20,
+            "unidad": "ml"
+          },
+          {
+            "item": "Agua tibia",
+            "cantidad": 85,
+            "unidad": "ml"
+          },
+          {
+            "item": "Atún al natural (escurrido)",
+            "cantidad": 240,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla",
+            "cantidad": 350,
+            "unidad": "g"
+          },
+          {
+            "item": "Huevo duro",
+            "cantidad": 2,
+            "unidad": "unidades"
+          },
+          {
+            "item": "Huevo (para ligar el relleno)",
+            "cantidad": 1,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Leche de avena Oatly Barista",
+            "cantidad": 250,
+            "unidad": "ml"
+          },
+          {
+            "item": "Harina/copos finos de avena (para espesar la bechamel)",
+            "cantidad": 25,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva (para la bechamel y salteado)",
+            "cantidad": 15,
+            "unidad": "ml"
+          },
+          {
+            "item": "Nuez moscada",
+            "cantidad": 1,
+            "unidad": "pizca"
+          },
+          {
+            "item": "Sal y pimienta",
+            "cantidad": 1,
+            "unidad": "al gusto"
+          },
+          {
+            "item": "Orégano",
+            "cantidad": 1,
+            "unidad": "pizca"
+          }
+        ],
+        "paso_a_paso": [
+          "Preparar la masa: mezclar los 100 g de harina integral con los 100 g de harina 0000 y una pizca de sal. Agregar 20 ml de aceite de oliva y el agua tibia gradualmente hasta formar un bollo tierno. Amasar 2 minutos y dejar reposar tapado por 15 minutos.",
+          "Saltear la cebolla: picar los 350 g de cebolla y dorarla en una sartén con un hilo de aceite de oliva hasta que esté bien caramelizada y tierna.",
+          "Preparar la bechamel fit: en una cacerola pequeña, calentar 10 ml de aceite de oliva, incorporar los 25 g de avena y remover unos segundos. Agregar progresivamente los 250 ml de leche Oatly Barista batiendo constantemente para evitar grumos. Cocinar a fuego medio hasta que espese y sazonar con sal, pimienta y bastante nuez moscada.",
+          "Armar el relleno: en un bol grande, integrar la cebolla salteada, el atún bien escurrido, los 2 huevos duros picados, la bechamel de avena y Oatly, y el huevo crudo para ligar. Condimentar con sal, pimienta y orégano al gusto.",
+          "Armado y horneado: estirar la masa y forrar un molde para tarta de 22-24 cm. Pinchar la base con un tenedor, verter el relleno de atún y emparejar la superficie.",
+          "Cocinar en horno precalentado a 190 °C durante 25 a 30 minutos, hasta que los bordes de la masa estén dorados y el relleno esté bien firme."
+        ]
+      }
     }
   ]
 }
