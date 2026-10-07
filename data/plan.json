@@ -957,6 +957,16 @@
             "carbohidratos_g": 51.5,
             "grasas_g": 30
           }
+        },
+        "snack_tarde": {
+          "recipeId": "latte-con-oatly-barista",
+          "recipeName": "Latte con Oatly Barista",
+          "macros": {
+            "calorias": 123,
+            "proteina_g": 2.2,
+            "carbohidratos_g": 14.2,
+            "grasas_g": 6.1
+          }
         }
       },
       "2026-10-16": {
@@ -1838,6 +1848,16 @@
             "proteina_g": 60.3,
             "carbohidratos_g": 51.5,
             "grasas_g": 30
+          }
+        },
+        "snack_tarde": {
+          "recipeId": "latte-con-oatly-barista",
+          "recipeName": "Latte con Oatly Barista",
+          "macros": {
+            "calorias": 123,
+            "proteina_g": 2.2,
+            "carbohidratos_g": 14.2,
+            "grasas_g": 6.1
           }
         }
       },
