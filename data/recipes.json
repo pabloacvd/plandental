@@ -2764,7 +2764,7 @@
     {
       "id": "salteado-al-wok-con-fideos-de-arroz-y-kyllingebryst-2-porcio",
       "receta": {
-        "nombre": "Salteado al wok con fideos de arroz y kyllingebryst (2 porciones)",
+        "nombre": "Wok de pollo con fideos de arroz",
         "descripcion_breve": "Salteado ultra magro de pechuga de pollo y fideos de arroz al wok con vegetales frescos, sazonado con salsa de soja baja en calorías para cubrir los requerimientos proteicos del día sin sumar grasas.",
         "categoria": "almuerzo/cena",
         "porciones": 2,
@@ -2774,64 +2774,8 @@
           "carbohidratos_g": 85,
           "grasas_g": 3
         },
-        "ingredientes": [
-          {
-            "ingrediente": "Pechuga de pollo (kyllingebryst, cruda)",
-            "cantidad": 550,
-            "unidad": "g",
-            "macros": {
-              "calorias": 583,
-              "proteina_g": 121,
-              "carbohidratos_g": 0,
-              "grasas_g": 5.5
-            }
-          },
-          {
-            "ingrediente": "Fideos de arroz (risnudler, secos)",
-            "cantidad": 190,
-            "unidad": "g",
-            "macros": {
-              "calorias": 684,
-              "proteina_g": 11.4,
-              "carbohidratos_g": 152,
-              "grasas_g": 0.4
-            }
-          },
-          {
-            "ingrediente": "Vegetales variados para wok (brócoli, pimiento, cebolla, brotes de soja)",
-            "cantidad": 300,
-            "unidad": "g",
-            "macros": {
-              "calorias": 105,
-              "proteina_g": 6,
-              "carbohidratos_g": 15,
-              "grasas_g": 0.6
-            }
-          },
-          {
-            "ingrediente": "Salsa de soja",
-            "cantidad": 60,
-            "unidad": "ml",
-            "macros": {
-              "calorias": 10.2,
-              "proteina_g": 1.38,
-              "carbohidratos_g": 1.2,
-              "grasas_g": 0
-            }
-          },
-          {
-            "ingrediente": "Ajo y jengibre fresco picados",
-            "cantidad": 15,
-            "unidad": "g",
-            "macros": {
-              "calorias": 12,
-              "proteina_g": 0.3,
-              "carbohidratos_g": 2.5,
-              "grasas_g": 0
-            }
-          }
-        ],
-        "instrucciones": [
+        "ingredientes": [],
+        "paso_a_paso": [
           "Hidratar o hervir los fideos de arroz según las instrucciones del paquete, escurrir y reservar.",
           "Cortar el kyllingebryst en tiras finas y sazonar con ajo picado, jengibre y un chorrito de salsa de soja.",
           "Calentar un wok o sartén antiadherente a fuego alto (usar spray vegetal o unas gotas de agua/salsa de soja para evitar que se pegue).",
