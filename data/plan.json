@@ -959,6 +959,16 @@
             "carbohidratos_g": 38,
             "grasas_g": 14
           }
+        },
+        "cena": {
+          "recipeId": "tarta-fit-de-atun-con-bechamel-de-avena-y-oatly",
+          "recipeName": "Tarta fit de atún con bechamel de avena y Oatly",
+          "macros": {
+            "calorias": 485,
+            "proteina_g": 26.5,
+            "carbohidratos_g": 51.2,
+            "grasas_g": 18.4
+          }
         }
       },
       "2026-10-12": {
@@ -1820,6 +1830,16 @@
             "proteina_g": 25,
             "carbohidratos_g": 38,
             "grasas_g": 14
+          }
+        },
+        "cena": {
+          "recipeId": "tarta-fit-de-atun-con-bechamel-de-avena-y-oatly",
+          "recipeName": "Tarta fit de atún con bechamel de avena y Oatly",
+          "macros": {
+            "calorias": 485,
+            "proteina_g": 26.5,
+            "carbohidratos_g": 51.2,
+            "grasas_g": 18.4
           }
         }
       },
