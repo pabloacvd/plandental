@@ -971,6 +971,16 @@
             "carbohidratos_g": 48,
             "grasas_g": 12
           }
+        },
+        "cena": {
+          "recipeId": "risotto-de-quinoa",
+          "recipeName": "Risotto de quinoa con pollo y brócoli",
+          "macros": {
+            "calorias": 440,
+            "proteina_g": 44,
+            "carbohidratos_g": 38,
+            "grasas_g": 12
+          }
         }
       }
     }
@@ -1845,6 +1855,16 @@
             "calorias": 430,
             "proteina_g": 28,
             "carbohidratos_g": 48,
+            "grasas_g": 12
+          }
+        },
+        "cena": {
+          "recipeId": "risotto-de-quinoa",
+          "recipeName": "Risotto de quinoa con pollo y brócoli",
+          "macros": {
+            "calorias": 440,
+            "proteina_g": 44,
+            "carbohidratos_g": 38,
             "grasas_g": 12
           }
         }
