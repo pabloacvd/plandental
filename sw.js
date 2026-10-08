@@ -3,20 +3,17 @@
  *
  * Cache strategy:
  *   - App shell (static assets): cache-first, updated on SW version bump.
- *   - data/plan.json: network-first, cache as fallback.
- *   - api.github.com: network-only (never cached — contains auth tokens and mutable data).
+ *   - supabase.co: network-only (auth tokens + live data — never cache).
+ *   - cdn.jsdelivr.net: cache-first (Supabase JS ESM bundle).
  *   - Everything else on origin: cache-first.
+ *   - Non-http(s) schemes (chrome-extension://, etc.): ignored entirely.
  *
  * Versioning:
- *   Bump CACHE_NAME (e.g. plandental-v2) whenever you deploy new assets.
+ *   Bump CACHE_NAME whenever you deploy new assets.
  *   The activate handler deletes all caches that don't match the current name.
- *
- * skipWaiting + clientsClaim:
- *   This is a single-user personal app. Activating the new SW immediately avoids
- *   the user needing to close all tabs before updates take effect.
  */
 
-const CACHE_NAME = 'plandental-v3';
+const CACHE_NAME = 'plandental-v4';
 
 /** Static app shell — all assets needed to boot the app offline. */
 const APP_SHELL = [
@@ -29,6 +26,7 @@ const APP_SHELL = [
   'js/planner.js',
   'js/recipes.js',
   'js/storage.js',
+  'js/supabase.js',
   'js/ui.js',
   'data/nutrition.json',
   'data/recipes.json',
@@ -65,18 +63,20 @@ self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // 1. GitHub API — network-only; never intercept.
-  if (url.hostname === 'api.github.com') {
-    return; // let the browser handle it normally
-  }
+  // 1. Only handle http and https — skip chrome-extension://, data://, etc.
+  //    Cache.put() throws on any other scheme, which would break extensions.
+  if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
 
-  // 2. plan.json — network-first (data can change from GitHub sync).
-  if (url.pathname.endsWith('/data/plan.json')) {
-    event.respondWith(networkFirst(request));
+  // 2. Supabase API — network-only. Never cache auth tokens or live data.
+  if (url.hostname.endsWith('.supabase.co')) return;
+
+  // 3. CDN (Supabase JS bundle) — cache-first so it works offline.
+  if (url.hostname === 'cdn.jsdelivr.net') {
+    event.respondWith(cacheFirst(request));
     return;
   }
 
-  // 3. Everything else (app shell + static assets) — cache-first.
+  // 4. Everything else on this origin (app shell + static assets) — cache-first.
   event.respondWith(cacheFirst(request));
 });
 
