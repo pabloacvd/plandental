@@ -733,6 +733,16 @@
             "carbohidratos_g": 38,
             "grasas_g": 14
           }
+        },
+        "snack_tarde": {
+          "recipeId": "latte-con-oatly-barista",
+          "recipeName": "Latte con Oatly Barista",
+          "macros": {
+            "calorias": 123,
+            "proteina_g": 2.2,
+            "carbohidratos_g": 14.2,
+            "grasas_g": 6.1
+          }
         }
       },
       "2026-10-09": {
@@ -1666,16 +1676,6 @@
         }
       },
       "2026-10-08": {
-        "snack_noche": {
-          "recipeId": "helado-ninja-creami-de-banana-dulce-de-leche-y-chocolate-2-p",
-          "recipeName": "Helado Ninja Creami de Banana, Dulce de Leche y Chocolate (2 porciones)",
-          "macros": {
-            "calorias": 147,
-            "proteina_g": 1.9,
-            "carbohidratos_g": 30.5,
-            "grasas_g": 2.9
-          }
-        },
         "almuerzo": {
           "recipeId": "entrana-magra-vuelta-y-vuelta-con-brocoli",
           "recipeName": "Entraña con Brócoli o Coliflor",
@@ -1694,6 +1694,16 @@
             "proteina_g": 25,
             "carbohidratos_g": 38,
             "grasas_g": 14
+          }
+        },
+        "snack_tarde": {
+          "recipeId": "latte-con-oatly-barista",
+          "recipeName": "Latte con Oatly Barista",
+          "macros": {
+            "calorias": 123,
+            "proteina_g": 2.2,
+            "carbohidratos_g": 14.2,
+            "grasas_g": 6.1
           }
         }
       },
