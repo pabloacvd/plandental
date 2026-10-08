@@ -733,6 +733,16 @@
             "carbohidratos_g": 14.2,
             "grasas_g": 6.1
           }
+        },
+        "cena": {
+          "recipeId": "pollo-brocoli-sweet-potato",
+          "recipeName": "Pechugas de pollo con brócoli y puré de batata",
+          "macros": {
+            "calorias": 490,
+            "proteina_g": 55,
+            "carbohidratos_g": 40,
+            "grasas_g": 8
+          }
         }
       },
       "2026-10-09": {
@@ -1684,6 +1694,16 @@
             "proteina_g": 2.2,
             "carbohidratos_g": 14.2,
             "grasas_g": 6.1
+          }
+        },
+        "cena": {
+          "recipeId": "pollo-brocoli-sweet-potato",
+          "recipeName": "Pechugas de pollo con brócoli y puré de batata",
+          "macros": {
+            "calorias": 490,
+            "proteina_g": 55,
+            "carbohidratos_g": 40,
+            "grasas_g": 8
           }
         }
       },
