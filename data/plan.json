@@ -806,28 +806,6 @@
             "grasas_g": 2.9
           }
         }
-      },
-      "2026-10-11": {
-        "desayuno": {
-          "recipeId": "skyr-con-semillas-de-chia",
-          "recipeName": "200g Skyr con chía y 45g prote",
-          "macros": {
-            "calorias": 303,
-            "proteina_g": 53.5,
-            "carbohidratos_g": 14.8,
-            "grasas_g": 2.5
-          }
-        },
-        "almuerzo": {
-          "recipeId": "cazuela-al-horno-pollo-vegetales",
-          "recipeName": "Cazuela al horno (Fad) de pollo y vegetales",
-          "macros": {
-            "calorias": 360,
-            "proteina_g": 48,
-            "carbohidratos_g": 14,
-            "grasas_g": 12
-          }
-        }
       }
     },
     "2026-W42": {
@@ -1818,18 +1796,6 @@
             "proteina_g": 8,
             "carbohidratos_g": 20,
             "grasas_g": 7
-          }
-        }
-      },
-      "2026-10-11": {
-        "desayuno": {
-          "recipeId": "skyr-con-semillas-de-chia",
-          "recipeName": "200g Skyr con chía y 45g prote",
-          "macros": {
-            "calorias": 303,
-            "proteina_g": 53.5,
-            "carbohidratos_g": 14.8,
-            "grasas_g": 2.5
           }
         }
       }
