@@ -80,8 +80,8 @@ export async function getMyProfile(authUser) {
     .eq('id', user.id)
     .single();
 
-  if (error) {
-    console.warn('getMyProfile:', error.message);
+  if (error || !data) {
+    console.warn('getMyProfile:', error ? error.message : 'No profile data returned');
     // Return a synthetic profile so the UI always shows something after login.
     const fallbackUsername =
       user.user_metadata?.username ||
@@ -113,8 +113,12 @@ export async function getMyPersons() {
  * Return the familia_flag for the current user.
  * { show_familia: boolean, approved_count: number }
  */
-export async function getFamiliaFlag() {
-  const { data: { user } } = await supabase.auth.getUser();
+export async function getFamiliaFlag(authUser) {
+  let user = authUser;
+  if (!user) {
+    const { data } = await supabase.auth.getUser();
+    user = data?.user;
+  }
   if (!user) return { show_familia: false, approved_count: 0 };
 
   const { data, error } = await supabase

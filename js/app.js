@@ -97,7 +97,7 @@ async function loadAppData(authUser) {
   // Resolve persons, familia flag, and profile in parallel.
   const [persons, familiaFlag, profile] = await Promise.all([
     getMyPersons(),
-    getFamiliaFlag(),
+    getFamiliaFlag(authUser),
     getMyProfile(authUser),
   ]);
 

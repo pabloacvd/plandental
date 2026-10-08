@@ -74,6 +74,8 @@ async function checkCounts() {
 async function checkAdminUser() {
   console.log('\n── 2. Admin user ───────────────────────────────');
 
+  let pabloId = '00000000-0000-0000-0000-000000000001';
+
   await check('profiles row for pablo exists', async () => {
     const { data, error } = await admin
       .from('profiles')
@@ -82,6 +84,7 @@ async function checkAdminUser() {
       .single();
     if (error) throw error;
     if (data.role !== 'admin') throw new Error(`role is "${data.role}", expected "admin"`);
+    pabloId = data.id;
   });
 
   await check('pablo has approved access to Pablo person', async () => {
@@ -89,7 +92,7 @@ async function checkAdminUser() {
       .from('person_access')
       .select('status, persons(name)')
       .eq('status', 'approved')
-      .eq('granted_to', '00000000-0000-0000-0000-000000000001')
+      .eq('granted_to', pabloId)
       .eq('person_id',  '00000000-0000-0000-0000-000000000010')
       .single();
     if (error) throw error;
@@ -100,7 +103,7 @@ async function checkAdminUser() {
     const { data, error } = await admin
       .from('person_access')
       .select('status')
-      .eq('granted_to', '00000000-0000-0000-0000-000000000001')
+      .eq('granted_to', pabloId)
       .eq('person_id',  '00000000-0000-0000-0000-000000000011')
       .single();
     if (error) throw error;
@@ -192,11 +195,18 @@ async function checkRLS() {
 async function checkFamiliaFlag() {
   console.log('\n── 6. Familia flag view ────────────────────────');
 
+  const { data: pabloProfile } = await admin
+    .from('profiles')
+    .select('id')
+    .eq('username', 'pablo')
+    .single();
+  const pabloId = pabloProfile?.id || '00000000-0000-0000-0000-000000000001';
+
   await check('pablo shows show_familia=true (has 2 persons)', async () => {
     const { data, error } = await admin
       .from('familia_flag')
       .select('show_familia, approved_count')
-      .eq('profile_id', '00000000-0000-0000-0000-000000000001')
+      .eq('profile_id', pabloId)
       .single();
     if (error) throw error;
     if (!data.show_familia) throw new Error(`show_familia=${data.show_familia}, approved_count=${data.approved_count}`);
