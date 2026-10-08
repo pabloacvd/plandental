@@ -785,26 +785,6 @@
             "carbohidratos_g": 9.7,
             "grasas_g": 0.9
           }
-        },
-        "cena": {
-          "recipeId": "zoodles-a-la-bolonesa",
-          "recipeName": "Fideos de zucchini (Zoodles) a la boloñesa",
-          "macros": {
-            "calorias": 310,
-            "proteina_g": 38,
-            "carbohidratos_g": 14,
-            "grasas_g": 11
-          }
-        },
-        "snack_noche": {
-          "recipeId": "helado-ninja-creami-de-banana-dulce-de-leche-y-chocolate-2-p",
-          "recipeName": "Helado Ninja Creami de Banana, Dulce de Leche y Chocolate (2 porciones)",
-          "macros": {
-            "calorias": 147,
-            "proteina_g": 1.9,
-            "carbohidratos_g": 30.5,
-            "grasas_g": 2.9
-          }
         }
       }
     },
