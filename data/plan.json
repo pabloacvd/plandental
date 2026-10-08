@@ -1787,16 +1787,6 @@
             "carbohidratos_g": 30,
             "grasas_g": 12
           }
-        },
-        "snack_noche": {
-          "recipeId": "snack-hummus-vegetales",
-          "recipeName": "Snack: Hummus casero con bastones de vegetales",
-          "macros": {
-            "calorias": 180,
-            "proteina_g": 8,
-            "carbohidratos_g": 20,
-            "grasas_g": 7
-          }
         }
       }
     },
