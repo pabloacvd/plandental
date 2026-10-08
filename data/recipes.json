@@ -3370,6 +3370,44 @@
           "Cocinar en horno precalentado a 190 °C durante 25 a 30 minutos, hasta que los bordes de la masa estén dorados y el relleno esté bien firme."
         ]
       }
+    },
+    {
+      "id": "entrana-magra-vuelta-y-vuelta-con-brocoli",
+      "receta": {
+        "nombre": "Entraña Magra Vuelta y Vuelta con Brócoli",
+        "descripcion_breve": "Entraña limpia de grasa externa cocinada a fuego fuerte acompañada de brócoli al microondas.",
+        "categoria": "almuerzo/cena",
+        "porciones": 1,
+        "macros_por_porcion": {
+          "calorias": 537,
+          "proteina_g": 55.6,
+          "carbohidratos_g": 13.2,
+          "grasas_g": 30.7
+        },
+        "ingredientes": [
+          {
+            "item": "Entraña limpia sin cuero ni grasa visible",
+            "cantidad": 250,
+            "unidad": "g"
+          },
+          {
+            "item": "Brócoli fresco o congelado",
+            "cantidad": 200,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva virgen extra",
+            "cantidad": 5,
+            "unidad": "g"
+          }
+        ],
+        "paso_a_paso": [
+          "Cortar el brócoli en flores, colocarlo en un recipiente apto para microondas con una cucharada de agua, tapar y cocinar a máxima potencia durante 3 a 4 minutos.",
+          "Calentar una sartén a fuego bien alto con la cucharadita de aceite de oliva hasta que esté bien caliente.",
+          "Cocinar la entraña 2 a 3 minutos por lado para dorar por fuera y mantener jugosa por dentro.",
+          "Salpimentar al salir de la sartén y servir inmediatamente junto al brócoli."
+        ]
+      }
     }
   ]
 }
