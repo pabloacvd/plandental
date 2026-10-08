@@ -807,18 +807,6 @@
           }
         }
       },
-      "2026-10-10": {
-        "snack_noche": {
-          "recipeId": "shake-prote-juli-sin-skyr",
-          "recipeName": "Shake prote Juli (sin skyr)",
-          "macros": {
-            "calorias": 111,
-            "proteina_g": 24.4,
-            "carbohidratos_g": 2,
-            "grasas_g": 0.3
-          }
-        }
-      },
       "2026-10-11": {
         "desayuno": {
           "recipeId": "skyr-con-semillas-de-chia",
@@ -1853,18 +1841,6 @@
           }
         }
       },
-      "2026-10-10": {
-        "snack_noche": {
-          "recipeId": "shake-prote-juli-sin-skyr",
-          "recipeName": "Shake prote Juli (sin skyr)",
-          "macros": {
-            "calorias": 111,
-            "proteina_g": 24.4,
-            "carbohidratos_g": 2,
-            "grasas_g": 0.3
-          }
-        }
-      },
       "2026-10-11": {
         "desayuno": {
           "recipeId": "skyr-con-semillas-de-chia",
@@ -1894,16 +1870,6 @@
             "proteina_g": 33.4,
             "carbohidratos_g": 5,
             "grasas_g": 0.5
-          }
-        },
-        "cena": {
-          "recipeId": "mac-and-cheese-proteico",
-          "recipeName": "Mac & Cheese proteico",
-          "macros": {
-            "calorias": 430,
-            "proteina_g": 28,
-            "carbohidratos_g": 48,
-            "grasas_g": 12
           }
         }
       }
