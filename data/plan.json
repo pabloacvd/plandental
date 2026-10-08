@@ -808,16 +808,6 @@
         }
       },
       "2026-10-10": {
-        "almuerzo": {
-          "recipeId": "pollo-al-curry",
-          "recipeName": "Pollo al curry con blomkålsris",
-          "macros": {
-            "calorias": 469,
-            "proteina_g": 65.7,
-            "carbohidratos_g": 16.7,
-            "grasas_g": 13.4
-          }
-        },
         "snack_tarde": {
           "recipeId": "batido-ninja-pablo",
           "recipeName": "Batido Ninja Pablo",
@@ -1884,26 +1874,6 @@
         }
       },
       "2026-10-10": {
-        "almuerzo": {
-          "recipeId": "pollo-al-curry",
-          "recipeName": "Pollo al curry con blomkålsris",
-          "macros": {
-            "calorias": 469,
-            "proteina_g": 65.7,
-            "carbohidratos_g": 16.7,
-            "grasas_g": 13.4
-          }
-        },
-        "snack_tarde": {
-          "recipeId": "batido-ninja-juli",
-          "recipeName": "Batido Ninja Juli",
-          "macros": {
-            "calorias": 161,
-            "proteina_g": 33.4,
-            "carbohidratos_g": 5,
-            "grasas_g": 0.5
-          }
-        },
         "cena": {
           "recipeId": "polenta-cremosa-con-oatly-barista-manteca-queso-y-salsa-roja",
           "recipeName": "Polenta cremosa con Oatly Barista, manteca, queso y salsa roja",
