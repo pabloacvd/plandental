@@ -44,17 +44,17 @@ export async function signOut() {
 
 /**
  * Return the current session, or null if not authenticated.
- * Session is persisted in localStorage — this is synchronous after
- * the first auth state event.
+ * Uses the v2 async API — supabase.auth.session() was removed in v2.
  */
-export function getSession() {
-  // supabase.auth.session() is synchronous in v2 after initialisation
-  return supabase.auth.session?.() ?? null;
+export async function getSession() {
+  const { data: { session } } = await supabase.auth.getSession();
+  return session ?? null;
 }
 
 /** True if a valid session exists. */
-export function isAuthenticated() {
-  return !!supabase.auth.session?.()?.access_token;
+export async function isAuthenticated() {
+  const session = await getSession();
+  return !!session?.access_token;
 }
 
 /**
@@ -62,13 +62,14 @@ export function isAuthenticated() {
  * Returns null if not authenticated.
  */
 export async function getMyProfile() {
-  const session = supabase.auth.session?.();
-  if (!session) return null;
+  // Use getUser() — authoritative server-side check, not the cached session.
+  const { data: { user }, error: uErr } = await supabase.auth.getUser();
+  if (uErr || !user) return null;
 
   const { data, error } = await supabase
     .from('profiles')
     .select('id, username, role')
-    .eq('id', session.user.id)
+    .eq('id', user.id)
     .single();
 
   if (error) { console.warn('getMyProfile:', error.message); return null; }
@@ -96,13 +97,13 @@ export async function getMyPersons() {
  * { show_familia: boolean, approved_count: number }
  */
 export async function getFamiliaFlag() {
-  const session = supabase.auth.session?.();
-  if (!session) return { show_familia: false, approved_count: 0 };
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return { show_familia: false, approved_count: 0 };
 
   const { data, error } = await supabase
     .from('familia_flag')
     .select('show_familia, approved_count')
-    .eq('profile_id', session.user.id)
+    .eq('profile_id', user.id)
     .maybeSingle();
 
   if (error) { console.warn('getFamiliaFlag:', error.message); }

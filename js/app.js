@@ -54,32 +54,33 @@ let state = {
 // ══════════════════════════════════════════════════════════
 
 async function init() {
-  // Listen for auth state changes (handles session restore on reload)
-  supabase.auth.onAuthStateChange(async (_event, session) => {
+  // Wire all controls once up-front. Elements inside #app-shell exist in
+  // the DOM even while hidden, so getElementById works fine here.
+  wireControls();
+
+  // Show login gate immediately so the user never sees a blank screen
+  // while we wait for the async auth state event below.
+  showLoginGate();
+
+  // onAuthStateChange is the single source of truth for auth state.
+  // It fires INITIAL_SESSION (with a session) or SIGNED_OUT on page load,
+  // then SIGNED_IN / SIGNED_OUT on subsequent auth actions.
+  // We never call loadAppData() from anywhere else to avoid double-loads.
+  supabase.auth.onAuthStateChange(async (event, session) => {
     if (session) {
       await loadAppData();
     } else {
-      // Not authenticated — show login gate
       showLoginGate();
     }
   });
-
-  // Check initial session (already persisted in localStorage)
-  const { data: { session } } = await supabase.auth.getSession();
-  if (!session) {
-    showLoginGate();
-    return;
-  }
-
-  await loadAppData();
 }
 
 /**
  * Load all app data once the user is authenticated.
- * Called both on first load and after login.
+ * Called by onAuthStateChange — never called directly from init().
  */
 async function loadAppData() {
-  // Resolve persons & familia flag first (needed by fetchPlan)
+  // Resolve persons, familia flag, and profile in parallel.
   const [persons, familiaFlag, profile] = await Promise.all([
     getMyPersons(),
     getFamiliaFlag(),
@@ -93,22 +94,20 @@ async function loadAppData() {
 
   // Default person selection:
   //  - If familia is available, default to Familia
-  //  - Otherwise default to the first person name
+  //  - Otherwise default to the first (and only) person name
   if (state.showFamilia) {
     state.person = 'Familia';
   } else if (persons.length) {
     state.person = persons[0].name;
   }
 
-  // Load recipes and nutrition
+  // Load recipes, nutrition, and plan
   const { recipes, nutrition } = await loadData();
   state.recipes   = recipes;
   state.nutrition = nutrition;
+  state.plan      = await fetchPlan();
 
-  // Load plan
-  state.plan = await fetchPlan();
-
-  // Hide login gate, show app
+  // Show app, hide login gate
   hideLoginGate();
   renderPersonSwitcher();
 
@@ -123,7 +122,6 @@ async function loadAppData() {
   renderSidebar();
   renderWeek();
   updateAuthUI();
-  wireControls();
 }
 
 // ── Login gate ────────────────────────────────────────────────
@@ -1393,17 +1391,28 @@ function wireControls() {
   document.getElementById('btn-create-person')?.addEventListener('click', handleCreatePerson);
   document.getElementById('btn-request-access')?.addEventListener('click', handleRequestAccess);
 
-  // Login gate form
-  document.getElementById('btn-login')?.addEventListener('click', async () => {
+  // Login gate form — click and Enter key both trigger sign-in
+  async function doLogin() {
     const user = document.getElementById('input-username')?.value.trim();
     const pass = document.getElementById('input-password')?.value;
     if (!user || !pass) { showToast('Ingresá usuario y contraseña', 'error'); return; }
+    const btn = document.getElementById('btn-login');
+    if (btn) { btn.disabled = true; btn.textContent = 'Entrando…'; }
     try {
       await signIn(user, pass);
       // onAuthStateChange fires → loadAppData() runs automatically
     } catch (e) {
       showToast('❌ ' + e.message, 'error');
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = 'Entrar'; }
     }
+  }
+  document.getElementById('btn-login')?.addEventListener('click', doLogin);
+  document.getElementById('input-password')?.addEventListener('keydown', e => {
+    if (e.key === 'Enter') doLogin();
+  });
+  document.getElementById('input-username')?.addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('input-password')?.focus();
   });
 
   // ESC key
