@@ -3408,6 +3408,86 @@
           "Salpimentar al salir de la sartén y servir inmediatamente junto al brócoli."
         ]
       }
+    },
+    {
+      "id": "wraps-fit-de-atun-con-bechamel-de-avena-y-oatly",
+      "receta": {
+        "nombre": "Wraps fit de atún con bechamel de avena y Oatly",
+        "descripcion_breve": "Relleno cremoso de atún, cebolla y bechamel fit de avena con Oatly Barista, servido en tortillas integrales Coop Fuldskornshvede. Cantidades ajustadas para 2 porciones (4 wraps en total).",
+        "categoria": "almuerzo/cena",
+        "porciones": 2,
+        "macros_por_porcion": {
+          "calorias": 463,
+          "proteina_g": 25.8,
+          "carbohidratos_g": 50.6,
+          "grasas_g": 15.6
+        },
+        "ingredientes": [
+          {
+            "item": "Coop Tortillas Fuldskornshvede",
+            "cantidad": 4,
+            "unidad": "unidades"
+          },
+          {
+            "item": "Atún al natural (escurrido)",
+            "cantidad": 120,
+            "unidad": "g"
+          },
+          {
+            "item": "Cebolla",
+            "cantidad": 175,
+            "unidad": "g"
+          },
+          {
+            "item": "Huevo duro",
+            "cantidad": 1,
+            "unidad": "unidad"
+          },
+          {
+            "item": "Huevo (para ligar el relleno)",
+            "cantidad": 1,
+            "unidad": "unidad (chico)"
+          },
+          {
+            "item": "Leche de avena Oatly Barista",
+            "cantidad": 125,
+            "unidad": "ml"
+          },
+          {
+            "item": "Harina/copos finos de avena",
+            "cantidad": 12.5,
+            "unidad": "g"
+          },
+          {
+            "item": "Aceite de oliva (para la bechamel y salteado)",
+            "cantidad": 7.5,
+            "unidad": "ml"
+          },
+          {
+            "item": "Nuez moscada",
+            "cantidad": 1,
+            "unidad": "pizca"
+          },
+          {
+            "item": "Sal y pimienta",
+            "cantidad": 1,
+            "unidad": "al gusto"
+          },
+          {
+            "item": "Orégano",
+            "cantidad": 1,
+            "unidad": "pizca"
+          }
+        ],
+        "paso_a_paso": [
+          "Saltear los 175 g de cebolla picada en una sartén con un hilo delgado de aceite de oliva (unos 2.5 ml) hasta que transparente y dore suavemente.",
+          "Preparar la bechamel fit: en una cacerola pequeña, calentar los 5 ml restantes de aceite de oliva, agregar los 12.5 g de avena y dorar apenas unos segundos. Incorporar los 125 ml de leche Oatly Barista batiendo constantemente hasta que tome cuerpo y espese. Sazonar con sal, pimienta y nuez moscada.",
+          "Integrar el relleno: en un bol mezclar la cebolla salteada, los 120 g de atún escurrido, el huevo duro picado, la bechamel fit y el huevo crudo para ligar.",
+          "Llevar la mezcla a la sartén a fuego medio-bajo durante 2 a 3 minutos, revolviendo suavemente para que el huevo cuaje y todo quede bien cremoso.",
+          "Calentar las 4 tortillas integrales Coop unos segundos por lado en una sartén limpia y seca para aflojarlas.",
+          "Dividir el relleno en 4 partes iguales, armar los 4 wraps (2 por persona) y dorarlos opcionalmente 1 minuto en la sartén para dejarlos crocantes."
+        ]
+      }
     }
   ]
 }
