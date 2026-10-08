@@ -724,16 +724,6 @@
             "grasas_g": 30.7
           }
         },
-        "cena": {
-          "recipeId": "tarta-integral-espinaca",
-          "recipeName": "Tarta integral de espinaca y hytteost",
-          "macros": {
-            "calorias": 380,
-            "proteina_g": 25,
-            "carbohidratos_g": 38,
-            "grasas_g": 14
-          }
-        },
         "snack_tarde": {
           "recipeId": "latte-con-oatly-barista",
           "recipeName": "Latte con Oatly Barista",
@@ -1684,16 +1674,6 @@
             "proteina_g": 55.6,
             "carbohidratos_g": 13.2,
             "grasas_g": 30.7
-          }
-        },
-        "cena": {
-          "recipeId": "tarta-integral-espinaca",
-          "recipeName": "Tarta integral de espinaca y hytteost",
-          "macros": {
-            "calorias": 380,
-            "proteina_g": 25,
-            "carbohidratos_g": 38,
-            "grasas_g": 14
           }
         },
         "snack_tarde": {
