@@ -714,16 +714,6 @@
         }
       },
       "2026-10-08": {
-        "snack_tarde": {
-          "recipeId": "batido-ninja-pablo",
-          "recipeName": "Batido Ninja Pablo",
-          "macros": {
-            "calorias": 269,
-            "proteina_g": 54.2,
-            "carbohidratos_g": 9.7,
-            "grasas_g": 0.9
-          }
-        },
         "snack_noche": {
           "recipeId": "snack-hummus-vegetales",
           "recipeName": "Snack: Hummus casero con bastones de vegetales",
