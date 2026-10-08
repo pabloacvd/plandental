@@ -827,16 +827,6 @@
             "carbohidratos_g": 14,
             "grasas_g": 12
           }
-        },
-        "snack_tarde": {
-          "recipeId": "batido-ninja-pablo",
-          "recipeName": "Batido Ninja Pablo",
-          "macros": {
-            "calorias": 269,
-            "proteina_g": 54.2,
-            "carbohidratos_g": 9.7,
-            "grasas_g": 0.9
-          }
         }
       }
     },
@@ -1840,16 +1830,6 @@
             "proteina_g": 53.5,
             "carbohidratos_g": 14.8,
             "grasas_g": 2.5
-          }
-        },
-        "almuerzo": {
-          "recipeId": "rollitos-carne-esparragos",
-          "recipeName": "Rollitos de carne y espárragos",
-          "macros": {
-            "calorias": 330,
-            "proteina_g": 44,
-            "carbohidratos_g": 6,
-            "grasas_g": 14
           }
         }
       }
