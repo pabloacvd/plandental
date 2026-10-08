@@ -1099,6 +1099,16 @@
             "carbohidratos_g": 3.7,
             "grasas_g": 0.5
           }
+        },
+        "cena": {
+          "recipeId": "wraps-fit-de-atun-con-bechamel-de-avena-y-oatly",
+          "recipeName": "Wraps fit de atún con bechamel de avena y Oatly",
+          "macros": {
+            "calorias": 463,
+            "proteina_g": 25.8,
+            "carbohidratos_g": 50.6,
+            "grasas_g": 15.6
+          }
         }
       },
       "2026-10-12": {
@@ -2070,6 +2080,16 @@
             "proteina_g": 24.4,
             "carbohidratos_g": 2,
             "grasas_g": 0.3
+          }
+        },
+        "cena": {
+          "recipeId": "wraps-fit-de-atun-con-bechamel-de-avena-y-oatly",
+          "recipeName": "Wraps fit de atún con bechamel de avena y Oatly",
+          "macros": {
+            "calorias": 463,
+            "proteina_g": 25.8,
+            "carbohidratos_g": 50.6,
+            "grasas_g": 15.6
           }
         }
       },
