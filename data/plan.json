@@ -714,16 +714,6 @@
         }
       },
       "2026-10-08": {
-        "snack_noche": {
-          "recipeId": "snack-hummus-vegetales",
-          "recipeName": "Snack: Hummus casero con bastones de vegetales",
-          "macros": {
-            "calorias": 180,
-            "proteina_g": 8,
-            "carbohidratos_g": 20,
-            "grasas_g": 7
-          }
-        },
         "almuerzo": {
           "recipeId": "entrana-magra-vuelta-y-vuelta-con-brocoli",
           "recipeName": "Entraña con Brócoli o Coliflor",
@@ -1676,16 +1666,6 @@
         }
       },
       "2026-10-08": {
-        "snack_tarde": {
-          "recipeId": "batido-ninja-juli",
-          "recipeName": "Batido Ninja Juli",
-          "macros": {
-            "calorias": 161,
-            "proteina_g": 33.4,
-            "carbohidratos_g": 5,
-            "grasas_g": 0.5
-          }
-        },
         "snack_noche": {
           "recipeId": "helado-ninja-creami-de-banana-dulce-de-leche-y-chocolate-2-p",
           "recipeName": "Helado Ninja Creami de Banana, Dulce de Leche y Chocolate (2 porciones)",
