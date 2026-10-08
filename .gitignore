@@ -21,3 +21,6 @@ data/plan.json
 # Supabase environment config (contains keys — never commit)
 scripts/.env
 js/config.js
+
+# Node dependencies — never commit
+node_modules/
