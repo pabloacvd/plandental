@@ -7,6 +7,7 @@ import { autoFillWeek } from './planner.js';
 import { getWeekDays, toDateKey, toWeekKey, MEAL_SLOTS, MONTH_NAMES } from './calendar.js';
 import {
   fetchPlan, savePlan, removePlanEntry,
+  fetchDefaultWeek, saveDefaultWeek, clearDefaultWeek,
   signIn, signOut, isAuthenticated, getMyProfile, getMyPersons, getFamiliaFlag,
   createPerson, requestPersonAccess, approvePersonAccess, rejectPersonAccess,
   getPendingAccessRequests, saveRecipes, consumeTokenFromHash,
@@ -36,6 +37,7 @@ let state = {
   anchorDate: new Date(),
   activeDay:  toDateKey(new Date()),
   plan:       {},
+  defaultWeek: {},               // { personName: { dayIndex: { slotId: meal } } }
   nutrition:  {},
   recipes:    [],
   searchQuery:    '',
@@ -62,13 +64,24 @@ async function init() {
   // while we wait for the async auth state event below.
   showLoginGate();
 
+  // Guard against re-entrant concurrent loadAppData() calls.
+  // onAuthStateChange can fire multiple times in rapid succession
+  // (INITIAL_SESSION + SIGNED_IN), so we only allow one load at a time.
+  let loading = false;
+
   // onAuthStateChange is the single source of truth for auth state.
   // It fires INITIAL_SESSION (with a session) or SIGNED_OUT on page load,
   // then SIGNED_IN / SIGNED_OUT on subsequent auth actions.
   // We never call loadAppData() from anywhere else to avoid double-loads.
   supabase.auth.onAuthStateChange(async (event, session) => {
     if (session) {
-      await loadAppData();
+      if (loading) return;
+      loading = true;
+      try {
+        await loadAppData(session.user);
+      } finally {
+        loading = false;
+      }
     } else {
       showLoginGate();
     }
@@ -78,13 +91,14 @@ async function init() {
 /**
  * Load all app data once the user is authenticated.
  * Called by onAuthStateChange — never called directly from init().
+ * @param {object} [authUser] — the user object from the auth session (avoids a round-trip getUser() call)
  */
-async function loadAppData() {
+async function loadAppData(authUser) {
   // Resolve persons, familia flag, and profile in parallel.
   const [persons, familiaFlag, profile] = await Promise.all([
     getMyPersons(),
     getFamiliaFlag(),
-    getMyProfile(),
+    getMyProfile(authUser),
   ]);
 
   state.persons        = persons;
@@ -101,11 +115,12 @@ async function loadAppData() {
     state.person = persons[0].name;
   }
 
-  // Load recipes, nutrition, and plan
+  // Load recipes, nutrition, plan, and default week template
   const { recipes, nutrition } = await loadData();
-  state.recipes   = recipes;
-  state.nutrition = nutrition;
-  state.plan      = await fetchPlan();
+  state.recipes      = recipes;
+  state.nutrition    = nutrition;
+  state.plan         = await fetchPlan();
+  state.defaultWeek  = await fetchDefaultWeek();
 
   // Show app, hide login gate
   hideLoginGate();
@@ -140,9 +155,53 @@ function hideLoginGate() {
 // WEEK RENDERING
 // ══════════════════════════════════════════════════════════
 
+/**
+ * If the current week has no meals for any of the active persons,
+ * pre-populate it from the default week template (in-memory only —
+ * persisted only when the user actually edits a slot, just like any
+ * other assignment). Returns true if defaults were applied.
+ */
+function applyDefaultWeekIfEmpty(weekDays, weekKey) {
+  const personsToCheck = state.person === 'Familia'
+    ? state.persons.map(p => p.name)
+    : [state.person];
+
+  // Check if every relevant person has zero slots this week
+  const weekIsEmpty = personsToCheck.every(personName => {
+    const weekData = state.plan?.[personName]?.[weekKey];
+    return !weekData || Object.keys(weekData).length === 0;
+  });
+
+  if (!weekIsEmpty) return false;
+
+  // Check that there is at least one default entry to apply
+  const hasDefaults = personsToCheck.some(n => {
+    const d = state.defaultWeek?.[n];
+    return d && Object.keys(d).length > 0;
+  });
+  if (!hasDefaults) return false;
+
+  // Copy default template into the plan (in-memory)
+  for (const personName of personsToCheck) {
+    const personDefaults = state.defaultWeek?.[personName];
+    if (!personDefaults) continue;
+
+    for (const [dayIndex, slotMap] of Object.entries(personDefaults)) {
+      const dateKey = toDateKey(weekDays[Number(dayIndex)]);
+      for (const [slotId, meal] of Object.entries(slotMap)) {
+        setDeep(state.plan, personName, weekKey, dateKey, slotId, { ...meal });
+      }
+    }
+  }
+  return true;
+}
+
 function renderWeek() {
   const weekDays = getWeekDays(state.anchorDate);
   const weekKey  = toWeekKey(state.anchorDate);
+
+  // Silently pre-fill empty weeks from the default week template
+  applyDefaultWeekIfEmpty(weekDays, weekKey);
 
   // Update navigation label
   if (isMobile() && state.mobileDayIndex !== null) {
@@ -1273,6 +1332,57 @@ async function handleAutoPlan() {
 }
 
 // ══════════════════════════════════════════════════════════
+// DEFAULT WEEK
+// ══════════════════════════════════════════════════════════
+
+/**
+ * Save the currently visible week as the default week template.
+ * Collects meals for the active persons from state.plan and writes
+ * them to the default_week table, replacing any previous template.
+ */
+async function handleSetDefaultWeek() {
+  const btn = document.getElementById('btn-set-default-week');
+  btn.disabled = true;
+  btn.textContent = '⏳ Guardando…';
+
+  try {
+    const weekDays  = getWeekDays(state.anchorDate);
+    const weekKey   = toWeekKey(state.anchorDate);
+    const persons   = personsToWrite();
+
+    // Build { dayIndex: { slotId: meal } } from the current week
+    const weekData = {};
+    weekDays.forEach((d, i) => {
+      const dateKey  = toDateKey(d);
+      const daySlots = {};
+      for (const personName of persons) {
+        const slotMap = state.plan?.[personName]?.[weekKey]?.[dateKey] || {};
+        for (const [slotId, meal] of Object.entries(slotMap)) {
+          if (meal?.recipeId) daySlots[slotId] = meal;
+        }
+      }
+      if (Object.keys(daySlots).length) weekData[i] = daySlots;
+    });
+
+    // Overwrite the stored template (clear first to remove stale slots)
+    await clearDefaultWeek(persons, state.personNameToId);
+    await saveDefaultWeek(weekData, persons, state.personNameToId);
+
+    // Update in-memory copy so it takes effect immediately on the next empty week
+    for (const personName of persons) {
+      state.defaultWeek[personName] = weekData;
+    }
+
+    showToast('✅ Semana guardada como plantilla', 'success');
+  } catch (e) {
+    showToast('❌ Error al guardar plantilla: ' + e.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '📌 Usar como predeterminada';
+  }
+}
+
+// ══════════════════════════════════════════════════════════
 // CONTROLS WIRING
 // ══════════════════════════════════════════════════════════
 
@@ -1370,6 +1480,9 @@ function wireControls() {
 
   // Auto-plan
   document.getElementById('btn-auto-plan').addEventListener('click', handleAutoPlan);
+
+  // Default week
+  document.getElementById('btn-set-default-week').addEventListener('click', handleSetDefaultWeek);
 
   // Shopping list
   document.getElementById('btn-shopping-list').addEventListener('click', openShoppingModal);

@@ -796,6 +796,21 @@ input  { font: inherit; border: none; outline: none; }
 .btn-auto-plan:hover:not(:disabled) { opacity: .88; }
 .btn-auto-plan:disabled { opacity: .55; cursor: not-allowed; }
 
+.btn-default-week {
+  font-size: .82rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  border: 1.5px solid var(--border);
+  transition: var(--transition);
+  flex-shrink: 0;
+  letter-spacing: .01em;
+}
+.btn-default-week:hover:not(:disabled) { background: var(--border); }
+.btn-default-week:disabled { opacity: .55; cursor: not-allowed; }
+
 /* ── Recipe editor modal ── */
 .modal-box--editor {
   max-width: 700px;
@@ -1135,6 +1150,7 @@ input  { font: inherit; border: none; outline: none; }
   .auth-area--desktop { display: none; }
   .btn-shopping--header { display: none; }
   .btn-auto-plan { display: none; }
+  .btn-default-week { display: none; }
 
   /* Row 2: controls fill full width, switcher aligned right */
   .header-controls {

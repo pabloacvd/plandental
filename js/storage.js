@@ -59,12 +59,20 @@ export async function isAuthenticated() {
 
 /**
  * Return the current user's profile from public.profiles.
- * Returns null if not authenticated.
+ * Accepts the auth user object from the session to skip an extra network round-trip.
+ * Falls back to a synthetic profile built from auth metadata if the DB row is missing.
+ * Returns null if not authenticated at all.
+ *
+ * @param {object} [authUser] — user object from supabase.auth.onAuthStateChange session
  */
-export async function getMyProfile() {
-  // Use getUser() — authoritative server-side check, not the cached session.
-  const { data: { user }, error: uErr } = await supabase.auth.getUser();
-  if (uErr || !user) return null;
+export async function getMyProfile(authUser) {
+  // Prefer the already-resolved user from the session; fall back to a network call.
+  let user = authUser;
+  if (!user) {
+    const { data, error: uErr } = await supabase.auth.getUser();
+    if (uErr || !data?.user) return null;
+    user = data.user;
+  }
 
   const { data, error } = await supabase
     .from('profiles')
@@ -72,7 +80,16 @@ export async function getMyProfile() {
     .eq('id', user.id)
     .single();
 
-  if (error) { console.warn('getMyProfile:', error.message); return null; }
+  if (error) {
+    console.warn('getMyProfile:', error.message);
+    // Return a synthetic profile so the UI always shows something after login.
+    const fallbackUsername =
+      user.user_metadata?.username ||
+      user.user_metadata?.full_name ||
+      (user.email ? user.email.split('@')[0] : null) ||
+      'usuario';
+    return { id: user.id, username: fallbackUsername, role: 'user' };
+  }
   return data;
 }
 
@@ -390,6 +407,101 @@ export async function fetchNutrition() {
     };
   }
   return result;
+}
+
+// ── Default Week ─────────────────────────────────────────────
+
+/**
+ * Fetch the default week template for all accessible persons.
+ * Returns { personName: { dayIndex: { slotId: { recipeId, recipeName, macros } } } }
+ * dayIndex is 0 (Monday) … 6 (Sunday).
+ */
+export async function fetchDefaultWeek() {
+  const persons = await getMyPersons();
+  if (!persons.length) return {};
+
+  const personIds  = persons.map(p => p.id);
+  const personById = Object.fromEntries(persons.map(p => [p.id, p.name]));
+
+  const { data, error } = await supabase
+    .from('default_week')
+    .select('person_id, day_index, slot_id, recipe_id, recipe_name, macros')
+    .in('person_id', personIds);
+
+  if (error) {
+    console.warn('fetchDefaultWeek:', error.message);
+    return {};
+  }
+
+  const result = {};
+  for (const row of (data || [])) {
+    const personName = personById[row.person_id];
+    if (!personName) continue;
+    result[personName]                           ??= {};
+    result[personName][row.day_index]            ??= {};
+    result[personName][row.day_index][row.slot_id] = {
+      recipeId:   row.recipe_id,
+      recipeName: row.recipe_name,
+      macros:     row.macros,
+    };
+  }
+  return result;
+}
+
+/**
+ * Save the current week as the default week template for the given persons.
+ * weekData: { dayIndex: { slotId: { recipeId, recipeName, macros } } }
+ * personNames: string[]
+ * personNameToId: { name: uuid }
+ */
+export async function saveDefaultWeek(weekData, personNames, personNameToId) {
+  const rows = [];
+
+  for (const personName of personNames) {
+    const personId = personNameToId?.[personName];
+    if (!personId) continue;
+
+    for (const [dayIndex, slotMap] of Object.entries(weekData)) {
+      for (const [slotId, meal] of Object.entries(slotMap)) {
+        if (!meal?.recipeId) continue;
+        rows.push({
+          person_id:   personId,
+          day_index:   Number(dayIndex),
+          slot_id:     slotId,
+          recipe_id:   meal.recipeId,
+          recipe_name: meal.recipeName || '',
+          macros:      meal.macros     || {},
+          updated_at:  new Date().toISOString(),
+        });
+      }
+    }
+  }
+
+  if (!rows.length) return;
+
+  const CHUNK = 500;
+  for (let i = 0; i < rows.length; i += CHUNK) {
+    const { error } = await supabase
+      .from('default_week')
+      .upsert(rows.slice(i, i + CHUNK), { onConflict: 'person_id,day_index,slot_id' });
+    if (error) throw new Error(error.message);
+  }
+}
+
+/**
+ * Remove all default week entries for the given persons.
+ * Used before a full overwrite so stale slots are cleared.
+ */
+export async function clearDefaultWeek(personNames, personNameToId) {
+  for (const personName of personNames) {
+    const personId = personNameToId?.[personName];
+    if (!personId) continue;
+    const { error } = await supabase
+      .from('default_week')
+      .delete()
+      .eq('person_id', personId);
+    if (error) throw new Error(error.message);
+  }
 }
 
 // ── Legacy compatibility shims ────────────────────────────────
