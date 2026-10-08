@@ -2,7 +2,7 @@
  * recipes.js — loads and searches the recipe catalog
  */
 
-import { fetchRecipes } from './storage.js';
+import { fetchRecipes, fetchNutrition } from './storage.js';
 
 let _recipes = [];
 let _nutrition = {};
@@ -27,14 +27,20 @@ export function slugify(name) {
 }
 
 export async function loadData() {
-  // nutrition.json is always static (no user changes)
-  const nutRes  = await fetch('./data/nutrition.json');
-  const nutData = await nutRes.json();
-  _nutrition = nutData.nutrition;
+  // Load nutrition from Supabase (falls back to static file if not authenticated)
+  const sbNutrition = await fetchNutrition();
+  if (Object.keys(sbNutrition).length > 0) {
+    _nutrition = sbNutrition;
+  } else {
+    // Fallback: read static file (needed before first login or during migration)
+    const nutRes  = await fetch('./data/nutrition.json');
+    const nutData = await nutRes.json();
+    _nutrition = nutData.nutrition;
+  }
 
-  // recipes: prefer GitHub / local cache; fall back to static file
+  // Load recipes from Supabase; fall back to static file
   const cached = await fetchRecipes();
-  if (cached?.recetas) {
+  if (cached?.recetas?.length) {
     _recipes = cached.recetas;
   } else {
     const recRes  = await fetch('./data/recipes.json');

@@ -6,10 +6,12 @@ import { loadData, searchRecipes, getRecipeById, addRecipe, updateRecipe, delete
 import { autoFillWeek } from './planner.js';
 import { getWeekDays, toDateKey, toWeekKey, MEAL_SLOTS, MONTH_NAMES } from './calendar.js';
 import {
-  fetchPlan, savePlan,
-  getCredentials, saveCredentials, clearCredentials, isAuthenticated,
-  testConnection, saveRecipes, consumeTokenFromHash,
+  fetchPlan, savePlan, removePlanEntry,
+  signIn, signOut, isAuthenticated, getMyProfile, getMyPersons, getFamiliaFlag,
+  createPerson, requestPersonAccess, approvePersonAccess, rejectPersonAccess,
+  getPendingAccessRequests, saveRecipes, consumeTokenFromHash,
 } from './storage.js';
+import { supabase } from './supabase.js';
 import {
   renderRecipeCard, renderRecipeDetail,
   renderCalendarGrid, updateKcalBars,
@@ -30,17 +32,21 @@ function isMobile() {
 // ══════════════════════════════════════════════════════════
 
 let state = {
-  person:     'Familia',          // default
+  person:     'Familia',          // default person view
   anchorDate: new Date(),
-  activeDay:  toDateKey(new Date()), // open today by default
+  activeDay:  toDateKey(new Date()),
   plan:       {},
   nutrition:  {},
   recipes:    [],
   searchQuery:    '',
   searchCategory: 'all',
   draggingRecipeId: null,
-  // Mobile-only: which day index (0–6 in week) is shown
   mobileDayIndex: null,
+  // Supabase-specific: resolved at runtime
+  persons:        [],          // [{ id, name, owner_id }]
+  personNameToId: {},          // { "Pablo": uuid, "Juli": uuid, … }
+  showFamilia:    false,       // from familia_flag view
+  profile:        null,        // { id, username, role }
 };
 
 // ══════════════════════════════════════════════════════════
@@ -48,42 +54,88 @@ let state = {
 // ══════════════════════════════════════════════════════════
 
 async function init() {
-  // Consume #token=… from URL before anything else
-  consumeTokenFromHash();
+  // Listen for auth state changes (handles session restore on reload)
+  supabase.auth.onAuthStateChange(async (_event, session) => {
+    if (session) {
+      await loadAppData();
+    } else {
+      // Not authenticated — show login gate
+      showLoginGate();
+    }
+  });
 
-  // Load static data
+  // Check initial session (already persisted in localStorage)
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) {
+    showLoginGate();
+    return;
+  }
+
+  await loadAppData();
+}
+
+/**
+ * Load all app data once the user is authenticated.
+ * Called both on first load and after login.
+ */
+async function loadAppData() {
+  // Resolve persons & familia flag first (needed by fetchPlan)
+  const [persons, familiaFlag, profile] = await Promise.all([
+    getMyPersons(),
+    getFamiliaFlag(),
+    getMyProfile(),
+  ]);
+
+  state.persons        = persons;
+  state.personNameToId = Object.fromEntries(persons.map(p => [p.name, p.id]));
+  state.showFamilia    = familiaFlag.show_familia;
+  state.profile        = profile;
+
+  // Default person selection:
+  //  - If familia is available, default to Familia
+  //  - Otherwise default to the first person name
+  if (state.showFamilia) {
+    state.person = 'Familia';
+  } else if (persons.length) {
+    state.person = persons[0].name;
+  }
+
+  // Load recipes and nutrition
   const { recipes, nutrition } = await loadData();
   state.recipes   = recipes;
   state.nutrition = nutrition;
 
-  // Load saved plan
+  // Load plan
   state.plan = await fetchPlan();
+
+  // Hide login gate, show app
+  hideLoginGate();
+  renderPersonSwitcher();
 
   // Apply mobile defaults
   if (isMobile()) {
-    // Collapse sidebar
     document.getElementById('sidebar').classList.add('collapsed');
-    // Familia already in state; mark it in UI
-    document.querySelectorAll('.person-btn').forEach(b => {
-      b.classList.toggle('active', b.dataset.person === 'Familia');
-    });
-    // Set mobile day index to today
     const weekDays = getWeekDays(state.anchorDate);
     state.mobileDayIndex = weekDays.findIndex(d => toDateKey(d) === toDateKey(new Date()));
     if (state.mobileDayIndex < 0) state.mobileDayIndex = 0;
   }
 
-  // Render sidebar
   renderSidebar();
-
-  // Render calendar
   renderWeek();
-
-  // Auth UI
   updateAuthUI();
-
-  // Wire up controls
   wireControls();
+}
+
+// ── Login gate ────────────────────────────────────────────────
+
+function showLoginGate() {
+  document.getElementById('login-gate').classList.remove('hidden');
+  document.getElementById('app-shell').classList.add('hidden');
+}
+
+function hideLoginGate() {
+  document.getElementById('login-gate').classList.add('hidden');
+  document.getElementById('app-shell').classList.remove('hidden');
 }
 
 // ══════════════════════════════════════════════════════════
@@ -441,10 +493,11 @@ function showSlotPickerForDrop(dateKey, recipeId) {
 
 /**
  * Determine which persons to write when assigning.
- * Familia → both Pablo and Juli get the same meal.
+ * Familia → all persons the user has approved access to.
+ * Single-person mode → just that person.
  */
 function personsToWrite() {
-  if (state.person === 'Familia') return ['Pablo', 'Juli'];
+  if (state.person === 'Familia') return state.persons.map(p => p.name);
   return [state.person];
 }
 
@@ -475,16 +528,12 @@ async function assignMeal(dateKey, slotId, recipeId) {
   if (state.activeDay === dateKey) refreshDayDetail();
 
   try {
-    const result = await savePlan(state.plan);
-    const extra = state.person === 'Familia' ? ' (Pablo + Juli)' : '';
-    showToast(
-      result.saved === 'github'
-        ? `✅ Guardado en GitHub${extra}`
-        : `⚠️ Sin GitHub — guardado solo en este dispositivo${extra}`,
-      result.saved === 'github' ? 'success' : 'warn'
-    );
+    await savePlan(state.plan, state.personNameToId);
+    const names = personsToWrite();
+    const extra  = names.length > 1 ? ` (${names.join(' + ')})` : '';
+    showToast(`✅ Guardado${extra}`, 'success');
   } catch (e) {
-    showToast('❌ Error al guardar en GitHub: ' + e.message, 'error');
+    showToast('❌ Error al guardar: ' + e.message, 'error');
   }
 }
 
@@ -494,6 +543,7 @@ async function removeMeal(dateKey, slotId, targetPerson = null) {
   // Otherwise use personsToWrite() which respects the current state.person.
   const persons = targetPerson ? [targetPerson] : personsToWrite();
 
+  // Remove from local state
   for (const p of persons) {
     const entry = state.plan?.[p]?.[weekKey]?.[dateKey];
     if (!entry) continue;
@@ -507,15 +557,13 @@ async function removeMeal(dateKey, slotId, targetPerson = null) {
   if (state.activeDay === dateKey) refreshDayDetail();
 
   try {
-    const result = await savePlan(state.plan);
-    showToast(
-      result.saved === 'github'
-        ? '✅ Guardado en GitHub'
-        : '⚠️ Sin GitHub — guardado solo en este dispositivo',
-      result.saved === 'github' ? 'success' : 'warn'
-    );
+    // Delete each slot row from Supabase individually
+    for (const p of persons) {
+      await removePlanEntry(p, dateKey, slotId, state.personNameToId);
+    }
+    showToast('✅ Eliminado', 'success');
   } catch (e) {
-    showToast('❌ Error al guardar en GitHub: ' + e.message, 'error');
+    showToast('❌ Error al eliminar: ' + e.message, 'error');
   }
 }
 
@@ -528,22 +576,17 @@ async function assignMealForPerson(dateKey, slotId, recipeId, targetPerson) {
   const { receta } = recipe;
   const weekKey  = toWeekKey(new Date(dateKey + 'T12:00:00'));
   const mealData = { recipeId, recipeName: receta.nombre, macros: { ...receta.macros_por_porcion } };
-  const persons  = targetPerson ? [targetPerson] : ['Pablo', 'Juli'];
+  const persons  = targetPerson ? [targetPerson] : state.persons.map(p => p.name);
   for (const p of persons) {
     setDeep(state.plan, p, weekKey, dateKey, slotId, mealData);
   }
   renderWeek();
   if (state.activeDay === dateKey) refreshDayDetail();
   try {
-    const result = await savePlan(state.plan);
-    showToast(
-      result.saved === 'github'
-        ? `✅ Guardado en GitHub (${persons.join('+')})`
-        : `⚠️ Sin GitHub — guardado solo en este dispositivo`,
-      result.saved === 'github' ? 'success' : 'warn'
-    );
+    await savePlan(state.plan, state.personNameToId);
+    showToast(`✅ Guardado (${persons.join(' + ')})`, 'success');
   } catch (e) {
-    showToast('❌ Error al guardar en GitHub: ' + e.message, 'error');
+    showToast('❌ Error al guardar: ' + e.message, 'error');
   }
 }
 
@@ -581,15 +624,10 @@ async function handleDeleteRecipe(id, name) {
   renderWeek(); // calorie bars might reference this recipe
 
   try {
-    const result = await saveRecipes(updated);
-    showToast(
-      result.saved === 'github'
-        ? '✅ Receta eliminada (GitHub)'
-        : '⚠️ Sin GitHub — eliminada solo en este dispositivo',
-      result.saved === 'github' ? 'success' : 'warn'
-    );
+    await saveRecipes(updated);
+    showToast('✅ Receta eliminada', 'success');
   } catch (e) {
-    showToast('❌ Error al guardar en GitHub: ' + e.message, 'error');
+    showToast('❌ Error al eliminar: ' + e.message, 'error');
   }
 }
 
@@ -772,15 +810,10 @@ async function saveRecipeFromForm() {
   closeRecipeEditor();
 
   try {
-    const result = await saveRecipes(updated);
-    showToast(
-      result.saved === 'github'
-        ? (isEditing ? '✅ Receta actualizada (GitHub)' : '✅ Receta guardada (GitHub)')
-        : (isEditing ? '⚠️ Sin GitHub — actualizada solo en este dispositivo' : '⚠️ Sin GitHub — guardada solo en este dispositivo'),
-      result.saved === 'github' ? 'success' : 'warn'
-    );
+    await saveRecipes(updated);
+    showToast(isEditing ? '✅ Receta actualizada' : '✅ Receta guardada', 'success');
   } catch (e) {
-    showToast('❌ Error al guardar en GitHub: ' + e.message, 'error');
+    showToast('❌ Error al guardar: ' + e.message, 'error');
   }
 }
 
@@ -809,15 +842,10 @@ async function saveRecipeFromJSON() {
     renderWeek();
     closeRecipeEditor();
     try {
-      const result = await saveRecipes(updated);
-      showToast(
-        result.saved === 'github'
-          ? '✅ Receta actualizada (GitHub)'
-          : '⚠️ Sin GitHub — actualizada solo en este dispositivo',
-        result.saved === 'github' ? 'success' : 'warn'
-      );
+      await saveRecipes(updated);
+      showToast('✅ Receta actualizada', 'success');
     } catch (e) {
-      showToast('❌ Error al guardar en GitHub: ' + e.message, 'error');
+      showToast('❌ Error al guardar: ' + e.message, 'error');
     }
     return;
   }
@@ -845,15 +873,10 @@ async function saveRecipeFromJSON() {
   closeRecipeEditor();
 
   try {
-    const result = await saveRecipes(updated || getAllRecipes());
-    showToast(
-      result.saved === 'github'
-        ? `✅ ${entries.length} receta(s) guardada(s) en GitHub`
-        : `⚠️ Sin GitHub — ${entries.length} receta(s) guardada(s) solo en este dispositivo`,
-      result.saved === 'github' ? 'success' : 'warn'
-    );
+    await saveRecipes(updated || getAllRecipes());
+    showToast(`✅ ${entries.length} receta(s) guardada(s)`, 'success');
   } catch (e) {
-    showToast('❌ Error al guardar en GitHub: ' + e.message, 'error');
+    showToast('❌ Error al guardar: ' + e.message, 'error');
   }
 }
 
@@ -1046,18 +1069,12 @@ async function shareShoppingList() {
   }
 }
 
+// ── Auth modal (now: user account info + logout) ──────────────
+
 function openAuthModal() {
-  // Pre-fill token field if already connected (masked)
-  const { token } = getCredentials();
-  if (token) document.getElementById('input-gh-token').value = token;
-  // Show quick-link section only when already connected
-  const ql = document.getElementById('auth-quicklink-section');
-  if (isAuthenticated()) {
-    ql.classList.remove('hidden');
-    refreshQuickLink();
-  } else {
-    ql.classList.add('hidden');
-  }
+  // Populate username display
+  const uEl = document.getElementById('auth-username-display');
+  if (uEl && state.profile) uEl.textContent = state.profile.username;
   document.getElementById('modal-auth').classList.remove('hidden');
 }
 
@@ -1065,76 +1082,173 @@ function closeAuthModal() {
   document.getElementById('modal-auth').classList.add('hidden');
 }
 
-async function saveAuth() {
-  const token = document.getElementById('input-gh-token').value.trim();
-
-  if (!token) {
-    showToast('Ingresá el token', 'error');
-    return;
-  }
-
-  saveCredentials({ token });
-
-  try {
-    await testConnection();
-    // Reload plan from GitHub
-    state.plan = await fetchPlan();
-    renderWeek();
-    updateAuthUI();
-    // Show quick-link now that we're connected
-    document.getElementById('auth-quicklink-section').classList.remove('hidden');
-    refreshQuickLink();
-    showToast('✅ Conectado a GitHub', 'success');
-  } catch (e) {
-    showToast('❌ ' + e.message, 'error');
-  }
-}
-
-function refreshQuickLink() {
-  const { token } = getCredentials();
-  if (!token) return;
-  const base = window.location.origin + window.location.pathname;
-  const url  = `${base}#token=${encodeURIComponent(token)}`;
-  document.getElementById('auth-quicklink-url').value = url;
-}
-
-function disconnectGitHub() {
-  if (!confirm('¿Desconectar GitHub en este dispositivo? El token será eliminado del localStorage.')) return;
-  clearCredentials();
-  updateAuthUI();
+async function handleLogout() {
+  if (!confirm('¿Cerrar sesión en este dispositivo?')) return;
+  await signOut();
+  // onAuthStateChange will fire and call showLoginGate()
   closeAuthModal();
-  showToast('Desconectado de GitHub', '');
+  showToast('Sesión cerrada', '');
 }
 
 function updateAuthUI() {
-  const connected = isAuthenticated();
-  const { owner, repo } = getCredentials();
+  const profile = state.profile;
 
-  // Desktop header button
+  // Desktop header button — show username when logged in
   const btn    = document.getElementById('btn-github-auth');
   const status = document.getElementById('auth-status');
-  if (connected) {
-    btn.textContent = '⚡ GitHub conectado';
+  if (profile) {
+    btn.textContent = `👤 ${profile.username}`;
     btn.classList.add('connected');
     status.textContent = '';
   } else {
-    btn.textContent = 'Conectar GitHub';
+    btn.textContent = 'Iniciar sesión';
     btn.classList.remove('connected');
-    status.textContent = '(sin conexión — guardado local)';
+    status.textContent = '';
   }
 
   // Footer button (mobile)
   const btnF    = document.getElementById('btn-github-auth-footer');
   const statusF = document.getElementById('auth-status-footer');
-  if (connected) {
-    btnF.textContent = '⚡ Conectado';
+  if (profile) {
+    btnF.textContent = `👤 ${profile.username}`;
     btnF.classList.add('connected');
     statusF.textContent = '';
   } else {
-    btnF.textContent = 'Conectar GitHub';
+    btnF.textContent = 'Iniciar sesión';
     btnF.classList.remove('connected');
     statusF.textContent = '';
   }
+}
+
+// ══════════════════════════════════════════════════════════
+// PERSON SWITCHER (dynamic — built from Supabase persons)
+// ══════════════════════════════════════════════════════════
+
+function renderPersonSwitcher() {
+  const switcher = document.querySelector('.person-switcher');
+  if (!switcher) return;
+
+  switcher.innerHTML = '';
+
+  // Individual person buttons
+  for (const p of state.persons) {
+    const btn = document.createElement('button');
+    btn.className   = 'person-btn';
+    btn.dataset.person = p.name;
+    btn.textContent = p.name;
+    btn.classList.toggle('active', state.person === p.name);
+    switcher.appendChild(btn);
+  }
+
+  // Familia button — only when show_familia is true
+  if (state.showFamilia) {
+    const btn = document.createElement('button');
+    btn.className   = 'person-btn person-btn--familia';
+    btn.dataset.person = 'Familia';
+    btn.textContent = '👨‍👩 Familia';
+    btn.classList.toggle('active', state.person === 'Familia');
+    switcher.appendChild(btn);
+  }
+
+  // Re-wire click handlers after rebuild
+  switcher.querySelectorAll('.person-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      switcher.querySelectorAll('.person-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.person = btn.dataset.person;
+      if (!isMobile()) {
+        state.activeDay = null;
+        document.getElementById('day-detail').classList.add('hidden-panel');
+      }
+      renderWeek();
+    });
+  });
+}
+
+// ══════════════════════════════════════════════════════════
+// PERSON MANAGEMENT
+// ══════════════════════════════════════════════════════════
+
+function openPersonModal() {
+  document.getElementById('modal-person').classList.remove('hidden');
+  refreshPendingRequests();
+}
+
+function closePersonModal() {
+  document.getElementById('modal-person').classList.add('hidden');
+}
+
+async function handleCreatePerson() {
+  const nameEl = document.getElementById('input-new-person-name');
+  const name   = nameEl?.value.trim();
+  if (!name) { showToast('Ingresá un nombre', 'error'); return; }
+
+  try {
+    await createPerson(name);
+    nameEl.value = '';
+    // Reload persons + familia flag
+    const [persons, familiaFlag] = await Promise.all([getMyPersons(), getFamiliaFlag()]);
+    state.persons        = persons;
+    state.personNameToId = Object.fromEntries(persons.map(p => [p.name, p.id]));
+    state.showFamilia    = familiaFlag.show_familia;
+    renderPersonSwitcher();
+    showToast(`✅ Persona "${name}" creada`, 'success');
+  } catch (e) {
+    showToast('❌ ' + e.message, 'error');
+  }
+}
+
+async function handleRequestAccess() {
+  const personIdEl = document.getElementById('input-request-person-id');
+  const personId   = personIdEl?.value.trim();
+  if (!personId) { showToast('Ingresá el ID de la persona', 'error'); return; }
+
+  try {
+    await requestPersonAccess(personId);
+    personIdEl.value = '';
+    showToast('✅ Solicitud enviada — esperá que sea aprobada', 'success');
+  } catch (e) {
+    showToast('❌ ' + e.message, 'error');
+  }
+}
+
+async function refreshPendingRequests() {
+  const container = document.getElementById('pending-requests-list');
+  if (!container) return;
+
+  const requests = await getPendingAccessRequests();
+  if (!requests.length) {
+    container.innerHTML = '<p class="no-requests">Sin solicitudes pendientes.</p>';
+    return;
+  }
+
+  container.innerHTML = requests.map(r => `
+    <div class="access-request-row">
+      <span>${r.profiles?.username ?? '?'} quiere acceder a <strong>${r.persons?.name ?? '?'}</strong></span>
+      <button class="btn-approve" data-id="${r.id}">✅ Aprobar</button>
+      <button class="btn-reject"  data-id="${r.id}">❌ Rechazar</button>
+    </div>
+  `).join('');
+
+  container.querySelectorAll('.btn-approve').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      try {
+        await approvePersonAccess(btn.dataset.id);
+        showToast('✅ Acceso aprobado', 'success');
+        refreshPendingRequests();
+      } catch (e) { showToast('❌ ' + e.message, 'error'); }
+    });
+  });
+
+  container.querySelectorAll('.btn-reject').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      try {
+        await rejectPersonAccess(btn.dataset.id);
+        showToast('Solicitud rechazada', '');
+        refreshPendingRequests();
+      } catch (e) { showToast('❌ ' + e.message, 'error'); }
+    });
+  });
 }
 
 // ══════════════════════════════════════════════════════════
@@ -1150,13 +1264,8 @@ async function handleAutoPlan() {
     autoFillWeek(state.plan, state.anchorDate);
     renderWeek();
     if (state.activeDay) refreshDayDetail();
-    const result = await savePlan(state.plan);
-    showToast(
-      result.saved === 'github'
-        ? '✅ Semana planificada y guardada en GitHub'
-        : '⚠️ Semana planificada — guardada solo en este dispositivo',
-      result.saved === 'github' ? 'success' : 'warn'
-    );
+    await savePlan(state.plan, state.personNameToId);
+    showToast('✅ Semana planificada y guardada', 'success');
   } catch (e) {
     showToast('❌ Error al planificar: ' + e.message, 'error');
   } finally {
@@ -1170,19 +1279,8 @@ async function handleAutoPlan() {
 // ══════════════════════════════════════════════════════════
 
 function wireControls() {
-  // Person switcher
-  document.querySelectorAll('.person-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.person-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      state.person = btn.dataset.person;
-      if (!isMobile()) {
-        state.activeDay = null;
-        document.getElementById('day-detail').classList.add('hidden-panel');
-      }
-      renderWeek();
-    });
-  });
+  // Person switcher is now rendered dynamically by renderPersonSwitcher()
+  // — no static wiring needed here.
 
   // Navigation — single day on mobile, full week on desktop
   document.getElementById('btn-prev-week').addEventListener('click', () => {
@@ -1226,7 +1324,7 @@ function wireControls() {
     document.getElementById('sidebar-backdrop').classList.add('hidden');
   });
 
-  // Footer auth button (mobile)
+  // Footer auth button (mobile) → account modal
   document.getElementById('btn-github-auth-footer').addEventListener('click', openAuthModal);
 
   // Recipe search
@@ -1282,16 +1380,31 @@ function wireControls() {
   document.querySelector('#modal-shopping .modal-backdrop').addEventListener('click', closeShoppingModal);
   document.getElementById('btn-share-shopping').addEventListener('click', shareShoppingList);
 
-  // Auth
+  // Auth — account modal
   document.getElementById('btn-github-auth').addEventListener('click', openAuthModal);
   document.getElementById('btn-close-auth-modal').addEventListener('click', closeAuthModal);
-  document.querySelector('#modal-auth .modal-backdrop').addEventListener('click', closeAuthModal);
-  document.getElementById('btn-save-auth').addEventListener('click', saveAuth);
-  document.getElementById('btn-copy-quicklink').addEventListener('click', () => {
-    const url = document.getElementById('auth-quicklink-url').value;
-    navigator.clipboard.writeText(url).then(() => showToast('✅ URL copiada', 'success'));
+  document.querySelector('#modal-auth .modal-backdrop')?.addEventListener('click', closeAuthModal);
+  document.getElementById('btn-logout')?.addEventListener('click', handleLogout);
+
+  // Person management modal
+  document.getElementById('btn-manage-persons')?.addEventListener('click', openPersonModal);
+  document.getElementById('btn-close-person-modal')?.addEventListener('click', closePersonModal);
+  document.querySelector('#modal-person .modal-backdrop')?.addEventListener('click', closePersonModal);
+  document.getElementById('btn-create-person')?.addEventListener('click', handleCreatePerson);
+  document.getElementById('btn-request-access')?.addEventListener('click', handleRequestAccess);
+
+  // Login gate form
+  document.getElementById('btn-login')?.addEventListener('click', async () => {
+    const user = document.getElementById('input-username')?.value.trim();
+    const pass = document.getElementById('input-password')?.value;
+    if (!user || !pass) { showToast('Ingresá usuario y contraseña', 'error'); return; }
+    try {
+      await signIn(user, pass);
+      // onAuthStateChange fires → loadAppData() runs automatically
+    } catch (e) {
+      showToast('❌ ' + e.message, 'error');
+    }
   });
-  document.getElementById('btn-disconnect').addEventListener('click', disconnectGitHub);
 
   // ESC key
   document.addEventListener('keydown', (e) => {
@@ -1300,6 +1413,7 @@ function wireControls() {
       closeAuthModal();
       closeRecipeEditor();
       closeShoppingModal();
+      closePersonModal();
       const picker = document.querySelector('.slot-picker');
       if (picker) picker.remove();
     }

@@ -1279,3 +1279,87 @@ input  { font: inherit; border: none; outline: none; }
     max-height: 92vh;
   }
 }
+
+/* ═══════════════════════════════════════════
+   LOGIN GATE
+   Full-screen overlay shown when not authenticated.
+═══════════════════════════════════════════ */
+.login-gate {
+  position: fixed; inset: 0; z-index: 500;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg);
+}
+.login-gate.hidden { display: none; }
+
+.login-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  width: 100%; max-width: 360px;
+  box-shadow: var(--shadow-md);
+  display: flex; flex-direction: column; gap: 14px;
+}
+.login-brand {
+  display: flex; align-items: center; gap: 8px;
+  justify-content: center;
+  font-size: 1.2rem; font-weight: 700; color: var(--text);
+  margin-bottom: 4px;
+}
+.login-box h2 {
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--text); text-align: center;
+  margin: 0;
+}
+.btn-login { margin-top: 4px; }
+
+/* ── App shell: hides until auth resolves ── */
+#app-shell.hidden {
+  display: none;
+}
+
+/* ═══════════════════════════════════════════
+   PERSON MANAGEMENT MODAL
+═══════════════════════════════════════════ */
+.person-modal-section {
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+}
+.person-modal-section:first-child { border-top: none; }
+.person-modal-section h4 {
+  font-size: .82rem; font-weight: 700; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: .05em;
+  margin: 0 0 8px;
+}
+.form-inline {
+  display: flex; gap: 8px; align-items: center;
+}
+.form-inline input {
+  flex: 1; padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: .84rem;
+}
+.access-request-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 0;
+  font-size: .84rem;
+  border-bottom: 1px solid var(--border);
+}
+.access-request-row:last-child { border-bottom: none; }
+.access-request-row span { flex: 1; }
+.no-requests { font-size: .82rem; color: var(--text-muted); padding: 4px 0; }
+
+/* Manage persons button (desktop header) */
+.btn-manage-persons {
+  background: none; border: none; cursor: pointer;
+  font-size: 1.1rem; padding: 4px 6px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  color: var(--text-muted);
+}
+.btn-manage-persons:hover { background: var(--bg); color: var(--accent); }
+
+@media (max-width: 900px) {
+  .btn-manage-persons { display: none; }
+}

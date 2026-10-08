@@ -1,0 +1,13 @@
+{
+  "name": "plandental-migrate",
+  "version": "1.0.0",
+  "description": "One-shot data migration: JSON files → Supabase",
+  "type": "module",
+  "scripts": {
+    "migrate":  "node migrate-to-supabase.js",
+    "validate": "node validate-migration.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.50.0"
+  }
+}

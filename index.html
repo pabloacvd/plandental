@@ -26,6 +26,33 @@
 <body>
 
   <!-- ════════════════════════════════════════════
+       LOGIN GATE — shown when not authenticated
+  ═══════════════════════════════════════════════ -->
+  <div id="login-gate" class="login-gate hidden">
+    <div class="login-box">
+      <div class="login-brand">
+        <span class="brand-icon">🥗</span>
+        <span class="brand-name">PlanDental</span>
+      </div>
+      <h2>Iniciar sesión</h2>
+      <div class="form-field">
+        <label for="input-username">Usuario</label>
+        <input type="text" id="input-username" placeholder="pablo" autocomplete="username" autocapitalize="none" />
+      </div>
+      <div class="form-field">
+        <label for="input-password">Contraseña</label>
+        <input type="password" id="input-password" placeholder="••••••••" autocomplete="current-password" />
+      </div>
+      <button id="btn-login" class="btn-primary btn-login">Entrar</button>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       APP SHELL — hidden until authenticated
+  ═══════════════════════════════════════════════ -->
+  <div id="app-shell" class="hidden">
+
+  <!-- ════════════════════════════════════════════
        HEADER
   ═══════════════════════════════════════════════ -->
   <header class="app-header">
@@ -38,11 +65,8 @@
         <span class="brand-name">PlanDental</span>
       </div>
       <div class="header-controls">
-        <div class="person-switcher">
-          <button class="person-btn" data-person="Pablo">Pablo</button>
-          <button class="person-btn" data-person="Juli">Juli</button>
-          <button class="person-btn person-btn--familia active" data-person="Familia">👨‍👩 Familia</button>
-        </div>
+        <!-- Person switcher: rendered dynamically by renderPersonSwitcher() -->
+        <div class="person-switcher" id="person-switcher"></div>
         <div class="week-nav">
           <button id="btn-prev-week" title="Anterior">&#8249;</button>
           <span id="week-label">Sem 00</span>
@@ -52,11 +76,13 @@
         <button id="btn-auto-plan" class="btn-auto-plan" title="Planificar semana automáticamente">✨ Planificar</button>
         <!-- Shopping button: always visible on desktop -->
         <button id="btn-shopping-list" class="btn-shopping btn-shopping--header" title="Lista de compras">🛒</button>
-        <!-- Auth moved to footer on mobile; shown here on desktop -->
+        <!-- Account button (desktop) — shows username; opens account modal -->
         <div class="auth-area auth-area--desktop">
-          <button id="btn-github-auth" class="btn-auth">Conectar GitHub</button>
+          <button id="btn-github-auth" class="btn-auth">Iniciar sesión</button>
           <span id="auth-status" class="auth-status"></span>
         </div>
+        <!-- Manage persons button (desktop) -->
+        <button id="btn-manage-persons" class="btn-manage-persons" title="Gestionar personas">👥</button>
       </div>
     </div>
   </header>
@@ -110,11 +136,11 @@
   </main>
 
   <!-- ════════════════════════════════════════════
-       FOOTER (mobile: GitHub auth)
+       FOOTER (mobile: account + shopping)
   ═══════════════════════════════════════════════ -->
   <footer class="app-footer" id="app-footer">
     <button id="btn-shopping-list-footer" class="btn-shopping" title="Lista de compras">🛒 Compras</button>
-    <button id="btn-github-auth-footer" class="btn-auth">Conectar GitHub</button>
+    <button id="btn-github-auth-footer" class="btn-auth">Iniciar sesión</button>
     <span id="auth-status-footer" class="auth-status"></span>
   </footer>
 
@@ -133,29 +159,48 @@
     </div>
   </div>
 
-  <!-- GitHub Auth Modal -->
+  <!-- Account Modal (replaces GitHub Auth modal) -->
   <div id="modal-auth" class="modal hidden">
     <div class="modal-backdrop"></div>
     <div class="modal-box modal-box--sm">
       <button class="modal-close" id="btn-close-auth-modal">✕</button>
-      <h3>Conectar con GitHub</h3>
-      <p>Ingresá tu <strong>Personal Access Token</strong> con permisos de <code>repo</code> (o <code>contents: write</code> en fine-grained).</p>
-      <input type="password" id="input-gh-token" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off" />
-      <button id="btn-save-auth" class="btn-primary">Guardar y conectar</button>
-      <p class="auth-note">El token se guarda en localStorage de este dispositivo.</p>
+      <h3>Mi cuenta</h3>
+      <p>Conectado como <strong id="auth-username-display"></strong></p>
+      <button id="btn-logout" class="btn-danger">Cerrar sesión en este dispositivo</button>
+    </div>
+  </div>
 
-      <!-- Quick-access link (shown only when already connected) -->
-      <div id="auth-quicklink-section" class="auth-quicklink-section hidden">
-        <hr class="auth-divider" />
-        <p class="auth-note"><strong>Acceso rápido en otro dispositivo</strong><br>
-        Copiá esta URL, abrila en el otro dispositivo y quedará conectado automáticamente.</p>
-        <div class="auth-quicklink-row">
-          <input type="text" id="auth-quicklink-url" class="auth-quicklink-input" readonly />
-          <button id="btn-copy-quicklink" class="btn-secondary btn-copy">Copiar</button>
+  <!-- Person Management Modal -->
+  <div id="modal-person" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-box modal-box--sm">
+      <button class="modal-close" id="btn-close-person-modal">✕</button>
+      <h3>Gestionar personas</h3>
+
+      <!-- Create a new person -->
+      <section class="person-modal-section">
+        <h4>Crear nueva persona</h4>
+        <div class="form-inline">
+          <input type="text" id="input-new-person-name" placeholder="Nombre (ej: María)" autocapitalize="words" />
+          <button id="btn-create-person" class="btn-primary">Crear</button>
         </div>
-        <p class="auth-note auth-note--warn">⚠️ Tratala como una contraseña — no la compartas por canales inseguros.</p>
-        <button id="btn-disconnect" class="btn-danger">Desconectar este dispositivo</button>
-      </div>
+      </section>
+
+      <!-- Request access to an existing person by UUID -->
+      <section class="person-modal-section">
+        <h4>Solicitar acceso a una persona existente</h4>
+        <p class="auth-note">Pedile al dueño el ID (UUID) de la persona.</p>
+        <div class="form-inline">
+          <input type="text" id="input-request-person-id" placeholder="UUID de la persona" autocomplete="off" />
+          <button id="btn-request-access" class="btn-secondary">Solicitar</button>
+        </div>
+      </section>
+
+      <!-- Pending incoming access requests -->
+      <section class="person-modal-section">
+        <h4>Solicitudes pendientes de aprobación</h4>
+        <div id="pending-requests-list"></div>
+      </section>
     </div>
   </div>
 
@@ -263,6 +308,8 @@
       </div>
     </div>
   </div>
+
+  </div><!-- /#app-shell -->
 
   <!-- Toast -->
   <div id="toast" class="toast hidden"></div>
