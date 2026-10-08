@@ -733,6 +733,16 @@
             "carbohidratos_g": 20,
             "grasas_g": 7
           }
+        },
+        "almuerzo": {
+          "recipeId": "entrana-magra-vuelta-y-vuelta-con-brocoli",
+          "recipeName": "Entraña con Brócoli o Coliflor",
+          "macros": {
+            "calorias": 537,
+            "proteina_g": 55.6,
+            "carbohidratos_g": 13.2,
+            "grasas_g": 30.7
+          }
         }
       },
       "2026-10-09": {
@@ -1798,6 +1808,16 @@
             "proteina_g": 1.9,
             "carbohidratos_g": 30.5,
             "grasas_g": 2.9
+          }
+        },
+        "almuerzo": {
+          "recipeId": "entrana-magra-vuelta-y-vuelta-con-brocoli",
+          "recipeName": "Entraña con Brócoli o Coliflor",
+          "macros": {
+            "calorias": 537,
+            "proteina_g": 55.6,
+            "carbohidratos_g": 13.2,
+            "grasas_g": 30.7
           }
         }
       },
