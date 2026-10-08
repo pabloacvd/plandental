@@ -188,8 +188,11 @@ export function renderCalendarGrid({
     // Build a quick icon lookup for standard slot IDs
     const slotIconMap = Object.fromEntries(MEAL_SLOTS.map(s => [s.id, s.icon]));
 
-    // Iterate over all keys (including virtual _juli keys from Familia merge)
-    Object.entries(dayEntry).forEach(([key, meal]) => {
+    // Iterate in MEAL_SLOTS order (base slot first, then _juli counterpart if present)
+    const orderedKeys = MEAL_SLOTS.flatMap(s => [s.id, `${s.id}_juli`])
+      .filter(k => k in dayEntry);
+    orderedKeys.forEach(key => {
+      const meal = dayEntry[key];
       if (!meal) return;
       // Derive the base slot id (strip _juli suffix) for the icon
       const baseSlotId = key.endsWith('_juli') ? key.slice(0, -5) : key;
