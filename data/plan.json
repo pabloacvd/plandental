@@ -766,16 +766,6 @@
             "grasas_g": 8
           }
         },
-        "almuerzo": {
-          "recipeId": "arrollado-de-pollo",
-          "recipeName": "Arrollado de pollo relleno de espinaca y Havarti",
-          "macros": {
-            "calorias": 370,
-            "proteina_g": 52,
-            "carbohidratos_g": 4,
-            "grasas_g": 16
-          }
-        },
         "snack_tarde": {
           "recipeId": "batido-ninja-pablo",
           "recipeName": "Batido Ninja Pablo",
@@ -1746,16 +1736,6 @@
             "proteina_g": 9.3,
             "carbohidratos_g": 59.8,
             "grasas_g": 8
-          }
-        },
-        "almuerzo": {
-          "recipeId": "arrollado-de-pollo",
-          "recipeName": "Arrollado de pollo relleno de espinaca y Havarti",
-          "macros": {
-            "calorias": 370,
-            "proteina_g": 52,
-            "carbohidratos_g": 4,
-            "grasas_g": 16
           }
         },
         "snack_tarde": {
