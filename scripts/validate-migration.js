@@ -57,7 +57,7 @@ async function check(label, fn) {
 async function checkCounts() {
   console.log('\n── 1. Record counts ────────────────────────────');
 
-  const tables = ['profiles', 'persons', 'person_access', 'recipes', 'nutrition_data', 'plans'];
+  const tables = ['profiles', 'persons', 'person_access', 'recipes', 'nutrition_data', 'plans', 'ingredients'];
   for (const t of tables) {
     const { count, error } = await admin.from(t).select('*', { count: 'exact', head: true });
     if (error) { fail(`${t} count`, error.message); continue; }

@@ -508,6 +508,132 @@ export async function clearDefaultWeek(personNames, personNameToId) {
   }
 }
 
+// ── Ingredients ───────────────────────────────────────────────
+
+/**
+ * Fetch all ingredients visible to the current user.
+ *
+ * Authenticated  → queries public.ingredients via Supabase RLS.
+ *                  Returns own rows + any rows owned by users who
+ *                  share approved person_access with the caller.
+ * Unauthenticated → falls back to data/ingredients.json (static
+ *                  seed file served alongside the app), or [] if
+ *                  the file is not yet present.
+ *
+ * @returns {Promise<Array>} Array of ingredient objects.
+ */
+export async function fetchIngredients() {
+  const session = await getSession();
+
+  if (session) {
+    const { data, error } = await supabase
+      .from('ingredients')
+      .select('id, owner_id, nombre, categoria, unidad_referencia, cantidad_referencia, calorias, proteina_g, carbohidratos_g, grasas_g, created_at, updated_at')
+      .order('nombre');
+
+    if (error) {
+      console.warn('fetchIngredients (supabase):', error.message);
+      return [];
+    }
+    return data ?? [];
+  }
+
+  // Unauthenticated fallback: load from static JSON seed file.
+  try {
+    const res = await fetch('./data/ingredients.json');
+    if (!res.ok) return [];
+    const json = await res.json();
+    // Accept either a plain array or { ingredientes: [...] }
+    return Array.isArray(json) ? json : (json.ingredientes ?? []);
+  } catch (err) {
+    console.warn('fetchIngredients (local):', err.message);
+    return [];
+  }
+}
+
+/**
+ * Save (upsert) a single ingredient to Supabase.
+ *
+ * Authenticated  → upserts into public.ingredients.
+ *                  owner_id is set to the current user's id;
+ *                  passing a different owner_id is ignored unless
+ *                  the caller is an admin (enforced by RLS).
+ * Unauthenticated → no-op; returns the object unchanged so
+ *                  callers can still work in offline mode.
+ *
+ * @param {object} ingObj — ingredient data (id is optional for new rows)
+ * @returns {Promise<object>} The saved row as returned by Supabase.
+ */
+export async function saveIngredient(ingObj) {
+  const session = await getSession();
+
+  if (!session) {
+    // Offline: caller is responsible for persisting locally.
+    return ingObj;
+  }
+
+  const { data: { user } } = await supabase.auth.getUser();
+
+  const row = {
+    nombre:              ingObj.nombre              ?? '',
+    categoria:           ingObj.categoria           ?? null,
+    unidad_referencia:   ingObj.unidad_referencia   ?? 'g',
+    cantidad_referencia: ingObj.cantidad_referencia ?? 100,
+    calorias:            ingObj.calorias            ?? 0,
+    proteina_g:          ingObj.proteina_g          ?? 0,
+    carbohidratos_g:     ingObj.carbohidratos_g     ?? 0,
+    grasas_g:            ingObj.grasas_g            ?? 0,
+    owner_id:            ingObj.owner_id            ?? user.id,
+    updated_at:          new Date().toISOString(),
+  };
+
+  // Only include id in the upsert when it's already known (edit case).
+  if (ingObj.id) row.id = ingObj.id;
+
+  const { data, error } = await supabase
+    .from('ingredients')
+    .upsert(row, { onConflict: 'owner_id,nombre' })
+    .select()
+    .single();
+
+  if (error) throw new Error(error.message);
+  return data;
+}
+
+/**
+ * Bulk-save an array of ingredients.
+ * Calls saveIngredient() sequentially to respect RLS per-row checks.
+ *
+ * @param {Array} ingArray — array of ingredient objects
+ * @returns {Promise<{ saved: number }>}
+ */
+export async function saveIngredients(ingArray) {
+  for (const ing of ingArray) {
+    await saveIngredient(ing);
+  }
+  return { saved: ingArray.length };
+}
+
+/**
+ * Delete an ingredient by id.
+ *
+ * Authenticated  → deletes from Supabase (RLS enforces owner or admin).
+ * Unauthenticated → no-op.
+ *
+ * @param {string} id — UUID of the ingredient to delete
+ */
+export async function deleteIngredient(id) {
+  const session = await getSession();
+  if (!session) return;
+
+  const { error } = await supabase
+    .from('ingredients')
+    .delete()
+    .eq('id', id);
+
+  if (error) throw new Error(error.message);
+}
+
 // ── Legacy compatibility shims ────────────────────────────────
 // app.js still calls getCredentials() / clearCredentials() /
 // consumeTokenFromHash() in a few places. These stubs satisfy the

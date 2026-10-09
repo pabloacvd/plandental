@@ -1,0 +1,2669 @@
+{
+  "ingredientes": [
+    {
+      "id": "aceite-de-oliva",
+      "nombre": "Aceite de oliva",
+      "categoria": "aceite",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 884,
+        "proteina_g": 0,
+        "carbohidratos_g": 0,
+        "grasas_g": 100
+      }
+    },
+    {
+      "id": "aceite-de-oliva-spray",
+      "nombre": "Aceite de oliva spray",
+      "categoria": "aceite",
+      "unidad_referencia": "ml",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 884,
+        "proteina_g": 0,
+        "carbohidratos_g": 0,
+        "grasas_g": 100
+      }
+    },
+    {
+      "id": "aceite-de-oliva-virgen-extra",
+      "nombre": "Aceite de oliva virgen extra",
+      "categoria": "aceite",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 884,
+        "proteina_g": 0,
+        "carbohidratos_g": 0,
+        "grasas_g": 100
+      }
+    },
+    {
+      "id": "aceite-de-sesamo",
+      "nombre": "Aceite de sésamo",
+      "categoria": "aceite",
+      "unidad_referencia": "ml",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 884,
+        "proteina_g": 0,
+        "carbohidratos_g": 0,
+        "grasas_g": 100
+      }
+    },
+    {
+      "id": "aceite-vegetal",
+      "nombre": "Aceite vegetal",
+      "categoria": "aceite",
+      "unidad_referencia": "ml",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 884,
+        "proteina_g": 0,
+        "carbohidratos_g": 0,
+        "grasas_g": 100
+      }
+    },
+    {
+      "id": "aceitunas-kalamata",
+      "nombre": "Aceitunas kalamata",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 145,
+        "proteina_g": 1,
+        "carbohidratos_g": 3.8,
+        "grasas_g": 15.3
+      }
+    },
+    {
+      "id": "aceitunas-picadas",
+      "nombre": "Aceitunas picadas",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 145,
+        "proteina_g": 1,
+        "carbohidratos_g": 3.8,
+        "grasas_g": 15.3
+      }
+    },
+    {
+      "id": "aceitunas-verdes",
+      "nombre": "Aceitunas verdes",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 145,
+        "proteina_g": 1,
+        "carbohidratos_g": 3.8,
+        "grasas_g": 15.3
+      }
+    },
+    {
+      "id": "agua-fria",
+      "nombre": "Agua fría",
+      "categoria": "otro",
+      "unidad_referencia": "ml",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 0,
+        "proteina_g": 0,
+        "carbohidratos_g": 0,
+        "grasas_g": 0
+      }
+    },
+    {
+      "id": "agua-tibia",
+      "nombre": "Agua tibia",
+      "categoria": "otro",
+      "unidad_referencia": "ml",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 0,
+        "proteina_g": 0,
+        "carbohidratos_g": 0,
+        "grasas_g": 0
+      }
+    },
+    {
+      "id": "ajo",
+      "nombre": "Ajo",
+      "categoria": "otro",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 8,
+        "proteina_g": 0.5,
+        "carbohidratos_g": 1,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "ajo-en-polvo",
+      "nombre": "Ajo en polvo",
+      "categoria": "especia",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 331,
+        "proteina_g": 6.7,
+        "carbohidratos_g": 72.7,
+        "grasas_g": 0.7
+      }
+    },
+    {
+      "id": "ajo-picado-al-gusto",
+      "nombre": "Ajo picado al gusto",
+      "categoria": "otro",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 149,
+        "proteina_g": 6.4,
+        "carbohidratos_g": 33.1,
+        "grasas_g": 0.5
+      }
+    },
+    {
+      "id": "ajo-y-perejil-picados",
+      "nombre": "Ajo y perejil picados",
+      "categoria": "otro",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 95,
+        "proteina_g": 3.5,
+        "carbohidratos_g": 18.5,
+        "grasas_g": 0.5
+      }
+    },
+    {
+      "id": "ajo-y-provenzal",
+      "nombre": "Ajo y provenzal",
+      "categoria": "otro",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 200,
+        "proteina_g": 6,
+        "carbohidratos_g": 38,
+        "grasas_g": 3
+      }
+    },
+    {
+      "id": "anglamark-finvalsede-havregryn",
+      "nombre": "Änglamark Finvalsede Havregryn",
+      "categoria": "cereal",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 366,
+        "proteina_g": 9.8,
+        "carbohidratos_g": 58.6,
+        "grasas_g": 7.1
+      }
+    },
+    {
+      "id": "apio",
+      "nombre": "Apio",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 16,
+        "proteina_g": 0.7,
+        "carbohidratos_g": 3,
+        "grasas_g": 0.2
+      }
+    },
+    {
+      "id": "arla-lactofree-0-5-fedt",
+      "nombre": "Arla Lactofree 0.5% fedt",
+      "categoria": "lacteo",
+      "unidad_referencia": "ml",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 35,
+        "proteina_g": 3.5,
+        "carbohidratos_g": 5,
+        "grasas_g": 0.5
+      }
+    },
+    {
+      "id": "arroz-cocido",
+      "nombre": "Arroz cocido",
+      "categoria": "cereal",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 130,
+        "proteina_g": 2.7,
+        "carbohidratos_g": 28,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "arroz-integral-cocido",
+      "nombre": "Arroz integral cocido",
+      "categoria": "cereal",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 123,
+        "proteina_g": 2.6,
+        "carbohidratos_g": 25.6,
+        "grasas_g": 1
+      }
+    },
+    {
+      "id": "atun-al-natural",
+      "nombre": "Atún al natural",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 116,
+        "proteina_g": 25.5,
+        "carbohidratos_g": 0,
+        "grasas_g": 1
+      }
+    },
+    {
+      "id": "atun-al-natural-en-lata",
+      "nombre": "Atún al natural en lata",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 116,
+        "proteina_g": 25.5,
+        "carbohidratos_g": 0,
+        "grasas_g": 1
+      }
+    },
+    {
+      "id": "avena-extrafina-o-pan-rallado-integral",
+      "nombre": "Avena extrafina o pan rallado integral",
+      "categoria": "cereal",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 366,
+        "proteina_g": 9.8,
+        "carbohidratos_g": 58.6,
+        "grasas_g": 7.1
+      }
+    },
+    {
+      "id": "banana",
+      "nombre": "Banana",
+      "categoria": "fruta",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 89,
+        "proteina_g": 1.1,
+        "carbohidratos_g": 22.8,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "banana-congelada",
+      "nombre": "Banana congelada",
+      "categoria": "fruta",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 89,
+        "proteina_g": 1.1,
+        "carbohidratos_g": 22.8,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "batata",
+      "nombre": "Batata",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 86,
+        "proteina_g": 1.6,
+        "carbohidratos_g": 20.1,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "beef-jerky-bolsa-de-60g",
+      "nombre": "beef jerky (bolsa de 60g",
+      "categoria": "proteina",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 275,
+        "proteina_g": 35,
+        "carbohidratos_g": 26,
+        "grasas_g": 3.5
+      }
+    },
+    {
+      "id": "berenjenas-o-zapallitos-grandes",
+      "nombre": "Berenjenas o zapallitos grandes",
+      "categoria": "otro",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 25,
+        "proteina_g": 1,
+        "carbohidratos_g": 6,
+        "grasas_g": 0.2
+      }
+    },
+    {
+      "id": "bife-magro-de-ternera-en-tiras",
+      "nombre": "Bife magro de ternera en tiras",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 155,
+        "proteina_g": 22.5,
+        "carbohidratos_g": 0,
+        "grasas_g": 6.5
+      }
+    },
+    {
+      "id": "bifes-finos-de-ternera-magra",
+      "nombre": "Bifes finos de ternera magra",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 155,
+        "proteina_g": 22.5,
+        "carbohidratos_g": 0,
+        "grasas_g": 6.5
+      }
+    },
+    {
+      "id": "bifes-magros",
+      "nombre": "Bifes magros",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 155,
+        "proteina_g": 22.5,
+        "carbohidratos_g": 0,
+        "grasas_g": 6.5
+      }
+    },
+    {
+      "id": "blomkalsris",
+      "nombre": "Blomkålsris",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 25,
+        "proteina_g": 2,
+        "carbohidratos_g": 5,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "brocoli",
+      "nombre": "Brócoli",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 34,
+        "proteina_g": 2.8,
+        "carbohidratos_g": 6.6,
+        "grasas_g": 0.4
+      }
+    },
+    {
+      "id": "brocoli-cocido",
+      "nombre": "Brócoli cocido",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 27,
+        "proteina_g": 2.4,
+        "carbohidratos_g": 5.6,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "brocoli-en-floretes",
+      "nombre": "Brócoli en floretes",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 34,
+        "proteina_g": 2.8,
+        "carbohidratos_g": 6.6,
+        "grasas_g": 0.4
+      }
+    },
+    {
+      "id": "brocoli-picado",
+      "nombre": "Brócoli picado",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 34,
+        "proteina_g": 2.8,
+        "carbohidratos_g": 6.6,
+        "grasas_g": 0.4
+      }
+    },
+    {
+      "id": "brocoli-y-o-coliflor",
+      "nombre": "Brócoli y/o coliflor",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 30,
+        "proteina_g": 2.6,
+        "carbohidratos_g": 6,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "calabaza-en-cubos",
+      "nombre": "Calabaza en cubos",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 26,
+        "proteina_g": 1,
+        "carbohidratos_g": 6.5,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "caldo-con-jengibre-y-soja",
+      "nombre": "Caldo con jengibre y soja",
+      "categoria": "condimento",
+      "unidad_referencia": "ml",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 8,
+        "proteina_g": 0.5,
+        "carbohidratos_g": 1,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "caldo-de-verduras",
+      "nombre": "Caldo de verduras",
+      "categoria": "condimento",
+      "unidad_referencia": "ml",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 8,
+        "proteina_g": 0.5,
+        "carbohidratos_g": 1,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "caldo-de-verduras-bajo-en-sodio",
+      "nombre": "Caldo de verduras bajo en sodio",
+      "categoria": "condimento",
+      "unidad_referencia": "ml",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 8,
+        "proteina_g": 0.5,
+        "carbohidratos_g": 1,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "canela",
+      "nombre": "Canela",
+      "categoria": "especia",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 261,
+        "proteina_g": 3.9,
+        "carbohidratos_g": 79.8,
+        "grasas_g": 1.2
+      }
+    },
+    {
+      "id": "carletti-m-rk-pal-gschokolade",
+      "nombre": "Carletti Mørk Pålægschokolade",
+      "categoria": "otro",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 510,
+        "proteina_g": 4.5,
+        "carbohidratos_g": 57.8,
+        "grasas_g": 29.4
+      }
+    },
+    {
+      "id": "carne-magra-de-ternera",
+      "nombre": "Carne magra de ternera",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 155,
+        "proteina_g": 22.5,
+        "carbohidratos_g": 0,
+        "grasas_g": 6.5
+      }
+    },
+    {
+      "id": "carne-magra-en-cubitos-pequenos",
+      "nombre": "Carne magra en cubitos pequeños",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 155,
+        "proteina_g": 22.5,
+        "carbohidratos_g": 0,
+        "grasas_g": 6.5
+      }
+    },
+    {
+      "id": "carne-molida-de-pavo",
+      "nombre": "Carne molida de pavo",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 149,
+        "proteina_g": 21,
+        "carbohidratos_g": 0,
+        "grasas_g": 7
+      }
+    },
+    {
+      "id": "carne-picada-magra",
+      "nombre": "Carne picada magra",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 174,
+        "proteina_g": 21,
+        "carbohidratos_g": 0,
+        "grasas_g": 9.8
+      }
+    },
+    {
+      "id": "carne-picada-vacuna",
+      "nombre": "Carne picada vacuna",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 250,
+        "proteina_g": 17,
+        "carbohidratos_g": 0,
+        "grasas_g": 20
+      }
+    },
+    {
+      "id": "carne-vacuna-magra-picada",
+      "nombre": "Carne vacuna magra picada",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 174,
+        "proteina_g": 21,
+        "carbohidratos_g": 0,
+        "grasas_g": 9.8
+      }
+    },
+    {
+      "id": "cebolla",
+      "nombre": "Cebolla",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 40,
+        "proteina_g": 1.1,
+        "carbohidratos_g": 9.3,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "cebolla-en-juliana",
+      "nombre": "Cebolla en juliana",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 40,
+        "proteina_g": 1.1,
+        "carbohidratos_g": 9.3,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "cebolla-en-trozos-grandes",
+      "nombre": "Cebolla en trozos grandes",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 40,
+        "proteina_g": 1.1,
+        "carbohidratos_g": 9.3,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "cebolla-morada",
+      "nombre": "Cebolla morada",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 40,
+        "proteina_g": 1.1,
+        "carbohidratos_g": 9.3,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "cebolla-picada",
+      "nombre": "Cebolla picada",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 40,
+        "proteina_g": 1.1,
+        "carbohidratos_g": 9.3,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "cebolla-pochada",
+      "nombre": "Cebolla pochada",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 55,
+        "proteina_g": 1.2,
+        "carbohidratos_g": 12,
+        "grasas_g": 0.2
+      }
+    },
+    {
+      "id": "cebolla-rallada",
+      "nombre": "Cebolla rallada",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 40,
+        "proteina_g": 1.1,
+        "carbohidratos_g": 9.3,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "cebolla-rehogada",
+      "nombre": "Cebolla rehogada",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 55,
+        "proteina_g": 1.2,
+        "carbohidratos_g": 12,
+        "grasas_g": 0.2
+      }
+    },
+    {
+      "id": "cebolla-y-morron",
+      "nombre": "Cebolla y morrón",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 40,
+        "proteina_g": 1.1,
+        "carbohidratos_g": 9.3,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "cebolla-y-morron-picados",
+      "nombre": "Cebolla y morrón picados",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 40,
+        "proteina_g": 1.1,
+        "carbohidratos_g": 9.3,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "champinones",
+      "nombre": "Champiñones",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 22,
+        "proteina_g": 3.1,
+        "carbohidratos_g": 3.3,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "cheasy-skyr",
+      "nombre": "Cheasy Skyr",
+      "categoria": "lacteo",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 56,
+        "proteina_g": 10,
+        "carbohidratos_g": 3.8,
+        "grasas_g": 0.2
+      }
+    },
+    {
+      "id": "cheasy-skyr-vanilje-0-2",
+      "nombre": "Cheasy Skyr Vanilje 0,2%",
+      "categoria": "lacteo",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 56,
+        "proteina_g": 10,
+        "carbohidratos_g": 3.8,
+        "grasas_g": 0.2
+      }
+    },
+    {
+      "id": "chocolate-amargo",
+      "nombre": "Chocolate amargo",
+      "categoria": "dulce",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 546,
+        "proteina_g": 5.5,
+        "carbohidratos_g": 60,
+        "grasas_g": 31
+      }
+    },
+    {
+      "id": "claras-de-huevo",
+      "nombre": "Claras de huevo",
+      "categoria": "huevo",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 17,
+        "proteina_g": 3.6,
+        "carbohidratos_g": 0.2,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "coliflor",
+      "nombre": "Coliflor",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 25,
+        "proteina_g": 2,
+        "carbohidratos_g": 5,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "comino",
+      "nombre": "Comino",
+      "categoria": "especia",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 375,
+        "proteina_g": 17.8,
+        "carbohidratos_g": 44.2,
+        "grasas_g": 22.3
+      }
+    },
+    {
+      "id": "comino-y-pimenton",
+      "nombre": "Comino y pimentón",
+      "categoria": "especia",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 375,
+        "proteina_g": 17.8,
+        "carbohidratos_g": 44.2,
+        "grasas_g": 22.3
+      }
+    },
+    {
+      "id": "condimentos-al-gusto",
+      "nombre": "Condimentos al gusto",
+      "categoria": "otro",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 0,
+        "proteina_g": 0,
+        "carbohidratos_g": 0,
+        "grasas_g": 0
+      }
+    },
+    {
+      "id": "coop-tortillas-fuldskornshvede",
+      "nombre": "Coop Tortillas Fuldskornshvede",
+      "categoria": "cereal",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 290,
+        "proteina_g": 8,
+        "carbohidratos_g": 48,
+        "grasas_g": 6
+      }
+    },
+    {
+      "id": "cous-cous-en-seco",
+      "nombre": "Cous cous en seco",
+      "categoria": "cereal",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 376,
+        "proteina_g": 13,
+        "carbohidratos_g": 77,
+        "grasas_g": 0.6
+      }
+    },
+    {
+      "id": "curcuma-y-chia",
+      "nombre": "Cúrcuma y chía",
+      "categoria": "semilla",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 312,
+        "proteina_g": 12,
+        "carbohidratos_g": 30,
+        "grasas_g": 16
+      }
+    },
+    {
+      "id": "curry-en-polvo",
+      "nombre": "Curry en polvo",
+      "categoria": "especia",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 325,
+        "proteina_g": 14.3,
+        "carbohidratos_g": 55.8,
+        "grasas_g": 14
+      }
+    },
+    {
+      "id": "dulce-de-leche",
+      "nombre": "Dulce de leche",
+      "categoria": "lacteo",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 315,
+        "proteina_g": 0.5,
+        "carbohidratos_g": 60,
+        "grasas_g": 8
+      }
+    },
+    {
+      "id": "dulce-de-leche-tradicional",
+      "nombre": "Dulce de leche tradicional",
+      "categoria": "lacteo",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 315,
+        "proteina_g": 0.5,
+        "carbohidratos_g": 60,
+        "grasas_g": 8
+      }
+    },
+    {
+      "id": "edamame",
+      "nombre": "Edamame",
+      "categoria": "legumbre",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 121,
+        "proteina_g": 11.9,
+        "carbohidratos_g": 8.9,
+        "grasas_g": 5.2
+      }
+    },
+    {
+      "id": "entrana",
+      "nombre": "entraña",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 240,
+        "proteina_g": 19,
+        "carbohidratos_g": 0,
+        "grasas_g": 18
+      }
+    },
+    {
+      "id": "entrana-limpia-sin-cuero-ni-grasa-visible",
+      "nombre": "Entraña limpia sin cuero ni grasa visible",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 218,
+        "proteina_g": 19.5,
+        "carbohidratos_g": 0,
+        "grasas_g": 15.2
+      }
+    },
+    {
+      "id": "esparragos-frescos",
+      "nombre": "Espárragos frescos",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 20,
+        "proteina_g": 2.2,
+        "carbohidratos_g": 3.9,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "esparragos-frescos-cortados",
+      "nombre": "Espárragos frescos cortados",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 20,
+        "proteina_g": 2.2,
+        "carbohidratos_g": 3.9,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "espinaca-congelada",
+      "nombre": "Espinaca congelada",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 23,
+        "proteina_g": 2.9,
+        "carbohidratos_g": 3.6,
+        "grasas_g": 0.4
+      }
+    },
+    {
+      "id": "espinaca-fresca",
+      "nombre": "Espinaca fresca",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 23,
+        "proteina_g": 2.9,
+        "carbohidratos_g": 3.6,
+        "grasas_g": 0.4
+      }
+    },
+    {
+      "id": "espinacas",
+      "nombre": "Espinacas",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 23,
+        "proteina_g": 2.9,
+        "carbohidratos_g": 3.6,
+        "grasas_g": 0.4
+      }
+    },
+    {
+      "id": "espinacas-frescas",
+      "nombre": "Espinacas frescas",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 23,
+        "proteina_g": 2.9,
+        "carbohidratos_g": 3.6,
+        "grasas_g": 0.4
+      }
+    },
+    {
+      "id": "espresso",
+      "nombre": "Espresso",
+      "categoria": "bebida",
+      "unidad_referencia": "ml",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 9,
+        "proteina_g": 0.1,
+        "carbohidratos_g": 1.7,
+        "grasas_g": 0
+      }
+    },
+    {
+      "id": "fideos-de-arroz",
+      "nombre": "Fideos de arroz",
+      "categoria": "cereal",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 364,
+        "proteina_g": 6.5,
+        "carbohidratos_g": 80,
+        "grasas_g": 0.5
+      }
+    },
+    {
+      "id": "frijoles-negros-cocidos",
+      "nombre": "Frijoles negros cocidos",
+      "categoria": "legumbre",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 130,
+        "proteina_g": 8.9,
+        "carbohidratos_g": 23.7,
+        "grasas_g": 0.5
+      }
+    },
+    {
+      "id": "garbanzos-cocidos",
+      "nombre": "Garbanzos cocidos",
+      "categoria": "legumbre",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 164,
+        "proteina_g": 8.9,
+        "carbohidratos_g": 27.4,
+        "grasas_g": 2.6
+      }
+    },
+    {
+      "id": "granola-sin-azucar",
+      "nombre": "Granola sin azúcar",
+      "categoria": "cereal",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 471,
+        "proteina_g": 10,
+        "carbohidratos_g": 60,
+        "grasas_g": 20
+      }
+    },
+    {
+      "id": "harina-0000",
+      "nombre": "Harina 0000",
+      "categoria": "cereal",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 364,
+        "proteina_g": 10,
+        "carbohidratos_g": 76,
+        "grasas_g": 1
+      }
+    },
+    {
+      "id": "harina-de-trigo-comun",
+      "nombre": "Harina de trigo común",
+      "categoria": "cereal",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 364,
+        "proteina_g": 10,
+        "carbohidratos_g": 76,
+        "grasas_g": 1
+      }
+    },
+    {
+      "id": "harina-de-trigo-integral",
+      "nombre": "Harina de trigo integral",
+      "categoria": "cereal",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 340,
+        "proteina_g": 13.2,
+        "carbohidratos_g": 72,
+        "grasas_g": 2.5
+      }
+    },
+    {
+      "id": "harina-integral",
+      "nombre": "Harina integral",
+      "categoria": "cereal",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 340,
+        "proteina_g": 13.2,
+        "carbohidratos_g": 72,
+        "grasas_g": 2.5
+      }
+    },
+    {
+      "id": "harina-copos-finos-de-avena",
+      "nombre": "Harina/copos finos de avena",
+      "categoria": "cereal",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 366,
+        "proteina_g": 9.8,
+        "carbohidratos_g": 58.6,
+        "grasas_g": 7.1
+      }
+    },
+    {
+      "id": "hielo",
+      "nombre": "Hielo",
+      "categoria": "otro",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 0,
+        "proteina_g": 0,
+        "carbohidratos_g": 0,
+        "grasas_g": 0
+      }
+    },
+    {
+      "id": "hojuelas-de-chile",
+      "nombre": "Hojuelas de chile",
+      "categoria": "otro",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 40,
+        "proteina_g": 2,
+        "carbohidratos_g": 8.5,
+        "grasas_g": 1.5
+      }
+    },
+    {
+      "id": "huevo",
+      "nombre": "Huevo",
+      "categoria": "huevo",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 72,
+        "proteina_g": 6.3,
+        "carbohidratos_g": 0.4,
+        "grasas_g": 5
+      }
+    },
+    {
+      "id": "huevo-crudo",
+      "nombre": "Huevo crudo",
+      "categoria": "huevo",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 72,
+        "proteina_g": 6.3,
+        "carbohidratos_g": 0.4,
+        "grasas_g": 5
+      }
+    },
+    {
+      "id": "huevo-duro",
+      "nombre": "Huevo duro",
+      "categoria": "huevo",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 72,
+        "proteina_g": 6.3,
+        "carbohidratos_g": 0.4,
+        "grasas_g": 5
+      }
+    },
+    {
+      "id": "huevo-duro-picado",
+      "nombre": "Huevo duro picado",
+      "categoria": "huevo",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 72,
+        "proteina_g": 6.3,
+        "carbohidratos_g": 0.4,
+        "grasas_g": 5
+      }
+    },
+    {
+      "id": "huevo-entero",
+      "nombre": "Huevo entero",
+      "categoria": "huevo",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 72,
+        "proteina_g": 6.3,
+        "carbohidratos_g": 0.4,
+        "grasas_g": 5
+      }
+    },
+    {
+      "id": "huevo-mediano",
+      "nombre": "Huevo mediano",
+      "categoria": "huevo",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 63,
+        "proteina_g": 5.5,
+        "carbohidratos_g": 0.4,
+        "grasas_g": 4.4
+      }
+    },
+    {
+      "id": "huevos",
+      "nombre": "Huevos",
+      "categoria": "huevo",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 72,
+        "proteina_g": 6.3,
+        "carbohidratos_g": 0.4,
+        "grasas_g": 5
+      }
+    },
+    {
+      "id": "huevos-duros",
+      "nombre": "Huevos duros",
+      "categoria": "huevo",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 72,
+        "proteina_g": 6.3,
+        "carbohidratos_g": 0.4,
+        "grasas_g": 5
+      }
+    },
+    {
+      "id": "huevos-enteros",
+      "nombre": "Huevos enteros",
+      "categoria": "huevo",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 72,
+        "proteina_g": 6.3,
+        "carbohidratos_g": 0.4,
+        "grasas_g": 5
+      }
+    },
+    {
+      "id": "huevos-enteros-grandes",
+      "nombre": "Huevos enteros grandes",
+      "categoria": "huevo",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 72,
+        "proteina_g": 6.3,
+        "carbohidratos_g": 0.4,
+        "grasas_g": 5
+      }
+    },
+    {
+      "id": "hytteost",
+      "nombre": "Hytteost",
+      "categoria": "lacteo",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 90,
+        "proteina_g": 11,
+        "carbohidratos_g": 3.2,
+        "grasas_g": 3
+      }
+    },
+    {
+      "id": "jugo-de-limon-y-sal",
+      "nombre": "Jugo de limón y sal",
+      "categoria": "fruta",
+      "unidad_referencia": "ml",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 4,
+        "proteina_g": 0.1,
+        "carbohidratos_g": 1.3,
+        "grasas_g": 0
+      }
+    },
+    {
+      "id": "jugo-de-tomate-pure",
+      "nombre": "Jugo de tomate / puré",
+      "categoria": "verdura",
+      "unidad_referencia": "ml",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 32,
+        "proteina_g": 1.5,
+        "carbohidratos_g": 5.8,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "leche-de-avena-oatly-barista",
+      "nombre": "Leche de avena Oatly Barista",
+      "categoria": "lacteo",
+      "unidad_referencia": "ml",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 150,
+        "proteina_g": 2.2,
+        "carbohidratos_g": 14.2,
+        "grasas_g": 6.1
+      }
+    },
+    {
+      "id": "leche-de-coco-light",
+      "nombre": "Leche de coco light",
+      "categoria": "lacteo",
+      "unidad_referencia": "ml",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 70,
+        "proteina_g": 0.7,
+        "carbohidratos_g": 3.2,
+        "grasas_g": 6
+      }
+    },
+    {
+      "id": "leche-descremada",
+      "nombre": "Leche descremada",
+      "categoria": "lacteo",
+      "unidad_referencia": "ml",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 35,
+        "proteina_g": 3.4,
+        "carbohidratos_g": 5,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "lentejas-cocidas",
+      "nombre": "Lentejas cocidas",
+      "categoria": "legumbre",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 116,
+        "proteina_g": 9,
+        "carbohidratos_g": 20.1,
+        "grasas_g": 0.4
+      }
+    },
+    {
+      "id": "lima",
+      "nombre": "Lima",
+      "categoria": "fruta",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 30,
+        "proteina_g": 0.7,
+        "carbohidratos_g": 10.5,
+        "grasas_g": 0.2
+      }
+    },
+    {
+      "id": "limon",
+      "nombre": "Limón",
+      "categoria": "fruta",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 29,
+        "proteina_g": 1.1,
+        "carbohidratos_g": 9.3,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "manteca",
+      "nombre": "Manteca",
+      "categoria": "lacteo",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 717,
+        "proteina_g": 0.9,
+        "carbohidratos_g": 0.1,
+        "grasas_g": 81.1
+      }
+    },
+    {
+      "id": "mantequilla-de-mani-natural",
+      "nombre": "Mantequilla de maní natural",
+      "categoria": "semilla",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 597,
+        "proteina_g": 25,
+        "carbohidratos_g": 20,
+        "grasas_g": 50
+      }
+    },
+    {
+      "id": "medio-morron",
+      "nombre": "medio morrón",
+      "categoria": "verdura",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 31,
+        "proteina_g": 1,
+        "carbohidratos_g": 6,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "miel",
+      "nombre": "Miel",
+      "categoria": "endulzante",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 304,
+        "proteina_g": 0.3,
+        "carbohidratos_g": 82.4,
+        "grasas_g": 0
+      }
+    },
+    {
+      "id": "minimaelk-y-cafe",
+      "nombre": "minimaelk y café",
+      "categoria": "otro",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 42,
+        "proteina_g": 3.5,
+        "carbohidratos_g": 5,
+        "grasas_g": 1.5
+      }
+    },
+    {
+      "id": "morron",
+      "nombre": "Morrón",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 31,
+        "proteina_g": 1,
+        "carbohidratos_g": 6,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "morron-asado-en-tiras",
+      "nombre": "Morrón asado en tiras",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 31,
+        "proteina_g": 1,
+        "carbohidratos_g": 6,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "morron-rojo",
+      "nombre": "Morrón rojo",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 31,
+        "proteina_g": 1,
+        "carbohidratos_g": 6,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "morron-rojo-y-verde-en-juliana",
+      "nombre": "Morrón rojo y verde en juliana",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 31,
+        "proteina_g": 1,
+        "carbohidratos_g": 6,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "mostaza",
+      "nombre": "Mostaza",
+      "categoria": "condimento",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 66,
+        "proteina_g": 4.4,
+        "carbohidratos_g": 6.4,
+        "grasas_g": 3.3
+      }
+    },
+    {
+      "id": "muslos-de-pollo-sin-piel",
+      "nombre": "Muslos de pollo sin piel",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 177,
+        "proteina_g": 24,
+        "carbohidratos_g": 0,
+        "grasas_g": 8
+      }
+    },
+    {
+      "id": "nalga-de-ternera-magra",
+      "nombre": "Nalga de ternera magra",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 140,
+        "proteina_g": 22,
+        "carbohidratos_g": 0,
+        "grasas_g": 5
+      }
+    },
+    {
+      "id": "nueces-picadas",
+      "nombre": "Nueces picadas",
+      "categoria": "otro",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 654,
+        "proteina_g": 15.2,
+        "carbohidratos_g": 13.7,
+        "grasas_g": 65.2
+      }
+    },
+    {
+      "id": "nuez-moscada",
+      "nombre": "Nuez moscada",
+      "categoria": "semilla",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 525,
+        "proteina_g": 5.8,
+        "carbohidratos_g": 49.3,
+        "grasas_g": 36.3
+      }
+    },
+    {
+      "id": "oatly-barista",
+      "nombre": "Oatly Barista",
+      "categoria": "bebida",
+      "unidad_referencia": "ml",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 150,
+        "proteina_g": 2.2,
+        "carbohidratos_g": 14.2,
+        "grasas_g": 6.1
+      }
+    },
+    {
+      "id": "oatly-barista-edition",
+      "nombre": "Oatly Barista Edition",
+      "categoria": "bebida",
+      "unidad_referencia": "ml",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 150,
+        "proteina_g": 2.2,
+        "carbohidratos_g": 14.2,
+        "grasas_g": 6.1
+      }
+    },
+    {
+      "id": "oregano",
+      "nombre": "Orégano",
+      "categoria": "especia",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 265,
+        "proteina_g": 9,
+        "carbohidratos_g": 68.9,
+        "grasas_g": 4.3
+      }
+    },
+    {
+      "id": "oregano-y-ajo-en-polvo",
+      "nombre": "Orégano y ajo en polvo",
+      "categoria": "especia",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 331,
+        "proteina_g": 6.7,
+        "carbohidratos_g": 72.7,
+        "grasas_g": 0.7
+      }
+    },
+    {
+      "id": "oregano-y-limon",
+      "nombre": "Orégano y limón",
+      "categoria": "fruta",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 265,
+        "proteina_g": 9,
+        "carbohidratos_g": 68.9,
+        "grasas_g": 4.3
+      }
+    },
+    {
+      "id": "palta",
+      "nombre": "Palta",
+      "categoria": "fruta",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 160,
+        "proteina_g": 2,
+        "carbohidratos_g": 8.5,
+        "grasas_g": 14.7
+      }
+    },
+    {
+      "id": "palta-aguacate",
+      "nombre": "Palta/aguacate",
+      "categoria": "fruta",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 160,
+        "proteina_g": 2,
+        "carbohidratos_g": 8.5,
+        "grasas_g": 14.7
+      }
+    },
+    {
+      "id": "pan-integral",
+      "nombre": "Pan integral",
+      "categoria": "cereal",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 247,
+        "proteina_g": 9,
+        "carbohidratos_g": 41,
+        "grasas_g": 3.4
+      }
+    },
+    {
+      "id": "pan-rallado",
+      "nombre": "Pan rallado",
+      "categoria": "cereal",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 395,
+        "proteina_g": 13,
+        "carbohidratos_g": 72,
+        "grasas_g": 3.6
+      }
+    },
+    {
+      "id": "papa",
+      "nombre": "Papa",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 77,
+        "proteina_g": 2,
+        "carbohidratos_g": 17.5,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "papa-cocida",
+      "nombre": "Papa cocida",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 87,
+        "proteina_g": 1.9,
+        "carbohidratos_g": 20.1,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "papa-cortada-en-bastones-finos",
+      "nombre": "Papa cortada en bastones finos",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 77,
+        "proteina_g": 2,
+        "carbohidratos_g": 17.5,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "papas-prefritas-de-bolsa",
+      "nombre": "papas prefritas de bolsa",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 296,
+        "proteina_g": 4,
+        "carbohidratos_g": 40,
+        "grasas_g": 14
+      }
+    },
+    {
+      "id": "pasta-integral",
+      "nombre": "Pasta integral",
+      "categoria": "cereal",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 348,
+        "proteina_g": 13,
+        "carbohidratos_g": 67,
+        "grasas_g": 2.5
+      }
+    },
+    {
+      "id": "pechuga-de-pollo",
+      "nombre": "Pechuga de pollo",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 165,
+        "proteina_g": 31,
+        "carbohidratos_g": 0,
+        "grasas_g": 3.6
+      }
+    },
+    {
+      "id": "pechuga-de-pollo-cocida-y-desmenuzada",
+      "nombre": "Pechuga de pollo cocida y desmenuzada",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 165,
+        "proteina_g": 31,
+        "carbohidratos_g": 0,
+        "grasas_g": 3.6
+      }
+    },
+    {
+      "id": "pechuga-de-pollo-en-cubos",
+      "nombre": "Pechuga de pollo en cubos",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 165,
+        "proteina_g": 31,
+        "carbohidratos_g": 0,
+        "grasas_g": 3.6
+      }
+    },
+    {
+      "id": "pechuga-de-pollo-en-tiras",
+      "nombre": "Pechuga de pollo en tiras",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 165,
+        "proteina_g": 31,
+        "carbohidratos_g": 0,
+        "grasas_g": 3.6
+      }
+    },
+    {
+      "id": "pechuga-de-pollo-fileteada",
+      "nombre": "Pechuga de pollo fileteada",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 165,
+        "proteina_g": 31,
+        "carbohidratos_g": 0,
+        "grasas_g": 3.6
+      }
+    },
+    {
+      "id": "pechuga-de-pollo-hervida-y-desmenuzada",
+      "nombre": "Pechuga de pollo hervida y desmenuzada",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 165,
+        "proteina_g": 31,
+        "carbohidratos_g": 0,
+        "grasas_g": 3.6
+      }
+    },
+    {
+      "id": "pechuga-desmenuzada",
+      "nombre": "Pechuga desmenuzada",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 165,
+        "proteina_g": 31,
+        "carbohidratos_g": 0,
+        "grasas_g": 3.6
+      }
+    },
+    {
+      "id": "pepino",
+      "nombre": "Pepino",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 15,
+        "proteina_g": 0.7,
+        "carbohidratos_g": 3.6,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "pera",
+      "nombre": "Pera",
+      "categoria": "fruta",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 57,
+        "proteina_g": 0.4,
+        "carbohidratos_g": 15.2,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "pimenton-ahumado",
+      "nombre": "Pimentón ahumado",
+      "categoria": "especia",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 282,
+        "proteina_g": 14.1,
+        "carbohidratos_g": 56.8,
+        "grasas_g": 4.3
+      }
+    },
+    {
+      "id": "pimienta-negra",
+      "nombre": "Pimienta negra",
+      "categoria": "especia",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 255,
+        "proteina_g": 10.4,
+        "carbohidratos_g": 63.9,
+        "grasas_g": 3.3
+      }
+    },
+    {
+      "id": "pimiento-morron-rojo",
+      "nombre": "Pimiento / Morrón rojo",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 31,
+        "proteina_g": 1,
+        "carbohidratos_g": 6,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "pimiento-morron",
+      "nombre": "Pimiento morrón",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 31,
+        "proteina_g": 1,
+        "carbohidratos_g": 6,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "pimiento-morron-en-trozos",
+      "nombre": "Pimiento morrón en trozos",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 31,
+        "proteina_g": 1,
+        "carbohidratos_g": 6,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "pimiento-rojo",
+      "nombre": "Pimiento rojo",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 31,
+        "proteina_g": 1,
+        "carbohidratos_g": 6,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "polenta",
+      "nombre": "Polenta",
+      "categoria": "cereal",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 370,
+        "proteina_g": 8.5,
+        "carbohidratos_g": 77.7,
+        "grasas_g": 3.6
+      }
+    },
+    {
+      "id": "proteina-de-suero",
+      "nombre": "Proteína de suero",
+      "categoria": "suplemento",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 380,
+        "proteina_g": 80,
+        "carbohidratos_g": 6,
+        "grasas_g": 3
+      }
+    },
+    {
+      "id": "pure-de-tomate",
+      "nombre": "Puré de tomate",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 32,
+        "proteina_g": 1.5,
+        "carbohidratos_g": 5.8,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "queso-cottage",
+      "nombre": "Queso cottage",
+      "categoria": "lacteo",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 98,
+        "proteina_g": 11.1,
+        "carbohidratos_g": 3.4,
+        "grasas_g": 4.5
+      }
+    },
+    {
+      "id": "queso-duro-rallado",
+      "nombre": "Queso duro rallado",
+      "categoria": "lacteo",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 392,
+        "proteina_g": 35.8,
+        "carbohidratos_g": 1.6,
+        "grasas_g": 27.2
+      }
+    },
+    {
+      "id": "queso-feta-light",
+      "nombre": "Queso feta light",
+      "categoria": "lacteo",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 246,
+        "proteina_g": 14,
+        "carbohidratos_g": 3.5,
+        "grasas_g": 20
+      }
+    },
+    {
+      "id": "queso-fresco-o-cottage",
+      "nombre": "Queso fresco o cottage",
+      "categoria": "lacteo",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 98,
+        "proteina_g": 11.1,
+        "carbohidratos_g": 3.4,
+        "grasas_g": 4.5
+      }
+    },
+    {
+      "id": "queso-havarti",
+      "nombre": "Queso Havarti",
+      "categoria": "lacteo",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 344,
+        "proteina_g": 24.7,
+        "carbohidratos_g": 1.5,
+        "grasas_g": 27.2
+      }
+    },
+    {
+      "id": "queso-havarti-16-rallado",
+      "nombre": "Queso Havarti (16%) rallado",
+      "categoria": "lacteo",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 344,
+        "proteina_g": 24.7,
+        "carbohidratos_g": 1.5,
+        "grasas_g": 27.2
+      }
+    },
+    {
+      "id": "quinoa-cocida",
+      "nombre": "Quinoa cocida",
+      "categoria": "cereal",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 120,
+        "proteina_g": 4.4,
+        "carbohidratos_g": 21.3,
+        "grasas_g": 1.9
+      }
+    },
+    {
+      "id": "quinoa-en-seco",
+      "nombre": "Quinoa en seco",
+      "categoria": "cereal",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 368,
+        "proteina_g": 14.1,
+        "carbohidratos_g": 64.2,
+        "grasas_g": 6.1
+      }
+    },
+    {
+      "id": "quinoa-lavada",
+      "nombre": "Quinoa lavada",
+      "categoria": "cereal",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 368,
+        "proteina_g": 14.1,
+        "carbohidratos_g": 64.2,
+        "grasas_g": 6.1
+      }
+    },
+    {
+      "id": "repollitos-de-bruselas",
+      "nombre": "Repollitos de Bruselas",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 43,
+        "proteina_g": 3.4,
+        "carbohidratos_g": 8.9,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "rucula",
+      "nombre": "Rúcula",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 25,
+        "proteina_g": 2.6,
+        "carbohidratos_g": 3.7,
+        "grasas_g": 0.7
+      }
+    },
+    {
+      "id": "sabor-en-polvo-4-quesos",
+      "nombre": "Sabor en polvo 4 quesos",
+      "categoria": "lacteo",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 80,
+        "proteina_g": 6,
+        "carbohidratos_g": 8,
+        "grasas_g": 2.5
+      }
+    },
+    {
+      "id": "sal",
+      "nombre": "Sal",
+      "categoria": "especia",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 0,
+        "proteina_g": 0,
+        "carbohidratos_g": 0,
+        "grasas_g": 0
+      }
+    },
+    {
+      "id": "sal-y-cilantro",
+      "nombre": "Sal y cilantro",
+      "categoria": "especia",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 0,
+        "proteina_g": 0,
+        "carbohidratos_g": 0,
+        "grasas_g": 0
+      }
+    },
+    {
+      "id": "sal-y-especias",
+      "nombre": "Sal y especias",
+      "categoria": "especia",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 0,
+        "proteina_g": 0,
+        "carbohidratos_g": 0,
+        "grasas_g": 0
+      }
+    },
+    {
+      "id": "sal-y-pimienta",
+      "nombre": "Sal y pimienta",
+      "categoria": "especia",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 0,
+        "proteina_g": 0,
+        "carbohidratos_g": 0,
+        "grasas_g": 0
+      }
+    },
+    {
+      "id": "salmon-cocido",
+      "nombre": "Salmón cocido",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 206,
+        "proteina_g": 20.4,
+        "carbohidratos_g": 0,
+        "grasas_g": 13.4
+      }
+    },
+    {
+      "id": "salsa-de-soja",
+      "nombre": "Salsa de soja",
+      "categoria": "condimento",
+      "unidad_referencia": "ml",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 53,
+        "proteina_g": 5.9,
+        "carbohidratos_g": 7,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "salsa-de-soja-baja-en-sodio",
+      "nombre": "Salsa de soja baja en sodio",
+      "categoria": "condimento",
+      "unidad_referencia": "ml",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 53,
+        "proteina_g": 5.9,
+        "carbohidratos_g": 7,
+        "grasas_g": 0.1
+      }
+    },
+    {
+      "id": "salsa-de-tomate-casera",
+      "nombre": "Salsa de tomate casera",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 40,
+        "proteina_g": 1.5,
+        "carbohidratos_g": 7,
+        "grasas_g": 1
+      }
+    },
+    {
+      "id": "semillas-de-chia",
+      "nombre": "Semillas de chía",
+      "categoria": "semilla",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 486,
+        "proteina_g": 17,
+        "carbohidratos_g": 42.1,
+        "grasas_g": 31
+      }
+    },
+    {
+      "id": "semillas-de-chia-o-sesamo",
+      "nombre": "Semillas de chía o sésamo",
+      "categoria": "semilla",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 486,
+        "proteina_g": 17,
+        "carbohidratos_g": 42.1,
+        "grasas_g": 31
+      }
+    },
+    {
+      "id": "semillas-de-sesamo",
+      "nombre": "Semillas de sésamo",
+      "categoria": "semilla",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 573,
+        "proteina_g": 17.7,
+        "carbohidratos_g": 23.5,
+        "grasas_g": 49.7
+      }
+    },
+    {
+      "id": "skyr",
+      "nombre": "Skyr",
+      "categoria": "lacteo",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 56,
+        "proteina_g": 10,
+        "carbohidratos_g": 3.8,
+        "grasas_g": 0.2
+      }
+    },
+    {
+      "id": "solomillo-de-cerdo",
+      "nombre": "Solomillo de cerdo",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 143,
+        "proteina_g": 22.3,
+        "carbohidratos_g": 0,
+        "grasas_g": 5.7
+      }
+    },
+    {
+      "id": "solomillo-de-cerdo-en-tiras",
+      "nombre": "Solomillo de cerdo en tiras",
+      "categoria": "proteina",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 143,
+        "proteina_g": 22.3,
+        "carbohidratos_g": 0,
+        "grasas_g": 5.7
+      }
+    },
+    {
+      "id": "spray-vegetal",
+      "nombre": "Spray vegetal",
+      "categoria": "aceite",
+      "unidad_referencia": "ml",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 884,
+        "proteina_g": 0,
+        "carbohidratos_g": 0,
+        "grasas_g": 100
+      }
+    },
+    {
+      "id": "tahini",
+      "nombre": "Tahini",
+      "categoria": "semilla",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 595,
+        "proteina_g": 17,
+        "carbohidratos_g": 21.3,
+        "grasas_g": 53.8
+      }
+    },
+    {
+      "id": "tapas-de-empanada-hojaldradas",
+      "nombre": "Tapas de empanada hojaldradas",
+      "categoria": "cereal",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 350,
+        "proteina_g": 7,
+        "carbohidratos_g": 42,
+        "grasas_g": 17
+      }
+    },
+    {
+      "id": "thise-gr-sk-inspireret-yoghurt-2",
+      "nombre": "Thise Græsk Inspireret Yoghurt 2%",
+      "categoria": "otro",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 65,
+        "proteina_g": 8,
+        "carbohidratos_g": 3.7,
+        "grasas_g": 2
+      }
+    },
+    {
+      "id": "tomate",
+      "nombre": "Tomate",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 18,
+        "proteina_g": 0.9,
+        "carbohidratos_g": 3.9,
+        "grasas_g": 0.2
+      }
+    },
+    {
+      "id": "tomate-cherry",
+      "nombre": "Tomate cherry",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 18,
+        "proteina_g": 0.9,
+        "carbohidratos_g": 3.9,
+        "grasas_g": 0.2
+      }
+    },
+    {
+      "id": "tomate-grande-en-rodajas",
+      "nombre": "Tomate grande en rodajas",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 18,
+        "proteina_g": 0.9,
+        "carbohidratos_g": 3.9,
+        "grasas_g": 0.2
+      }
+    },
+    {
+      "id": "tomate-triturado",
+      "nombre": "Tomate triturado",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 32,
+        "proteina_g": 1.5,
+        "carbohidratos_g": 5.8,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "tortilla-integral-pequena",
+      "nombre": "Tortilla integral pequeña",
+      "categoria": "cereal",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 290,
+        "proteina_g": 8,
+        "carbohidratos_g": 48,
+        "grasas_g": 6
+      }
+    },
+    {
+      "id": "vegetales-asiaticos-o-mix-de-puerro-y-morron",
+      "nombre": "Vegetales asiáticos o mix de puerro y morrón",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 31,
+        "proteina_g": 1,
+        "carbohidratos_g": 6,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "vinagre-blanco",
+      "nombre": "Vinagre blanco",
+      "categoria": "condimento",
+      "unidad_referencia": "ml",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 18,
+        "proteina_g": 0,
+        "carbohidratos_g": 0,
+        "grasas_g": 0
+      }
+    },
+    {
+      "id": "whey-isolate",
+      "nombre": "Whey isolate",
+      "categoria": "suplemento",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 368,
+        "proteina_g": 82,
+        "carbohidratos_g": 4,
+        "grasas_g": 1
+      }
+    },
+    {
+      "id": "yema-de-huevo",
+      "nombre": "Yema de huevo",
+      "categoria": "huevo",
+      "unidad_referencia": "unidad",
+      "cantidad_referencia": 1,
+      "macros": {
+        "calorias": 55,
+        "proteina_g": 2.7,
+        "carbohidratos_g": 0.6,
+        "grasas_g": 4.5
+      }
+    },
+    {
+      "id": "yogur-griego-0-sin-azucar",
+      "nombre": "Yogur griego 0% sin azúcar",
+      "categoria": "lacteo",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 59,
+        "proteina_g": 10,
+        "carbohidratos_g": 3.6,
+        "grasas_g": 0.4
+      }
+    },
+    {
+      "id": "zanahoria",
+      "nombre": "Zanahoria",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 41,
+        "proteina_g": 0.9,
+        "carbohidratos_g": 9.6,
+        "grasas_g": 0.2
+      }
+    },
+    {
+      "id": "zucchini",
+      "nombre": "Zucchini",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 17,
+        "proteina_g": 1.2,
+        "carbohidratos_g": 3.1,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "zucchini-en-rodajas",
+      "nombre": "Zucchini en rodajas",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 17,
+        "proteina_g": 1.2,
+        "carbohidratos_g": 3.1,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "zucchinis-en-rodajas-gruesas",
+      "nombre": "Zucchinis en rodajas gruesas",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 17,
+        "proteina_g": 1.2,
+        "carbohidratos_g": 3.1,
+        "grasas_g": 0.3
+      }
+    },
+    {
+      "id": "zucchinis-grandes-cortados-a-lo-largo",
+      "nombre": "Zucchinis grandes cortados a lo largo",
+      "categoria": "verdura",
+      "unidad_referencia": "g",
+      "cantidad_referencia": 100,
+      "macros": {
+        "calorias": 17,
+        "proteina_g": 1.2,
+        "carbohidratos_g": 3.1,
+        "grasas_g": 0.3
+      }
+    }
+  ]
+}

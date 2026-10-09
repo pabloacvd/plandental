@@ -2842,20 +2842,19 @@
         },
         "ingredientes": [
           {
-            "nombre": "Pechuga de pollo (cocida)",
-            "cantidad": "450g"
+            "item": "Pechuga de pollo",
+            "cantidad": 450,
+            "unidad": "g"
           },
           {
-            "nombre": "Papa",
-            "cantidad": "500g"
+            "item": "Papa",
+            "cantidad": 500,
+            "unidad": "g"
           },
           {
-            "nombre": "Vegetales mixtos (zucchini, berenjena, cebolla, morrón)",
-            "cantidad": "500g"
-          },
-          {
-            "nombre": "Aceite de oliva",
-            "cantidad": "12g (1 cucharada sopera)"
+            "item": "Aceite de oliva",
+            "cantidad": 12,
+            "unidad": "g"
           }
         ],
         "pasos": [
@@ -2882,26 +2881,14 @@
         },
         "ingredientes": [
           {
-            "nombre": "Thise Græsk Inspireret Yoghurt 2%",
+            "item": "Thise Græsk Inspireret Yoghurt 2%",
             "cantidad": 200,
-            "unidad": "g",
-            "macros": {
-              "calorias": 130,
-              "proteina_g": 16,
-              "carbohidratos_g": 7.4,
-              "grasas_g": 4
-            }
+            "unidad": "g"
           },
           {
-            "nombre": "Dulce de leche tradicional",
+            "item": "Dulce de leche tradicional",
             "cantidad": 40,
-            "unidad": "g",
-            "macros": {
-              "calorias": 126,
-              "proteina_g": 0.2,
-              "carbohidratos_g": 24,
-              "grasas_g": 3.2
-            }
+            "unidad": "g"
           }
         ]
       }

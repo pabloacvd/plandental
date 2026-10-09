@@ -3,6 +3,7 @@
  */
 
 import { fetchRecipes, fetchNutrition } from './storage.js';
+import { loadIngredients } from './ingredients.js';
 
 let _recipes = [];
 let _nutrition = {};
@@ -47,6 +48,9 @@ export async function loadData() {
     const recData = await recRes.json();
     _recipes = recData.recetas;
   }
+
+  // Load ingredients catalog (Supabase when authenticated, JSON seed otherwise)
+  await loadIngredients();
 
   return { recipes: _recipes, nutrition: _nutrition };
 }

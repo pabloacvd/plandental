@@ -94,26 +94,51 @@
   ═══════════════════════════════════════════════ -->
   <main class="app-main">
 
-    <!-- SIDEBAR: Recipe Search -->
+    <!-- SIDEBAR: Recipe / Ingredient Search -->
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-header">
         <button id="btn-toggle-sidebar" class="btn-hamburger" title="Menú">
           <span></span><span></span><span></span>
         </button>
-        <span class="sidebar-title">Recetas</span>
-        <button id="btn-add-recipe" class="btn-new-recipe" title="Nueva receta">＋</button>
+        <span class="sidebar-title" id="sidebar-title-text">Recetas</span>
+        <button id="btn-add-sidebar" class="btn-new-recipe" title="Nueva receta">＋</button>
       </div>
+
+      <!-- Sidebar navigation tabs -->
+      <div class="sidebar-nav-tabs" id="sidebar-nav-tabs">
+        <button class="sidebar-nav-tab active" data-sidebar-tab="recipes">Recetas</button>
+        <button class="sidebar-nav-tab" data-sidebar-tab="ingredients">Ingredientes</button>
+      </div>
+
       <div class="search-box">
         <input type="text" id="recipe-search" placeholder="Buscar receta, ingrediente…" autocomplete="off" />
         <button id="btn-clear-search" class="btn-clear" title="Limpiar">✕</button>
       </div>
+
+      <!-- Recipe filter chips (hidden when ingredients tab is active) -->
       <div class="filter-chips" id="filter-chips">
         <button class="chip active" data-cat="all">Todas</button>
         <button class="chip" data-cat="desayuno">Desayuno</button>
         <button class="chip" data-cat="almuerzo/cena">Almuerzo/Cena</button>
         <button class="chip" data-cat="snack">Snack</button>
       </div>
+
+      <!-- Ingredient category filter chips (hidden when recipes tab is active) -->
+      <div class="filter-chips hidden" id="filter-chips-ingredients">
+        <button class="chip active" data-ing-cat="all">Todos</button>
+        <button class="chip" data-ing-cat="verdura">Verdura</button>
+        <button class="chip" data-ing-cat="fruta">Fruta</button>
+        <button class="chip" data-ing-cat="proteina">Proteína</button>
+        <button class="chip" data-ing-cat="lacteo">Lácteo</button>
+        <button class="chip" data-ing-cat="cereal">Cereal</button>
+        <button class="chip" data-ing-cat="legumbre">Legumbre</button>
+        <button class="chip" data-ing-cat="condimento">Condimento</button>
+        <button class="chip" data-ing-cat="aceite">Aceite</button>
+        <button class="chip" data-ing-cat="otro">Otro</button>
+      </div>
+
       <div id="recipe-list" class="recipe-list"></div>
+      <div id="ingredients-sidebar-list" class="recipe-list hidden"></div>
     </aside>
 
     <!-- MAIN CONTENT: Calendar + Day detail -->
@@ -244,7 +269,10 @@
           </div>
         </div>
 
-        <div class="form-section-title">Macros por porción</div>
+        <div class="form-section-title">
+          Macros por porción
+          <span id="rf-macros-auto" class="macros-auto-badge hidden" title="Calculado desde los ingredientes del catálogo">⚡ Auto-calculado desde ingredientes</span>
+        </div>
         <div class="form-grid form-grid--4">
           <div class="form-field">
             <label>Calorías (kcal)</label>
@@ -266,8 +294,12 @@
 
         <div class="form-section-title">
           Ingredientes
-          <button class="btn-add-row" id="btn-add-ingredient">+ Agregar</button>
+          <span class="form-section-actions">
+            <button class="btn-add-row" id="btn-new-ingredient-quick" title="Crear un ingrediente nuevo en el catálogo">+ Nuevo ingrediente</button>
+            <button class="btn-add-row" id="btn-add-ingredient">+ Agregar</button>
+          </span>
         </div>
+        <datalist id="ingredients-datalist"></datalist>
         <div id="ingredients-list" class="dynamic-list"></div>
 
         <div class="form-section-title">
@@ -307,6 +339,93 @@
         <button id="btn-share-shopping" class="btn-primary btn-share">
           <span>📤</span> Compartir
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ingredient Editor Modal -->
+  <div id="modal-ingredient-editor" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-box modal-box--editor">
+      <button class="modal-close" id="btn-close-ingredient-editor">✕</button>
+      <h3 id="ingredient-editor-title">Nuevo ingrediente</h3>
+
+      <!-- Tab switcher -->
+      <div class="editor-tabs">
+        <button class="editor-tab ing-editor-tab active" data-ing-tab="form">📝 Formulario</button>
+        <button class="editor-tab ing-editor-tab" data-ing-tab="json">{ } JSON</button>
+      </div>
+
+      <!-- FORM TAB -->
+      <div id="ing-editor-tab-form" class="editor-tab-content">
+        <div class="form-grid">
+          <div class="form-field form-field--full">
+            <label>Nombre *</label>
+            <input type="text" id="ing-nombre" placeholder="Nombre del ingrediente" />
+          </div>
+          <div class="form-field">
+            <label>Categoría</label>
+            <select id="ing-categoria">
+              <option value="">— Sin categoría —</option>
+              <option value="verdura">Verdura</option>
+              <option value="fruta">Fruta</option>
+              <option value="proteina">Proteína</option>
+              <option value="lacteo">Lácteo</option>
+              <option value="cereal">Cereal</option>
+              <option value="legumbre">Legumbre</option>
+              <option value="condimento">Condimento</option>
+              <option value="aceite">Aceite</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Unidad de referencia *</label>
+            <select id="ing-unidad">
+              <option value="g">g (gramos)</option>
+              <option value="ml">ml (mililitros)</option>
+              <option value="unidad">unidad</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Cantidad de referencia *</label>
+            <input type="number" id="ing-cantidad-ref" min="1" step="1" value="100" placeholder="100" />
+          </div>
+        </div>
+
+        <div class="form-section-title">Macros por cantidad de referencia</div>
+        <div class="form-grid form-grid--4">
+          <div class="form-field">
+            <label>Calorías (kcal)</label>
+            <input type="number" id="ing-cal" min="0" step="0.1" placeholder="0" />
+          </div>
+          <div class="form-field">
+            <label>Proteína (g)</label>
+            <input type="number" id="ing-prot" min="0" step="0.1" placeholder="0" />
+          </div>
+          <div class="form-field">
+            <label>Carbohidratos (g)</label>
+            <input type="number" id="ing-carbs" min="0" step="0.1" placeholder="0" />
+          </div>
+          <div class="form-field">
+            <label>Grasas (g)</label>
+            <input type="number" id="ing-fat" min="0" step="0.1" placeholder="0" />
+          </div>
+        </div>
+
+        <div class="editor-actions editor-actions--split">
+          <button id="btn-delete-ingredient" class="btn-danger hidden">🗑 Eliminar ingrediente</button>
+          <button id="btn-save-ingredient-form" class="btn-primary">Guardar ingrediente</button>
+        </div>
+      </div>
+
+      <!-- JSON TAB -->
+      <div id="ing-editor-tab-json" class="editor-tab-content hidden">
+        <p class="json-hint">Pegá un objeto <code>{ "id": "…", "nombre": "…", … }</code> o array <code>[{ … }, …]</code>.</p>
+        <textarea id="ing-json" rows="14" placeholder='{ "nombre": "Pollo", "categoria": "proteina", "unidad_referencia": "g", "cantidad_referencia": 100, "calorias": 165, "proteina_g": 31, "carbohidratos_g": 0, "grasas_g": 3.6 }'></textarea>
+        <div class="editor-actions">
+          <button id="btn-preview-ingredient-json" class="btn-secondary">Previsualizar</button>
+          <button id="btn-save-ingredient-json" class="btn-primary">Guardar</button>
+        </div>
       </div>
     </div>
   </div>

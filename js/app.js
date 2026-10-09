@@ -11,14 +11,21 @@ import {
   signIn, signOut, isAuthenticated, getMyProfile, getMyPersons, getFamiliaFlag,
   createPerson, requestPersonAccess, approvePersonAccess, rejectPersonAccess,
   getPendingAccessRequests, saveRecipes, consumeTokenFromHash,
+  saveIngredient, deleteIngredient as deleteIngredientFromStorage,
 } from './storage.js';
 import { supabase } from './supabase.js';
 import {
   renderRecipeCard, renderRecipeDetail,
   renderCalendarGrid, updateKcalBars,
   renderDayDetail, renderDaySummary,
+  renderIngredientsSidebar,
   showToast,
 } from './ui.js';
+import {
+  searchIngredients, getIngredientById, getAllIngredients, getIngredientByName,
+  addIngredient, updateIngredient, deleteIngredient as deleteIngredientLocal,
+  calculateItemMacros, calculateRecipeMacros,
+} from './ingredients.js';
 
 // ══════════════════════════════════════════════════════════
 // MOBILE DETECTION
@@ -49,6 +56,9 @@ let state = {
   personNameToId: {},          // { "Pablo": uuid, "Juli": uuid, … }
   showFamilia:    false,       // from familia_flag view
   profile:        null,        // { id, username, role }
+  // Sidebar tabs
+  sidebarTab:              'recipes',   // 'recipes' | 'ingredients'
+  ingredientSearchCategory: 'all',
 };
 
 // ══════════════════════════════════════════════════════════
@@ -269,6 +279,11 @@ function applyMobileDayVisibility(weekDays) {
 // ══════════════════════════════════════════════════════════
 
 function renderSidebar() {
+  if (state.sidebarTab === 'ingredients') {
+    _renderIngredientsSidebarPanel();
+    return;
+  }
+
   const results = searchRecipes(state.searchQuery, state.searchCategory);
   const list    = document.getElementById('recipe-list');
   list.innerHTML = '';
@@ -332,6 +347,241 @@ function renderSidebar() {
 
     list.appendChild(card);
   });
+}
+
+function _renderIngredientsSidebarPanel() {
+  // Catalog may have changed (add/edit/delete) — keep recipe editor in sync
+  refreshIngredientsDatalist();
+  _refreshRecipeEditorRows();
+
+  const cat = state.ingredientSearchCategory;
+  const q   = state.searchQuery;
+
+  // Filter by search query and category
+  const results = searchIngredients(q, cat);
+
+  const container = document.getElementById('ingredients-sidebar-list');
+  renderIngredientsSidebar(
+    results,
+    container,
+    (ing) => openIngredientEditorForEdit(ing.id),
+    (id)  => deleteIngredientHandler(id),
+  );
+}
+
+// ══════════════════════════════════════════════════════════
+// SIDEBAR TAB SWITCHING
+// ══════════════════════════════════════════════════════════
+
+function setSidebarTab(tab) {
+  state.sidebarTab = tab;
+
+  // Nav tab buttons
+  document.querySelectorAll('.sidebar-nav-tab').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.sidebarTab === tab);
+  });
+
+  // Recipe list vs ingredient list visibility
+  document.getElementById('recipe-list').classList.toggle('hidden', tab !== 'recipes');
+  document.getElementById('ingredients-sidebar-list').classList.toggle('hidden', tab !== 'ingredients');
+
+  // Filter chips visibility
+  document.getElementById('filter-chips').classList.toggle('hidden', tab !== 'recipes');
+  document.getElementById('filter-chips-ingredients').classList.toggle('hidden', tab !== 'ingredients');
+
+  // Title text and + button tooltip
+  const titleEl  = document.getElementById('sidebar-title-text');
+  const addBtn   = document.getElementById('btn-add-sidebar');
+  if (tab === 'ingredients') {
+    titleEl.textContent  = 'Ingredientes';
+    addBtn.title         = 'Nuevo ingrediente';
+  } else {
+    titleEl.textContent  = 'Recetas';
+    addBtn.title         = 'Nueva receta';
+  }
+
+  // Reset search query and re-render
+  document.getElementById('recipe-search').value = '';
+  state.searchQuery = '';
+  renderSidebar();
+}
+
+// ══════════════════════════════════════════════════════════
+// INGREDIENT EDITOR MODAL
+// ══════════════════════════════════════════════════════════
+
+let _editingIngredientId = null;
+
+function openIngredientEditor() {
+  _editingIngredientId = null;
+  _resetIngredientForm();
+  document.getElementById('ingredient-editor-title').textContent = 'Nuevo ingrediente';
+  document.getElementById('btn-delete-ingredient').classList.add('hidden');
+  document.getElementById('modal-ingredient-editor').classList.remove('hidden');
+  setIngredientEditorTab('form');
+}
+
+function openIngredientEditorForEdit(id) {
+  const ing = getIngredientById(id);
+  if (!ing) return;
+  _editingIngredientId = id;
+  _resetIngredientForm();
+
+  document.getElementById('ing-nombre').value       = ing.nombre         || '';
+  document.getElementById('ing-categoria').value    = ing.categoria      || '';
+  document.getElementById('ing-unidad').value       = ing.unidad_referencia   || 'g';
+  document.getElementById('ing-cantidad-ref').value = ing.cantidad_referencia ?? 100;
+  document.getElementById('ing-cal').value          = ing.calorias        ?? '';
+  document.getElementById('ing-prot').value         = ing.proteina_g      ?? '';
+  document.getElementById('ing-carbs').value        = ing.carbohidratos_g ?? '';
+  document.getElementById('ing-fat').value          = ing.grasas_g        ?? '';
+
+  // Pre-fill JSON tab
+  document.getElementById('ing-json').value = JSON.stringify(ing, null, 2);
+
+  document.getElementById('ingredient-editor-title').textContent = 'Editar ingrediente';
+  document.getElementById('btn-delete-ingredient').classList.remove('hidden');
+  document.getElementById('modal-ingredient-editor').classList.remove('hidden');
+  setIngredientEditorTab('form');
+}
+
+function closeIngredientEditor() {
+  _editingIngredientId = null;
+  document.getElementById('modal-ingredient-editor').classList.add('hidden');
+}
+
+function _resetIngredientForm() {
+  document.getElementById('ing-nombre').value       = '';
+  document.getElementById('ing-categoria').value    = '';
+  document.getElementById('ing-unidad').value       = 'g';
+  document.getElementById('ing-cantidad-ref').value = '100';
+  document.getElementById('ing-cal').value          = '';
+  document.getElementById('ing-prot').value         = '';
+  document.getElementById('ing-carbs').value        = '';
+  document.getElementById('ing-fat').value          = '';
+  document.getElementById('ing-json').value         = '';
+}
+
+function setIngredientEditorTab(tab) {
+  document.querySelectorAll('.ing-editor-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.ingTab === tab);
+  });
+  document.getElementById('ing-editor-tab-form').classList.toggle('hidden', tab !== 'form');
+  document.getElementById('ing-editor-tab-json').classList.toggle('hidden', tab !== 'json');
+}
+
+function _collectIngredientFormData() {
+  const nombre = document.getElementById('ing-nombre').value.trim();
+  if (!nombre) return null;
+
+  return {
+    nombre,
+    categoria:           document.getElementById('ing-categoria').value   || null,
+    unidad_referencia:   document.getElementById('ing-unidad').value      || 'g',
+    cantidad_referencia: parseFloat(document.getElementById('ing-cantidad-ref').value) || 100,
+    calorias:            parseFloat(document.getElementById('ing-cal').value)   || 0,
+    proteina_g:          parseFloat(document.getElementById('ing-prot').value)  || 0,
+    carbohidratos_g:     parseFloat(document.getElementById('ing-carbs').value) || 0,
+    grasas_g:            parseFloat(document.getElementById('ing-fat').value)   || 0,
+  };
+}
+
+async function saveIngredientFromForm() {
+  const data = _collectIngredientFormData();
+  if (!data) {
+    showToast('El nombre es obligatorio', 'error');
+    return;
+  }
+
+  let saved;
+  const isEditing = !!_editingIngredientId;
+
+  if (isEditing) {
+    saved = updateIngredient(_editingIngredientId, data);
+  } else {
+    saved = addIngredient(data);
+  }
+
+  closeIngredientEditor();
+  _renderIngredientsSidebarPanel();
+
+  try {
+    await saveIngredient(saved);
+    showToast(isEditing ? '✅ Ingrediente actualizado' : '✅ Ingrediente guardado', 'success');
+  } catch (e) {
+    showToast('❌ Error al guardar: ' + e.message, 'error');
+  }
+}
+
+async function saveIngredientFromJSON() {
+  const raw = document.getElementById('ing-json').value.trim();
+  if (!raw) return;
+
+  let parsed;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    showToast('JSON inválido', 'error');
+    return;
+  }
+
+  const entries = Array.isArray(parsed) ? parsed : [parsed];
+  if (!entries.every(e => e.nombre)) {
+    showToast('Cada ingrediente debe tener al menos "nombre"', 'error');
+    return;
+  }
+
+  const isEditing = !!_editingIngredientId && entries.length === 1;
+  const savedEntries = [];
+
+  if (isEditing) {
+    savedEntries.push(updateIngredient(_editingIngredientId, entries[0]));
+  } else {
+    for (const entry of entries) {
+      savedEntries.push(addIngredient(entry));
+    }
+  }
+
+  closeIngredientEditor();
+  _renderIngredientsSidebarPanel();
+
+  try {
+    for (const saved of savedEntries) {
+      await saveIngredient(saved);
+    }
+    showToast(`✅ ${entries.length} ingrediente(s) guardado(s)`, 'success');
+  } catch (e) {
+    showToast('❌ Error al guardar: ' + e.message, 'error');
+  }
+}
+
+function previewIngredientJSON() {
+  const raw = document.getElementById('ing-json').value.trim();
+  if (!raw) return;
+  try {
+    const p = JSON.parse(raw);
+    document.getElementById('ing-json').value = JSON.stringify(p, null, 2);
+    showToast('JSON válido ✓');
+  } catch (e) {
+    showToast('JSON inválido: ' + e.message, 'error');
+  }
+}
+
+async function deleteIngredientHandler(id) {
+  const ing = getIngredientById(id);
+  const name = ing ? ing.nombre : id;
+  if (!confirm(`¿Eliminar el ingrediente "${name}"?`)) return;
+
+  deleteIngredientLocal(id);
+  closeIngredientEditor();
+  _renderIngredientsSidebarPanel();
+
+  try {
+    await deleteIngredientFromStorage(id);
+    showToast('🗑 Ingrediente eliminado', 'success');
+  } catch (e) {
+    showToast('❌ Error al eliminar: ' + e.message, 'error');
+  }
 }
 
 // ══════════════════════════════════════════════════════════
@@ -698,6 +948,7 @@ function openRecipeEditor() {
   resetEditorForm();
   document.getElementById('recipe-editor-title').textContent = 'Nueva receta';
   document.getElementById('modal-recipe-editor').classList.remove('hidden');
+  refreshIngredientsDatalist();
   // Start with one blank ingredient and one blank step
   addIngredientRow();
   addStepRow();
@@ -728,6 +979,7 @@ function openRecipeEditorForEdit(id) {
   sel.value = matchingOpt ? cat : sel.options[0].value;
 
   // Ingredients
+  refreshIngredientsDatalist();
   (receta.ingredientes || []).forEach(ing => {
     addIngredientRow(ing.nombre ?? ing.item, ing.cantidad, ing.unidad);
   });
@@ -759,6 +1011,7 @@ function resetEditorForm() {
   document.getElementById('rf-prot').value        = '';
   document.getElementById('rf-carbs').value       = '';
   document.getElementById('rf-fat').value         = '';
+  document.getElementById('rf-macros-auto').classList.add('hidden');
   document.getElementById('rf-json').value        = '';
   document.getElementById('ingredients-list').innerHTML = '';
   document.getElementById('steps-list').innerHTML       = '';
@@ -774,18 +1027,128 @@ function setEditorTab(tab) {
   document.getElementById('editor-tab-json').classList.toggle('hidden', tab !== 'json');
 }
 
+/** Fill <datalist id="ingredients-datalist"> with every ingredient in the catalog. */
+function refreshIngredientsDatalist() {
+  const dl = document.getElementById('ingredients-datalist');
+  if (!dl) return;
+  dl.innerHTML = '';
+  const frag = document.createDocumentFragment();
+  getAllIngredients()
+    .slice()
+    .sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'))
+    .forEach(ing => {
+      const opt = document.createElement('option');
+      opt.value = ing.nombre;
+      opt.label = `${ing.cantidad_referencia} ${ing.unidad_referencia}`;
+      frag.appendChild(opt);
+    });
+  dl.appendChild(frag);
+}
+
+function _fmtMacro(n) {
+  return Number.isInteger(n) ? String(n) : n.toFixed(1);
+}
+
+/** Update the per-row macro badge for the given ingredient row. */
+function updateIngredientRowBadge(row) {
+  const badge = row.querySelector('.ingr-row-macros');
+  const name  = row.querySelector('.ingr-item').value.trim();
+  const ing   = name ? getIngredientByName(name) : null;
+
+  if (!ing) {
+    badge.textContent = name ? 'Sin datos en el catálogo' : '';
+    badge.classList.toggle('ingr-row-macros--unknown', !!name);
+    badge.classList.toggle('hidden', !name);
+    badge.removeAttribute('title');
+    return;
+  }
+
+  const qty = parseFloat(row.querySelector('.ingr-qty').value) || 0;
+  const m   = calculateItemMacros(ing, qty, row.querySelector('.ingr-unit').value);
+  badge.textContent = `${Math.round(m.calorias)} kcal · ${_fmtMacro(m.proteina_g)}g P · ${_fmtMacro(m.carbohidratos_g)}g C · ${_fmtMacro(m.grasas_g)}g G`;
+  badge.title = `Referencia: ${ing.cantidad_referencia} ${ing.unidad_referencia}`;
+  badge.classList.remove('ingr-row-macros--unknown', 'hidden');
+}
+
+/** Read the recipe editor's ingredient rows as { item, cantidad, unidad }[]. */
+function _readEditorIngredientRows() {
+  return [...document.querySelectorAll('#ingredients-list .dynamic-row')]
+    .map(row => ({
+      item:     row.querySelector('.ingr-item').value.trim(),
+      cantidad: parseFloat(row.querySelector('.ingr-qty').value) || 0,
+      unidad:   row.querySelector('.ingr-unit').value.trim(),
+    }))
+    .filter(i => i.item);
+}
+
+/**
+ * Recompute rf-cal / rf-prot / rf-carbs / rf-fat from the ingredient rows.
+ * Does nothing when no row matches a catalog ingredient, so recipes with
+ * hand-entered macros are never wiped.
+ */
+function recalculateRecipeEditorMacros() {
+  const rows = _readEditorIngredientRows();
+  const hasKnown = rows.some(r => getIngredientByName(r.item));
+  const autoBadge = document.getElementById('rf-macros-auto');
+  if (!hasKnown) {
+    autoBadge.classList.add('hidden');
+    return;
+  }
+
+  const porciones = parseInt(document.getElementById('rf-porciones').value) || 1;
+  const { porcion } = calculateRecipeMacros(rows, porciones);
+
+  document.getElementById('rf-cal').value   = Math.round(porcion.calorias);
+  document.getElementById('rf-prot').value  = Math.round(porcion.proteina_g * 10) / 10;
+  document.getElementById('rf-carbs').value = Math.round(porcion.carbohidratos_g * 10) / 10;
+  document.getElementById('rf-fat').value   = Math.round(porcion.grasas_g * 10) / 10;
+  autoBadge.classList.remove('hidden');
+}
+
+/** Refresh row badges and totals after the catalog changed (editor may be open). */
+function _refreshRecipeEditorRows() {
+  const modal = document.getElementById('modal-recipe-editor');
+  if (modal.classList.contains('hidden')) return;
+  document.querySelectorAll('#ingredients-list .dynamic-row').forEach(updateIngredientRowBadge);
+  recalculateRecipeEditorMacros();
+}
+
 function addIngredientRow(item = '', cantidad = '', unidad = '') {
   const list = document.getElementById('ingredients-list');
   const row  = document.createElement('div');
-  row.className = 'dynamic-row';
+  row.className = 'dynamic-row dynamic-row--ingr';
   row.innerHTML = `
-    <input class="ingr-item"  type="text"   placeholder="Ingrediente" value="${item}" />
-    <input class="ingr-qty"   type="number" placeholder="Cant." value="${cantidad}" min="0" step="0.1" />
-    <input class="ingr-unit"  type="text"   placeholder="Unidad" value="${unidad}" />
+    <input class="ingr-item"  type="text"   placeholder="Ingrediente" list="ingredients-datalist" autocomplete="off" />
+    <input class="ingr-qty"   type="number" placeholder="Cant." min="0" step="0.1" />
+    <input class="ingr-unit"  type="text"   placeholder="Unidad" />
     <button class="btn-del-row" title="Eliminar">✕</button>
+    <div class="ingr-row-macros hidden"></div>
   `;
-  row.querySelector('.btn-del-row').addEventListener('click', () => row.remove());
+  // Set values via DOM properties (no HTML injection from recipe data)
+  const itemInput = row.querySelector('.ingr-item');
+  const qtyInput  = row.querySelector('.ingr-qty');
+  const unitInput = row.querySelector('.ingr-unit');
+  itemInput.value = item ?? '';
+  qtyInput.value  = cantidad ?? '';
+  unitInput.value = unidad ?? '';
+
+  itemInput.addEventListener('input', () => {
+    const ing = getIngredientByName(itemInput.value);
+    if (ing && !unitInput.value.trim()) unitInput.value = ing.unidad_referencia;
+    updateIngredientRowBadge(row);
+    recalculateRecipeEditorMacros();
+  });
+  [qtyInput, unitInput].forEach(el => el.addEventListener('input', () => {
+    updateIngredientRowBadge(row);
+    recalculateRecipeEditorMacros();
+  }));
+  row.querySelector('.btn-del-row').addEventListener('click', () => {
+    row.remove();
+    recalculateRecipeEditorMacros();
+  });
+
   list.appendChild(row);
+  updateIngredientRowBadge(row);
 }
 
 function addStepRow(text = '') {
@@ -1435,6 +1798,22 @@ function wireControls() {
   // Footer auth button (mobile) → account modal
   document.getElementById('btn-github-auth-footer').addEventListener('click', openAuthModal);
 
+  // Sidebar nav tabs (Recetas / Ingredientes)
+  document.getElementById('sidebar-nav-tabs').addEventListener('click', (e) => {
+    const btn = e.target.closest('.sidebar-nav-tab');
+    if (!btn) return;
+    setSidebarTab(btn.dataset.sidebarTab);
+  });
+
+  // + button — opens recipe or ingredient editor depending on active tab
+  document.getElementById('btn-add-sidebar').addEventListener('click', () => {
+    if (state.sidebarTab === 'ingredients') {
+      openIngredientEditor();
+    } else {
+      openRecipeEditor();
+    }
+  });
+
   // Recipe search
   document.getElementById('recipe-search').addEventListener('input', (e) => {
     state.searchQuery = e.target.value;
@@ -1446,13 +1825,23 @@ function wireControls() {
     renderSidebar();
   });
 
-  // Category filter chips
+  // Recipe category filter chips
   document.getElementById('filter-chips').addEventListener('click', (e) => {
     const chip = e.target.closest('.chip');
     if (!chip) return;
-    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('#filter-chips .chip').forEach(c => c.classList.remove('active'));
     chip.classList.add('active');
     state.searchCategory = chip.dataset.cat;
+    renderSidebar();
+  });
+
+  // Ingredient category filter chips
+  document.getElementById('filter-chips-ingredients').addEventListener('click', (e) => {
+    const chip = e.target.closest('.chip');
+    if (!chip) return;
+    document.querySelectorAll('#filter-chips-ingredients .chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    state.ingredientSearchCategory = chip.dataset.ingCat;
     renderSidebar();
   });
 
@@ -1464,18 +1853,40 @@ function wireControls() {
   document.querySelector('#modal-recipe .modal-backdrop').addEventListener('click', closeRecipeModal);
 
   // Recipe editor
-  document.getElementById('btn-add-recipe').addEventListener('click', openRecipeEditor);
   document.getElementById('btn-close-recipe-editor').addEventListener('click', closeRecipeEditor);
   document.querySelector('#modal-recipe-editor .modal-backdrop').addEventListener('click', closeRecipeEditor);
   document.getElementById('btn-save-recipe').addEventListener('click', saveRecipeFromForm);
   document.getElementById('btn-save-json-recipe').addEventListener('click', saveRecipeFromJSON);
   document.getElementById('btn-load-json').addEventListener('click', previewJSON);
   document.getElementById('btn-add-ingredient').addEventListener('click', () => addIngredientRow());
+  document.getElementById('btn-new-ingredient-quick').addEventListener('click', openIngredientEditor);
+  document.getElementById('rf-porciones').addEventListener('input', recalculateRecipeEditorMacros);
+  // Manual edits of a macro field mean the values are no longer auto-calculated
+  ['rf-cal', 'rf-prot', 'rf-carbs', 'rf-fat'].forEach(id => {
+    document.getElementById(id).addEventListener('input', () => {
+      document.getElementById('rf-macros-auto').classList.add('hidden');
+    });
+  });
   document.getElementById('btn-add-step').addEventListener('click', () => addStepRow());
 
-  // Editor tabs
-  document.querySelectorAll('.editor-tab').forEach(tab => {
+  // Recipe editor tabs
+  document.querySelectorAll('.editor-tab[data-tab]').forEach(tab => {
     tab.addEventListener('click', () => setEditorTab(tab.dataset.tab));
+  });
+
+  // Ingredient editor modal
+  document.getElementById('btn-close-ingredient-editor').addEventListener('click', closeIngredientEditor);
+  document.querySelector('#modal-ingredient-editor .modal-backdrop').addEventListener('click', closeIngredientEditor);
+  document.getElementById('btn-save-ingredient-form').addEventListener('click', saveIngredientFromForm);
+  document.getElementById('btn-save-ingredient-json').addEventListener('click', saveIngredientFromJSON);
+  document.getElementById('btn-preview-ingredient-json').addEventListener('click', previewIngredientJSON);
+  document.getElementById('btn-delete-ingredient').addEventListener('click', () => {
+    if (_editingIngredientId) deleteIngredientHandler(_editingIngredientId);
+  });
+
+  // Ingredient editor tabs
+  document.querySelectorAll('.ing-editor-tab').forEach(tab => {
+    tab.addEventListener('click', () => setIngredientEditorTab(tab.dataset.ingTab));
   });
 
   // Auto-plan
@@ -1534,6 +1945,7 @@ function wireControls() {
       closeRecipeModal();
       closeAuthModal();
       closeRecipeEditor();
+      closeIngredientEditor();
       closeShoppingModal();
       closePersonModal();
       const picker = document.querySelector('.slot-picker');

@@ -230,20 +230,68 @@ async function migratePlan() {
   log(`${total} plan entries upserted`);
 }
 
-// ── 4. Verification summary ───────────────────────────────────
+// ── 4. Migrate ingredients ────────────────────────────────────
+
+async function migrateIngredients() {
+  console.log('\n── ingredients ─────────────────────────────────');
+  const raw = readJSON('ingredients.json');
+  if (!raw) { warn('data/ingredients.json not found — skipping'); return; }
+
+  // Get first admin profile or Pablo to use as default owner
+  const { data: profiles } = await supabase.from('profiles').select('id, username').order('created_at', { ascending: true });
+  const ownerId = profiles?.[0]?.id || null;
+
+  if (!ownerId) {
+    warn('No profile found to assign owner_id to ingredients — skipping');
+    return;
+  }
+
+  const items = raw.ingredientes || [];
+  if (!items.length) { warn('No ingredients found — skipping'); return; }
+
+  const rows = items.map(ing => ({
+    owner_id:            ownerId,
+    nombre:              ing.nombre || '',
+    categoria:           ing.categoria || null,
+    unidad_referencia:   ing.unidad_referencia || 'g',
+    cantidad_referencia: Number(ing.cantidad_referencia) || 100,
+    calorias:            Number(ing.macros?.calorias ?? ing.calorias ?? 0),
+    proteina_g:          Number(ing.macros?.proteina_g ?? ing.proteina_g ?? 0),
+    carbohidratos_g:     Number(ing.macros?.carbohidratos_g ?? ing.carbohidratos_g ?? 0),
+    grasas_g:            Number(ing.macros?.grasas_g ?? ing.grasas_g ?? 0),
+    updated_at:          new Date().toISOString(),
+  }));
+
+  const CHUNK = 500;
+  let total = 0;
+  for (let i = 0; i < rows.length; i += CHUNK) {
+    const chunk = rows.slice(i, i + CHUNK);
+    const { error } = await supabase
+      .from('ingredients')
+      .upsert(chunk, { onConflict: 'owner_id,nombre' });
+    if (error) fail(`ingredients upsert (chunk ${i}): ${error.message}`);
+    total += chunk.length;
+  }
+
+  log(`${total} ingredients upserted (owner: ${profiles[0].username})`);
+}
+
+// ── 5. Verification summary ───────────────────────────────────
 
 async function verify() {
   console.log('\n── verification ────────────────────────────────');
 
-  const [rCount, nCount, pCount] = await Promise.all([
+  const [rCount, nCount, pCount, iCount] = await Promise.all([
     supabase.from('recipes').select('id', { count: 'exact', head: true }),
     supabase.from('nutrition_data').select('id', { count: 'exact', head: true }),
     supabase.from('plans').select('id', { count: 'exact', head: true }),
+    supabase.from('ingredients').select('id', { count: 'exact', head: true }),
   ]);
 
   log(`recipes:        ${rCount.count ?? '?'} rows`);
   log(`nutrition_data: ${nCount.count ?? '?'} rows`);
   log(`plans:          ${pCount.count ?? '?'} rows`);
+  log(`ingredients:    ${iCount.count ?? '?'} rows`);
 }
 
 // ── Main ──────────────────────────────────────────────────────
@@ -255,6 +303,7 @@ async function main() {
   await migrateRecipes();
   await migrateNutrition();
   await migratePlan();
+  await migrateIngredients();
   await verify();
 
   console.log('\n✅ Migration complete.\n');

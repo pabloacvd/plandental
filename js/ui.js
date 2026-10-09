@@ -626,6 +626,78 @@ function renderFamilySummary(pabloEntry, juliEntry, nutritionAll, container) {
 
 // ── Toast ─────────────────────────────────────────────────
 
+
+// ══════════════════════════════════════════════════════════
+// INGREDIENT CARDS
+// ══════════════════════════════════════════════════════════
+
+/**
+ * Renders a single ingredient card element.
+ * @param {object} ingredient  — flat ingredient object from ingredients.js
+ * @param {function} onEdit    — called with (ingredient) when the edit button is clicked
+ * @param {function} onDelete  — called with (ingredient.id) when the delete button is clicked
+ * @returns {HTMLElement}
+ */
+export function renderIngredientCard(ingredient, onEdit, onDelete) {
+  const card = document.createElement('div');
+  card.className = 'ingredient-card';
+  card.dataset.id = ingredient.id;
+
+  const cat = ingredient.categoria
+    ? `<span class="ingredient-card-cat">${ingredient.categoria}</span>`
+    : '';
+
+  const ref = `${ingredient.cantidad_referencia} ${ingredient.unidad_referencia}`;
+
+  card.innerHTML = `
+    <div class="ingredient-card-actions">
+      <button class="ingredient-card-edit" title="Editar">✏️</button>
+      <button class="ingredient-card-delete" title="Eliminar">🗑</button>
+    </div>
+    <div class="ingredient-card-name">${ingredient.nombre}</div>
+    ${cat}
+    <div class="ingredient-card-ref">Por ${ref}</div>
+    <div class="ingredient-macros">
+      <span class="ingredient-macro-badge ing-badge--kcal">${ingredient.calorias} kcal</span>
+      <span class="ingredient-macro-badge ing-badge--prot">P ${ingredient.proteina_g}g</span>
+      <span class="ingredient-macro-badge ing-badge--carb">C ${ingredient.carbohidratos_g}g</span>
+      <span class="ingredient-macro-badge ing-badge--fat">G ${ingredient.grasas_g}g</span>
+    </div>
+  `;
+
+  card.querySelector('.ingredient-card-edit').addEventListener('click', (e) => {
+    e.stopPropagation();
+    onEdit(ingredient);
+  });
+  card.querySelector('.ingredient-card-delete').addEventListener('click', (e) => {
+    e.stopPropagation();
+    onDelete(ingredient.id);
+  });
+
+  return card;
+}
+
+/**
+ * Renders the full ingredients list into a container element.
+ * @param {object[]} ingredients
+ * @param {HTMLElement} container
+ * @param {function} onEdit
+ * @param {function} onDelete
+ */
+export function renderIngredientsSidebar(ingredients, container, onEdit, onDelete) {
+  container.innerHTML = '';
+
+  if (!ingredients.length) {
+    container.innerHTML = '<p style="font-size:.8rem;color:var(--text-muted);padding:12px">Sin resultados.</p>';
+    return;
+  }
+
+  ingredients.forEach(ingredient => {
+    container.appendChild(renderIngredientCard(ingredient, onEdit, onDelete));
+  });
+}
+
+
 let _toastTimer = null;
 
 export function showToast(message, type = '') {
