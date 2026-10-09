@@ -47,6 +47,11 @@ body {
 button { cursor: pointer; border: none; background: none; font: inherit; }
 input  { font: inherit; border: none; outline: none; }
 
+/* Utility: hidden elements */
+.hidden {
+  display: none !important;
+}
+
 /* ═══════════════════════════════════════════
    HEADER
 ═══════════════════════════════════════════ */
