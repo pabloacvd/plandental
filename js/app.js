@@ -83,6 +83,12 @@ async function init() {
   // It fires INITIAL_SESSION (with a session) or SIGNED_OUT on page load,
   // then SIGNED_IN / SIGNED_OUT on subsequent auth actions.
   // We never call loadAppData() from anywhere else to avoid double-loads.
+  //
+  // Only react to SIGNED_OUT for the unauthenticated path. All other
+  // null-session events (TOKEN_REFRESHED, INITIAL_SESSION with no session,
+  // USER_UPDATED, etc.) are transient and must not hide the app shell while
+  // loadAppData() is still in flight — that is what causes the "session
+  // flicker" where the login gate flashes on a plain page refresh.
   supabase.auth.onAuthStateChange(async (event, session) => {
     if (session) {
       if (loading) return;
@@ -92,7 +98,7 @@ async function init() {
       } finally {
         loading = false;
       }
-    } else {
+    } else if (event === 'SIGNED_OUT') {
       showLoginGate();
     }
   });

@@ -152,7 +152,7 @@ export function searchIngredients(query = '', category = 'all') {
  * Add a new ingredient to the in-memory list.
  * Generates a unique id from the name using `slugifyIngredient`.
  * @param {object} data  — ingredient fields (id is optional; generated if absent)
- * @returns {object[]} Updated ingredients array.
+ * @returns {object} The newly added ingredient entry.
  */
 export function addIngredient(data) {
   let id = data.id || slugifyIngredient(data.nombre ?? '');
@@ -164,20 +164,19 @@ export function addIngredient(data) {
 
   const entry = _normalise({ ...data, id });
   _ingredients = [..._ingredients, entry];
-  return _ingredients;
+  return entry;
 }
 
 /**
  * Update an existing ingredient in-place by id.
  * @param {string} id
  * @param {object} data  — fields to merge into the existing entry
- * @returns {object[]} Updated ingredients array.
+ * @returns {object} The updated ingredient entry.
  */
 export function updateIngredient(id, data) {
-  _ingredients = _ingredients.map(i =>
-    i.id === id ? _normalise({ ...i, ...data, id }) : i
-  );
-  return _ingredients;
+  const updated = _normalise({ ...(_ingredients.find(i => i.id === id) ?? {}), ...data, id });
+  _ingredients = _ingredients.map(i => i.id === id ? updated : i);
+  return updated;
 }
 
 /**
