@@ -522,7 +522,11 @@ async function saveIngredientFromForm() {
   _renderIngredientsSidebarPanel();
 
   try {
-    await saveIngredient(saved);
+    const serverData = await saveIngredient(saved);
+    // Sync local ingredient with server's UUID
+    if (serverData && serverData.id && serverData.id !== saved.id) {
+      updateIngredient(saved.id, { id: serverData.id });
+    }
     showToast(isEditing ? '✅ Ingrediente actualizado' : '✅ Ingrediente guardado', 'success');
   } catch (e) {
     showToast('❌ Error al guardar: ' + e.message, 'error');
@@ -563,7 +567,11 @@ async function saveIngredientFromJSON() {
 
   try {
     for (const saved of savedEntries) {
-      await saveIngredient(saved);
+      const serverData = await saveIngredient(saved);
+      // Sync local ingredient with server's UUID
+      if (serverData && serverData.id && serverData.id !== saved.id) {
+        updateIngredient(saved.id, { id: serverData.id });
+      }
     }
     showToast(`✅ ${entries.length} ingrediente(s) guardado(s)`, 'success');
   } catch (e) {

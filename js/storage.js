@@ -564,6 +564,13 @@ export async function fetchIngredients() {
  * @param {object} ingObj — ingredient data (id is optional for new rows)
  * @returns {Promise<object>} The saved row as returned by Supabase.
  */
+/**
+ * Check if a string is a valid UUID.
+ */
+function _isUUID(str) {
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
+}
+
 export async function saveIngredient(ingObj) {
   const session = await getSession();
 
@@ -587,8 +594,9 @@ export async function saveIngredient(ingObj) {
     updated_at:          new Date().toISOString(),
   };
 
-  // Only include id in the upsert when it's already known (edit case).
-  if (ingObj.id) row.id = ingObj.id;
+  // Only include id in the upsert if it's a valid UUID (server-generated).
+  // Local slug IDs (e.g. "pollo") must NOT be sent — let Postgres generate the UUID.
+  if (ingObj.id && _isUUID(ingObj.id)) row.id = ingObj.id;
 
   const { data, error } = await supabase
     .from('ingredients')
