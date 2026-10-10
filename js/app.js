@@ -150,7 +150,9 @@ async function loadAppData(authUser) {
     if (state.mobileDayIndex < 0) state.mobileDayIndex = 0;
   }
 
-  renderSidebar();
+  // Ensure sidebar tab visibility matches state (handles initial load and reloads)
+  setSidebarTab(state.sidebarTab);
+
   renderWeek();
   updateAuthUI();
 }
@@ -380,34 +382,42 @@ function _renderIngredientsSidebarPanel() {
 // ══════════════════════════════════════════════════════════
 
 function setSidebarTab(tab) {
+  // Validate tab value
+  if (tab !== 'recipes' && tab !== 'ingredients') {
+    console.warn('setSidebarTab called with invalid tab:', tab);
+    tab = 'recipes';
+  }
   state.sidebarTab = tab;
+
+  const isRecipes = tab === 'recipes';
 
   // Nav tab buttons
   document.querySelectorAll('.sidebar-nav-tab').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.sidebarTab === tab);
+    const shouldBeActive = btn.dataset.sidebarTab === tab;
+    btn.classList.toggle('active', shouldBeActive);
   });
 
   // Recipe list vs ingredient list visibility
-  document.getElementById('recipe-list').classList.toggle('hidden', tab !== 'recipes');
-  document.getElementById('ingredients-sidebar-list').classList.toggle('hidden', tab !== 'ingredients');
+  const recipeList = document.getElementById('recipe-list');
+  const ingredientsList = document.getElementById('ingredients-sidebar-list');
+  if (recipeList) recipeList.classList.toggle('hidden', !isRecipes);
+  if (ingredientsList) ingredientsList.classList.toggle('hidden', isRecipes);
 
   // Filter chips visibility
-  document.getElementById('filter-chips').classList.toggle('hidden', tab !== 'recipes');
-  document.getElementById('filter-chips-ingredients').classList.toggle('hidden', tab !== 'ingredients');
+  const filterChips = document.getElementById('filter-chips');
+  const filterChipsIngredients = document.getElementById('filter-chips-ingredients');
+  if (filterChips) filterChips.classList.toggle('hidden', !isRecipes);
+  if (filterChipsIngredients) filterChipsIngredients.classList.toggle('hidden', isRecipes);
 
   // Title text and + button tooltip
   const titleEl  = document.getElementById('sidebar-title-text');
   const addBtn   = document.getElementById('btn-add-sidebar');
-  if (tab === 'ingredients') {
-    titleEl.textContent  = 'Ingredientes';
-    addBtn.title         = 'Nuevo ingrediente';
-  } else {
-    titleEl.textContent  = 'Recetas';
-    addBtn.title         = 'Nueva receta';
-  }
+  if (titleEl) titleEl.textContent = isRecipes ? 'Recetas' : 'Ingredientes';
+  if (addBtn) addBtn.title = isRecipes ? 'Nueva receta' : 'Nuevo ingrediente';
 
   // Reset search query and re-render
-  document.getElementById('recipe-search').value = '';
+  const searchInput = document.getElementById('recipe-search');
+  if (searchInput) searchInput.value = '';
   state.searchQuery = '';
   renderSidebar();
 }
