@@ -69,6 +69,19 @@ export async function adminCreateUser(username, password) {
 }
 
 /**
+ * Admin-only: reset any user's password by username.
+ * @param {string} username — the target user's display name
+ * @param {string} newPassword — minimum 6 characters
+ */
+export async function adminResetPassword(username, newPassword) {
+  const { error } = await supabase.rpc('admin_reset_password', {
+    p_username:     username.toLowerCase().trim(),
+    p_new_password: newPassword,
+  });
+  if (error) throw new Error(error.message);
+}
+
+/**
  * Return the current session, or null if not authenticated.
  * Uses the v2 async API — supabase.auth.session() was removed in v2.
  */

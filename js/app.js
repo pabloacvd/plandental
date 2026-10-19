@@ -12,7 +12,7 @@ import {
   createPerson, requestPersonAccess, approvePersonAccess, rejectPersonAccess,
   getPendingAccessRequests, saveRecipes, consumeTokenFromHash,
   saveIngredient, deleteIngredient as deleteIngredientFromStorage,
-  changePassword, adminCreateUser,
+  changePassword, adminCreateUser, adminResetPassword,
 } from './storage.js';
 import { supabase } from './supabase.js';
 import {
@@ -1591,6 +1591,25 @@ async function handleCreateUser() {
   }
 }
 
+async function handleResetUserPassword() {
+  const username = document.getElementById('input-reset-username')?.value.trim() ?? '';
+  const password = document.getElementById('input-reset-password')?.value ?? '';
+  if (!username) { showToast('Ingresá el nombre de usuario', 'error'); return; }
+  if (password.length < 6) { showToast('La contraseña debe tener al menos 6 caracteres', 'error'); return; }
+  const btn = document.getElementById('btn-reset-user-password');
+  if (btn) { btn.disabled = true; btn.textContent = 'Guardando…'; }
+  try {
+    await adminResetPassword(username, password);
+    showToast(`✅ Contraseña de "${username}" actualizada`, 'success');
+    document.getElementById('input-reset-username').value = '';
+    document.getElementById('input-reset-password').value = '';
+  } catch (e) {
+    showToast('❌ ' + e.message, 'error');
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = 'Cambiar contraseña'; }
+  }
+}
+
 async function handleLogout() {
   if (!confirm('¿Cerrar sesión en este dispositivo?')) return;
   await signOut();
@@ -2003,6 +2022,7 @@ function wireControls() {
   document.getElementById('btn-close-user-mgmt')?.addEventListener('click', closeUserMgmtModal);
   document.querySelector('#modal-user-mgmt .modal-backdrop')?.addEventListener('click', closeUserMgmtModal);
   document.getElementById('btn-create-user')?.addEventListener('click', handleCreateUser);
+  document.getElementById('btn-reset-user-password')?.addEventListener('click', handleResetUserPassword);
 
   // Person management modal
   document.getElementById('btn-manage-persons')?.addEventListener('click', openPersonModal);

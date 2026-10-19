@@ -92,3 +92,53 @@ $$;
 -- and the admin check inside protect it, but belt-and-suspenders:
 revoke all on function public.admin_create_user(text, text) from public;
 grant execute on function public.admin_create_user(text, text) to authenticated;
+
+-- ============================================================
+-- admin_reset_password
+-- Allows an admin to set (or reset) any user's password.
+-- The target user is identified by username (case-insensitive).
+-- ============================================================
+
+create or replace function public.admin_reset_password(
+  p_username text,
+  p_new_password text
+)
+returns void
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_email text;
+begin
+  -- ── 1. Authorisation ────────────────────────────────────────
+  if not public.is_admin() then
+    raise exception 'Solo administradores pueden cambiar contraseñas de otros usuarios.';
+  end if;
+
+  -- ── 2. Input validation ──────────────────────────────────────
+  if p_username is null or trim(p_username) = '' then
+    raise exception 'El nombre de usuario no puede estar vacío.';
+  end if;
+
+  if p_new_password is null or length(p_new_password) < 6 then
+    raise exception 'La contraseña debe tener al menos 6 caracteres.';
+  end if;
+
+  p_username := lower(trim(p_username));
+  v_email    := p_username || '@app.local';
+
+  -- ── 3. Update the encrypted password in auth.users ───────────
+  update auth.users
+    set encrypted_password = crypt(p_new_password, gen_salt('bf')),
+        updated_at         = now()
+  where email = v_email;
+
+  if not found then
+    raise exception 'No existe ningún usuario con ese nombre.';
+  end if;
+end;
+$$;
+
+revoke all on function public.admin_reset_password(text, text) from public;
+grant execute on function public.admin_reset_password(text, text) to authenticated;
