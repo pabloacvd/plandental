@@ -138,11 +138,19 @@ export async function getMyProfile(authUser) {
  * Fetch all persons the current user has approved access to.
  * Returns array of { id, name, owner_id }.
  */
-export async function getMyPersons() {
+export async function getMyPersons(authUser) {
+  let user = authUser;
+  if (!user) {
+    const { data } = await supabase.auth.getUser();
+    user = data?.user;
+  }
+  if (!user) return [];
+
   const { data, error } = await supabase
     .from('person_access')
     .select('person_id, status, persons(id, name, owner_id)')
-    .eq('status', 'approved');
+    .eq('status', 'approved')
+    .eq('granted_to', user.id);
 
   if (error) { console.warn('getMyPersons:', error.message); return []; }
   return (data || []).map(row => row.persons).filter(Boolean);
