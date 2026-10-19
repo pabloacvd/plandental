@@ -14,7 +14,7 @@ create or replace function public.admin_create_user(
 returns uuid
 language plpgsql
 security definer
-set search_path = public
+set search_path = public, extensions
 as $$
 declare
   v_id    uuid;
@@ -106,7 +106,7 @@ create or replace function public.admin_reset_password(
 returns void
 language plpgsql
 security definer
-set search_path = public
+set search_path = public, extensions
 as $$
 declare
   v_email text;
