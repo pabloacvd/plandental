@@ -88,9 +88,11 @@ values (
 on conflict (person_id, granted_to) do nothing;
 
 -- ── 5. Create the Juli person record ────────────────────────
--- Juli does not have a user profile yet.  Her plan data is
--- accessible to pablo (admin) and to any profile whose username
--- is 'juli' once they register.
+-- Juli no tiene cuenta de usuario todavía.
+-- Para crearla: iniciá sesión como pablo (admin) y usá
+-- "Mi cuenta → Gestionar usuarios" en la app.
+-- El trigger on_profile_created_match_person asignará acceso
+-- automáticamente a este persons row cuando el usuario 'juli' sea creado.
 insert into public.persons (id, name, owner_id, created_at)
 values (
   '00000000-0000-0000-0000-000000000011',

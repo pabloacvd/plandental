@@ -186,14 +186,54 @@
     </div>
   </div>
 
-  <!-- Account Modal (replaces GitHub Auth modal) -->
+  <!-- Account Modal -->
   <div id="modal-auth" class="modal hidden">
     <div class="modal-backdrop"></div>
     <div class="modal-box modal-box--sm">
       <button class="modal-close" id="btn-close-auth-modal">✕</button>
       <h3>Mi cuenta</h3>
       <p>Conectado como <strong id="auth-username-display"></strong></p>
-      <button id="btn-logout" class="btn-danger">Cerrar sesión en este dispositivo</button>
+
+      <!-- Change password (any user) -->
+      <section class="person-modal-section">
+        <h4>Cambiar contraseña</h4>
+        <div class="form-field">
+          <input type="password" id="input-new-password" placeholder="Nueva contraseña" autocomplete="new-password" />
+        </div>
+        <div class="form-field">
+          <input type="password" id="input-confirm-password" placeholder="Repetir contraseña" autocomplete="new-password" />
+        </div>
+        <button id="btn-change-password" class="btn-primary">Cambiar contraseña</button>
+      </section>
+
+      <!-- Admin-only: open user management modal -->
+      <section class="person-modal-section hidden" id="section-admin-users">
+        <h4>Administración</h4>
+        <button id="btn-open-user-mgmt" class="btn-secondary">👤 Gestionar usuarios</button>
+      </section>
+
+      <button id="btn-logout" class="btn-danger" style="margin-top:0.5rem">Cerrar sesión en este dispositivo</button>
+    </div>
+  </div>
+
+  <!-- User Management Modal (admin only) -->
+  <div id="modal-user-mgmt" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-box modal-box--sm">
+      <button class="modal-close" id="btn-close-user-mgmt">✕</button>
+      <h3>Gestionar usuarios</h3>
+      <section class="person-modal-section">
+        <h4>Crear usuario</h4>
+        <div class="form-field">
+          <label for="input-new-username">Usuario</label>
+          <input type="text" id="input-new-username" placeholder="ej: juli" autocomplete="off" autocapitalize="none" />
+        </div>
+        <div class="form-field">
+          <label for="input-new-user-password">Contraseña inicial</label>
+          <input type="password" id="input-new-user-password" placeholder="Mínimo 6 caracteres" autocomplete="new-password" />
+        </div>
+        <button id="btn-create-user" class="btn-primary">Crear usuario</button>
+      </section>
     </div>
   </div>
 

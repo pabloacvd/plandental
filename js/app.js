@@ -12,6 +12,7 @@ import {
   createPerson, requestPersonAccess, approvePersonAccess, rejectPersonAccess,
   getPendingAccessRequests, saveRecipes, consumeTokenFromHash,
   saveIngredient, deleteIngredient as deleteIngredientFromStorage,
+  changePassword, adminCreateUser,
 } from './storage.js';
 import { supabase } from './supabase.js';
 import {
@@ -1519,11 +1520,75 @@ function openAuthModal() {
   // Populate username display
   const uEl = document.getElementById('auth-username-display');
   if (uEl && state.profile) uEl.textContent = state.profile.username;
+  // Show admin section only for admins
+  const adminSection = document.getElementById('section-admin-users');
+  if (adminSection) {
+    adminSection.classList.toggle('hidden', state.profile?.role !== 'admin');
+  }
+  // Clear password fields on open
+  const np = document.getElementById('input-new-password');
+  const cp = document.getElementById('input-confirm-password');
+  if (np) np.value = '';
+  if (cp) cp.value = '';
   document.getElementById('modal-auth').classList.remove('hidden');
 }
 
 function closeAuthModal() {
   document.getElementById('modal-auth').classList.add('hidden');
+}
+
+// ── User management modal (admin only) ────────────────────────
+
+function openUserMgmtModal() {
+  closeAuthModal();
+  const u = document.getElementById('input-new-username');
+  const p = document.getElementById('input-new-user-password');
+  if (u) u.value = '';
+  if (p) p.value = '';
+  document.getElementById('modal-user-mgmt').classList.remove('hidden');
+}
+
+function closeUserMgmtModal() {
+  document.getElementById('modal-user-mgmt').classList.add('hidden');
+}
+
+async function handleChangePassword() {
+  const np = document.getElementById('input-new-password')?.value ?? '';
+  const cp = document.getElementById('input-confirm-password')?.value ?? '';
+  if (!np || !cp) { showToast('Ingresá la nueva contraseña dos veces', 'error'); return; }
+  if (np !== cp)  { showToast('Las contraseñas no coinciden', 'error'); return; }
+  if (np.length < 6) { showToast('La contraseña debe tener al menos 6 caracteres', 'error'); return; }
+  const btn = document.getElementById('btn-change-password');
+  if (btn) { btn.disabled = true; btn.textContent = 'Guardando…'; }
+  try {
+    await changePassword(np);
+    showToast('✅ Contraseña actualizada', 'success');
+    document.getElementById('input-new-password').value = '';
+    document.getElementById('input-confirm-password').value = '';
+  } catch (e) {
+    showToast('❌ ' + e.message, 'error');
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = 'Cambiar contraseña'; }
+  }
+}
+
+async function handleCreateUser() {
+  const username = document.getElementById('input-new-username')?.value.trim() ?? '';
+  const password = document.getElementById('input-new-user-password')?.value ?? '';
+  if (!username) { showToast('Ingresá un nombre de usuario', 'error'); return; }
+  if (password.length < 6) { showToast('La contraseña debe tener al menos 6 caracteres', 'error'); return; }
+  const btn = document.getElementById('btn-create-user');
+  if (btn) { btn.disabled = true; btn.textContent = 'Creando…'; }
+  try {
+    await adminCreateUser(username, password);
+    showToast(`✅ Usuario "${username}" creado`, 'success');
+    document.getElementById('input-new-username').value = '';
+    document.getElementById('input-new-user-password').value = '';
+  } catch (e) {
+    showToast('❌ ' + e.message, 'error');
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = 'Crear usuario'; }
+  }
 }
 
 async function handleLogout() {
@@ -1931,6 +1996,13 @@ function wireControls() {
   document.getElementById('btn-close-auth-modal').addEventListener('click', closeAuthModal);
   document.querySelector('#modal-auth .modal-backdrop')?.addEventListener('click', closeAuthModal);
   document.getElementById('btn-logout')?.addEventListener('click', handleLogout);
+  document.getElementById('btn-change-password')?.addEventListener('click', handleChangePassword);
+
+  // User management modal (admin only)
+  document.getElementById('btn-open-user-mgmt')?.addEventListener('click', openUserMgmtModal);
+  document.getElementById('btn-close-user-mgmt')?.addEventListener('click', closeUserMgmtModal);
+  document.querySelector('#modal-user-mgmt .modal-backdrop')?.addEventListener('click', closeUserMgmtModal);
+  document.getElementById('btn-create-user')?.addEventListener('click', handleCreateUser);
 
   // Person management modal
   document.getElementById('btn-manage-persons')?.addEventListener('click', openPersonModal);
@@ -1968,6 +2040,7 @@ function wireControls() {
     if (e.key === 'Escape') {
       closeRecipeModal();
       closeAuthModal();
+      closeUserMgmtModal();
       closeRecipeEditor();
       closeIngredientEditor();
       closeShoppingModal();

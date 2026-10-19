@@ -43,6 +43,32 @@ export async function signOut() {
 }
 
 /**
+ * Change the current user's password.
+ * Requires an active session (JWT proves identity — no current password needed).
+ * @param {string} newPassword — minimum 6 characters
+ */
+export async function changePassword(newPassword) {
+  const { error } = await supabase.auth.updateUser({ password: newPassword });
+  if (error) throw new Error(error.message);
+}
+
+/**
+ * Admin-only: create a new Supabase Auth user.
+ * Calls the admin_create_user RPC (SECURITY DEFINER, postgres-level insert).
+ * @param {string} username — display name; stored lowercased
+ * @param {string} password — minimum 6 characters
+ * @returns {string} new user UUID
+ */
+export async function adminCreateUser(username, password) {
+  const { data, error } = await supabase.rpc('admin_create_user', {
+    p_username: username.toLowerCase().trim(),
+    p_password: password,
+  });
+  if (error) throw new Error(error.message);
+  return data; // uuid
+}
+
+/**
  * Return the current session, or null if not authenticated.
  * Uses the v2 async API — supabase.auth.session() was removed in v2.
  */
