@@ -659,12 +659,20 @@ input  { font: inherit; border: none; outline: none; }
   background: var(--accent);
   overflow: hidden;
 }
-.summary-stat-bar-bmr {
-  position: absolute; top: -2px;
-  width: 2px; height: 7px;
-  background: var(--text-muted);
+.summary-stat-bar-mark {
+  position: absolute;
   border-radius: 1px;
   transform: translateX(-50%);
+}
+/* Minimum (BMR): short, muted line */
+.summary-stat-bar-bmr {
+  top: -1px; width: 2px; height: 5px;
+  background: var(--text-muted);
+}
+/* Daily target: taller, solid black line */
+.summary-stat-bar-target {
+  top: -3px; width: 2px; height: 9px;
+  background: #000;
 }
 
 /* ═══════════════════════════════════════════
@@ -1425,6 +1433,12 @@ input  { font: inherit; border: none; outline: none; }
   text-transform: uppercase; letter-spacing: .05em;
   margin: 0 0 8px;
 }
+.nutrition-profile-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px;
+  margin-bottom: 10px;
+}
+.nutrition-profile-grid .form-field--full { grid-column: 1 / -1; }
+.form-field .req { color: var(--red); }
 .form-inline {
   display: flex; gap: 8px; align-items: center;
 }

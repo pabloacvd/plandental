@@ -3,6 +3,7 @@
     "Pablo": {
       "bmr_kcal": 1680,
       "daily_calories_kcal": 2080,
+      "maintenance_kcal": 2600,
       "protein_g": 160,
       "carbs_g": 215,
       "fat_g": 64,
@@ -59,6 +60,7 @@
     "Juli": {
       "bmr_kcal": 1354,
       "daily_calories_kcal": 1690,
+      "maintenance_kcal": 2113,
       "protein_g": 125,
       "carbs_g": 175,
       "fat_g": 54,

@@ -124,10 +124,19 @@ async function migrateNutrition() {
       continue;
     }
 
+    const maintenance = data.maintenance_kcal
+      ?? data.body_composition?.calories?.maintenance_kcal_day;
+    if (!maintenance) {
+      fail(`nutrition_data for ${personName}: maintenance_kcal is required`);
+    }
+
     const row = {
       person_id:            personId,
       bmr_kcal:             data.bmr_kcal            ?? null,
       daily_calories_kcal:  data.daily_calories_kcal ?? null,
+      maintenance_kcal:     maintenance,
+      weight_kg:            data.body_composition?.body?.weight_kg_current ?? null,
+      height_cm:            data.body_composition?.body?.height_cm         ?? null,
       protein_g:            data.protein_g            ?? null,
       carbs_g:              data.carbs_g              ?? null,
       fat_g:                data.fat_g                ?? null,

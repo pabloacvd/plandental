@@ -478,6 +478,51 @@ function buildPersonMealHTML(meal, personName, cls, slotId) {
   }
 }
 
+// ── Summary bar helper ────────────────────────────────────
+
+/**
+ * Builds a summary bar. The fill is current/base (capped at 100%).
+ * Each mark is positioned at value/base and drawn as a vertical line.
+ * @param {number} current
+ * @param {number|null} base   value that represents 100% of the bar
+ * @param {string} color       fill colour
+ * @param {Array<{value:?number, cls:string, title:string}>} marks
+ */
+function summaryBarHTML(current, base, color, marks = []) {
+  if (!base) return '';
+  const pct = Math.min((current / base) * 100, 100);
+  const markHTML = marks
+    .filter(m => m.value)
+    .map(m => {
+      const left = Math.min((m.value / base) * 100, 100).toFixed(1);
+      return `<div class="summary-stat-bar-mark ${m.cls}" style="left:${left}%" title="${m.title}"></div>`;
+    })
+    .join('');
+  return `
+    <div class="summary-stat-bar">
+      <div class="summary-stat-bar-fill" style="width:${pct.toFixed(1)}%;background:${color}"></div>
+      ${markHTML}
+    </div>
+  `;
+}
+
+/** Calorie marks: daily target and minimum (BMR), both relative to maintenance. */
+function calorieMarks(target, bmr) {
+  return [
+    { value: bmr,    cls: 'summary-stat-bar-bmr',    title: `Mínimo (TMB): ${bmr} kcal` },
+    { value: target, cls: 'summary-stat-bar-target', title: `Objetivo diario: ${target} kcal` },
+  ];
+}
+
+/** "TMB: x | meta: y | mant.: z kcal" — shows whichever values exist. */
+function calorieSubText(n) {
+  return [
+    n.bmr    ? `TMB: ${n.bmr}`      : null,
+    n.target ? `meta: ${n.target}`  : null,
+    n.maint  ? `mant.: ${n.maint}`  : null,
+  ].filter(Boolean).join(' &nbsp;|&nbsp; ') + ' kcal';
+}
+
 // ── Single-person day summary ─────────────────────────────
 
 export function renderDaySummary(dayEntry, nutrition, container) {
@@ -489,6 +534,7 @@ export function renderDaySummary(dayEntry, nutrition, container) {
       value: `${Math.round(macros.calorias)} kcal`,
       target: nutrition?.daily_calories_kcal || null,
       bmr: nutrition?.bmr_kcal || null,
+      maintenance: nutrition?.maintenance_kcal || null,
       current: macros.calorias,
       unit: 'kcal',
       color: 'var(--orange)',
@@ -520,8 +566,10 @@ export function renderDaySummary(dayEntry, nutrition, container) {
   ];
 
   container.innerHTML = stats.map(s => {
-    const pct       = s.target ? Math.min((s.current / s.target) * 100, 100) : null;
-    const bmrPct    = (s.bmr && s.target) ? ((s.bmr / s.target) * 100).toFixed(1) : null;
+    const isCal     = s.label === 'Calorías';
+    // Calories: maintenance is 100% of the bar. Macros: the target is 100%.
+    const base      = isCal ? s.maintenance : s.target;
+    const barHTML   = summaryBarHTML(s.current, base, s.color, isCal ? calorieMarks(s.target, s.bmr) : []);
     const remaining = s.target != null ? s.target - s.current : null;
     const remRound  = remaining != null
       ? (s.unit === 'kcal' ? Math.round(remaining) : Math.round(remaining * 10) / 10)
@@ -530,8 +578,8 @@ export function renderDaySummary(dayEntry, nutrition, container) {
     const remLabel  = remaining != null && remaining < 0
       ? `Exceso: ${Math.abs(remRound)} ${s.unit}`
       : `Disponible: ${remRound} ${s.unit}`;
-    const subLine   = (s.bmr && s.target)
-      ? `<div class="summary-stat-sub">TMB: ${s.bmr} ${s.unit} &nbsp;|&nbsp; meta: ${s.target} ${s.unit}</div>`
+    const subLine   = isCal
+      ? `<div class="summary-stat-sub">${calorieSubText({ bmr: s.bmr, target: s.target, maint: s.maintenance })}</div>`
       : s.target
         ? `<div class="summary-stat-sub">meta: ${s.target} ${s.unit}</div>`
         : '';
@@ -540,14 +588,7 @@ export function renderDaySummary(dayEntry, nutrition, container) {
         <div class="summary-stat-label">${s.label}</div>
         <div class="summary-stat-value" style="color:${s.color}">${s.value}</div>
         ${subLine}
-        ${pct !== null ? `
-          <div class="summary-stat-bar">
-            <div class="summary-stat-bar-fill"
-                 style="width:${pct.toFixed(1)}%;background:${s.color}">
-            </div>
-            ${bmrPct ? `<div class="summary-stat-bar-bmr" style="left:${bmrPct}%"></div>` : ''}
-          </div>
-        ` : ''}
+        ${barHTML}
         ${remRound !== null ? `<div class="summary-stat-remaining" style="color:${remColor}">${remLabel}</div>` : ''}
       </div>
     `;
@@ -563,13 +604,12 @@ function renderFamilySummary(pabloEntry, juliEntry, nutritionAll, container) {
   const juli    = nutritionAll?.Juli  || {};
 
   const rows = [
-    { label: 'Calorías',      key: 'calorias',           pabloTarget: pablo.daily_calories_kcal, juliTarget: juli.daily_calories_kcal, pabloBmr: pablo.bmr_kcal || null, juliBmr: juli.bmr_kcal || null, unit: 'kcal', color: 'var(--orange)' },
+    { label: 'Calorías',      key: 'calorias',           pabloTarget: pablo.daily_calories_kcal, juliTarget: juli.daily_calories_kcal, pabloBmr: pablo.bmr_kcal || null, juliBmr: juli.bmr_kcal || null, pabloMaint: pablo.maintenance_kcal || null, juliMaint: juli.maintenance_kcal || null, unit: 'kcal', color: 'var(--orange)' },
     { label: 'Proteína',      key: 'proteina_g',          pabloTarget: pablo.protein_g,           juliTarget: juli.protein_g,           unit: 'g',    color: 'var(--accent)' },
     { label: 'Carbos',        key: 'carbohidratos_g',     pabloTarget: pablo.carbs_g,             juliTarget: juli.carbs_g,             unit: 'g',    color: 'var(--green)'  },
     { label: 'Grasas',        key: 'grasas_g',            pabloTarget: pablo.fat_g,               juliTarget: juli.fat_g,               unit: 'g',    color: 'var(--purple)' },
   ];
 
-  const pct  = (val, target) => target ? Math.min((val / target) * 100, 100).toFixed(1) : 0;
   const disp = (val, unit)   => unit === 'kcal' ? `${Math.round(val)} ${unit}` : `${val} ${unit}`;
 
   container.innerHTML = `
@@ -582,8 +622,12 @@ function renderFamilySummary(pabloEntry, juliEntry, nutritionAll, container) {
       ${rows.map(r => {
         const pVal  = pMacros[r.key] ?? 0;
         const jVal  = jMacros[r.key] ?? 0;
-        const pPct  = pct(pVal, r.pabloTarget);
-        const jPct  = pct(jVal, r.juliTarget);
+        const isCal = r.key === 'calorias';
+        // Calories: maintenance is 100%. Macros: the target is 100%.
+        const pBase = isCal ? r.pabloMaint : r.pabloTarget;
+        const jBase = isCal ? r.juliMaint  : r.juliTarget;
+        const pBar  = summaryBarHTML(pVal, pBase, r.color, isCal ? calorieMarks(r.pabloTarget, r.pabloBmr) : []);
+        const jBar  = summaryBarHTML(jVal, jBase, r.color, isCal ? calorieMarks(r.juliTarget,  r.juliBmr)  : []);
 
         const remDisp = (val, target, unit) => {
           if (!target) return '';
@@ -594,13 +638,11 @@ function renderFamilySummary(pabloEntry, juliEntry, nutritionAll, container) {
           return `<div class="family-row-remaining" style="color:${color}">${label}</div>`;
         };
 
-        const pBmrPct = (r.pabloBmr && r.pabloTarget) ? ((r.pabloBmr / r.pabloTarget) * 100).toFixed(1) : null;
-        const jBmrPct = (r.juliBmr  && r.juliTarget)  ? ((r.juliBmr  / r.juliTarget)  * 100).toFixed(1) : null;
-        const pSubLine = (r.pabloBmr && r.pabloTarget)
-          ? `<div class="family-row-sub">TMB: ${r.pabloBmr} ${r.unit} &nbsp;|&nbsp; meta: ${r.pabloTarget} ${r.unit}</div>`
+        const pSubLine = isCal
+          ? `<div class="family-row-sub">${calorieSubText({ bmr: r.pabloBmr, target: r.pabloTarget, maint: r.pabloMaint })}</div>`
           : r.pabloTarget ? `<div class="family-row-sub">meta: ${r.pabloTarget} ${r.unit}</div>` : '';
-        const jSubLine = (r.juliBmr && r.juliTarget)
-          ? `<div class="family-row-sub">TMB: ${r.juliBmr} ${r.unit} &nbsp;|&nbsp; meta: ${r.juliTarget} ${r.unit}</div>`
+        const jSubLine = isCal
+          ? `<div class="family-row-sub">${calorieSubText({ bmr: r.juliBmr, target: r.juliTarget, maint: r.juliMaint })}</div>`
           : r.juliTarget ? `<div class="family-row-sub">meta: ${r.juliTarget} ${r.unit}</div>` : '';
         return `
           <div class="family-summary-row">
@@ -608,13 +650,13 @@ function renderFamilySummary(pabloEntry, juliEntry, nutritionAll, container) {
             <div class="family-row-cell">
               <div class="family-row-value">${disp(pVal, r.unit)}</div>
               ${pSubLine}
-              ${r.pabloTarget ? `<div class="summary-stat-bar"><div class="summary-stat-bar-fill" style="width:${pPct}%;background:${r.color}"></div>${pBmrPct ? `<div class="summary-stat-bar-bmr" style="left:${pBmrPct}%"></div>` : ''}</div>` : ''}
+              ${pBar}
               ${remDisp(pVal, r.pabloTarget, r.unit)}
             </div>
             <div class="family-row-cell">
               <div class="family-row-value">${disp(jVal, r.unit)}</div>
               ${jSubLine}
-              ${r.juliTarget ? `<div class="summary-stat-bar"><div class="summary-stat-bar-fill" style="width:${jPct}%;background:${r.color}"></div>${jBmrPct ? `<div class="summary-stat-bar-bmr" style="left:${jBmrPct}%"></div>` : ''}</div>` : ''}
+              ${jBar}
               ${remDisp(jVal, r.juliTarget, r.unit)}
             </div>
           </div>

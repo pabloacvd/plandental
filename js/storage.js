@@ -447,6 +447,11 @@ export async function fetchNutrition() {
     result[name] = {
       bmr_kcal:           row.bmr_kcal,
       daily_calories_kcal: row.daily_calories_kcal,
+      maintenance_kcal:   row.maintenance_kcal,
+      weight_kg:          row.weight_kg,
+      height_cm:          row.height_cm,
+      age_years:          row.age_years,
+      sex:                row.sex,
       protein_g:          row.protein_g,
       carbs_g:            row.carbs_g,
       fat_g:              row.fat_g,
@@ -458,6 +463,31 @@ export async function fetchNutrition() {
     };
   }
   return result;
+}
+
+/**
+ * Create or update the profile fields of a person's nutrition_data row.
+ * Only the columns listed here are written; protein/carbs/fat targets,
+ * supplements and the JSON blob are left untouched on existing rows.
+ * @param {string} personId
+ * @param {{bmr_kcal:number, daily_calories_kcal:number, maintenance_kcal:number,
+ *          weight_kg:?number, height_cm:?number, age_years:?number, sex:?string}} p
+ */
+export async function saveNutritionProfile(personId, p) {
+  const { error } = await supabase
+    .from('nutrition_data')
+    .upsert({
+      person_id:           personId,
+      bmr_kcal:            p.bmr_kcal,
+      daily_calories_kcal: p.daily_calories_kcal,
+      maintenance_kcal:    p.maintenance_kcal,
+      weight_kg:           p.weight_kg,
+      height_cm:           p.height_cm,
+      age_years:           p.age_years,
+      sex:                 p.sex,
+      updated_at:          new Date().toISOString(),
+    }, { onConflict: 'person_id' });
+  if (error) throw new Error(error.message);
 }
 
 // ── Default Week ─────────────────────────────────────────────

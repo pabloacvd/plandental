@@ -143,20 +143,22 @@ async function checkNutrition() {
   await check('Pablo nutrition_data row exists', async () => {
     const { data, error } = await admin
       .from('nutrition_data')
-      .select('bmr_kcal, daily_calories_kcal')
+      .select('bmr_kcal, daily_calories_kcal, maintenance_kcal')
       .eq('person_id', '00000000-0000-0000-0000-000000000010')
       .single();
     if (error) throw error;
     if (!data.bmr_kcal) throw new Error('bmr_kcal is null');
+    if (!data.maintenance_kcal) throw new Error('maintenance_kcal is null');
   });
 
   await check('Juli nutrition_data row exists', async () => {
     const { data, error } = await admin
       .from('nutrition_data')
-      .select('bmr_kcal')
+      .select('bmr_kcal, maintenance_kcal')
       .eq('person_id', '00000000-0000-0000-0000-000000000011')
       .single();
     if (error) throw error;
+    if (!data.maintenance_kcal) throw new Error('maintenance_kcal is null');
   });
 }
 

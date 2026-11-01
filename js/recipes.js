@@ -28,16 +28,9 @@ export function slugify(name) {
 }
 
 export async function loadData() {
-  // Load nutrition from Supabase (falls back to static file if not authenticated)
-  const sbNutrition = await fetchNutrition();
-  if (Object.keys(sbNutrition).length > 0) {
-    _nutrition = sbNutrition;
-  } else {
-    // Fallback: read static file (needed before first login or during migration)
-    const nutRes  = await fetch('./data/nutrition.json');
-    const nutData = await nutRes.json();
-    _nutrition = nutData.nutrition;
-  }
+  // Nutrition comes only from Supabase (RLS scopes it to the user's persons).
+  // Persons without a row are asked to complete their profile in the UI.
+  _nutrition = await fetchNutrition();
 
   // Load recipes from Supabase; fall back to static file
   const cached = await fetchRecipes();

@@ -87,7 +87,7 @@ No es necesario desinstalar la PWA del iPhone.
 **Qué funciona offline:**
 - La interfaz completa (HTML, CSS, JS).
 - El catálogo de recetas (`data/recipes.json`) — cacheado en la primera visita.
-- Los datos nutricionales (`data/nutrition.json`) — cacheado en la primera visita.
+- Los datos nutricionales se leen solo de Supabase (`nutrition_data`); `data/nutrition.json` es únicamente la semilla del script de migración.
 - El plan semanal guardado localmente en `localStorage`.
 
 **Qué requiere Internet:**

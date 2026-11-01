@@ -13,6 +13,7 @@ import {
   getPendingAccessRequests, saveRecipes, consumeTokenFromHash,
   saveIngredient, deleteIngredient as deleteIngredientFromStorage,
   changePassword, adminCreateUser, adminResetPassword,
+  fetchNutrition, saveNutritionProfile,
 } from './storage.js';
 import { supabase } from './supabase.js';
 import {
@@ -156,6 +157,14 @@ async function loadAppData(authUser) {
 
   renderWeek();
   updateAuthUI();
+
+  // maintenance_kcal is mandatory: if any of the user's persons lacks it,
+  // open "Mi cuenta" so the profile gets completed.
+  const missing = personsMissingMaintenance();
+  if (missing.length) {
+    openAuthModal();
+    showToast(`Completá los datos de ${missing.map(p => p.name).join(', ')}`, 'error');
+  }
 }
 
 // ── Login gate ────────────────────────────────────────────────
@@ -1608,10 +1617,113 @@ async function shareShoppingList() {
 
 // ── Auth modal (now: user account info + logout) ──────────────
 
+const PROFILE_FIELDS = {
+  bmr_kcal:            'input-profile-bmr',
+  daily_calories_kcal: 'input-profile-target',
+  maintenance_kcal:    'input-profile-maintenance',
+  weight_kg:           'input-profile-weight',
+  height_cm:           'input-profile-height',
+  age_years:           'input-profile-age',
+  sex:                 'input-profile-sex',
+};
+
+/** Persons of the current user whose required maintenance_kcal is not loaded yet. */
+function personsMissingMaintenance() {
+  return state.persons.filter(p => !state.nutrition[p.name]?.maintenance_kcal);
+}
+
+/** Fill the profile form with the stored values of the selected person. */
+function fillProfileForm(personName) {
+  const n = state.nutrition[personName] || {};
+  for (const [key, id] of Object.entries(PROFILE_FIELDS)) {
+    document.getElementById(id).value = n[key] ?? '';
+  }
+}
+
+function populateProfileSection() {
+  const select = document.getElementById('input-profile-person');
+  select.innerHTML = '';
+  for (const p of state.persons) {
+    const missing = !state.nutrition[p.name]?.maintenance_kcal;
+    const opt = document.createElement('option');
+    opt.value = p.name;
+    opt.textContent = missing ? `${p.name} (datos incompletos)` : p.name;
+    select.appendChild(opt);
+  }
+  // Preselect the active person, or the first one still incomplete.
+  const incomplete = personsMissingMaintenance()[0]?.name;
+  const preferred  = incomplete
+    ?? (state.persons.some(p => p.name === state.person) ? state.person : state.persons[0]?.name);
+  if (preferred) select.value = preferred;
+
+  document.getElementById('field-profile-person').classList.toggle('hidden', state.persons.length < 2);
+  document.getElementById('section-nutrition-profile').classList.toggle('hidden', !state.persons.length);
+  if (select.value) fillProfileForm(select.value);
+}
+
+async function handleSaveProfile() {
+  const personName = document.getElementById('input-profile-person').value;
+  const personId   = state.personNameToId[personName];
+  if (!personId) { showToast('Elegí una persona', 'error'); return; }
+
+  const num = id => {
+    const v = document.getElementById(id).value.trim();
+    return v === '' ? null : Number(v);
+  };
+  const profile = {
+    bmr_kcal:            num(PROFILE_FIELDS.bmr_kcal),
+    daily_calories_kcal: num(PROFILE_FIELDS.daily_calories_kcal),
+    maintenance_kcal:    num(PROFILE_FIELDS.maintenance_kcal),
+    weight_kg:           num(PROFILE_FIELDS.weight_kg),
+    height_cm:           num(PROFILE_FIELDS.height_cm),
+    age_years:           num(PROFILE_FIELDS.age_years),
+    sex:                 document.getElementById(PROFILE_FIELDS.sex).value || null,
+  };
+
+  // Required: BMR, daily target and maintenance (positive numbers).
+  const required = [
+    [profile.bmr_kcal,            'la tasa metabólica basal'],
+    [profile.daily_calories_kcal, 'las calorías objetivo'],
+    [profile.maintenance_kcal,    'las calorías de mantenimiento'],
+  ];
+  for (const [value, label] of required) {
+    if (!Number.isFinite(value) || value <= 0) {
+      showToast(`Ingresá ${label}`, 'error');
+      return;
+    }
+  }
+  for (const key of ['weight_kg', 'height_cm', 'age_years']) {
+    if (profile[key] !== null && (!Number.isFinite(profile[key]) || profile[key] <= 0)) {
+      showToast('Peso, altura y edad deben ser números positivos', 'error');
+      return;
+    }
+  }
+  if (profile.age_years !== null && (!Number.isInteger(profile.age_years) || profile.age_years > 120)) {
+    showToast('La edad debe ser un entero entre 1 y 120', 'error');
+    return;
+  }
+
+  const btn = document.getElementById('btn-save-profile');
+  btn.disabled = true; btn.textContent = 'Guardando…';
+  try {
+    await saveNutritionProfile(personId, profile);
+    // Reload from the DB so the UI reflects exactly what is stored.
+    state.nutrition = await fetchNutrition();
+    populateProfileSection();
+    renderWeek();
+    showToast('✅ Datos guardados', 'success');
+  } catch (e) {
+    showToast('❌ ' + e.message, 'error');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Guardar datos';
+  }
+}
+
 function openAuthModal() {
   // Populate username display
   const uEl = document.getElementById('auth-username-display');
   if (uEl && state.profile) uEl.textContent = state.profile.username;
+  populateProfileSection();
   // Show admin section only for admins
   const adminSection = document.getElementById('section-admin-users');
   if (adminSection) {
@@ -2109,6 +2221,8 @@ function wireControls() {
   document.querySelector('#modal-auth .modal-backdrop')?.addEventListener('click', closeAuthModal);
   document.getElementById('btn-logout')?.addEventListener('click', handleLogout);
   document.getElementById('btn-change-password')?.addEventListener('click', handleChangePassword);
+  document.getElementById('btn-save-profile')?.addEventListener('click', handleSaveProfile);
+  document.getElementById('input-profile-person')?.addEventListener('change', e => fillProfileForm(e.target.value));
 
   // User management modal (admin only)
   document.getElementById('btn-open-user-mgmt')?.addEventListener('click', openUserMgmtModal);
