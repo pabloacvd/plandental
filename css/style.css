@@ -784,15 +784,33 @@ input  { font: inherit; border: none; outline: none; }
   padding: 5px 4px;
   border-radius: var(--radius-sm);
   font-size: .88rem;
+  cursor: pointer;
+  user-select: none;
 }
 .shopping-item:hover { background: var(--surface-alt); }
+.shopping-item--unchecked .shopping-item-name,
+.shopping-item--unchecked .shopping-item-qty {
+  opacity: .45;
+  text-decoration: line-through;
+}
+.shopping-cb {
+  flex-shrink: 0;
+  width: 16px; height: 16px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
 .shopping-item-name { flex: 1; font-weight: 500; }
 .shopping-item-qty {
   color: var(--accent); font-weight: 600; font-size: .82rem;
   white-space: nowrap;
 }
 .shopping-actions {
-  display: flex; justify-content: flex-end;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 8px; flex-wrap: wrap;
+}
+.btn-save-presel {
+  font-size: .82rem; padding: 6px 12px; margin-top: 0;
+  flex-shrink: 0;
 }
 .btn-share {
   display: flex; align-items: center; gap: 6px;

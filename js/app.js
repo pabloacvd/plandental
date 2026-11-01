@@ -1353,16 +1353,41 @@ const SHOPPING_EXCLUDE = [
   'agua', 'hielo', 'whey isolate', 'proteína de suero', 'condimento',
 ];
 
+// Ingredients deselected by default (stored + initial seed)
+const SHOPPING_DESELECT_DEFAULTS_KEY = 'shopping_deselected_defaults';
+const SHOPPING_DESELECT_SEED = [
+  'café', 'cafe', 'aceite', 'sal', 'pimienta', 'vinagre', 'azúcar', 'azucar',
+  'orégano', 'oregano', 'ajo en polvo', 'cebolla en polvo', 'pimentón', 'paprika',
+  'comino', 'cúrcuma', 'curcuma', 'curry', 'canela', 'nuez moscada',
+];
+
+function loadShoppingDeselectedDefaults() {
+  try {
+    const raw = localStorage.getItem(SHOPPING_DESELECT_DEFAULTS_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch { /* ignore */ }
+  return SHOPPING_DESELECT_SEED.slice();
+}
+
+function saveShoppingDeselectedDefaults(list) {
+  try {
+    localStorage.setItem(SHOPPING_DESELECT_DEFAULTS_KEY, JSON.stringify(list));
+  } catch { /* ignore */ }
+}
+
 function isExcludedIngredient(name) {
   const lower = name.toLowerCase();
   return SHOPPING_EXCLUDE.some(ex => lower.includes(ex));
 }
 
+function isDefaultDeselected(name, deselectedDefaults) {
+  const lower = name.toLowerCase();
+  return deselectedDefaults.some(ex => lower.includes(ex.toLowerCase()));
+}
+
 /**
- * Build the shopping list from today (or Monday if today is past Sunday) through
- * Sunday of the current anchor week.
- * Returns an array of { dateKey, dayName, items: [{ name, qty, unit }] }
- * One entry per ingredient per day (not aggregated across days).
+ * Build the aggregated shopping list from the selected day through next Sunday.
+ * Returns a flat array of { name, qty, unit } with quantities summed per ingredient.
  */
 function buildShoppingList() {
   const weekDays = getWeekDays(state.anchorDate);
@@ -1372,19 +1397,14 @@ function buildShoppingList() {
   // Only days from today onwards (inclusive) within the displayed week
   const relevantDays = weekDays.filter(d => toDateKey(d) >= todayKey);
 
-  const result = [];
+  // Aggregate: key = "name||unit" → { name, qty (numeric), unit }
+  const agg = new Map();
 
-  for (let i = 0; i < relevantDays.length; i++) {
-    const date    = relevantDays[i];
+  for (const date of relevantDays) {
     const dateKey = toDateKey(date);
-    // ISO weekday index: Mon=0 … Sun=6
-    const dayIdx  = weekDays.indexOf(date);
-    const dayName = DAY_NAMES_ES[dayIdx] ?? dateKey;
 
-    // Gather all meals for this day across persons
     const persons = state.person === 'Familia' ? ['Pablo', 'Juli'] : [state.person];
     const seenRecipes = new Set();
-    const dayItems    = [];
 
     for (const p of persons) {
       const dayEntry = state.plan?.[p]?.[weekKey]?.[dateKey];
@@ -1394,7 +1414,6 @@ function buildShoppingList() {
         const meal = dayEntry[slotId];
         if (!meal?.recipeId) continue;
 
-        // Deduplicate: same recipe shown once per day even in Familia mode
         const key = `${meal.recipeId}__${slotId.replace(/_juli$/, '')}`;
         if (seenRecipes.has(key)) continue;
         seenRecipes.add(key);
@@ -1405,28 +1424,41 @@ function buildShoppingList() {
         for (const ing of recipe.receta.ingredientes) {
           if (!ing.item) continue;
           if (isExcludedIngredient(ing.item)) continue;
-          dayItems.push({
-            name: ing.item,
-            qty:  ing.cantidad ?? '',
-            unit: ing.unidad  ?? '',
-          });
+
+          const aggKey = `${ing.item.toLowerCase()}||${(ing.unidad ?? '').toLowerCase()}`;
+          const parsed = parseFloat(ing.cantidad);
+          const addQty = isNaN(parsed) ? 0 : parsed;
+
+          if (agg.has(aggKey)) {
+            const entry = agg.get(aggKey);
+            entry.qty += addQty;
+          } else {
+            agg.set(aggKey, {
+              name: ing.item,
+              qty:  addQty,
+              unit: ing.unidad ?? '',
+              rawQty: ing.cantidad ?? '',
+            });
+          }
         }
       }
     }
-
-    if (dayItems.length > 0) {
-      result.push({ dateKey, dayName, items: dayItems });
-    }
   }
 
-  return result;
+  // Convert map to array, format qty back to string
+  return Array.from(agg.values()).map(e => ({
+    name: e.name,
+    qty:  e.qty > 0 ? String(e.qty) : e.rawQty,
+    unit: e.unit,
+  }));
 }
 
 /**
  * Render the shopping list modal content and open it.
  */
 function openShoppingModal() {
-  const list = buildShoppingList();
+  const items = buildShoppingList();
+  const deselectedDefaults = loadShoppingDeselectedDefaults();
 
   // Date range label
   const weekDays  = getWeekDays(state.anchorDate);
@@ -1441,36 +1473,56 @@ function openShoppingModal() {
   const container = document.getElementById('shopping-list-content');
   container.innerHTML = '';
 
-  if (list.length === 0) {
+  if (items.length === 0) {
     container.innerHTML = '<div class="shopping-empty">No hay comidas planificadas desde hoy hasta el domingo 🍽️</div>';
   } else {
-    for (const { dayName, items } of list) {
-      const group = document.createElement('div');
-      group.className = 'shopping-day-group';
+    // Sort: checked (selected) first, deselected last
+    const checked   = items.filter(i => !isDefaultDeselected(i.name, deselectedDefaults));
+    const unchecked = items.filter(i =>  isDefaultDeselected(i.name, deselectedDefaults));
+    const sorted = [...checked, ...unchecked];
 
-      const title = document.createElement('div');
-      title.className = 'shopping-day-title';
-      title.textContent = dayName.charAt(0).toUpperCase() + dayName.slice(1);
-      group.appendChild(title);
+    for (const { name, qty, unit } of sorted) {
+      const isChecked = !isDefaultDeselected(name, deselectedDefaults);
+      const row = document.createElement('label');
+      row.className = 'shopping-item' + (isChecked ? '' : ' shopping-item--unchecked');
 
-      for (const { name, qty, unit } of items) {
-        const row = document.createElement('div');
-        row.className = 'shopping-item';
-        row.innerHTML = `
-          <span class="shopping-item-name">${name}</span>
-          <span class="shopping-item-qty">${qty}${unit}</span>
-        `;
-        group.appendChild(row);
-      }
+      const cb = document.createElement('input');
+      cb.type    = 'checkbox';
+      cb.className = 'shopping-cb';
+      cb.checked = isChecked;
+      cb.dataset.name = name;
+      cb.addEventListener('change', () => {
+        row.classList.toggle('shopping-item--unchecked', !cb.checked);
+        // Re-sort: move unchecked items to bottom
+        _reshuffleShoppingList(container);
+      });
 
-      container.appendChild(group);
+      const nameSpan = document.createElement('span');
+      nameSpan.className = 'shopping-item-name';
+      nameSpan.textContent = name;
+
+      const qtySpan = document.createElement('span');
+      qtySpan.className = 'shopping-item-qty';
+      qtySpan.textContent = qty ? `${qty}${unit}` : unit;
+
+      row.appendChild(cb);
+      row.appendChild(nameSpan);
+      row.appendChild(qtySpan);
+      container.appendChild(row);
     }
   }
 
-  // Store list for share
-  document.getElementById('modal-shopping').dataset.list = buildShoppingListText(list);
-
   document.getElementById('modal-shopping').classList.remove('hidden');
+}
+
+/**
+ * Move unchecked items to the bottom of the container, preserving relative order.
+ */
+function _reshuffleShoppingList(container) {
+  const rows = Array.from(container.querySelectorAll('.shopping-item'));
+  const checked   = rows.filter(r => !r.classList.contains('shopping-item--unchecked'));
+  const unchecked = rows.filter(r =>  r.classList.contains('shopping-item--unchecked'));
+  for (const r of [...checked, ...unchecked]) container.appendChild(r);
 }
 
 function closeShoppingModal() {
@@ -1478,22 +1530,38 @@ function closeShoppingModal() {
 }
 
 /**
- * Convert the structured list to plain text: "Ingrediente cantidad+unidad día"
+ * Save current checkbox state as the new defaults.
  */
-function buildShoppingListText(list) {
+function saveShoppingPreselections() {
+  const container = document.getElementById('shopping-list-content');
+  const newDeselected = [];
+  container.querySelectorAll('.shopping-cb').forEach(cb => {
+    if (!cb.checked) newDeselected.push(cb.dataset.name.toLowerCase());
+  });
+  saveShoppingDeselectedDefaults(newDeselected);
+  showToast('✅ Pre-selecciones guardadas', 'success');
+}
+
+/**
+ * Convert the selected items to plain text for sharing.
+ */
+function buildShoppingListText() {
+  const container = document.getElementById('shopping-list-content');
   const lines = [];
-  for (const { dayName, items } of list) {
-    for (const { name, qty, unit } of items) {
-      lines.push(`${name} ${qty}${unit} ${dayName}`);
-    }
-  }
+  container.querySelectorAll('.shopping-item').forEach(row => {
+    const cb = row.querySelector('.shopping-cb');
+    if (!cb || !cb.checked) return;
+    const name = row.querySelector('.shopping-item-name')?.textContent ?? '';
+    const qty  = row.querySelector('.shopping-item-qty')?.textContent ?? '';
+    lines.push(qty ? `${name} ${qty}` : name);
+  });
   return lines.join('\n');
 }
 
 async function shareShoppingList() {
-  const text = document.getElementById('modal-shopping').dataset.list || '';
+  const text = buildShoppingListText();
   if (!text) {
-    showToast('No hay ingredientes para compartir', 'warn');
+    showToast('No hay ingredientes seleccionados para compartir', 'warn');
     return;
   }
   if (navigator.share) {
@@ -2009,6 +2077,7 @@ function wireControls() {
   document.getElementById('btn-close-shopping-modal').addEventListener('click', closeShoppingModal);
   document.querySelector('#modal-shopping .modal-backdrop').addEventListener('click', closeShoppingModal);
   document.getElementById('btn-share-shopping').addEventListener('click', shareShoppingList);
+  document.getElementById('btn-save-shopping-preselections').addEventListener('click', saveShoppingPreselections);
 
   // Auth — account modal
   document.getElementById('btn-github-auth').addEventListener('click', openAuthModal);
