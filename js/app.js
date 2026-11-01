@@ -1397,14 +1397,18 @@ function buildShoppingList() {
   // Only days from today onwards (inclusive) within the displayed week
   const relevantDays = weekDays.filter(d => toDateKey(d) >= todayKey);
 
-  // Aggregate: key = "name||unit" → { name, qty (numeric), unit }
-  const agg = new Map();
+  const persons = state.person === 'Familia' ? ['Pablo', 'Juli'] : [state.person];
+
+  // ── Pass 1: count how many portions of each recipe are consumed ──────────
+  // Each slot entry (per person) = 1 portion consumed.
+  // We deduplicate within a (person, dateKey, slotId) triple to avoid
+  // double-counting when both Pablo and Juli share the same entry in the plan.
+  // Key = "recipeId" → portionsConsumed (integer)
+  const portionsConsumed = new Map(); // recipeId → number
+  const seenSlots = new Set();        // "person__dateKey__slotId" already tallied
 
   for (const date of relevantDays) {
     const dateKey = toDateKey(date);
-
-    const persons = state.person === 'Familia' ? ['Pablo', 'Juli'] : [state.person];
-    const seenRecipes = new Set();
 
     for (const p of persons) {
       const dayEntry = state.plan?.[p]?.[weekKey]?.[dateKey];
@@ -1414,33 +1418,49 @@ function buildShoppingList() {
         const meal = dayEntry[slotId];
         if (!meal?.recipeId) continue;
 
-        const key = `${meal.recipeId}__${slotId.replace(/_juli$/, '')}`;
-        if (seenRecipes.has(key)) continue;
-        seenRecipes.add(key);
+        // Normalise: _juli suffix slots belong to Juli but live under Pablo's
+        // plan key in some layouts — strip it so we don't double-count.
+        const slotBase   = slotId.replace(/_juli$/, '');
+        const personKey  = slotId.endsWith('_juli') ? 'Juli' : p;
+        const slotTriple = `${personKey}__${dateKey}__${slotBase}`;
+        if (seenSlots.has(slotTriple)) continue;
+        seenSlots.add(slotTriple);
 
-        const recipe = getRecipeById(meal.recipeId);
-        if (!recipe?.receta?.ingredientes) continue;
+        const prev = portionsConsumed.get(meal.recipeId) ?? 0;
+        portionsConsumed.set(meal.recipeId, prev + 1);
+      }
+    }
+  }
 
-        for (const ing of recipe.receta.ingredientes) {
-          if (!ing.item) continue;
-          if (isExcludedIngredient(ing.item)) continue;
+  // ── Pass 2: for each recipe, compute how many batches to cook ───────────
+  // batches = ceil(portionsConsumed / porciones)
+  // Then scale ingredient quantities by that batch count.
+  const agg = new Map(); // "name||unit" → { name, qty, unit, rawQty }
 
-          const aggKey = `${ing.item.toLowerCase()}||${(ing.unidad ?? '').toLowerCase()}`;
-          const parsed = parseFloat(ing.cantidad);
-          const addQty = isNaN(parsed) ? 0 : parsed;
+  for (const [recipeId, consumed] of portionsConsumed) {
+    const recipe = getRecipeById(recipeId);
+    if (!recipe?.receta?.ingredientes) continue;
 
-          if (agg.has(aggKey)) {
-            const entry = agg.get(aggKey);
-            entry.qty += addQty;
-          } else {
-            agg.set(aggKey, {
-              name: ing.item,
-              qty:  addQty,
-              unit: ing.unidad ?? '',
-              rawQty: ing.cantidad ?? '',
-            });
-          }
-        }
+    const porciones = recipe.receta.porciones || 1;
+    const batches   = Math.ceil(consumed / porciones);
+
+    for (const ing of recipe.receta.ingredientes) {
+      if (!ing.item) continue;
+      if (isExcludedIngredient(ing.item)) continue;
+
+      const aggKey = `${ing.item.toLowerCase()}||${(ing.unidad ?? '').toLowerCase()}`;
+      const parsed = parseFloat(ing.cantidad);
+      const addQty = isNaN(parsed) ? 0 : parsed * batches;
+
+      if (agg.has(aggKey)) {
+        agg.get(aggKey).qty += addQty;
+      } else {
+        agg.set(aggKey, {
+          name:   ing.item,
+          qty:    addQty,
+          unit:   ing.unidad ?? '',
+          rawQty: ing.cantidad ?? '',
+        });
       }
     }
   }
