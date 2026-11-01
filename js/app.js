@@ -1448,7 +1448,7 @@ function buildShoppingList() {
       if (!ing.item) continue;
       if (isExcludedIngredient(ing.item)) continue;
 
-      const aggKey = `${ing.item.toLowerCase()}||${(ing.unidad ?? '').toLowerCase()}`;
+      const aggKey = ing.item.toLowerCase().trim();
       const parsed = parseFloat(ing.cantidad);
       const addQty = isNaN(parsed) ? 0 : parsed * batches;
 
@@ -1496,9 +1496,10 @@ function openShoppingModal() {
   if (items.length === 0) {
     container.innerHTML = '<div class="shopping-empty">No hay comidas planificadas desde hoy hasta el domingo 🍽️</div>';
   } else {
-    // Sort: checked (selected) first, deselected last
-    const checked   = items.filter(i => !isDefaultDeselected(i.name, deselectedDefaults));
-    const unchecked = items.filter(i =>  isDefaultDeselected(i.name, deselectedDefaults));
+    // Sort: checked (selected) first, deselected last; each group alphabetically
+    const byName = (a, b) => a.name.localeCompare(b.name, 'es');
+    const checked   = items.filter(i => !isDefaultDeselected(i.name, deselectedDefaults)).sort(byName);
+    const unchecked = items.filter(i =>  isDefaultDeselected(i.name, deselectedDefaults)).sort(byName);
     const sorted = [...checked, ...unchecked];
 
     for (const { name, qty, unit } of sorted) {
@@ -1536,12 +1537,15 @@ function openShoppingModal() {
 }
 
 /**
- * Move unchecked items to the bottom of the container, preserving relative order.
+ * Move unchecked items to the bottom of the container, each group sorted alphabetically.
  */
 function _reshuffleShoppingList(container) {
   const rows = Array.from(container.querySelectorAll('.shopping-item'));
-  const checked   = rows.filter(r => !r.classList.contains('shopping-item--unchecked'));
-  const unchecked = rows.filter(r =>  r.classList.contains('shopping-item--unchecked'));
+  const byName = (a, b) =>
+    a.querySelector('.shopping-item-name').textContent
+     .localeCompare(b.querySelector('.shopping-item-name').textContent, 'es');
+  const checked   = rows.filter(r => !r.classList.contains('shopping-item--unchecked')).sort(byName);
+  const unchecked = rows.filter(r =>  r.classList.contains('shopping-item--unchecked')).sort(byName);
   for (const r of [...checked, ...unchecked]) container.appendChild(r);
 }
 
