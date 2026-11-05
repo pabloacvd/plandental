@@ -56,7 +56,7 @@ let state = {
   mobileDayIndex: null,
   // Supabase-specific: resolved at runtime
   persons:        [],          // [{ id, name, owner_id }]
-  personNameToId: {},          // { "Pablo": uuid, "Juli": uuid, … }
+  personNameToId: {},          // { "<person name>": uuid, … }
   showFamilia:    false,       // true when the family has 2+ persons
   profile:        null,        // { id, username, role }
   // Family-wide shopping pre-selections (loaded once per login; null = not loaded yet)
@@ -263,6 +263,7 @@ function renderWeek() {
     weekDays,
     planData:     state.plan,
     person:       state.person,
+    members:      viewMembers(),
     weekKey,
     activeDay:    state.activeDay,
     onDayClick:   openDayDetail,
@@ -276,11 +277,8 @@ function renderWeek() {
     applyMobileDayVisibility(weekDays);
   }
 
-  // For Familia, use Pablo's nutrition for the kcal bar (representative)
-  const nutritionForBar = state.person === 'Familia'
-    ? state.nutrition['Pablo']
-    : state.nutrition[state.person];
-  updateKcalBars(weekDays, state.plan, state.person, weekKey, nutritionForBar);
+  // One kcal bar per visible member, each against their own target
+  updateKcalBars(weekDays, state.plan, viewMembers(), weekKey, state.nutrition);
 
   // Always open the active day panel
   if (state.activeDay) {
@@ -684,18 +682,20 @@ function refreshDayDetail() {
   const weekKey = toWeekKey(new Date(state.activeDay + 'T12:00:00'));
 
   if (state.person === 'Familia') {
-    const pabloEntry = state.plan?.['Pablo']?.[weekKey]?.[state.activeDay] || {};
-    const juliEntry  = state.plan?.['Juli']?.[weekKey]?.[state.activeDay]  || {};
+    const memberEntries = state.persons.map(member => ({
+      member,
+      entry: state.plan?.[member.name]?.[weekKey]?.[state.activeDay] || {},
+    }));
     renderDayDetail({
       dateKey:      state.activeDay,
-      dayEntry:     pabloEntry,   // still used for compat
-      pabloEntry,
-      juliEntry,
+      dayEntry:     null,
+      memberEntries,
       nutrition:    null,
       nutritionAll: state.nutrition,
       person:       'Familia',
-      onRemoveMeal: (dateKey, slotId, targetPerson) => removeMeal(dateKey, slotId, targetPerson),
-      onAddMealToSlot: (slotId, recipeId, targetPerson) => {
+      onRemoveMeal: (dateKey, slotId, personIds) => removeMeal(dateKey, slotId, personIds),
+      onAddMealToSlot: (slotId, recipeId, personId) => {
+        const targetPerson = personNameById(personId);
         if (recipeId) {
           assignMealForPerson(state.activeDay, slotId, recipeId, targetPerson);
         } else {
@@ -708,8 +708,7 @@ function refreshDayDetail() {
     renderDayDetail({
       dateKey:      state.activeDay,
       dayEntry,
-      pabloEntry:   null,
-      juliEntry:    null,
+      memberEntries: null,
       nutrition:    state.nutrition[state.person],
       nutritionAll: state.nutrition,
       person:       state.person,
@@ -749,7 +748,10 @@ function openSlotPicker(slotId, targetPerson = null) {
   const personLabel = targetPerson ? ` — ${targetPerson}` : '';
   const results = searchRecipes(state.searchQuery, state.searchCategory);
 
-  picker.innerHTML = `<div class="slot-picker-title">Seleccionar para ${slotLabel}${personLabel}</div>`;
+  const pickerTitle = document.createElement('div');
+  pickerTitle.className = 'slot-picker-title';
+  pickerTitle.textContent = `Seleccionar para ${slotLabel}${personLabel}`;
+  picker.appendChild(pickerTitle);
 
   results.slice(0, 30).forEach(recipe => {
     const item = document.createElement('div');
@@ -815,7 +817,15 @@ function showSlotPickerForDrop(dateKey, recipeId) {
 
   const picker = document.createElement('div');
   picker.className = 'slot-picker';
-  picker.innerHTML = `<div class="slot-picker-title">¿En qué comida?<br><small style="font-weight:400;color:var(--text)">${recipe.receta.nombre}</small></div>`;
+  const dropTitle = document.createElement('div');
+  dropTitle.className = 'slot-picker-title';
+  dropTitle.append('¿En qué comida?', document.createElement('br'));
+  const dropSmall = document.createElement('small');
+  dropSmall.style.fontWeight = '400';
+  dropSmall.style.color = 'var(--text)';
+  dropSmall.textContent = recipe.receta.nombre;
+  dropTitle.appendChild(dropSmall);
+  picker.appendChild(dropTitle);
 
   MEAL_SLOTS.forEach(slot => {
     const item = document.createElement('div');
@@ -854,6 +864,17 @@ function personsToWrite() {
   return [state.person];
 }
 
+/** Persons shown in the current view: the whole family or just the selected one. */
+function viewMembers() {
+  if (state.person === 'Familia') return state.persons;
+  return state.persons.filter(p => p.name === state.person);
+}
+
+/** Person name for a person id (null when id is null/unknown). */
+function personNameById(personId) {
+  return state.persons.find(p => p.id === personId)?.name ?? null;
+}
+
 function setDeep(plan, person, weekKey, dateKey, slotId, value) {
   if (!plan[person])                  plan[person] = {};
   if (!plan[person][weekKey])         plan[person][weekKey] = {};
@@ -885,11 +906,13 @@ async function assignMeal(dateKey, slotId, recipeId) {
   }
 }
 
-async function removeMeal(dateKey, slotId, targetPerson = null) {
+async function removeMeal(dateKey, slotId, personIds = null) {
   const weekKey = toWeekKey(new Date(dateKey + 'T12:00:00'));
-  // If targetPerson is given (family individual remove), only remove for that person.
+  // If person ids are given (family individual remove), only remove for them.
   // Otherwise use personsToWrite() which respects the current state.person.
-  const persons = targetPerson ? [targetPerson] : personsToWrite();
+  const persons = personIds?.length
+    ? personIds.map(personNameById).filter(Boolean)
+    : personsToWrite();
 
   // Remove from local state
   for (const p of persons) {
@@ -1209,9 +1232,11 @@ function addStepRow(text = '') {
   row.className = 'dynamic-row';
   row.innerHTML = `
     <span style="font-size:.75rem;font-weight:700;color:var(--text-muted);min-width:18px">${idx}</span>
-    <textarea class="step-text" rows="2" placeholder="Describí el paso…">${text}</textarea>
+    <textarea class="step-text" rows="2" placeholder="Describí el paso…"></textarea>
     <button class="btn-del-row" title="Eliminar">✕</button>
   `;
+  // Set the text via the DOM property: recipe steps may come from another family member.
+  row.querySelector('.step-text').value = text ?? '';
   row.querySelector('.btn-del-row').addEventListener('click', () => {
     row.remove();
     // Renumber remaining steps
@@ -1410,17 +1435,15 @@ function buildShoppingList() {
   // Only days from today onwards (inclusive) within the displayed week
   const relevantDays = weekDays.filter(d => toDateKey(d) >= todayKey);
 
-  const persons = state.person === 'Familia' ? ['Pablo', 'Juli'] : [state.person];
+  const persons = viewMembers().map(p => p.name);
 
   // ── Collect the consumed meals ───────────────────────────────────────────
-  // Each slot entry (per person) = 1 portion consumed.
-  // We deduplicate within a (person, dateKey, slotId) triple to avoid
-  // double-counting when both Pablo and Juli share the same entry in the plan.
+  // Each slot entry (per person) = 1 portion consumed. The plan is keyed by
+  // person → week → day → slot, so every (person, day, slot) is unique.
   // Grouping by (recipeId + version) and batch math live in
   // buildShoppingItems (plan-versions.js): two versions of the same recipe
   // are cooked as separate batches with their own ingredient quantities.
   const consumedMeals = [];
-  const seenSlots = new Set();        // "person__dateKey__slotId" already tallied
 
   for (const date of relevantDays) {
     const dateKey = toDateKey(date);
@@ -1429,19 +1452,8 @@ function buildShoppingList() {
       const dayEntry = state.plan?.[p]?.[weekKey]?.[dateKey];
       if (!dayEntry) continue;
 
-      for (const slotId of Object.keys(dayEntry)) {
-        const meal = dayEntry[slotId];
-        if (!meal?.recipeId) continue;
-
-        // Normalise: _juli suffix slots belong to Juli but live under Pablo's
-        // plan key in some layouts — strip it so we don't double-count.
-        const slotBase   = slotId.replace(/_juli$/, '');
-        const personKey  = slotId.endsWith('_juli') ? 'Juli' : p;
-        const slotTriple = `${personKey}__${dateKey}__${slotBase}`;
-        if (seenSlots.has(slotTriple)) continue;
-        seenSlots.add(slotTriple);
-
-        consumedMeals.push(meal);
+      for (const meal of Object.values(dayEntry)) {
+        if (meal?.recipeId) consumedMeals.push(meal);
       }
     }
   }
@@ -1962,7 +1974,7 @@ async function handleAutoPlan() {
   btn.textContent = '⏳ Planificando…';
 
   try {
-    autoFillWeek(state.plan, state.anchorDate);
+    autoFillWeek(state.plan, state.anchorDate, state.persons.map(p => p.name));
     renderWeek();
     if (state.activeDay) refreshDayDetail();
     await savePlan(state.plan, state.personNameToId);

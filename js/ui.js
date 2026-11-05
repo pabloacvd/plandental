@@ -15,6 +15,12 @@ function esc(value) {
     .replace(/'/g, '&#39;');
 }
 
+/** Numeric value for display: anything that is not a finite number becomes 0. */
+function num(value) {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : 0;
+}
+
 // ── Category → CSS class mapping ─────────────────────────
 
 function catClass(cat = '') {
@@ -55,16 +61,16 @@ export function renderRecipeCard(recipeObj) {
 
   card.innerHTML = `
     <span class="recipe-card-cat ${catClass(categoria)}">${catLabel(categoria)}</span>
-    <div class="recipe-card-name">${nombre}</div>
+    <div class="recipe-card-name">${esc(nombre)}</div>
     <div class="recipe-card-macros">
-      <span>🔥 ${m.calorias} kcal</span>
-      <span>💪 ${m.proteina_g}g prot</span>
-      <span>🌾 ${m.carbohidratos_g}g carbs</span>
-      <span>🧈 ${m.grasas_g}g grasas</span>
+      <span>🔥 ${num(m.calorias)} kcal</span>
+      <span>💪 ${num(m.proteina_g)}g prot</span>
+      <span>🌾 ${num(m.carbohidratos_g)}g carbs</span>
+      <span>🧈 ${num(m.grasas_g)}g grasas</span>
     </div>
-    <button class="recipe-card-info"   data-info="${id}"   title="Ver receta">ℹ</button>
-    <button class="recipe-card-edit"   data-edit="${id}"   title="Editar receta">✏️</button>
-    <button class="recipe-card-delete" data-delete="${id}" title="Eliminar receta">🗑</button>
+    <button class="recipe-card-info"   data-info="${esc(id)}"   title="Ver receta">ℹ</button>
+    <button class="recipe-card-edit"   data-edit="${esc(id)}"   title="Editar receta">✏️</button>
+    <button class="recipe-card-delete" data-delete="${esc(id)}" title="Eliminar receta">🗑</button>
   `;
   return card;
 }
@@ -131,31 +137,44 @@ export function renderRecipeDetail(recipeObj) {
 
 // ── Calendar grid ─────────────────────────────────────────
 
+/** Number of distinct member colours (see .member-badge-N / .member-col-N in the CSS). */
+const MEMBER_COLORS = 5;
+
 /**
- * For the Familia view we merge both Pablo+Juli entries.
- * If they share the same meal for a slot, show it once; otherwise show both.
+ * Group the meals members have for one slot by recipe version.
+ * Members that share the same version end up in one group, in member order.
+ *
+ * @param {Array<{member:{id:string,name:string}, entry:object}>} memberEntries
+ * @param {string} slotId
+ * @returns {Array<{meal:object, personIds:string[]}>}
  */
-function getDayEntry(planData, person, weekKey, dateKey) {
-  if (person === 'Familia') {
-    const pablo = planData?.['Pablo']?.[weekKey]?.[dateKey] || {};
-    const juli  = planData?.['Juli']?.[weekKey]?.[dateKey]  || {};
-    const merged = { ...pablo };
-    // Add Juli's meals that are different or missing from Pablo
-    for (const slotId of Object.keys(juli)) {
-      if (!merged[slotId] || !sameMealVersion(merged[slotId], juli[slotId])) {
-        // Different meal — append as a virtual slot so it shows as an extra pill
-        merged[`${slotId}_juli`] = juli[slotId];
-      }
-    }
-    return merged;
+function groupSlotMeals(memberEntries, slotId) {
+  const groups = [];
+  for (const { member, entry } of memberEntries) {
+    const meal = entry?.[slotId];
+    if (!meal) continue;
+    const group = groups.find(g => sameMealVersion(g.meal, meal));
+    if (group) group.personIds.push(member.id);
+    else groups.push({ meal, personIds: [member.id] });
   }
-  return planData?.[person]?.[weekKey]?.[dateKey] || {};
+  return groups;
+}
+
+/**
+ * One pill per distinct meal version per slot (in MEAL_SLOTS order).
+ * Members sharing a meal show a single pill.
+ */
+function buildDayPills(memberEntries) {
+  return MEAL_SLOTS.flatMap(slot =>
+    groupSlotMeals(memberEntries, slot.id).map(g => ({ slotId: slot.id, ...g }))
+  );
 }
 
 export function renderCalendarGrid({
   weekDays,
   planData,
   person,
+  members,
   weekKey,
   activeDay,
   onDayClick,
@@ -167,11 +186,15 @@ export function renderCalendarGrid({
   grid.innerHTML = '';
 
   const today = toDateKey(new Date());
+  const isFamily = person === 'Familia';
+  const nameById = Object.fromEntries(members.map(m => [m.id, m.name]));
 
   weekDays.forEach((date, idx) => {
-    const dateKey  = toDateKey(date);
-    const dayEntry = getDayEntry(planData, person, weekKey, dateKey);
-    const macros   = computeDayMacros(dayEntry);
+    const dateKey = toDateKey(date);
+    const memberEntries = members.map(member => ({
+      member,
+      entry: planData?.[member.name]?.[weekKey]?.[dateKey] || {},
+    }));
 
     const cell = document.createElement('div');
     cell.className = 'day-cell';
@@ -199,21 +222,18 @@ export function renderCalendarGrid({
     // Build a quick icon lookup for standard slot IDs
     const slotIconMap = Object.fromEntries(MEAL_SLOTS.map(s => [s.id, s.icon]));
 
-    // Iterate in MEAL_SLOTS order (base slot first, then _juli counterpart if present)
-    const orderedKeys = MEAL_SLOTS.flatMap(s => [s.id, `${s.id}_juli`])
-      .filter(k => k in dayEntry);
-    orderedKeys.forEach(key => {
-      const meal = dayEntry[key];
-      if (!meal) return;
-      // Derive the base slot id (strip _juli suffix) for the icon
-      const baseSlotId = key.endsWith('_juli') ? key.slice(0, -5) : key;
-      const icon = slotIconMap[baseSlotId] || '🍽️';
+    buildDayPills(memberEntries).forEach(({ slotId, meal, personIds }) => {
+      const icon = slotIconMap[slotId] || '🍽️';
+      // In Familia, say who eats the meal when it is not shared by everyone.
+      const who = isFamily && personIds.length < members.length
+        ? ` (${personIds.map(id => nameById[id]).join(', ')})`
+        : '';
       const pill = document.createElement('div');
       pill.className = 'meal-pill';
       pill.innerHTML = `
         <span class="meal-pill-slot">${icon}</span>
-        <span class="meal-pill-name meal-pill-name--link" data-recipe-id="${esc(meal.recipeId)}" title="Ver receta: ${esc(meal.recipeName)}">${esc(meal.recipeName)}</span>
-        <button class="meal-pill-remove" data-date="${dateKey}" data-slot="${key}" title="Quitar">✕</button>
+        <span class="meal-pill-name meal-pill-name--link" data-recipe-id="${esc(meal.recipeId)}" title="Ver receta: ${esc(meal.recipeName)}${esc(who)}">${esc(meal.recipeName)}</span>
+        <button class="meal-pill-remove" data-date="${esc(dateKey)}" data-slot="${esc(slotId)}" data-person-ids="${esc(personIds.join(','))}" title="Quitar">✕</button>
       `;
       // The click opens THIS meal's version (snapshot), not the current recipe.
       pill.querySelector('.meal-pill-name--link').mealRef = meal;
@@ -228,8 +248,8 @@ export function renderCalendarGrid({
     dropHint.textContent = 'Soltar aquí';
     cell.appendChild(dropHint);
 
-    // Calorie bar
-    cell.appendChild(buildKcalBar(macros.calorias));
+    // Calorie bar(s): one per member in Familia, a single one otherwise
+    cell.appendChild(buildKcalBar(memberEntries, isFamily));
 
     // Events
     cell.addEventListener('click', (e) => {
@@ -264,7 +284,7 @@ export function renderCalendarGrid({
     mealsDiv.querySelectorAll('.meal-pill-remove').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
-        onRemoveMeal(btn.dataset.date, btn.dataset.slot);
+        onRemoveMeal(btn.dataset.date, btn.dataset.slot, btn.dataset.personIds.split(','));
       });
     });
 
@@ -272,56 +292,78 @@ export function renderCalendarGrid({
   });
 }
 
-function buildKcalBar(kcal) {
+/**
+ * One row per member that has calories that day. The label reads "Kcal" in
+ * single-person mode; in Familia it shows the member name on the left and
+ * "Kcal N" on the right, with that member's bar below.
+ */
+function buildKcalBar(memberEntries, isFamily) {
   const wrapper = document.createElement('div');
   wrapper.className = 'day-kcal-bar';
-  if (kcal === 0) return wrapper;
 
-  wrapper.innerHTML = `
-    <div class="kcal-label">
-      <span>Kcal</span>
-      <span>${Math.round(kcal)}</span>
-    </div>
-    <div class="kcal-track">
-      <div class="kcal-fill" style="width:0%"></div>
-    </div>
-  `;
+  for (const { member, entry } of memberEntries) {
+    const kcal = computeDayMacros(entry).calorias;
+    if (kcal === 0) continue;
+
+    const left  = isFamily ? esc(member.name) : 'Kcal';
+    const right = isFamily ? `Kcal ${Math.round(kcal)}` : `${Math.round(kcal)}`;
+
+    const row = document.createElement('div');
+    row.className = 'kcal-row';
+    row.dataset.personId = member.id;
+    row.innerHTML = `
+      <div class="kcal-label">
+        <span>${left}</span>
+        <span>${right}</span>
+      </div>
+      <div class="kcal-track">
+        <div class="kcal-fill" style="width:0%"></div>
+      </div>
+    `;
+    wrapper.appendChild(row);
+  }
   return wrapper;
 }
 
 /**
  * Update calorie bar widths after rendering (needs nutrition data).
- * In Familia mode we show Pablo's bar (they eat the same).
+ * Each member's bar is measured against that member's own daily target.
  */
-export function updateKcalBars(weekDays, planData, person, weekKey, nutrition) {
-  const effectivePerson = person === 'Familia' ? 'Pablo' : person;
-  const target = nutrition?.daily_calories_kcal || 2000;
-
+export function updateKcalBars(weekDays, planData, members, weekKey, nutritionAll) {
   weekDays.forEach(date => {
-    const dateKey  = toDateKey(date);
-    const dayEntry = planData?.[effectivePerson]?.[weekKey]?.[dateKey] || {};
-    const macros   = computeDayMacros(dayEntry);
-    const pct      = Math.min((macros.calorias / target) * 100, 100);
-
+    const dateKey = toDateKey(date);
     const cell = document.querySelector(`.day-cell[data-date-key="${dateKey}"]`);
     if (!cell) return;
 
-    const fill = cell.querySelector('.kcal-fill');
-    if (!fill) return;
+    for (const member of members) {
+      const fill = [...cell.querySelectorAll('.kcal-row')]
+        .find(row => row.dataset.personId === member.id)
+        ?.querySelector('.kcal-fill');
+      if (!fill) continue;
 
-    fill.style.width = pct + '%';
-    fill.classList.toggle('over',  macros.calorias > target * 1.05);
-    fill.classList.toggle('close', macros.calorias > target * 0.9 && macros.calorias <= target * 1.05);
+      const target   = nutritionAll?.[member.name]?.daily_calories_kcal || 2000;
+      const dayEntry = planData?.[member.name]?.[weekKey]?.[dateKey] || {};
+      const kcal     = computeDayMacros(dayEntry).calorias;
+
+      fill.style.width = Math.min((kcal / target) * 100, 100) + '%';
+      fill.classList.toggle('over',  kcal > target * 1.05);
+      fill.classList.toggle('close', kcal > target * 0.9 && kcal <= target * 1.05);
+    }
   });
 }
 
 // ── Day detail panel ──────────────────────────────────────
 
+/**
+ * @param {Array<{member:{id:string,name:string}, entry:object}>} [memberEntries]
+ *        Familia mode only: every family member with their entry for the day.
+ * onRemoveMeal(dateKey, slotId, personIds|null)  — null = everyone in view
+ * onAddMealToSlot(slotId, recipeId, personId|null) — null = everyone in view
+ */
 export function renderDayDetail({
   dateKey,
   dayEntry,
-  pabloEntry,   // only set in Familia mode
-  juliEntry,    // only set in Familia mode
+  memberEntries,
   nutrition,
   person,
   nutritionAll,
@@ -339,14 +381,16 @@ export function renderDayDetail({
   slotsEl.innerHTML = '';
 
   if (person === 'Familia') {
-    // ── Family mode: show all slots that have a meal for either person ──
-    MEAL_SLOTS.forEach(slot => {
-      const pMeal = pabloEntry?.[slot.id] || null;
-      const jMeal = juliEntry?.[slot.id]  || null;
+    // ── Family mode: one row per member for every slot ──
+    const members = memberEntries.map(me => me.member);
 
-      // Only show the slot if at least one person has something, OR always show all slots
-      const hasMeal = pMeal || jMeal;
-      const sameRecipe = pMeal && jMeal && sameMealVersion(pMeal, jMeal);
+    MEAL_SLOTS.forEach(slot => {
+      const meals = memberEntries.map(({ entry }) => entry?.[slot.id] || null);
+      const hasMeal = meals.some(Boolean);
+      // Everyone has a meal and it is the same version for all of them
+      const sharedMeal = meals.every(Boolean)
+        && meals.every(m => sameMealVersion(m, meals[0]))
+        ? meals[0] : null;
 
       const card = document.createElement('div');
       card.className = 'slot-card' + (hasMeal ? ' has-meal' : '');
@@ -354,63 +398,61 @@ export function renderDayDetail({
 
       const titleEl = `<div class="slot-title">${slot.icon} ${slot.label}</div>`;
 
-      if (sameRecipe) {
-        // Same meal for both — show once with a "los dos" label
-        const m = pMeal.macros || {};
+      if (sharedMeal && members.length > 1) {
+        // Same meal for everyone — show once
+        const m = sharedMeal.macros || {};
+        const everyone = members.length === 2 ? 'Los dos' : 'Todos';
         card.innerHTML = `
           ${titleEl}
           <div class="slot-family-shared">
-            <span class="slot-family-badge shared-badge">🏋️🌸 Los dos</span>
-            <div class="slot-meal-name">${esc(pMeal.recipeName)}</div>
+            <span class="slot-family-badge shared-badge">👥 ${everyone}</span>
+            <div class="slot-meal-name">${esc(sharedMeal.recipeName)}</div>
             <div class="slot-meal-macros">
-              <span>🔥 ${m.calorias || 0} kcal</span>
-              <span>💪 ${m.proteina_g || 0}g</span>
+              <span>🔥 ${num(m.calorias)} kcal</span>
+              <span>💪 ${num(m.proteina_g)}g</span>
             </div>
           </div>
           <div class="slot-actions">
-            <button class="slot-btn remove" data-person="both">Quitar a los dos</button>
+            <button class="slot-btn remove">Quitar a ${everyone === 'Los dos' ? 'los dos' : 'todos'}</button>
           </div>
         `;
         card.querySelector('.slot-btn.remove').addEventListener('click', () => {
-          onRemoveMeal(dateKey, slot.id, null); // null = both
+          onRemoveMeal(dateKey, slot.id, null); // null = everyone
         });
       } else {
-        // Different meals (or only one has a meal) — show two rows
+        // Different meals (or some members have none) — one row per member
         card.innerHTML = `
           ${titleEl}
           <div class="slot-family-rows">
-            ${buildPersonMealHTML(pMeal, 'Pablo', 'pablo', slot.id)}
-            ${buildPersonMealHTML(jMeal, 'Juli',  'juli',  slot.id)}
+            ${members.map((member, i) => buildPersonMealHTML(meals[i], member, i)).join('')}
           </div>
         `;
-        card.querySelector('.slot-btn-remove-pablo')?.addEventListener('click', () => {
-          onRemoveMeal(dateKey, slot.id, 'Pablo');
+        card.querySelectorAll('.slot-btn-remove').forEach(btn => {
+          btn.addEventListener('click', () => {
+            onRemoveMeal(dateKey, slot.id, [btn.dataset.personId]);
+          });
         });
-        card.querySelector('.slot-btn-remove-juli')?.addEventListener('click', () => {
-          onRemoveMeal(dateKey, slot.id, 'Juli');
-        });
-        card.querySelector('.slot-btn-add-pablo')?.addEventListener('click', () => {
-          onAddMealToSlot(slot.id, null, 'Pablo');
-        });
-        card.querySelector('.slot-btn-add-juli')?.addEventListener('click', () => {
-          onAddMealToSlot(slot.id, null, 'Juli');
+        card.querySelectorAll('.slot-btn-add-sm').forEach(btn => {
+          btn.addEventListener('click', () => {
+            onAddMealToSlot(slot.id, null, btn.dataset.personId);
+          });
         });
       }
 
-      // Drop zone — assigns to both when dragged in family mode
+      // Drop zone — assigns to everyone when dragged in family mode
       card.addEventListener('dragover', (e) => { e.preventDefault(); card.classList.add('drop-target'); });
       card.addEventListener('dragleave', () => card.classList.remove('drop-target'));
       card.addEventListener('drop', (e) => {
         e.preventDefault();
         card.classList.remove('drop-target');
         const recipeId = e.dataTransfer.getData('recipeId');
-        if (recipeId) onAddMealToSlot(slot.id, recipeId, null); // null = both
+        if (recipeId) onAddMealToSlot(slot.id, recipeId, null); // null = everyone
       });
 
       slotsEl.appendChild(card);
     });
 
-    renderFamilySummary(pabloEntry, juliEntry, nutritionAll, summaryEl);
+    renderFamilySummary(memberEntries, nutritionAll, summaryEl);
 
   } else {
     // ── Single person mode ──
@@ -426,10 +468,10 @@ export function renderDayDetail({
           <div class="slot-title">${slot.icon} ${slot.label}</div>
           <div class="slot-meal-name">${esc(meal.recipeName)}</div>
           <div class="slot-meal-macros">
-            <span>🔥 ${m.calorias || 0} kcal</span>
-            <span>💪 ${m.proteina_g || 0}g</span>
-            <span>🌾 ${m.carbohidratos_g || 0}g</span>
-            <span>🧈 ${m.grasas_g || 0}g</span>
+            <span>🔥 ${num(m.calorias)} kcal</span>
+            <span>💪 ${num(m.proteina_g)}g</span>
+            <span>🌾 ${num(m.carbohidratos_g)}g</span>
+            <span>🧈 ${num(m.grasas_g)}g</span>
           </div>
           <div class="slot-actions">
             <button class="slot-btn remove" data-slot="${slot.id}">Quitar</button>
@@ -469,26 +511,27 @@ export function renderDayDetail({
   }
 }
 
-function buildPersonMealHTML(meal, personName, cls, slotId) {
+function buildPersonMealHTML(meal, member, index) {
+  const badge = `<span class="slot-family-badge member-badge-${index % MEMBER_COLORS}">${esc(member.name)}</span>`;
+  const pid = esc(member.id);
   if (meal) {
     const m = meal.macros || {};
     return `
       <div class="slot-family-person-row has-meal-row">
-        <span class="slot-family-badge ${cls}-badge">${personName === 'Pablo' ? '🏋️' : '🌸'} ${personName}</span>
+        ${badge}
         <span class="slot-meal-name-sm">${esc(meal.recipeName)}</span>
-        <span class="slot-meal-kcal">${m.calorias || 0} kcal</span>
-        <button class="slot-btn-remove-${cls} slot-btn-icon" title="Quitar">✕</button>
-      </div>
-    `;
-  } else {
-    return `
-      <div class="slot-family-person-row empty-row">
-        <span class="slot-family-badge ${cls}-badge">${personName === 'Pablo' ? '🏋️' : '🌸'} ${personName}</span>
-        <span class="slot-empty-text">Sin asignar</span>
-        <button class="slot-btn-add-${cls} slot-btn-add-sm" title="Agregar">+ Agregar</button>
+        <span class="slot-meal-kcal">${num(m.calorias)} kcal</span>
+        <button class="slot-btn-remove slot-btn-icon" data-person-id="${pid}" title="Quitar">✕</button>
       </div>
     `;
   }
+  return `
+    <div class="slot-family-person-row empty-row">
+      ${badge}
+      <span class="slot-empty-text">Sin asignar</span>
+      <button class="slot-btn-add-sm" data-person-id="${pid}" title="Agregar">+ Agregar</button>
+    </div>
+  `;
 }
 
 // ── Summary bar helper ────────────────────────────────────
@@ -608,70 +651,73 @@ export function renderDaySummary(dayEntry, nutrition, container) {
   }).join('');
 }
 
-// ── Family day summary (Pablo + Juli side by side) ────────
+// ── Family day summary (one column per member) ────────────
 
-function renderFamilySummary(pabloEntry, juliEntry, nutritionAll, container) {
-  const pMacros = computeDayMacros(pabloEntry);
-  const jMacros = computeDayMacros(juliEntry);
-  const pablo   = nutritionAll?.Pablo || {};
-  const juli    = nutritionAll?.Juli  || {};
+function renderFamilySummary(memberEntries, nutritionAll, container) {
+  const cols = memberEntries.map(({ member, entry }) => {
+    const n = nutritionAll?.[member.name] || {};
+    return {
+      member,
+      macros: computeDayMacros(entry),
+      targets: {
+        calorias:        n.daily_calories_kcal,
+        proteina_g:      n.protein_g,
+        carbohidratos_g: n.carbs_g,
+        grasas_g:        n.fat_g,
+      },
+      bmr:   n.bmr_kcal || null,
+      maint: n.maintenance_kcal || null,
+    };
+  });
 
   const rows = [
-    { label: 'Calorías',      key: 'calorias',           pabloTarget: pablo.daily_calories_kcal, juliTarget: juli.daily_calories_kcal, pabloBmr: pablo.bmr_kcal || null, juliBmr: juli.bmr_kcal || null, pabloMaint: pablo.maintenance_kcal || null, juliMaint: juli.maintenance_kcal || null, unit: 'kcal', color: 'var(--orange)' },
-    { label: 'Proteína',      key: 'proteina_g',          pabloTarget: pablo.protein_g,           juliTarget: juli.protein_g,           unit: 'g',    color: 'var(--accent)' },
-    { label: 'Carbos',        key: 'carbohidratos_g',     pabloTarget: pablo.carbs_g,             juliTarget: juli.carbs_g,             unit: 'g',    color: 'var(--green)'  },
-    { label: 'Grasas',        key: 'grasas_g',            pabloTarget: pablo.fat_g,               juliTarget: juli.fat_g,               unit: 'g',    color: 'var(--purple)' },
+    { label: 'Calorías', key: 'calorias',        unit: 'kcal', color: 'var(--orange)' },
+    { label: 'Proteína', key: 'proteina_g',      unit: 'g',    color: 'var(--accent)' },
+    { label: 'Carbos',   key: 'carbohidratos_g', unit: 'g',    color: 'var(--green)'  },
+    { label: 'Grasas',   key: 'grasas_g',        unit: 'g',    color: 'var(--purple)' },
   ];
 
-  const disp = (val, unit)   => unit === 'kcal' ? `${Math.round(val)} ${unit}` : `${val} ${unit}`;
+  const disp = (val, unit) => unit === 'kcal' ? `${Math.round(val)} ${unit}` : `${val} ${unit}`;
+
+  const remDisp = (val, target, unit) => {
+    if (!target) return '';
+    const rem   = target - val;
+    const round = unit === 'kcal' ? Math.round(rem) : Math.round(rem * 10) / 10;
+    const color = rem < 0 ? 'var(--red)' : 'var(--green)';
+    const label = rem < 0 ? `Exceso: ${Math.abs(round)} ${unit}` : `Disponible: ${round} ${unit}`;
+    return `<div class="family-row-remaining" style="color:${color}">${label}</div>`;
+  };
 
   container.innerHTML = `
-    <div class="family-summary">
+    <div class="family-summary" style="--family-cols:${cols.length}">
       <div class="family-summary-header">
         <div></div>
-        <div class="family-col-label pablo-col">🏋️ Pablo</div>
-        <div class="family-col-label juli-col">🌸 Juli</div>
+        ${cols.map((c, i) => `<div class="family-col-label member-col-${i % MEMBER_COLORS}">${esc(c.member.name)}</div>`).join('')}
       </div>
       ${rows.map(r => {
-        const pVal  = pMacros[r.key] ?? 0;
-        const jVal  = jMacros[r.key] ?? 0;
         const isCal = r.key === 'calorias';
-        // Calories: maintenance is 100%. Macros: the target is 100%.
-        const pBase = isCal ? r.pabloMaint : r.pabloTarget;
-        const jBase = isCal ? r.juliMaint  : r.juliTarget;
-        const pBar  = summaryBarHTML(pVal, pBase, r.color, isCal ? calorieMarks(r.pabloTarget, r.pabloBmr) : []);
-        const jBar  = summaryBarHTML(jVal, jBase, r.color, isCal ? calorieMarks(r.juliTarget,  r.juliBmr)  : []);
-
-        const remDisp = (val, target, unit) => {
-          if (!target) return '';
-          const rem   = target - val;
-          const round = unit === 'kcal' ? Math.round(rem) : Math.round(rem * 10) / 10;
-          const color = rem < 0 ? 'var(--red)' : 'var(--green)';
-          const label = rem < 0 ? `Exceso: ${Math.abs(round)} ${unit}` : `Disponible: ${round} ${unit}`;
-          return `<div class="family-row-remaining" style="color:${color}">${label}</div>`;
-        };
-
-        const pSubLine = isCal
-          ? `<div class="family-row-sub">${calorieSubText({ bmr: r.pabloBmr, target: r.pabloTarget, maint: r.pabloMaint })}</div>`
-          : r.pabloTarget ? `<div class="family-row-sub">meta: ${r.pabloTarget} ${r.unit}</div>` : '';
-        const jSubLine = isCal
-          ? `<div class="family-row-sub">${calorieSubText({ bmr: r.juliBmr, target: r.juliTarget, maint: r.juliMaint })}</div>`
-          : r.juliTarget ? `<div class="family-row-sub">meta: ${r.juliTarget} ${r.unit}</div>` : '';
+        const cells = cols.map(c => {
+          const val    = c.macros[r.key] ?? 0;
+          const target = c.targets[r.key];
+          // Calories: maintenance is 100%. Macros: the target is 100%.
+          const base = isCal ? c.maint : target;
+          const bar  = summaryBarHTML(val, base, r.color, isCal ? calorieMarks(target, c.bmr) : []);
+          const sub  = isCal
+            ? `<div class="family-row-sub">${calorieSubText({ bmr: c.bmr, target, maint: c.maint })}</div>`
+            : target ? `<div class="family-row-sub">meta: ${target} ${r.unit}</div>` : '';
+          return `
+            <div class="family-row-cell">
+              <div class="family-row-value">${disp(val, r.unit)}</div>
+              ${sub}
+              ${bar}
+              ${remDisp(val, target, r.unit)}
+            </div>
+          `;
+        }).join('');
         return `
           <div class="family-summary-row">
             <div class="family-row-label" style="color:${r.color}">${r.label}</div>
-            <div class="family-row-cell">
-              <div class="family-row-value">${disp(pVal, r.unit)}</div>
-              ${pSubLine}
-              ${pBar}
-              ${remDisp(pVal, r.pabloTarget, r.unit)}
-            </div>
-            <div class="family-row-cell">
-              <div class="family-row-value">${disp(jVal, r.unit)}</div>
-              ${jSubLine}
-              ${jBar}
-              ${remDisp(jVal, r.juliTarget, r.unit)}
-            </div>
+            ${cells}
           </div>
         `;
       }).join('')}
@@ -699,24 +745,24 @@ export function renderIngredientCard(ingredient, onEdit, onDelete) {
   card.dataset.id = ingredient.id;
 
   const cat = ingredient.categoria
-    ? `<span class="ingredient-card-cat">${ingredient.categoria}</span>`
+    ? `<span class="ingredient-card-cat">${esc(ingredient.categoria)}</span>`
     : '';
 
-  const ref = `${ingredient.cantidad_referencia} ${ingredient.unidad_referencia}`;
+  const ref = esc(`${ingredient.cantidad_referencia} ${ingredient.unidad_referencia}`);
 
   card.innerHTML = `
     <div class="ingredient-card-actions">
       <button class="ingredient-card-edit" title="Editar">✏️</button>
       <button class="ingredient-card-delete" title="Eliminar">🗑</button>
     </div>
-    <div class="ingredient-card-name">${ingredient.nombre}</div>
+    <div class="ingredient-card-name">${esc(ingredient.nombre)}</div>
     ${cat}
     <div class="ingredient-card-ref">Por ${ref}</div>
     <div class="ingredient-macros">
-      <span class="ingredient-macro-badge ing-badge--kcal">${ingredient.calorias} kcal</span>
-      <span class="ingredient-macro-badge ing-badge--prot">P ${ingredient.proteina_g}g</span>
-      <span class="ingredient-macro-badge ing-badge--carb">C ${ingredient.carbohidratos_g}g</span>
-      <span class="ingredient-macro-badge ing-badge--fat">G ${ingredient.grasas_g}g</span>
+      <span class="ingredient-macro-badge ing-badge--kcal">${num(ingredient.calorias)} kcal</span>
+      <span class="ingredient-macro-badge ing-badge--prot">P ${num(ingredient.proteina_g)}g</span>
+      <span class="ingredient-macro-badge ing-badge--carb">C ${num(ingredient.carbohidratos_g)}g</span>
+      <span class="ingredient-macro-badge ing-badge--fat">G ${num(ingredient.grasas_g)}g</span>
     </div>
   `;
 

@@ -351,6 +351,16 @@ Siete cambios sobre la app (JS vanilla + Supabase, sin framework ni tests autom�
 
 ---
 
+## Pasada de seguridad: escapado de HTML (hecha)
+
+- `js/ui.js`: `esc()` en `renderRecipeCard` (nombre, id), `renderIngredientCard` (nombre, categoría, referencia) y atributos `data-*` de pills; `num()` fuerza valores numéricos en macros que se interpolan en `innerHTML`.
+- `js/app.js`: `openSlotPicker` y `showSlotPickerForDrop` arman el título con `createElement`/`textContent`; `addStepRow` asigna el texto del paso con `.value` (antes iba dentro del `<textarea>`).
+- `sw.js` → `plandental-v15`.
+- Sin escapar a propósito (valores propios, constantes o numéricos): `slot.icon`/`slot.label` (constantes de `calendar.js`), `personName` en `buildPersonMealHTML` (literal 'Pablo'/'Juli'), `calorieSubText`/`summaryBarHTML` (números de la tabla de nutrición).
+
+---
+
+
 ## Verificación final (después de la sub-tarea 8)
 
 Pendientes detectados durante la ejecución, a comprobar al terminar todas las sub-tareas:

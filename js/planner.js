@@ -3,8 +3,9 @@
  *
  * Rules:
  *  1. snack_tarde is ALWAYS filled with the Whey-isolate snack specific to each person
- *     (Pablo: 45 g · Juli: 30 g). The matching recipe is found dynamically from
- *     whatever recipes are loaded in the current environment.
+ *     (matching the person's `whey_g` nutrition target when set). The matching
+ *     recipe is found dynamically from whatever recipes are loaded in the
+ *     current environment.
  *  2. The remaining slots (desayuno, almuerzo, cena, snack_noche) are filled from
  *     available recipes using a loose knapsack that:
  *       - favours variety (avoids repeating the same recipe in the same week)
@@ -22,15 +23,16 @@ const WHEY_INGREDIENT = 'whey isolate';
 
 /**
  * Return the recipe id whose ingredient list contains "Whey isolate"
- * at the given target grams for the person.
- * Falls back to the first whey recipe found if no exact gram match exists.
+ * at the person's `whey_g` target.
+ * Falls back to the first whey recipe found if no exact gram match exists
+ * (or if the person has no `whey_g` target).
  *
- * @param {'Pablo'|'Juli'} person
+ * @param {string} person  person name
  * @returns {string|null} recipe id or null
  */
 function findWheyRecipeFor(person) {
   const nutrition = getNutrition(person);
-  const targetG   = nutrition?.whey_g ?? (person === 'Pablo' ? 45 : 30);
+  const targetG   = nutrition?.whey_g != null ? Number(nutrition.whey_g) : null;
 
   const allRecipes = getAllRecipes();
   let fallback = null;
@@ -43,7 +45,7 @@ function findWheyRecipeFor(person) {
 
     if (!fallback) fallback = recipe.id;
 
-    if (Number(wheyIng.cantidad) === targetG) {
+    if (targetG !== null && Number(wheyIng.cantidad) === targetG) {
       return recipe.id;
     }
   }
@@ -186,26 +188,24 @@ function pickBest(slotId, current, targets, weekUsed, exclude = []) {
  *
  * @param {object}   plan        The full plan object (state.plan)
  * @param {Date}     anchorDate  Any date within the target week
+ * @param {string[]} persons     Names of the persons to plan for (the user's family)
  * @returns {object}  The mutated plan (same reference)
  */
-export function autoFillWeek(plan, anchorDate) {
+export function autoFillWeek(plan, anchorDate, persons) {
   const weekDays = getWeekDays(anchorDate);
   const weekKey  = toWeekKey(anchorDate);
 
-  const persons  = ['Pablo', 'Juli'];
   const slots    = MEAL_SLOTS.map(s => s.id);
 
   // Find each person's whey snack recipe once
-  const wheyRecipeId = {
-    Pablo: findWheyRecipeFor('Pablo'),
-    Juli:  findWheyRecipeFor('Juli'),
-  };
+  const wheyRecipeId = Object.fromEntries(
+    persons.map(person => [person, findWheyRecipeFor(person)])
+  );
 
   // Track which recipe ids were used this week, per person (for variety)
-  const weekUsed = {
-    Pablo: new Set(),
-    Juli:  new Set(),
-  };
+  const weekUsed = Object.fromEntries(
+    persons.map(person => [person, new Set()])
+  );
 
   // Seed weekUsed with what's already planned
   for (const person of persons) {

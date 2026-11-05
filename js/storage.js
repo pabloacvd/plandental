@@ -172,8 +172,8 @@ export async function getMyPersons() {
  * the legacy nested format expected by the rest of the app:
  *
  *   {
- *     "Pablo": { "2025-W27": { "2025-07-07": { "desayuno": { recipeId, recipeName, macros, recipeSnapshot? } } } },
- *     "Juli":  { ... }
+ *     "<person name>": { "2025-W27": { "2025-07-07": { "desayuno": { recipeId, recipeName, macros, recipeSnapshot? } } } },
+ *     "<other person>": { ... }
  *   }
  *
  * Falls back to an empty object on error.
@@ -224,7 +224,7 @@ export async function fetchPlan() {
  * Accepts the same nested format fetchPlan() returns.
  * Uses upsert to safely overwrite or insert.
  *
- * personNameToId is a map { "Pablo": uuid, "Juli": uuid } built at
+ * personNameToId is a map { "<person name>": uuid, … } built at
  * runtime from the persons list so we can resolve the FK correctly.
  */
 export async function savePlan(plan, personNameToId) {
@@ -273,7 +273,7 @@ export async function savePlan(plan, personNameToId) {
 
 /**
  * Remove a single meal slot from Supabase.
- * personNameToId: { "Pablo": uuid, ... }
+ * personNameToId: { "<person name>": uuid, ... }
  */
 export async function removePlanEntry(personName, dateKey, slotId, personNameToId) {
   const personId = personNameToId?.[personName];
@@ -355,7 +355,7 @@ export async function deleteRecipeFromDB(id) {
 
 /**
  * Fetch nutrition data for all accessible persons.
- * Returns the legacy format: { "Pablo": { bmr_kcal, …, body_composition: … }, … }
+ * Returns the legacy format: { "<person name>": { bmr_kcal, …, body_composition: … }, … }
  */
 export async function fetchNutrition() {
   const persons = await getMyPersons();

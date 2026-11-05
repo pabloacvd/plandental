@@ -430,6 +430,7 @@ input  { font: inherit; border: none; outline: none; }
 .day-kcal-bar {
   margin-top: auto;
 }
+.kcal-row + .kcal-row { margin-top: 4px; }
 .kcal-label {
   font-size: .68rem; color: var(--text-muted);
   display: flex; justify-content: space-between; margin-bottom: 2px;
@@ -555,9 +556,13 @@ input  { font: inherit; border: none; outline: none; }
   font-size: .68rem; font-weight: 700; padding: 1px 6px;
   border-radius: 10px; white-space: nowrap; flex-shrink: 0;
 }
-.pablo-badge  { background: var(--accent-bg);  color: var(--accent-dark); }
-.juli-badge   { background: var(--purple-bg);  color: var(--purple); }
-.shared-badge { background: var(--green-bg);   color: #15803d; }
+/* Member colours cycle by position in the family (see MEMBER_COLORS in ui.js) */
+.member-badge-0 { background: var(--accent-bg);  color: var(--accent-dark); }
+.member-badge-1 { background: var(--purple-bg);  color: var(--purple); }
+.member-badge-2 { background: var(--orange-bg);  color: #c2410c; }
+.member-badge-3 { background: var(--red-bg);     color: var(--red); }
+.member-badge-4 { background: var(--green-bg);   color: #15803d; }
+.shared-badge   { background: var(--green-bg);   color: #15803d; }
 
 .slot-meal-name-sm {
   flex: 1; overflow: hidden; text-overflow: ellipsis;
@@ -601,7 +606,7 @@ input  { font: inherit; border: none; outline: none; }
 .family-summary-header,
 .family-summary-row {
   display: grid;
-  grid-template-columns: 120px 1fr 1fr;
+  grid-template-columns: 120px repeat(var(--family-cols, 2), minmax(0, 1fr));
   gap: 10px;
   align-items: center;
   padding: 6px 2px;
@@ -615,8 +620,11 @@ input  { font: inherit; border: none; outline: none; }
   font-size: .78rem; font-weight: 700;
   text-transform: uppercase; letter-spacing: .05em;
 }
-.pablo-col { color: var(--accent); }
-.juli-col  { color: var(--purple); }
+.member-col-0 { color: var(--accent); }
+.member-col-1 { color: var(--purple); }
+.member-col-2 { color: var(--orange); }
+.member-col-3 { color: var(--red); }
+.member-col-4 { color: var(--green); }
 .family-row-label {
   font-size: .78rem; font-weight: 700;
   text-transform: uppercase; letter-spacing: .05em;
@@ -1366,7 +1374,7 @@ input  { font: inherit; border: none; outline: none; }
   /* ── Family summary ── */
   .family-summary-header,
   .family-summary-row {
-    grid-template-columns: 90px 1fr 1fr;
+    grid-template-columns: 90px repeat(var(--family-cols, 2), minmax(0, 1fr));
     gap: 6px;
   }
   /* Make family-summary span all columns of the day-summary grid */
