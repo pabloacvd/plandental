@@ -418,6 +418,43 @@ function validateAdminCleanupMigration() {
   assert('allowlist = the 3 admin RPCs',           /array\['admin_create_user',\s*'admin_reset_password',\s*'admin_list_families'\]/i.test(code), 'missing allowlist of admin RPCs');
 }
 
+/**
+ * 20261105000800_shopping_preferences.sql — per-family shopping pre-selections,
+ * RLS by my_family_id(), no admin bypass, anon without access.
+ */
+function validateShoppingPreferencesMigration() {
+  section('3d. supabase/migrations/20261105000800_shopping_preferences.sql');
+
+  const sqlPath = resolve(ROOT, 'supabase', 'migrations', '20261105000800_shopping_preferences.sql');
+  assert('SQL file exists', existsSync(sqlPath), 'migration file not found');
+  if (!existsSync(sqlPath)) return;
+
+  const code = readFileSync(sqlPath, 'utf8').replace(/--.*$/gm, '');
+  const policySql = [...code.matchAll(/create policy[\s\S]*?;/gi)].map(m => m[0]);
+  const policyFor = cmd => policySql.find(p => new RegExp(`for\\s+${cmd}\\b`, 'i').test(p)) ?? '';
+
+  assert('CREATE TABLE shopping_preferences',      /create table if not exists public\.shopping_preferences/i.test(code), 'missing CREATE TABLE');
+  assert('family_id PK, FK families on delete cascade, default my_family_id()',
+    /family_id\s+uuid\s+primary key\s+references public\.families\(id\) on delete cascade\s+default public\.my_family_id\(\)/i.test(code), 'family_id must be PK + FK cascade + default my_family_id()');
+  assert('deselected text[] not null default {}',  /deselected\s+text\[\]\s+not null default '\{\}'/i.test(code),           'missing deselected column');
+  assert('updated_at timestamptz default now()',   /updated_at\s+timestamptz\s+not null default now\(\)/i.test(code),        'missing updated_at');
+  assert('CHECK cardinality <= 1000',              /check\s*\([\s\S]*cardinality\(deselected\)\s*<=\s*1000/i.test(code),     'missing cardinality CHECK');
+  assert('protects family_id on update (trigger)', /create trigger tr_shopping_preferences_protect_ownership\s+before update on public\.shopping_preferences/i.test(code), 'missing ownership trigger');
+  const fnSql = code.match(/create or replace function public\.shopping_preferences_protect_ownership\(\)[\s\S]*?\$\$;/i)?.[0] ?? '';
+  assert('ownership function exists and is not security definer', fnSql !== '' && !/security definer/i.test(fnSql), 'trigger function must exist and must not be security definer');
+  assert('RLS enabled',                            /alter table public\.shopping_preferences enable row level security/i.test(code), 'missing RLS enable');
+  assert('4 policies created',                     policySql.length === 4,                                                   `found ${policySql.length} CREATE POLICY statement(s)`);
+  assert('SELECT: family_id = my_family_id()',     /using\s*\(\s*family_id\s*=\s*public\.my_family_id\(\)\s*\)/i.test(policyFor('select')), 'SELECT policy must filter by my_family_id()');
+  assert('INSERT: with check family',              /with check\s*\(\s*family_id\s*=\s*public\.my_family_id\(\)\s*\)/i.test(policyFor('insert')), 'INSERT policy must check my_family_id()');
+  assert('UPDATE: using + with check by family',   /using\s*\(\s*family_id\s*=\s*public\.my_family_id\(\)\s*\)[\s\S]*with check\s*\(\s*family_id\s*=\s*public\.my_family_id\(\)\s*\)/i.test(policyFor('update')), 'UPDATE policy must have using and with check');
+  assert('DELETE: family_id = my_family_id()',     /using\s*\(\s*family_id\s*=\s*public\.my_family_id\(\)\s*\)/i.test(policyFor('delete')), 'DELETE policy must filter by my_family_id()');
+  assert('policies are TO authenticated',          policySql.every(p => /to authenticated/i.test(p)),                        'every policy must be TO authenticated');
+  assert('policies do not use is_admin()',         !policySql.some(p => /is_admin/i.test(p)),                                'policies must not use is_admin()');
+  assert('revokes anon access',                    /revoke all on public\.shopping_preferences from anon/i.test(code),       'missing revoke from anon');
+  assert('no seed rows inserted',                  !/insert into public\.shopping_preferences/i.test(code),                  'my_family_id() is NULL in migrations: do not insert seed rows');
+  assert('has final validation (raise exception)', /raise exception 'Validación fallida/i.test(code),                        'missing final validation block');
+}
+
 // ── 4. Integration with data/recipes.json ─────────────────────────────────────
 
 function validateRecipesIntegration() {
@@ -498,6 +535,7 @@ validateIngredientsJSON();
 validateIngredientsLogic();
 validateSQLSchema();
 validateAdminCleanupMigration();
+validateShoppingPreferencesMigration();
 validateRecipesIntegration();
 
 console.log('\n══════════════════════════════════════════════');

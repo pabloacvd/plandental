@@ -10,6 +10,7 @@ import {
   fetchPlan, savePlan, removePlanEntry,
   fetchDefaultWeek, saveDefaultWeek, clearDefaultWeek,
   signIn, signOut, isAuthenticated, getMyProfile, getMyPersons,
+  fetchShoppingDeselected, saveShoppingDeselected,
   saveRecipes, deleteRecipeFromDB, consumeTokenFromHash,
   saveIngredient, deleteIngredient as deleteIngredientFromStorage,
   changePassword, adminCreateUser, adminResetPassword, adminListFamilies,
@@ -58,6 +59,8 @@ let state = {
   personNameToId: {},          // { "Pablo": uuid, "Juli": uuid, … }
   showFamilia:    false,       // true when the family has 2+ persons
   profile:        null,        // { id, username, role }
+  // Family-wide shopping pre-selections (loaded once per login; null = not loaded yet)
+  shoppingDeselectedDefaults: null,
   // Sidebar tabs
   sidebarTab:              'recipes',   // 'recipes' | 'ingredients'
   ingredientSearchCategory: 'all',
@@ -101,6 +104,8 @@ async function init() {
         loading = false;
       }
     } else if (event === 'SIGNED_OUT') {
+      // Drop per-family data so the next user on this browser never sees it.
+      state.shoppingDeselectedDefaults = null;
       showLoginGate();
     }
   });
@@ -112,11 +117,17 @@ async function init() {
  * @param {object} [authUser] — the user object from the auth session (avoids a round-trip getUser() call)
  */
 async function loadAppData(authUser) {
-  // Resolve persons (limited to the user's family by RLS) and profile in parallel.
-  const [persons, profile] = await Promise.all([
+  // Resolve persons (limited to the user's family by RLS), profile and the
+  // family's shopping pre-selections in parallel. Overwritten on every login,
+  // so a user switch in the same browser always reloads the new family's list.
+  const [persons, profile, shoppingDeselected] = await Promise.all([
     getMyPersons(),
     getMyProfile(authUser),
+    fetchShoppingDeselected(),
   ]);
+
+  // null = family has no saved row yet (or network error) → seed list.
+  state.shoppingDeselectedDefaults = shoppingDeselected ?? SHOPPING_DESELECT_SEED.slice();
 
   state.persons        = persons;
   state.personNameToId = Object.fromEntries(persons.map(p => [p.name, p.id]));
@@ -1368,27 +1379,14 @@ const SHOPPING_EXCLUDE = [
   'agua', 'hielo', 'whey isolate', 'proteína de suero', 'condimento',
 ];
 
-// Ingredients deselected by default (stored + initial seed)
-const SHOPPING_DESELECT_DEFAULTS_KEY = 'shopping_deselected_defaults';
+// Ingredients deselected by default: initial seed for families without a saved row.
+// The family's saved list lives in the DB (shopping_preferences) and in
+// state.shoppingDeselectedDefaults after login.
 const SHOPPING_DESELECT_SEED = [
   'café', 'cafe', 'aceite', 'sal', 'pimienta', 'vinagre', 'azúcar', 'azucar',
   'orégano', 'oregano', 'ajo en polvo', 'cebolla en polvo', 'pimentón', 'paprika',
   'comino', 'cúrcuma', 'curcuma', 'curry', 'canela', 'nuez moscada',
 ];
-
-function loadShoppingDeselectedDefaults() {
-  try {
-    const raw = localStorage.getItem(SHOPPING_DESELECT_DEFAULTS_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch { /* ignore */ }
-  return SHOPPING_DESELECT_SEED.slice();
-}
-
-function saveShoppingDeselectedDefaults(list) {
-  try {
-    localStorage.setItem(SHOPPING_DESELECT_DEFAULTS_KEY, JSON.stringify(list));
-  } catch { /* ignore */ }
-}
 
 function isExcludedIngredient(name) {
   const lower = name.toLowerCase();
@@ -1460,7 +1458,7 @@ function buildShoppingList() {
  */
 function openShoppingModal() {
   const items = buildShoppingList();
-  const deselectedDefaults = loadShoppingDeselectedDefaults();
+  const deselectedDefaults = state.shoppingDeselectedDefaults ?? SHOPPING_DESELECT_SEED;
 
   // Date range label
   const weekDays  = getWeekDays(state.anchorDate);
@@ -1538,14 +1536,26 @@ function closeShoppingModal() {
 /**
  * Save current checkbox state as the new defaults.
  */
-function saveShoppingPreselections() {
+async function saveShoppingPreselections() {
   const container = document.getElementById('shopping-list-content');
   const newDeselected = [];
   container.querySelectorAll('.shopping-cb').forEach(cb => {
     if (!cb.checked) newDeselected.push(cb.dataset.name.toLowerCase());
   });
-  saveShoppingDeselectedDefaults(newDeselected);
-  showToast('✅ Pre-selecciones guardadas', 'success');
+
+  const btn = document.getElementById('btn-save-shopping-preselections');
+  if (btn) btn.disabled = true;
+  try {
+    await saveShoppingDeselected(newDeselected);
+    // Update the in-memory list only after the DB write succeeded.
+    state.shoppingDeselectedDefaults = newDeselected;
+    showToast('✅ Pre-selecciones guardadas', 'success');
+  } catch (e) {
+    console.error('saveShoppingPreselections:', e);
+    showToast('❌ No se pudieron guardar las pre-selecciones', 'error');
+  } finally {
+    if (btn) btn.disabled = false;
+  }
 }
 
 /**

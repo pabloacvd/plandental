@@ -198,6 +198,12 @@ async function checkRLS() {
     if (error && error.code !== '42501' && error.code !== 'PGRST301') throw error;
     if (data && data.length > 0) throw new Error('anon received recipe rows — RLS / privileges may be misconfigured');
   });
+
+  await check('anon cannot read shopping_preferences (no privileges / RLS)', async () => {
+    const { data, error } = await anon.from('shopping_preferences').select('family_id').limit(1);
+    if (error && error.code !== '42501' && error.code !== 'PGRST301') throw error;
+    if (data && data.length > 0) throw new Error('anon received shopping_preferences rows — RLS / privileges may be misconfigured');
+  });
 }
 
 // ── 6. Every profile has a person in its family ──────────────

@@ -326,15 +326,28 @@ Siete cambios sobre la app (JS vanilla + Supabase, sin framework ni tests autom�
 - Una familia sin lista guardada empieza con `SHOPPING_DESELECT_SEED`.
 
 **Todo List**
-- [ ] Migración: crear `shopping_preferences(family_id uuid primary key references families, deselected text[] not null default '{}', updated_at timestamptz)`. RLS por `family_id = my_family_id()`, sin bypass de admin.
-- [ ] [`js/storage.js`](js/storage.js): añadir `fetchShoppingDeselected()` (devuelve `null` si la familia no tiene fila) y `saveShoppingDeselected(list)` (upsert por `family_id`; el valor lo completa un default `my_family_id()`).
-- [ ] [`js/app.js`](js/app.js):1366-1385: reemplazar `loadShoppingDeselectedDefaults` / `saveShoppingDeselectedDefaults` (localStorage) por estas llamadas. Cargar la lista una vez al iniciar sesión y guardarla en `state`, para que `buildShoppingList` y el modal de compras sigan siendo síncronos. `saveShoppingPreselections` (línea 1568) pasa a ser `async` con manejo de error y toast.
-- [ ] Eliminar el uso de `localStorage` y la clave `shopping_deselected_defaults`. Decisión confirmada: no se migra el valor local; cada familia parte de `SHOPPING_DESELECT_SEED` y el usuario ajusta sus pre-selecciones a mano.
-- [ ] Verificación manual: guardar como Lara, entrar como Pablo (otra familia) y confirmar que ve el seed; entrar como Juli y confirmar que ve la de Pablo.
+- [x] Migración [`20261105000800_shopping_preferences.sql`](supabase/migrations/20261105000800_shopping_preferences.sql): `shopping_preferences(family_id uuid PK → families on delete cascade default my_family_id(), deselected text[] not null default '{}', updated_at timestamptz not null default now())`. CHECK `shopping_preferences_deselected_check` (≤ 1000 elementos, sin NULL, ≤ 20000 bytes en total). Trigger `tr_shopping_preferences_protect_ownership` (no security definer) que impide cambiar `family_id`. RLS con 4 policies `to authenticated` por `family_id = my_family_id()` (sin `is_admin()`), `revoke all ... from anon`/`public`, `revoke truncate` a `authenticated`. Bloque final de validación con `raise exception`. Sin filas semilla (`my_family_id()` es NULL en migraciones).
+- [x] [`js/storage.js`](js/storage.js): `fetchShoppingDeselected()` (`null` si no hay fila o hay error; `console.warn` como `fetchRecipes`) y `saveShoppingDeselected(list)` (upsert `onConflict: 'family_id'`, lanza `Error` en fallo).
+- [x] [`js/app.js`](js/app.js): `state.shoppingDeselectedDefaults` se carga en `loadAppData` (en paralelo con persons/profile) y se sobreescribe en cada login; `null` → `SHOPPING_DESELECT_SEED`. `openShoppingModal` lee del state (sincrónico). `saveShoppingPreselections` es `async`: deshabilita el botón, guarda, actualiza el state solo si el guardado fue OK, toast de éxito o error genérico (detalle en `console.error`). `buildShoppingList`/`buildShoppingItems` no se tocaron.
+- [x] Eliminado `localStorage` y la clave `shopping_deselected_defaults` (no se migra el valor local). En `SIGNED_OUT` se pone `state.shoppingDeselectedDefaults = null`, y cada login lo recarga, por lo que no se filtran preselecciones entre familias en el mismo navegador.
+- [x] `sw.js` → `plandental-v14`. [`scripts/validate-ingredients.js`](scripts/validate-ingredients.js): sección 3d (118/118 OK). [`scripts/validate-migration.js`](scripts/validate-migration.js): check de que `anon` no lee `shopping_preferences` (requiere DB y `scripts/.env`; no se pudo correr aquí).
+- [ ] Verificación manual (pendiente del usuario): guardar como Lara, entrar como Pablo (otra familia) y confirmar que ve el seed; entrar como Juli y confirmar que ve la de Pablo.
 
-**Relevant Context**: [`js/app.js`](js/app.js):1365-1395, 1545-1576, 2216; [`index.html`](index.html):438-439.
+**Decisión sobre `family_id` en el upsert**: el cliente no envía `family_id`. PostgREST arma `INSERT ... ON CONFLICT (family_id) DO UPDATE`; Postgres evalúa los defaults de la fila propuesta antes de detectar el conflicto, así que `family_id = my_family_id()` ya está resuelto y el conflicto cae sobre la fila de la propia familia (mismo mecanismo que `saveRecipe` con `family_id,id` e `ingredients` con `family_id,nombre`). No hizo falta RPC ni select previo. Como no hay DB aquí, no se pudo ejecutar; si el upsert fallara en la prueba manual, el plan B es enviar `family_id` explícito leído de `profiles` (`getMyProfile`), que la RLS validaría igual.
 
-**Status**: [ ] pending
+**Cómo ejecutar**: aplicar `20261105000800_shopping_preferences.sql` (`supabase db push` o editor SQL) y desplegar el JS a la vez (`sw.js` v14). Si el JS nuevo corre sin la tabla, `fetchShoppingDeselected` devuelve `null` (usa el seed) pero guardar falla con toast de error.
+
+**Prueba manual**:
+1. Aplicar la migración y revisar el `NOTICE` de validación.
+2. Como lara: abrir Compras, cambiar checkboxes, «Guardar pre-selecciones» → toast de éxito. Recargar: se mantienen.
+3. Cerrar sesión, entrar como pablo (otra familia): ve el seed (`SHOPPING_DESELECT_SEED`), no lo de Lara.
+4. Como pablo: guardar otra selección. Entrar como juli (misma familia): ve la de Pablo.
+5. Entrar como lara de nuevo: sigue viendo la suya.
+6. Desde la consola como lara: `supabase.from('shopping_preferences').select('*')` devuelve solo su fila; un `update` de `family_id` falla.
+
+**Relevant Context**: [`supabase/migrations/20261105000800_shopping_preferences.sql`](supabase/migrations/20261105000800_shopping_preferences.sql); [`js/storage.js`](js/storage.js):659-698; [`js/app.js`](js/app.js) (`loadAppData`, `SHOPPING_DESELECT_SEED`, `openShoppingModal`, `saveShoppingPreselections`); [`index.html`](index.html):412.
+
+**Status**: [x] done
 
 ---
 

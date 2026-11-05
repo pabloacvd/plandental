@@ -656,6 +656,47 @@ export async function deleteIngredient(id) {
   if (error) throw new Error(error.message);
 }
 
+// ── Shopping list pre-selections (per family) ─────────────────
+
+/**
+ * Fetch the family's default-deselected shopping ingredients.
+ * RLS limits the result to the caller's family (at most one row).
+ * Returns an array of strings, or null if the family has no row yet
+ * or the request failed (the caller then falls back to its seed list).
+ */
+export async function fetchShoppingDeselected() {
+  const { data, error } = await supabase
+    .from('shopping_preferences')
+    .select('deselected')
+    .maybeSingle();
+
+  if (error) {
+    console.warn('fetchShoppingDeselected:', error.message);
+    return null;
+  }
+  if (!data || !Array.isArray(data.deselected)) return null;
+  return data.deselected.filter(x => typeof x === 'string');
+}
+
+/**
+ * Save (upsert) the family's default-deselected shopping ingredients.
+ * family_id is not sent: the DB default (my_family_id()) fills it on the
+ * insert attempt, so ON CONFLICT (family_id) resolves to the family's row
+ * (same mechanism as saveRecipe with 'family_id,id'). RLS validates it.
+ * Throws on failure so the caller can report it.
+ * @param {string[]} list
+ */
+export async function saveShoppingDeselected(list) {
+  const { error } = await supabase
+    .from('shopping_preferences')
+    .upsert({
+      deselected: list,
+      updated_at: new Date().toISOString(),
+    }, { onConflict: 'family_id' });
+
+  if (error) throw new Error(error.message);
+}
+
 // ── Legacy compatibility shims ────────────────────────────────
 // app.js still calls getCredentials() / clearCredentials() /
 // consumeTokenFromHash() in a few places. These stubs satisfy the
