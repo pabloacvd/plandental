@@ -8,9 +8,8 @@ import { getWeekDays, toDateKey, toWeekKey, MEAL_SLOTS, MONTH_NAMES } from './ca
 import {
   fetchPlan, savePlan, removePlanEntry,
   fetchDefaultWeek, saveDefaultWeek, clearDefaultWeek,
-  signIn, signOut, isAuthenticated, getMyProfile, getMyPersons, getFamiliaFlag,
-  createPerson, requestPersonAccess, approvePersonAccess, rejectPersonAccess,
-  getPendingAccessRequests, saveRecipes, consumeTokenFromHash,
+  signIn, signOut, isAuthenticated, getMyProfile, getMyPersons,
+  saveRecipes, deleteRecipeFromDB, consumeTokenFromHash,
   saveIngredient, deleteIngredient as deleteIngredientFromStorage,
   changePassword, adminCreateUser, adminResetPassword,
   fetchNutrition, saveNutritionProfile,
@@ -56,7 +55,7 @@ let state = {
   // Supabase-specific: resolved at runtime
   persons:        [],          // [{ id, name, owner_id }]
   personNameToId: {},          // { "Pablo": uuid, "Juli": uuid, … }
-  showFamilia:    false,       // from familia_flag view
+  showFamilia:    false,       // true when the family has 2+ persons
   profile:        null,        // { id, username, role }
   // Sidebar tabs
   sidebarTab:              'recipes',   // 'recipes' | 'ingredients'
@@ -112,16 +111,15 @@ async function init() {
  * @param {object} [authUser] — the user object from the auth session (avoids a round-trip getUser() call)
  */
 async function loadAppData(authUser) {
-  // Resolve persons, familia flag, and profile in parallel.
-  const [persons, familiaFlag, profile] = await Promise.all([
-    getMyPersons(authUser),
-    getFamiliaFlag(authUser),
+  // Resolve persons (limited to the user's family by RLS) and profile in parallel.
+  const [persons, profile] = await Promise.all([
+    getMyPersons(),
     getMyProfile(authUser),
   ]);
 
   state.persons        = persons;
   state.personNameToId = Object.fromEntries(persons.map(p => [p.name, p.id]));
-  state.showFamilia    = familiaFlag.show_familia;
+  state.showFamilia    = persons.length >= 2;
   state.profile        = profile;
 
   // Default person selection:
@@ -960,12 +958,12 @@ function closeRecipeModal() {
 async function handleDeleteRecipe(id, name) {
   if (!confirm(`¿Eliminar "${name}"? Esta acción no se puede deshacer.`)) return;
 
-  const updated = deleteRecipe(id);
+  deleteRecipe(id);
   renderSidebar();
   renderWeek(); // calorie bars might reference this recipe
 
   try {
-    await saveRecipes(updated);
+    await deleteRecipeFromDB(id);
     showToast('✅ Receta eliminada', 'success');
   } catch (e) {
     showToast('❌ Error al eliminar: ' + e.message, 'error');
@@ -1898,92 +1896,6 @@ function renderPersonSwitcher() {
 }
 
 // ══════════════════════════════════════════════════════════
-// PERSON MANAGEMENT
-// ══════════════════════════════════════════════════════════
-
-function openPersonModal() {
-  document.getElementById('modal-person').classList.remove('hidden');
-  refreshPendingRequests();
-}
-
-function closePersonModal() {
-  document.getElementById('modal-person').classList.add('hidden');
-}
-
-async function handleCreatePerson() {
-  const nameEl = document.getElementById('input-new-person-name');
-  const name   = nameEl?.value.trim();
-  if (!name) { showToast('Ingresá un nombre', 'error'); return; }
-
-  try {
-    await createPerson(name);
-    nameEl.value = '';
-    // Reload persons + familia flag
-    const [persons, familiaFlag] = await Promise.all([getMyPersons(), getFamiliaFlag()]);
-    state.persons        = persons;
-    state.personNameToId = Object.fromEntries(persons.map(p => [p.name, p.id]));
-    state.showFamilia    = familiaFlag.show_familia;
-    renderPersonSwitcher();
-    showToast(`✅ Persona "${name}" creada`, 'success');
-  } catch (e) {
-    showToast('❌ ' + e.message, 'error');
-  }
-}
-
-async function handleRequestAccess() {
-  const personIdEl = document.getElementById('input-request-person-id');
-  const personId   = personIdEl?.value.trim();
-  if (!personId) { showToast('Ingresá el ID de la persona', 'error'); return; }
-
-  try {
-    await requestPersonAccess(personId);
-    personIdEl.value = '';
-    showToast('✅ Solicitud enviada — esperá que sea aprobada', 'success');
-  } catch (e) {
-    showToast('❌ ' + e.message, 'error');
-  }
-}
-
-async function refreshPendingRequests() {
-  const container = document.getElementById('pending-requests-list');
-  if (!container) return;
-
-  const requests = await getPendingAccessRequests();
-  if (!requests.length) {
-    container.innerHTML = '<p class="no-requests">Sin solicitudes pendientes.</p>';
-    return;
-  }
-
-  container.innerHTML = requests.map(r => `
-    <div class="access-request-row">
-      <span>${r.profiles?.username ?? '?'} quiere acceder a <strong>${r.persons?.name ?? '?'}</strong></span>
-      <button class="btn-approve" data-id="${r.id}">✅ Aprobar</button>
-      <button class="btn-reject"  data-id="${r.id}">❌ Rechazar</button>
-    </div>
-  `).join('');
-
-  container.querySelectorAll('.btn-approve').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      try {
-        await approvePersonAccess(btn.dataset.id);
-        showToast('✅ Acceso aprobado', 'success');
-        refreshPendingRequests();
-      } catch (e) { showToast('❌ ' + e.message, 'error'); }
-    });
-  });
-
-  container.querySelectorAll('.btn-reject').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      try {
-        await rejectPersonAccess(btn.dataset.id);
-        showToast('Solicitud rechazada', '');
-        refreshPendingRequests();
-      } catch (e) { showToast('❌ ' + e.message, 'error'); }
-    });
-  });
-}
-
-// ══════════════════════════════════════════════════════════
 // AUTO-PLAN
 // ══════════════════════════════════════════════════════════
 
@@ -2231,13 +2143,6 @@ function wireControls() {
   document.getElementById('btn-create-user')?.addEventListener('click', handleCreateUser);
   document.getElementById('btn-reset-user-password')?.addEventListener('click', handleResetUserPassword);
 
-  // Person management modal
-  document.getElementById('btn-manage-persons')?.addEventListener('click', openPersonModal);
-  document.getElementById('btn-close-person-modal')?.addEventListener('click', closePersonModal);
-  document.querySelector('#modal-person .modal-backdrop')?.addEventListener('click', closePersonModal);
-  document.getElementById('btn-create-person')?.addEventListener('click', handleCreatePerson);
-  document.getElementById('btn-request-access')?.addEventListener('click', handleRequestAccess);
-
   // Login gate form — click and Enter key both trigger sign-in
   async function doLogin() {
     const user = document.getElementById('input-username')?.value.trim();
@@ -2271,7 +2176,6 @@ function wireControls() {
       closeRecipeEditor();
       closeIngredientEditor();
       closeShoppingModal();
-      closePersonModal();
       const picker = document.querySelector('.slot-picker');
       if (picker) picker.remove();
     }

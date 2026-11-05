@@ -9,8 +9,10 @@
  *   2. js/ingredients.js logic — calculateItemMacros, calculateRecipeMacros,
  *                                slugifyIngredient, searchIngredients,
  *                                addIngredient / updateIngredient / deleteIngredient.
- *   3. supabase/migrations/20250602000000_ingredients.sql — columns, indexes,
- *                                shares_access_with, RLS policies.
+ *   3. supabase/migrations/20250602000000_ingredients.sql — base columns, indexes,
+ *                                RLS enabled; and 20261105000400_ingredients_by_family.sql —
+ *                                family_id, family uniqueness, family RLS policies
+ *                                (no is_admin(), no shares_access_with).
  *   4. Integration with data/recipes.json — ingredient rows follow the
  *                                { item, cantidad, unidad } shape.
  *
@@ -288,7 +290,7 @@ function validateIngredientsLogic() {
 // ── 3. SQL schema ─────────────────────────────────────────────────────────────
 
 function validateSQLSchema() {
-  section('3. supabase/migrations/20250602000000_ingredients.sql');
+  section('3a. supabase/migrations/20250602000000_ingredients.sql (base table)');
 
   const sqlPath = resolve(ROOT, 'supabase', 'migrations', '20250602000000_ingredients.sql');
   assert('SQL file exists', existsSync(sqlPath), 'migration file not found');
@@ -313,30 +315,81 @@ function validateSQLSchema() {
   assert('grasas_g numeric',                      /grasas_g\s+numeric/i.test(sql),                              'missing grasas_g');
   assert('created_at timestamptz',                /created_at\s+timestamptz/i.test(sql),                        'missing created_at');
   assert('updated_at timestamptz',                /updated_at\s+timestamptz/i.test(sql),                        'missing updated_at');
-  assert('UNIQUE (owner_id, nombre)',             /unique\s*\(\s*owner_id\s*,\s*nombre\s*\)/i.test(sql),        'missing unique constraint');
-
   // Indexes
   assert('ingredients_owner_idx index exists',   /create index if not exists ingredients_owner_idx/i.test(sql), 'missing owner index');
   assert('ingredients_nombre_idx GIN index',     /create index if not exists ingredients_nombre_idx/i.test(sql),'missing nombre GIN index');
   assert('GIN uses to_tsvector',                 /using gin\s*\(\s*to_tsvector/i.test(sql),                    'GIN index missing to_tsvector');
 
-  // shares_access_with function
-  assert('shares_access_with function defined',  /create or replace function public\.shares_access_with/i.test(sql),  'missing function');
-  assert('shares_access_with returns boolean',   /returns boolean/i.test(sql),                                         'missing RETURNS BOOLEAN');
-  assert('shares_access_with is security definer', /security definer/i.test(sql),                                      'missing SECURITY DEFINER');
-  assert('shares_access_with: stable',           /stable/i.test(sql),                                                   'missing STABLE marker');
-  assert('shares_access_with: joins person_access twice', /join public\.person_access/i.test(sql),                      'missing person_access JOIN');
-  assert("shares_access_with: checks status = 'approved'", /status\s*=\s*'approved'/i.test(sql),                       "missing status='approved' check");
-
-  // RLS
+  // RLS is enabled in the base migration (policies are replaced by the family migration)
   assert('RLS enabled',                          /alter table public\.ingredients enable row level security/i.test(sql), 'missing RLS enable');
-  assert('SELECT policy exists',                 /for select/i.test(sql),                                                'missing SELECT policy');
-  assert('INSERT policy exists',                 /for insert/i.test(sql),                                                'missing INSERT policy');
-  assert('UPDATE policy exists',                 /for update/i.test(sql),                                                'missing UPDATE policy');
-  assert('DELETE policy exists',                 /for delete/i.test(sql),                                                'missing DELETE policy');
-  assert('SELECT uses shares_access_with',       /for select[\s\S]*?shares_access_with/i.test(sql),                     'SELECT policy missing shares_access_with');
-  assert('SELECT uses is_admin()',               /for select[\s\S]*?is_admin\(\)/i.test(sql),                            'SELECT policy missing is_admin()');
-  assert('INSERT restricted to owner or admin', /for insert[\s\S]*?owner_id\s*=\s*auth\.uid\(\)/i.test(sql),            'INSERT policy missing owner_id = auth.uid()');
+
+  validateFamilyMigration();
+}
+
+/**
+ * 20261105000400_ingredients_by_family.sql — ingredients are scoped by family,
+ * with no admin bypass and no dependency on shares_access_with / person_access.
+ */
+function validateFamilyMigration() {
+  section('3b. supabase/migrations/20261105000400_ingredients_by_family.sql');
+
+  const sqlPath = resolve(ROOT, 'supabase', 'migrations', '20261105000400_ingredients_by_family.sql');
+  assert('SQL file exists', existsSync(sqlPath), 'migration file not found');
+  if (!existsSync(sqlPath)) return;
+
+  const sql = readFileSync(sqlPath, 'utf8');
+  ok('SQL file readable');
+
+  // Executable SQL only: strip "-- ..." comments so explanatory text cannot satisfy or break a check
+  const code = sql.replace(/--.*$/gm, '');
+
+  // Split the file into the executable part and the final validation block, so policy
+  // checks only look at the CREATE POLICY statements and not at the validation regexes.
+  const policySql = [...code.matchAll(/create policy[\s\S]*?;/gi)].map(m => m[0]);
+  const policyFor = cmd => policySql.find(p => new RegExp(`for\\s+${cmd}\\b`, 'i').test(p)) ?? '';
+
+  // family_id column
+  assert('adds ingredients.family_id',            /add column if not exists family_id uuid references public\.families\(id\) on delete restrict/i.test(code), 'missing family_id column / FK on delete restrict');
+  assert('backfills family_id from owner profile', /update public\.ingredients[\s\S]*?set\s+family_id\s*=\s*pr\.family_id[\s\S]*?pr\.id\s*=\s*i\.owner_id/i.test(code), 'missing family_id backfill from profiles');
+  assert('family_id default my_family_id()',      /alter column family_id set default public\.my_family_id\(\)/i.test(code), 'missing default my_family_id()');
+  assert('family_id NOT NULL',                    /alter column family_id set not null/i.test(code),                          'missing NOT NULL');
+  assert('owner_id default auth.uid()',           /alter column owner_id\s+set default auth\.uid\(\)/i.test(code),            'missing owner_id default');
+
+  // Dedup before the new unique constraint
+  const dedupPos  = code.search(/delete from public\.ingredients/i);
+  const uniquePos = code.search(/add constraint ingredients_family_nombre_key/i);
+  assert('dedups before creating unique',         dedupPos !== -1 && uniquePos !== -1 && dedupPos < uniquePos, 'dedupe must run before the unique constraint');
+  assert('dedup reports count (raise notice)',    /raise notice[^;]*eliminados/i.test(code),                                  'missing raise notice with deleted count');
+  assert('dedup checks FKs to ingredients',       /confrelid\s*=\s*'public\.ingredients'::regclass/i.test(code),              'missing FK check before deleting');
+
+  // Uniqueness: real constraint (for upsert onConflict) + case-insensitive index
+  assert('drops unique (owner_id, nombre)',       /drop constraint if exists ingredients_owner_id_nombre_key/i.test(code),     'old unique constraint not dropped');
+  assert('UNIQUE constraint (family_id, nombre)', /add constraint ingredients_family_nombre_key unique\s*\(\s*family_id\s*,\s*nombre\s*\)/i.test(code), 'missing unique (family_id, nombre)');
+  assert('UNIQUE index (family_id, lower(nombre))', /create unique index if not exists ingredients_family_nombre_lower_idx\s+on public\.ingredients\s*\(\s*family_id\s*,\s*lower\(nombre\)\s*\)/i.test(code), 'missing unique index on lower(nombre)');
+
+  // Ownership protection trigger
+  assert('protects family_id/owner_id on update', /create trigger tr_ingredients_protect_ownership\s+before update on public\.ingredients/i.test(code), 'missing ownership trigger');
+
+  // Policies: exactly 4, by family, no admin bypass, no shares_access_with
+  assert('4 policies created',                    policySql.length === 4,                                                      `found ${policySql.length} CREATE POLICY statement(s)`);
+  assert('RLS enabled',                           /alter table public\.ingredients enable row level security/i.test(code),     'missing RLS enable');
+  assert('SELECT: family_id = my_family_id()',    /using\s*\(\s*family_id\s*=\s*public\.my_family_id\(\)\s*\)/i.test(policyFor('select')), 'SELECT policy must filter by my_family_id()');
+  assert('INSERT: with check family + creator',   /with check\s*\([\s\S]*family_id\s*=\s*public\.my_family_id\(\)[\s\S]*owner_id\s*=\s*auth\.uid\(\)/i.test(policyFor('insert')), 'INSERT policy must check family_id and owner_id = auth.uid()');
+  assert('UPDATE: using + with check by family',  /using\s*\(\s*family_id\s*=\s*public\.my_family_id\(\)\s*\)[\s\S]*with check\s*\(\s*family_id\s*=\s*public\.my_family_id\(\)\s*\)/i.test(policyFor('update')), 'UPDATE policy must have using and with check on my_family_id()');
+  assert('DELETE: family_id = my_family_id()',    /using\s*\(\s*family_id\s*=\s*public\.my_family_id\(\)\s*\)/i.test(policyFor('delete')), 'DELETE policy must filter by my_family_id()');
+  assert('policies are TO authenticated',         policySql.every(p => /to authenticated/i.test(p)),                          'every policy must be TO authenticated');
+  assert('policies do not use is_admin()',        !policySql.some(p => /is_admin/i.test(p)),                                   'policies must not use is_admin()');
+  assert('policies do not use shares_access_with', !policySql.some(p => /shares_access_with/i.test(p)),                        'policies must not use shares_access_with');
+  assert('policies do not use person_access',     !policySql.some(p => /person_access/i.test(p)),                              'policies must not use person_access');
+  assert('revokes anon access',                   /revoke all on public\.ingredients from anon/i.test(code),                   'missing revoke from anon');
+
+  // shares_access_with removed (no cascade)
+  assert('drops shares_access_with(uuid)',        /drop function if exists public\.shares_access_with\(uuid\)\s*;/i.test(code), 'missing drop function shares_access_with');
+  assert('drop has no CASCADE',                   !/drop function[^;]*cascade/i.test(code),                                    'drop must not use CASCADE');
+
+  // Final in-database validation block
+  assert('has final validation (raise exception)', /raise exception 'Validación fallida/i.test(code),                          'missing final validation block');
+  assert('final validation reports counts per family', /raise notice 'Familia/i.test(code),                                   'missing per-family counts notice');
 }
 
 // ── 4. Integration with data/recipes.json ─────────────────────────────────────

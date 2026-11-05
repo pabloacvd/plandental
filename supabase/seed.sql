@@ -16,6 +16,22 @@
 -- Internal email convention: <username>@app.local
 -- This email is never shown to the user — username is always used.
 
+-- ── 0. Create the family shared by pablo and juli ───────────
+-- profiles.family_id is NOT NULL. The trigger tr_assign_profile_family reads
+-- the session setting app.new_user_family_id when the profile is created;
+-- without it, it would create an individual family for pablo.
+insert into public.families (name)
+select 'Pablo y Juli'
+where not exists (
+  select 1 from public.families where lower(name) = lower('Pablo y Juli')
+);
+
+select set_config(
+  'app.new_user_family_id',
+  (select id::text from public.families where lower(name) = lower('Pablo y Juli')),
+  false   -- session-level: works even if the script is not one transaction
+);
+
 insert into auth.users (
   id,
   instance_id,
@@ -76,23 +92,12 @@ values (
 )
 on conflict (id) do nothing;
 
--- ── 4. Create approved access: pablo → Pablo ─────────────────
-insert into public.person_access (person_id, granted_to, granted_by, status, created_at)
-values (
-  '00000000-0000-0000-0000-000000000010',
-  '00000000-0000-0000-0000-000000000001',
-  '00000000-0000-0000-0000-000000000001',
-  'approved',
-  now()
-)
-on conflict (person_id, granted_to) do nothing;
-
--- ── 5. Create the Juli person record ────────────────────────
--- Juli no tiene cuenta de usuario todavía.
--- Para crearla: iniciá sesión como pablo (admin) y usá
--- "Mi cuenta → Gestionar usuarios" en la app.
--- El trigger on_profile_created_match_person asignará acceso
--- automáticamente a este persons row cuando el usuario 'juli' sea creado.
+-- ── 4. Create the Juli person record ────────────────────────
+-- Juli no tiene cuenta de usuario todavía; su persona pertenece a la familia
+-- de pablo (persons.family_id se toma del owner). Para crear su cuenta:
+-- iniciá sesión como pablo (admin) y usá "Mi cuenta → Gestionar usuarios",
+-- eligiendo la familia "Pablo y Juli". admin_create_user reutiliza esta
+-- persona (mismo nombre dentro de la familia) en lugar de crear otra.
 insert into public.persons (id, name, owner_id, created_at)
 values (
   '00000000-0000-0000-0000-000000000011',
@@ -102,16 +107,8 @@ values (
 )
 on conflict (id) do nothing;
 
--- Grant pablo approved access to Juli as well (he is admin + owner)
-insert into public.person_access (person_id, granted_to, granted_by, status, created_at)
-values (
-  '00000000-0000-0000-0000-000000000011',
-  '00000000-0000-0000-0000-000000000001',
-  '00000000-0000-0000-0000-000000000001',
-  'approved',
-  now()
-)
-on conflict (person_id, granted_to) do nothing;
+-- Clear the session setting used above.
+select set_config('app.new_user_family_id', '', false);
 
 -- ── Done ─────────────────────────────────────────────────────
 -- ⚠️  REMEMBER: change pablo's password immediately after first login.

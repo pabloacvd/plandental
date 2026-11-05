@@ -12,9 +12,9 @@
  *
  * Data model:
  *   Plans      → public.plans        (one row per person/date/slot)
- *   Recipes    → public.recipes      (shared catalog)
+ *   Recipes    → public.recipes      (catalog scoped to user's family)
  *   Nutrition  → public.nutrition_data
- *   Persons    → public.persons + public.person_access
+ *   Persons    → public.persons (scoped to the user's family)
  */
 
 import { supabase } from './supabase.js';
@@ -132,107 +132,21 @@ export async function getMyProfile(authUser) {
   return data;
 }
 
-// ── Persons & access ─────────────────────────────────────────
+// ── Persons ──────────────────────────────────────────────────
 
 /**
- * Fetch all persons the current user has approved access to.
+ * Fetch all persons of the current user's family.
+ * RLS limits the rows to persons.family_id = my_family_id().
+ * Persons are created server-side when an admin creates the user.
  * Returns array of { id, name, owner_id }.
  */
-export async function getMyPersons(authUser) {
-  let user = authUser;
-  if (!user) {
-    const { data } = await supabase.auth.getUser();
-    user = data?.user;
-  }
-  if (!user) return [];
-
+export async function getMyPersons() {
   const { data, error } = await supabase
-    .from('person_access')
-    .select('person_id, status, persons(id, name, owner_id)')
-    .eq('status', 'approved')
-    .eq('granted_to', user.id);
+    .from('persons')
+    .select('id, name, owner_id')
+    .order('name');
 
   if (error) { console.warn('getMyPersons:', error.message); return []; }
-  return (data || []).map(row => row.persons).filter(Boolean);
-}
-
-/**
- * Return the familia_flag for the current user.
- * { show_familia: boolean, approved_count: number }
- */
-export async function getFamiliaFlag(authUser) {
-  let user = authUser;
-  if (!user) {
-    const { data } = await supabase.auth.getUser();
-    user = data?.user;
-  }
-  if (!user) return { show_familia: false, approved_count: 0 };
-
-  const { data, error } = await supabase
-    .from('familia_flag')
-    .select('show_familia, approved_count')
-    .eq('profile_id', user.id)
-    .maybeSingle();
-
-  if (error) { console.warn('getFamiliaFlag:', error.message); }
-  return data ?? { show_familia: false, approved_count: 0 };
-}
-
-/**
- * Create a new person and grant the caller immediate approved access.
- * Returns the new person_id (uuid).
- */
-export async function createPerson(name) {
-  const { data, error } = await supabase.rpc('create_person_with_access', {
-    p_name: name,
-  });
-  if (error) throw new Error(error.message);
-  return data; // uuid
-}
-
-/**
- * Request access to an existing person (creates a 'pending' record).
- * Returns the new person_access id.
- */
-export async function requestPersonAccess(personId) {
-  const { data, error } = await supabase.rpc('request_person_access', {
-    p_person_id: personId,
-  });
-  if (error) throw new Error(error.message);
-  return data;
-}
-
-/**
- * Approve an incoming access request (the caller must be granted_to).
- */
-export async function approvePersonAccess(accessId) {
-  const { error } = await supabase.rpc('approve_person_access', {
-    p_access_id: accessId,
-  });
-  if (error) throw new Error(error.message);
-}
-
-/**
- * Reject / cancel an access request.
- */
-export async function rejectPersonAccess(accessId) {
-  const { error } = await supabase.rpc('reject_person_access', {
-    p_access_id: accessId,
-  });
-  if (error) throw new Error(error.message);
-}
-
-/**
- * Fetch pending incoming access requests for the current user
- * (i.e., someone wants access to one of the caller's persons).
- */
-export async function getPendingAccessRequests() {
-  const { data, error } = await supabase
-    .from('person_access')
-    .select('id, person_id, granted_to, status, created_at, persons(name), profiles!person_access_granted_to_fkey(username)')
-    .eq('status', 'pending');
-
-  if (error) { console.warn('getPendingAccessRequests:', error.message); return []; }
   return data || [];
 }
 
@@ -358,8 +272,8 @@ export async function removePlanEntry(personName, dateKey, slotId, personNameToI
 // ── Recipes ───────────────────────────────────────────────────
 
 /**
- * Fetch all recipes from Supabase.
- * Returns array in the legacy format: [{ id, receta }, …]
+ * Fetch all recipes visible to the current user's family from Supabase.
+ * Returns array in the legacy format: [{ id, receta }, …] or null on error.
  */
 export async function fetchRecipes() {
   const { data, error } = await supabase
@@ -377,6 +291,8 @@ export async function fetchRecipes() {
 
 /**
  * Save (upsert) a single recipe to Supabase.
+ * family_id is populated by DB default (my_family_id()) on insert
+ * and preserved on update.
  */
 export async function saveRecipe(recipeObj) {
   const { id, receta } = recipeObj;
@@ -388,7 +304,7 @@ export async function saveRecipe(recipeObj) {
       categoria: receta.categoria || null,
       receta,
       updated_at: new Date().toISOString(),
-    }, { onConflict: 'id' });
+    }, { onConflict: 'family_id,id' });
 
   if (error) throw new Error(error.message);
 }
@@ -405,7 +321,7 @@ export async function saveRecipes(recipesArray) {
 }
 
 /**
- * Delete a recipe by id.
+ * Delete a recipe by id (RLS restricts deletion to the caller's family).
  */
 export async function deleteRecipeFromDB(id) {
   const { error } = await supabase
@@ -591,8 +507,8 @@ export async function clearDefaultWeek(personNames, personNameToId) {
  * Fetch all ingredients visible to the current user.
  *
  * Authenticated  → queries public.ingredients via Supabase RLS.
- *                  Returns own rows + any rows owned by users who
- *                  share approved person_access with the caller.
+ *                  Returns every ingredient of the caller's family
+ *                  (family_id = my_family_id()), whoever created it.
  * Unauthenticated → falls back to data/ingredients.json (static
  *                  seed file served alongside the app), or [] if
  *                  the file is not yet present.
@@ -631,10 +547,11 @@ export async function fetchIngredients() {
 /**
  * Save (upsert) a single ingredient to Supabase.
  *
- * Authenticated  → upserts into public.ingredients.
- *                  owner_id is set to the current user's id;
- *                  passing a different owner_id is ignored unless
- *                  the caller is an admin (enforced by RLS).
+ * Authenticated  → upserts into public.ingredients, unique per
+ *                  (family_id, nombre). family_id and owner_id (creator)
+ *                  are filled by DB defaults (my_family_id() / auth.uid())
+ *                  on insert and are never sent, so editing an ingredient
+ *                  created by another family member keeps its creator.
  * Unauthenticated → no-op; returns the object unchanged so
  *                  callers can still work in offline mode.
  *
@@ -656,8 +573,6 @@ export async function saveIngredient(ingObj) {
     return ingObj;
   }
 
-  const { data: { user } } = await supabase.auth.getUser();
-
   const row = {
     nombre:              ingObj.nombre              ?? '',
     categoria:           ingObj.categoria           ?? null,
@@ -667,7 +582,6 @@ export async function saveIngredient(ingObj) {
     proteina_g:          ingObj.proteina_g          ?? 0,
     carbohidratos_g:     ingObj.carbohidratos_g     ?? 0,
     grasas_g:            ingObj.grasas_g            ?? 0,
-    owner_id:            ingObj.owner_id            ?? user.id,
     updated_at:          new Date().toISOString(),
   };
 
@@ -677,7 +591,7 @@ export async function saveIngredient(ingObj) {
 
   const { data, error } = await supabase
     .from('ingredients')
-    .upsert(row, { onConflict: 'owner_id,nombre' })
+    .upsert(row, { onConflict: 'family_id,nombre' })
     .select()
     .single();
 
@@ -702,7 +616,7 @@ export async function saveIngredients(ingArray) {
 /**
  * Delete an ingredient by id.
  *
- * Authenticated  → deletes from Supabase (RLS enforces owner or admin).
+ * Authenticated  → deletes from Supabase (RLS: any member of the family).
  * Unauthenticated → no-op.
  *
  * @param {string} id — UUID of the ingredient to delete

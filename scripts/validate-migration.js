@@ -57,7 +57,7 @@ async function check(label, fn) {
 async function checkCounts() {
   console.log('\n── 1. Record counts ────────────────────────────');
 
-  const tables = ['profiles', 'persons', 'person_access', 'recipes', 'nutrition_data', 'plans', 'ingredients'];
+  const tables = ['profiles', 'families', 'persons', 'recipes', 'nutrition_data', 'plans', 'ingredients'];
   for (const t of tables) {
     const { count, error } = await admin.from(t).select('*', { count: 'exact', head: true });
     if (error) { fail(`${t} count`, error.message); continue; }
@@ -87,27 +87,24 @@ async function checkAdminUser() {
     pabloId = data.id;
   });
 
-  await check('pablo has approved access to Pablo person', async () => {
-    const { data, error } = await admin
-      .from('person_access')
-      .select('status, persons(name)')
-      .eq('status', 'approved')
-      .eq('granted_to', pabloId)
-      .eq('person_id',  '00000000-0000-0000-0000-000000000010')
-      .single();
-    if (error) throw error;
-    if (data.status !== 'approved') throw new Error('access status is not approved');
+  await check('pablo and Pablo person share the same family', async () => {
+    const { data: prof, error: e1 } = await admin
+      .from('profiles').select('family_id').eq('id', pabloId).single();
+    if (e1) throw e1;
+    const { data: person, error: e2 } = await admin
+      .from('persons').select('family_id, owner_id').eq('id', '00000000-0000-0000-0000-000000000010').single();
+    if (e2) throw e2;
+    if (person.family_id !== prof.family_id) throw new Error('Pablo person is in a different family than the profile');
   });
 
-  await check('pablo has approved access to Juli person', async () => {
-    const { data, error } = await admin
-      .from('person_access')
-      .select('status')
-      .eq('granted_to', pabloId)
-      .eq('person_id',  '00000000-0000-0000-0000-000000000011')
-      .single();
-    if (error) throw error;
-    if (data.status !== 'approved') throw new Error('access status is not approved');
+  await check('Juli person is in pablo\'s family', async () => {
+    const { data: prof, error: e1 } = await admin
+      .from('profiles').select('family_id').eq('id', pabloId).single();
+    if (e1) throw e1;
+    const { data: person, error: e2 } = await admin
+      .from('persons').select('family_id').eq('id', '00000000-0000-0000-0000-000000000011').single();
+    if (e2) throw e2;
+    if (person.family_id !== prof.family_id) throw new Error('Juli person is in a different family than pablo');
   });
 }
 
@@ -128,10 +125,10 @@ async function checkRecipes() {
   await check('batido-ninja-pablo recipe exists', async () => {
     const { data, error } = await admin
       .from('recipes')
-      .select('id')
-      .eq('id', 'batido-ninja-pablo')
-      .single();
+      .select('id, family_id')
+      .eq('id', 'batido-ninja-pablo');
     if (error) throw error;
+    if (!data || data.length === 0) throw new Error('batido-ninja-pablo recipe not found');
   });
 }
 
@@ -183,35 +180,28 @@ async function checkRLS() {
     if (data && data.length > 0) throw new Error('anon received nutrition rows — RLS may be misconfigured');
   });
 
-  await check('anon can read recipes (public catalog policy)', async () => {
-    // Recipes require auth.uid() not null — so anon (no JWT) returns empty.
-    // This is expected and acceptable for a PWA that always logs in first.
-    const { error } = await anon.from('recipes').select('id').limit(1);
-    // No error means the query ran fine (may return 0 rows due to auth requirement)
-    if (error && error.code !== 'PGRST301') throw error;
+  await check('anon cannot read recipes (RLS / privileges block unauthenticated)', async () => {
+    // Recipes require authenticated session — anon has no privileges on recipes.
+    const { data, error } = await anon.from('recipes').select('id').limit(1);
+    // Either permission denied (code 42501 / PGRST301) or 0 rows returned
+    if (error && error.code !== '42501' && error.code !== 'PGRST301') throw error;
+    if (data && data.length > 0) throw new Error('anon received recipe rows — RLS / privileges may be misconfigured');
   });
 }
 
-// ── 6. Familia flag view ──────────────────────────────────────
+// ── 6. Every profile has a person in its family ──────────────
 
-async function checkFamiliaFlag() {
-  console.log('\n── 6. Familia flag view ────────────────────────');
+async function checkProfilePersons() {
+  console.log('\n── 6. Profiles have a person in their family ───');
 
-  const { data: pabloProfile } = await admin
-    .from('profiles')
-    .select('id')
-    .eq('username', 'pablo')
-    .single();
-  const pabloId = pabloProfile?.id || '00000000-0000-0000-0000-000000000001';
-
-  await check('pablo shows show_familia=true (has 2 persons)', async () => {
-    const { data, error } = await admin
-      .from('familia_flag')
-      .select('show_familia, approved_count')
-      .eq('profile_id', pabloId)
-      .single();
-    if (error) throw error;
-    if (!data.show_familia) throw new Error(`show_familia=${data.show_familia}, approved_count=${data.approved_count}`);
+  await check('every profile has a persons row named after it in its family', async () => {
+    const { data: profiles, error: e1 } = await admin.from('profiles').select('username, family_id');
+    if (e1) throw e1;
+    const { data: persons, error: e2 } = await admin.from('persons').select('name, family_id');
+    if (e2) throw e2;
+    const missing = profiles.filter(pr =>
+      !persons.some(pe => pe.family_id === pr.family_id && pe.name.toLowerCase() === pr.username.toLowerCase()));
+    if (missing.length) throw new Error(`missing persons for: ${missing.map(m => m.username).join(', ')}`);
   });
 }
 
@@ -237,7 +227,7 @@ async function main() {
   await checkRecipes();
   await checkNutrition();
   await checkRLS();
-  await checkFamiliaFlag();
+  await checkProfilePersons();
   printSessionCheck();
 
   console.log(`\n──────────────────────────────────────`);

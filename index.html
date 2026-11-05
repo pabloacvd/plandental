@@ -83,8 +83,6 @@
           <button id="btn-github-auth" class="btn-auth">Iniciar sesión</button>
           <span id="auth-status" class="auth-status"></span>
         </div>
-        <!-- Manage persons button (desktop) -->
-        <button id="btn-manage-persons" class="btn-manage-persons" title="Gestionar personas">👥</button>
       </div>
     </div>
   </header>
@@ -292,40 +290,6 @@
           <input type="password" id="input-reset-password" placeholder="Mínimo 6 caracteres" autocomplete="new-password" />
         </div>
         <button id="btn-reset-user-password" class="btn-secondary">Cambiar contraseña</button>
-      </section>
-    </div>
-  </div>
-
-  <!-- Person Management Modal -->
-  <div id="modal-person" class="modal hidden">
-    <div class="modal-backdrop"></div>
-    <div class="modal-box modal-box--sm">
-      <button class="modal-close" id="btn-close-person-modal">✕</button>
-      <h3>Gestionar personas</h3>
-
-      <!-- Create a new person -->
-      <section class="person-modal-section">
-        <h4>Crear nueva persona</h4>
-        <div class="form-inline">
-          <input type="text" id="input-new-person-name" placeholder="Nombre (ej: María)" autocapitalize="words" />
-          <button id="btn-create-person" class="btn-primary">Crear</button>
-        </div>
-      </section>
-
-      <!-- Request access to an existing person by UUID -->
-      <section class="person-modal-section">
-        <h4>Solicitar acceso a una persona existente</h4>
-        <p class="auth-note">Pedile al dueño el ID (UUID) de la persona.</p>
-        <div class="form-inline">
-          <input type="text" id="input-request-person-id" placeholder="UUID de la persona" autocomplete="off" />
-          <button id="btn-request-access" class="btn-secondary">Solicitar</button>
-        </div>
-      </section>
-
-      <!-- Pending incoming access requests -->
-      <section class="person-modal-section">
-        <h4>Solicitudes pendientes de aprobación</h4>
-        <div id="pending-requests-list"></div>
       </section>
     </div>
   </div>

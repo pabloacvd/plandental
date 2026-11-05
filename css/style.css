@@ -1421,7 +1421,7 @@ input  { font: inherit; border: none; outline: none; }
 }
 
 /* ═══════════════════════════════════════════
-   PERSON MANAGEMENT MODAL
+   MODAL SECTIONS / FORMS
 ═══════════════════════════════════════════ */
 .person-modal-section {
   padding: 12px 0;
@@ -1439,38 +1439,6 @@ input  { font: inherit; border: none; outline: none; }
 }
 .nutrition-profile-grid .form-field--full { grid-column: 1 / -1; }
 .form-field .req { color: var(--red); }
-.form-inline {
-  display: flex; gap: 8px; align-items: center;
-}
-.form-inline input {
-  flex: 1; padding: 7px 10px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  font-size: .84rem;
-}
-.access-request-row {
-  display: flex; align-items: center; gap: 8px;
-  padding: 6px 0;
-  font-size: .84rem;
-  border-bottom: 1px solid var(--border);
-}
-.access-request-row:last-child { border-bottom: none; }
-.access-request-row span { flex: 1; }
-.no-requests { font-size: .82rem; color: var(--text-muted); padding: 4px 0; }
-
-/* Manage persons button (desktop header) */
-.btn-manage-persons {
-  background: none; border: none; cursor: pointer;
-  font-size: 1.1rem; padding: 4px 6px;
-  border-radius: var(--radius-sm);
-  transition: var(--transition);
-  color: var(--text-muted);
-}
-.btn-manage-persons:hover { background: var(--bg); color: var(--accent); }
-
-@media (max-width: 900px) {
-  .btn-manage-persons { display: none; }
-}
 
 /* ═══════════════════════════════════════════
    INGREDIENT CARDS (sidebar list)

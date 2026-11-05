@@ -32,14 +32,20 @@ export async function loadData() {
   // Persons without a row are asked to complete their profile in the UI.
   _nutrition = await fetchNutrition();
 
-  // Load recipes from Supabase; fall back to static file
+  // Load recipes from Supabase (scoped to family); fall back to static file
+  // only if fetchRecipes() returns null (error/offline or unauthenticated).
   const cached = await fetchRecipes();
-  if (cached?.recetas?.length) {
+  if (cached && Array.isArray(cached.recetas)) {
     _recipes = cached.recetas;
   } else {
-    const recRes  = await fetch('./data/recipes.json');
-    const recData = await recRes.json();
-    _recipes = recData.recetas;
+    try {
+      const recRes  = await fetch('./data/recipes.json');
+      const recData = await recRes.json();
+      _recipes = recData.recetas || [];
+    } catch (err) {
+      console.warn('loadData: recipes.json fallback failed', err.message);
+      _recipes = [];
+    }
   }
 
   // Load ingredients catalog (Supabase when authenticated, JSON seed otherwise)
