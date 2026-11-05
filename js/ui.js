@@ -3,6 +3,17 @@
  */
 
 import { MEAL_SLOTS, DAY_NAMES_SHORT, MONTH_NAMES, computeDayMacros, toDateKey } from './calendar.js';
+import { sameMealVersion } from './plan-versions.js';
+
+/** Escape text before interpolating it into innerHTML (recipe data comes from the DB). */
+function esc(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
 
 // ── Category → CSS class mapping ─────────────────────────
 
@@ -79,40 +90,40 @@ export function renderRecipeDetail(recipeObj) {
                         : [];
 
   return `
-    <div class="recipe-detail-name">${nombre}</div>
-    <div class="recipe-detail-desc">${descripcion_breve}</div>
+    <div class="recipe-detail-name">${esc(nombre)}</div>
+    <div class="recipe-detail-desc">${esc(descripcion_breve)}</div>
     <div class="recipe-detail-macros">
       <div class="macro-box">
-        <div class="macro-box-val" style="color:var(--orange)">${m.calorias}</div>
+        <div class="macro-box-val" style="color:var(--orange)">${esc(m.calorias)}</div>
         <div class="macro-box-lbl">kcal</div>
       </div>
       <div class="macro-box">
-        <div class="macro-box-val" style="color:var(--accent)">${m.proteina_g}g</div>
+        <div class="macro-box-val" style="color:var(--accent)">${esc(m.proteina_g)}g</div>
         <div class="macro-box-lbl">proteína</div>
       </div>
       <div class="macro-box">
-        <div class="macro-box-val" style="color:var(--green)">${m.carbohidratos_g}g</div>
+        <div class="macro-box-val" style="color:var(--green)">${esc(m.carbohidratos_g)}g</div>
         <div class="macro-box-lbl">carbos</div>
       </div>
       <div class="macro-box">
-        <div class="macro-box-val" style="color:var(--purple)">${m.grasas_g}g</div>
+        <div class="macro-box-val" style="color:var(--purple)">${esc(m.grasas_g)}g</div>
         <div class="macro-box-lbl">grasas</div>
       </div>
     </div>
-    <p style="font-size:.75rem;color:var(--text-muted);margin-bottom:10px">Porciones: ${porciones}</p>
+    <p style="font-size:.75rem;color:var(--text-muted);margin-bottom:10px">Porciones: ${esc(porciones)}</p>
     <div class="recipe-detail-section">Ingredientes</div>
     <table class="ingredient-table">
       ${safeIngredientes.map(ing => `
         <tr>
-          <td>${ing.nombre ?? ing.item ?? ing.ingrediente ?? ''}</td>
-          <td>${ing.cantidad ?? ''}${ing.unidad ? ' ' + ing.unidad : ''}</td>
+          <td>${esc(ing.nombre ?? ing.item ?? ing.ingrediente ?? '')}</td>
+          <td>${esc(ing.cantidad ?? '')}${ing.unidad ? ' ' + esc(ing.unidad) : ''}</td>
         </tr>
       `).join('')}
     </table>
     <div class="recipe-detail-section">Preparación</div>
     <ol class="step-list">
       ${safePasoAPaso.map((step, i) => `
-        <li><span class="step-num">${i + 1}</span><span>${step}</span></li>
+        <li><span class="step-num">${i + 1}</span><span>${esc(step)}</span></li>
       `).join('')}
     </ol>
   `;
@@ -131,7 +142,7 @@ function getDayEntry(planData, person, weekKey, dateKey) {
     const merged = { ...pablo };
     // Add Juli's meals that are different or missing from Pablo
     for (const slotId of Object.keys(juli)) {
-      if (!merged[slotId] || merged[slotId].recipeId !== juli[slotId].recipeId) {
+      if (!merged[slotId] || !sameMealVersion(merged[slotId], juli[slotId])) {
         // Different meal — append as a virtual slot so it shows as an extra pill
         merged[`${slotId}_juli`] = juli[slotId];
       }
@@ -201,9 +212,11 @@ export function renderCalendarGrid({
       pill.className = 'meal-pill';
       pill.innerHTML = `
         <span class="meal-pill-slot">${icon}</span>
-        <span class="meal-pill-name meal-pill-name--link" data-recipe-id="${meal.recipeId}" title="Ver receta: ${meal.recipeName}">${meal.recipeName}</span>
+        <span class="meal-pill-name meal-pill-name--link" data-recipe-id="${esc(meal.recipeId)}" title="Ver receta: ${esc(meal.recipeName)}">${esc(meal.recipeName)}</span>
         <button class="meal-pill-remove" data-date="${dateKey}" data-slot="${key}" title="Quitar">✕</button>
       `;
+      // The click opens THIS meal's version (snapshot), not the current recipe.
+      pill.querySelector('.meal-pill-name--link').mealRef = meal;
       mealsDiv.appendChild(pill);
     });
 
@@ -229,7 +242,7 @@ export function renderCalendarGrid({
     mealsDiv.querySelectorAll('.meal-pill-name--link').forEach(el => {
       el.addEventListener('click', (e) => {
         e.stopPropagation();
-        if (onRecipeClick && el.dataset.recipeId) onRecipeClick(el.dataset.recipeId);
+        if (onRecipeClick && el.dataset.recipeId) onRecipeClick(el.dataset.recipeId, el.mealRef);
       });
     });
 
@@ -333,7 +346,7 @@ export function renderDayDetail({
 
       // Only show the slot if at least one person has something, OR always show all slots
       const hasMeal = pMeal || jMeal;
-      const sameRecipe = pMeal && jMeal && pMeal.recipeId === jMeal.recipeId;
+      const sameRecipe = pMeal && jMeal && sameMealVersion(pMeal, jMeal);
 
       const card = document.createElement('div');
       card.className = 'slot-card' + (hasMeal ? ' has-meal' : '');
@@ -348,7 +361,7 @@ export function renderDayDetail({
           ${titleEl}
           <div class="slot-family-shared">
             <span class="slot-family-badge shared-badge">🏋️🌸 Los dos</span>
-            <div class="slot-meal-name">${pMeal.recipeName}</div>
+            <div class="slot-meal-name">${esc(pMeal.recipeName)}</div>
             <div class="slot-meal-macros">
               <span>🔥 ${m.calorias || 0} kcal</span>
               <span>💪 ${m.proteina_g || 0}g</span>
@@ -411,7 +424,7 @@ export function renderDayDetail({
         const m = meal.macros || {};
         card.innerHTML = `
           <div class="slot-title">${slot.icon} ${slot.label}</div>
-          <div class="slot-meal-name">${meal.recipeName}</div>
+          <div class="slot-meal-name">${esc(meal.recipeName)}</div>
           <div class="slot-meal-macros">
             <span>🔥 ${m.calorias || 0} kcal</span>
             <span>💪 ${m.proteina_g || 0}g</span>
@@ -462,7 +475,7 @@ function buildPersonMealHTML(meal, personName, cls, slotId) {
     return `
       <div class="slot-family-person-row has-meal-row">
         <span class="slot-family-badge ${cls}-badge">${personName === 'Pablo' ? '🏋️' : '🌸'} ${personName}</span>
-        <span class="slot-meal-name-sm">${meal.recipeName}</span>
+        <span class="slot-meal-name-sm">${esc(meal.recipeName)}</span>
         <span class="slot-meal-kcal">${m.calorias || 0} kcal</span>
         <button class="slot-btn-remove-${cls} slot-btn-icon" title="Quitar">✕</button>
       </div>

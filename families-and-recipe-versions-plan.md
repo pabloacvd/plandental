@@ -226,20 +226,41 @@ Siete cambios sobre la app (JS vanilla + Supabase, sin framework ni tests autom�
 - Los registros de plan existentes siguen funcionando.
 
 **Todo List**
-- [ ] Migración: añadir `plans.recipe_snapshot jsonb` (copia completa del objeto `receta`) y lo mismo en `default_week` (la plantilla semanal asigna recetas igual que el plan).
-- [ ] Backfill de filas existentes: `recipe_snapshot` desde `recipes.receta` actual (mejor aproximación disponible) y, si no existe la receta, un snapshot mínimo con `recipe_name` y `macros`.
-- [ ] Actualizar `upsert_plan_entry` para recibir `p_recipe_snapshot`.
-- [ ] `assignMeal` / `assignMealForPerson` ([`js/app.js`](js/app.js):852, 914): guardar `recipeSnapshot` (copia profunda de `receta`) junto con `macros` derivados de ese snapshot.
-- [ ] `fetchPlan` / `savePlan` y `fetchDefaultWeek` / `saveDefaultWeek` en [`js/storage.js`](js/storage.js): leer y escribir `recipe_snapshot`.
-- [ ] Vista de receta desde el plan ([`js/app.js`](js/app.js):945-1000, `ui.js` pill con `data-recipe-id`): si el click viene de una comida del plan, mostrar el snapshot. Si viene del catálogo, la receta actual.
-- [ ] `buildShoppingList` ([`js/app.js`](js/app.js):1401-1480): agrupar por `(recipeId, versión)` usando el snapshot de cada comida. Dos versiones de la misma receta se cuentan como lotes distintos, con ingredientes distintos.
-- [ ] `planner.js` (`mealEntry`): al autogenerar el plan, incluir el snapshot de la receta elegida.
-- [ ] Confirmar que `calendar.js` y `ui.js` siguen sumando `meal.macros` (ya es snapshot).
-- [ ] Prueba manual del escenario 100 g → 50 g.
+- [x] Migración (`20261105000600_plan_recipe_snapshot.sql`): `plans.recipe_snapshot jsonb` y `default_week.recipe_snapshot jsonb` (nullable), con CHECK en ambas (objeto jsonb y < 100 kB, validado sobre filas existentes).
+- [x] Backfill: `recipes.receta` con `recipes.id = recipe_id` y `recipes.family_id = persons.family_id` (vía `person_id`); si no existe, snapshot mínimo `{nombre, macros_por_porcion}`. `macros` no se recalcula.
+- [x] `upsert_plan_entry` recibe `p_recipe_snapshot jsonb default null`; se elimina la firma vieja de 7 parámetros.
+- [x] `assignMeal` / `assignMealForPerson`: usan `mealFromRecipe()` (copia profunda independiente por persona; `macros` derivados del snapshot).
+- [x] `fetchPlan` / `savePlan` y `fetchDefaultWeek` / `saveDefaultWeek` en [`js/storage.js`](js/storage.js): leen y escriben `recipe_snapshot` ↔ `meal.recipeSnapshot` (fila vieja sin snapshot → meal sin `recipeSnapshot`).
+- [x] Vista de receta desde el plan: la pill pasa la comida a `openRecipeModal(recipeId, meal)`, que muestra el snapshot (fallback a la receta actual). El catálogo sigue usando `openRecipeModal(recipeId)`.
+- [x] `buildShoppingList` delega en `buildShoppingItems()` ([`js/plan-versions.js`](js/plan-versions.js)): agrupa por `(recipeId + huella de ingredientes/porciones)`; cada versión tiene sus propios lotes.
+- [x] `planner.js` (`mealEntry`): usa `mealFromRecipe()`. La semana por defecto se copia al plan con `copyMealForPlan()` (genera snapshot desde la receta actual si la plantilla no lo tiene); «Usar como predeterminada» guarda `recipeSnapshot` porque las comidas ya lo llevan.
+- [x] Confirmado por `grep`: `calendar.js` (`computeDayMacros`), `ui.js` y `planner.js` suman `meal.macros`; `saveRecipeFromForm` / `saveRecipeFromJSON` no tocan el plan.
+- [x] Vista «Familia» (`getDayEntry` y `renderDayDetail`): «Los dos» solo si `sameMealVersion()`; si la versión difiere se muestran por separado.
+- [x] `scripts/verify-recipe-versions.js` (17 checks, sin DB) pasa.
+- [ ] Prueba manual del escenario 100 g → 50 g (pendiente del usuario, ver pasos abajo).
+
+**Cómo ejecutar**: aplicar `20261105000600_plan_recipe_snapshot.sql` (`supabase db push` o pegar en el editor SQL) y desplegar el JS a la vez (el cliente nuevo llama a `upsert_plan_entry`/`plans` con `recipe_snapshot`; `sw.js` pasó a `plandental-v12`). Revisar los `NOTICE` de conteos de snapshot completo vs mínimo.
+
+**Prueba manual (100 g → 50 g)**:
+1. Crear/editar una receta con 100 g de harina y macros conocidos. Asignarla al lunes.
+2. Editar la receta: 50 g de harina y macros menores. Guardar.
+3. Asignar la receta editada al martes.
+4. Verificar que el lunes suma los macros de 100 g y el martes los de 50 g (barra de kcal y panel del día).
+5. Hacer click en el nombre de la receta en el lunes (ingredientes 100 g) y en el martes (50 g); desde el sidebar debe verse 50 g.
+6. Lista de compras (desde hoy hasta el domingo): la harina suma 100 + 50 (lotes separados por versión).
+7. En Familia, asignar la v1 a Pablo y la v2 a Juli en el mismo slot: se muestran como comidas distintas; con la misma versión, «Los dos».
 
 **Relevant Context**: [`20250101000001_rpc_functions.sql`](supabase/migrations/20250101000001_rpc_functions.sql):131-163; [`js/app.js`](js/app.js):789-945, 1401-1480; [`js/storage.js`](js/storage.js):246-330, 497-560; [`js/planner.js`](js/planner.js):97-160; [`js/ui.js`](js/ui.js):200-235.
 
-**Status**: [ ] pending
+**Notas para Sub-task 7** (implementado en `20261105000600_plan_recipe_snapshot.sql`):
+- `plans` y `default_week` tienen `recipe_snapshot jsonb` (CHECK `*_recipe_snapshot_check`: objeto y < 100 kB). La migración valida que `upsert_plan_entry` (única firma, 8 parámetros) no use `is_admin()`, sea `security definer` con `search_path` fijo y solo la ejecute `authenticated`.
+- Módulo puro nuevo [`js/plan-versions.js`](js/plan-versions.js) (sin DOM): `mealFromRecipe`, `copyMealForPlan`, `sameMealVersion`, `versionFingerprint`, `resolveMealReceta`, `buildShoppingItems`. La sub-tarea 8 (pre-selecciones de compras) debe seguir usando `buildShoppingItems`; `isExcluded` se inyecta desde `app.js`.
+- `ui.js` ahora tiene `esc()` y escapa el contenido de `renderRecipeDetail`, las pills y los paneles del día. **Hallazgo**: antes no se escapaba nada (nombre, descripción, ingredientes, pasos); como el snapshot lo puede haber editado otro miembro de la familia, se escapó lo tocado. Siguen sin escapar (fuera de alcance): `renderRecipeCard` (nombre/categoría, `ui.js`), `showSlotPickerForDrop` (`app.js`) y otros `innerHTML` del editor de recetas/ingredientes; conviene revisarlos en una pasada de seguridad.
+- Para la sub-tarea 7: las policies de `plans`/`default_week` ya usan `person_in_my_family()` (sin `is_admin()`) y no se tocaron aquí; `scripts/validate-ingredients.js` sigue pasando (88/88).
+- Limitación conocida: el backfill usa la receta actual, no la histórica; las filas migradas con snapshot mínimo (sin `ingredientes`) caen al catálogo actual en vista de receta y compras.
+- Mismo `recipeId` con distinta versión ya no se agrupa en compras ni se muestra como «Los dos» en Familia.
+
+**Status**: [x] done
 
 ---
 

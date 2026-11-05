@@ -13,7 +13,7 @@
  *   The activate handler deletes all caches that don't match the current name.
  */
 
-const CACHE_NAME = 'plandental-v11';
+const CACHE_NAME = 'plandental-v12';
 
 /** Static app shell — all assets needed to boot the app offline. */
 const APP_SHELL = [
@@ -24,6 +24,7 @@ const APP_SHELL = [
   'js/app.js',
   'js/calendar.js',
   'js/ingredients.js',
+  'js/plan-versions.js',
   'js/planner.js',
   'js/recipes.js',
   'js/storage.js',

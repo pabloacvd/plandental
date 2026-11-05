@@ -4,6 +4,7 @@
 
 import { loadData, searchRecipes, getRecipeById, addRecipe, updateRecipe, deleteRecipe, getAllRecipes, slugify } from './recipes.js';
 import { autoFillWeek } from './planner.js';
+import { mealFromRecipe, copyMealForPlan, resolveMealReceta, buildShoppingItems } from './plan-versions.js';
 import { getWeekDays, toDateKey, toWeekKey, MEAL_SLOTS, MONTH_NAMES } from './calendar.js';
 import {
   fetchPlan, savePlan, removePlanEntry,
@@ -215,7 +216,9 @@ function applyDefaultWeekIfEmpty(weekDays, weekKey) {
     for (const [dayIndex, slotMap] of Object.entries(personDefaults)) {
       const dateKey = toDateKey(weekDays[Number(dayIndex)]);
       for (const [slotId, meal] of Object.entries(slotMap)) {
-        setDeep(state.plan, personName, weekKey, dateKey, slotId, { ...meal });
+        // Independent copy incl. snapshot; legacy defaults without snapshot get
+        // one generated from the current recipe (macros stay as stored).
+        setDeep(state.plan, personName, weekKey, dateKey, slotId, copyMealForPlan(meal, getRecipeById));
       }
     }
   }
@@ -851,16 +854,11 @@ async function assignMeal(dateKey, slotId, recipeId) {
   const recipe = getRecipeById(recipeId);
   if (!recipe) return;
 
-  const { receta } = recipe;
-  const weekKey  = toWeekKey(new Date(dateKey + 'T12:00:00'));
-  const mealData = {
-    recipeId,
-    recipeName: receta.nombre,
-    macros:     { ...receta.macros_por_porcion },
-  };
+  const weekKey = toWeekKey(new Date(dateKey + 'T12:00:00'));
 
+  // Each person gets an independent copy of the recipe version (snapshot).
   for (const p of personsToWrite()) {
-    setDeep(state.plan, p, weekKey, dateKey, slotId, mealData);
+    setDeep(state.plan, p, weekKey, dateKey, slotId, mealFromRecipe(recipe));
   }
 
   renderWeek();
@@ -912,12 +910,10 @@ async function removeMeal(dateKey, slotId, targetPerson = null) {
 async function assignMealForPerson(dateKey, slotId, recipeId, targetPerson) {
   const recipe = getRecipeById(recipeId);
   if (!recipe) return;
-  const { receta } = recipe;
   const weekKey  = toWeekKey(new Date(dateKey + 'T12:00:00'));
-  const mealData = { recipeId, recipeName: receta.nombre, macros: { ...receta.macros_por_porcion } };
   const persons  = targetPerson ? [targetPerson] : state.persons.map(p => p.name);
   for (const p of persons) {
-    setDeep(state.plan, p, weekKey, dateKey, slotId, mealData);
+    setDeep(state.plan, p, weekKey, dateKey, slotId, mealFromRecipe(recipe));
   }
   renderWeek();
   if (state.activeDay === dateKey) refreshDayDetail();
@@ -940,8 +936,20 @@ function openSlotPickerForPerson(slotId, targetPerson) {
 // RECIPE MODAL
 // ══════════════════════════════════════════════════════════
 
-function openRecipeModal(recipeId) {
-  const recipe = getRecipeById(recipeId);
+/**
+ * Open the recipe detail modal.
+ * - From the catalog (sidebar): openRecipeModal(recipeId) → current recipe.
+ * - From a plan meal: openRecipeModal(recipeId, meal) → the meal's snapshot
+ *   (falls back to the current catalog recipe for legacy meals).
+ */
+function openRecipeModal(recipeId, meal = null) {
+  let recipe = null;
+  if (meal) {
+    const receta = resolveMealReceta(meal, getRecipeById);
+    if (receta) recipe = { id: meal.recipeId, receta };
+  } else {
+    recipe = getRecipeById(recipeId);
+  }
   if (!recipe) return;
   document.getElementById('modal-recipe-content').innerHTML = renderRecipeDetail(recipe);
   document.getElementById('modal-recipe').classList.remove('hidden');
@@ -1406,12 +1414,14 @@ function buildShoppingList() {
 
   const persons = state.person === 'Familia' ? ['Pablo', 'Juli'] : [state.person];
 
-  // ── Pass 1: count how many portions of each recipe are consumed ──────────
+  // ── Collect the consumed meals ───────────────────────────────────────────
   // Each slot entry (per person) = 1 portion consumed.
   // We deduplicate within a (person, dateKey, slotId) triple to avoid
   // double-counting when both Pablo and Juli share the same entry in the plan.
-  // Key = "recipeId" → portionsConsumed (integer)
-  const portionsConsumed = new Map(); // recipeId → number
+  // Grouping by (recipeId + version) and batch math live in
+  // buildShoppingItems (plan-versions.js): two versions of the same recipe
+  // are cooked as separate batches with their own ingredient quantities.
+  const consumedMeals = [];
   const seenSlots = new Set();        // "person__dateKey__slotId" already tallied
 
   for (const date of relevantDays) {
@@ -1433,51 +1443,16 @@ function buildShoppingList() {
         if (seenSlots.has(slotTriple)) continue;
         seenSlots.add(slotTriple);
 
-        const prev = portionsConsumed.get(meal.recipeId) ?? 0;
-        portionsConsumed.set(meal.recipeId, prev + 1);
+        consumedMeals.push(meal);
       }
     }
   }
 
-  // ── Pass 2: for each recipe, compute how many batches to cook ───────────
-  // batches = ceil(portionsConsumed / porciones)
-  // Then scale ingredient quantities by that batch count.
-  const agg = new Map(); // "name||unit" → { name, qty, unit, rawQty }
-
-  for (const [recipeId, consumed] of portionsConsumed) {
-    const recipe = getRecipeById(recipeId);
-    if (!recipe?.receta?.ingredientes) continue;
-
-    const porciones = recipe.receta.porciones || 1;
-    const batches   = Math.ceil(consumed / porciones);
-
-    for (const ing of recipe.receta.ingredientes) {
-      if (!ing.item) continue;
-      if (isExcludedIngredient(ing.item)) continue;
-
-      const aggKey = ing.item.toLowerCase().trim();
-      const parsed = parseFloat(ing.cantidad);
-      const addQty = isNaN(parsed) ? 0 : parsed * batches;
-
-      if (agg.has(aggKey)) {
-        agg.get(aggKey).qty += addQty;
-      } else {
-        agg.set(aggKey, {
-          name:   ing.item,
-          qty:    addQty,
-          unit:   ing.unidad ?? '',
-          rawQty: ing.cantidad ?? '',
-        });
-      }
-    }
-  }
-
-  // Convert map to array, format qty back to string
-  return Array.from(agg.values()).map(e => ({
-    name: e.name,
-    qty:  e.qty > 0 ? String(e.qty) : e.rawQty,
-    unit: e.unit,
-  }));
+  // Uses each meal's snapshot (fallback: current catalog recipe).
+  return buildShoppingItems(consumedMeals, {
+    getRecipeById,
+    isExcluded: isExcludedIngredient,
+  });
 }
 
 /**

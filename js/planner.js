@@ -13,6 +13,7 @@
  */
 
 import { getAllRecipes, getNutrition } from './recipes.js';
+import { mealFromRecipe } from './plan-versions.js';
 import { getWeekDays, toDateKey, toWeekKey, MEAL_SLOTS } from './calendar.js';
 
 // ── Whey-isolate snack detection ────────────────────────────────────────────
@@ -126,17 +127,13 @@ function scoreRecipe(recipe, current, targets, weekUsed) {
 // ── Core planner ─────────────────────────────────────────────────────────────
 
 /**
- * Build a meal entry object (same shape as assignMeal writes to plan).
+ * Build a meal entry object (same shape as assignMeal writes to plan,
+ * including an independent snapshot of the chosen recipe).
  */
 function mealEntry(recipeId) {
   const recipe = getAllRecipes().find(r => r.id === recipeId);
   if (!recipe) return null;
-  const { receta } = recipe;
-  return {
-    recipeId,
-    recipeName: receta.nombre,
-    macros: { ...receta.macros_por_porcion },
-  };
+  return mealFromRecipe(recipe);
 }
 
 /**
