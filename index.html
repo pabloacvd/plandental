@@ -275,6 +275,16 @@
           <label for="input-new-user-password">Contraseña inicial</label>
           <input type="password" id="input-new-user-password" placeholder="Mínimo 6 caracteres" autocomplete="new-password" />
         </div>
+        <div class="form-field">
+          <label for="select-new-user-family">Familia</label>
+          <select id="select-new-user-family">
+            <option value="">Cargando familias…</option>
+          </select>
+        </div>
+        <div class="form-field hidden" id="field-new-family-name">
+          <label for="input-new-family-name">Nombre de la nueva familia</label>
+          <input type="text" id="input-new-family-name" maxlength="100" placeholder="ej: Familia Pérez" autocomplete="off" />
+        </div>
         <button id="btn-create-user" class="btn-primary">Crear usuario</button>
       </section>
 

@@ -392,6 +392,32 @@ function validateFamilyMigration() {
   assert('final validation reports counts per family', /raise notice 'Familia/i.test(code),                                   'missing per-family counts notice');
 }
 
+/**
+ * 20261105000700_admin_cleanup.sql — profiles readable only within the family,
+ * is_admin() confined to the three admin RPCs, executable validation block.
+ */
+function validateAdminCleanupMigration() {
+  section('3c. supabase/migrations/20261105000700_admin_cleanup.sql');
+
+  const sqlPath = resolve(ROOT, 'supabase', 'migrations', '20261105000700_admin_cleanup.sql');
+  assert('SQL file exists', existsSync(sqlPath), 'migration file not found');
+  if (!existsSync(sqlPath)) return;
+
+  const code = readFileSync(sqlPath, 'utf8').replace(/--.*$/gm, '');
+  const policySql = [...code.matchAll(/create policy[\s\S]*?;/gi)].map(m => m[0]);
+
+  assert('drops the open profiles SELECT policy',  /drop policy if exists "profiles: select authenticated" on public\.profiles/i.test(code), 'missing drop of open SELECT policy');
+  assert('1 policy created (profiles select)',     policySql.length === 1 && /on public\.profiles/i.test(policySql[0]), `found ${policySql.length} CREATE POLICY statement(s)`);
+  assert('profiles SELECT: own row or family',     /using\s*\(\s*id\s*=\s*auth\.uid\(\)\s*or\s+family_id\s*=\s*public\.my_family_id\(\)\s*\)/i.test(policySql[0] ?? ''), 'SELECT policy must be id = auth.uid() or family_id = my_family_id()');
+  assert('profiles policy is TO authenticated',    /to authenticated/i.test(policySql[0] ?? ''), 'policy must be TO authenticated');
+  assert('policy does not use is_admin()',         !policySql.some(p => /is_admin/i.test(p)),    'policy must not use is_admin()');
+  assert('revokes anon on profiles',               /revoke all on public\.profiles from anon/i.test(code), 'missing revoke from anon');
+  assert('revokes anon on admin_reset_password',   /revoke all on function public\.admin_reset_password\(text, text\) from public, anon/i.test(code), 'missing revoke from anon');
+  assert('has final validation (raise exception)', /raise exception 'Validación fallida/i.test(code), 'missing final validation block');
+  assert('validation scans pg_policies and pg_proc', /pg_policies/i.test(code) && /pg_proc/i.test(code), 'validation must scan pg_policies and pg_proc');
+  assert('allowlist = the 3 admin RPCs',           /array\['admin_create_user',\s*'admin_reset_password',\s*'admin_list_families'\]/i.test(code), 'missing allowlist of admin RPCs');
+}
+
 // ── 4. Integration with data/recipes.json ─────────────────────────────────────
 
 function validateRecipesIntegration() {
@@ -471,6 +497,7 @@ console.log('============================================');
 validateIngredientsJSON();
 validateIngredientsLogic();
 validateSQLSchema();
+validateAdminCleanupMigration();
 validateRecipesIntegration();
 
 console.log('\n══════════════════════════════════════════════');

@@ -180,6 +180,17 @@ async function checkRLS() {
     if (data && data.length > 0) throw new Error('anon received nutrition rows — RLS may be misconfigured');
   });
 
+  await check('anon cannot read profiles (no privileges / RLS)', async () => {
+    const { data, error } = await anon.from('profiles').select('id').limit(1);
+    if (error && error.code !== '42501' && error.code !== 'PGRST301') throw error;
+    if (data && data.length > 0) throw new Error('anon received profile rows — RLS / privileges may be misconfigured');
+  });
+
+  await check('anon cannot execute admin_list_families', async () => {
+    const { data, error } = await anon.rpc('admin_list_families');
+    if (!error) throw new Error(`anon executed admin_list_families (${data?.length ?? 0} rows)`);
+  });
+
   await check('anon cannot read recipes (RLS / privileges block unauthenticated)', async () => {
     // Recipes require authenticated session — anon has no privileges on recipes.
     const { data, error } = await anon.from('recipes').select('id').limit(1);

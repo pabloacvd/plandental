@@ -274,15 +274,45 @@ Siete cambios sobre la app (JS vanilla + Supabase, sin framework ni tests autom�
 - Pablo no ve planes ni datos nutricionales de familias ajenas.
 
 **Todo List**
-- [ ] [`index.html`](index.html):264-289: añadir selector de familia (existentes + "Nueva familia" con campo de nombre).
-- [ ] [`js/storage.js`](js/storage.js):62-69 `adminCreateUser(username, password, { familyId, newFamilyName })` y nueva `adminListFamilies()`.
-- [ ] [`js/app.js`](js/app.js):1746-1796: cargar familias al abrir el modal y enviar la elección en `handleCreateUser`.
-- [ ] Decisión confirmada: aislamiento total. Verificar que ninguna policy ni RPC de `persons`, `plans`, `nutrition_data`, `default_week`, `ingredients`, `recipes` y `shopping_preferences` use `is_admin()`. El poder de admin queda limitado a `admin_create_user`, `admin_reset_password` y `admin_list_families`. (Las policies de `persons`, `plans`, `nutrition_data` y `default_week` se reescriben en la sub-tarea 3.)
-- [ ] Actualizar [`scripts/validate-ingredients.js`](scripts/validate-ingredients.js) para las nuevas policies.
+- [x] [`index.html`](index.html): en "Crear usuario", `<select id="select-new-user-family">` (con `<label for>`) y campo `#field-new-family-name` (oculto salvo "Nueva familia…", `maxlength=100`). Sin CSS nuevo: reutiliza `.form-field` y `.hidden`.
+- [x] [`js/storage.js`](js/storage.js): `adminCreateUser(username, password, { familyId = null, newFamilyName = null } = {})` envía `p_family_id` / `p_new_family_name`; nueva `adminListFamilies()` (RPC `admin_list_families`, devuelve array, lanza `Error` en fallo como el resto).
+- [x] [`js/app.js`](js/app.js): `openUserMgmtModal` llama a `loadFamiliesForUserMgmt()` (solo si `state.profile.role === 'admin'`); `renderFamilySelect` arma las `<option>` con `createElement` + `textContent` (nombre y miembros, sin `innerHTML`); `handleCreateUser` exige familia elegida o nombre de familia nueva no vacío (≤ 100) y tras crear recarga la lista. El error del RPC se registra con `console.error` y al usuario se le muestra un mensaje genérico.
+- [x] Auditoría de `is_admin()` sobre el estado final (ver abajo): sin bypass. Aislamiento total confirmado para `persons`, `plans`, `nutrition_data`, `default_week`, `ingredients`, `recipes`, `profiles` y `families`. (`shopping_preferences` aún no existe: la crea la sub-tarea 8 y no debe usar `is_admin()`.)
+- [x] Migración [`20261105000700_admin_cleanup.sql`](supabase/migrations/20261105000700_admin_cleanup.sql): restringe SELECT de `profiles`, revoca `anon` sobre `profiles` y sobre `admin_reset_password`, y termina con un bloque de validación ejecutable (ver abajo).
+- [x] [`scripts/validate-ingredients.js`](scripts/validate-ingredients.js): nueva sección 3c que valida la migración (99/99 OK). [`scripts/validate-migration.js`](scripts/validate-migration.js): checks de que `anon` no lee `profiles` ni ejecuta `admin_list_families` (requiere DB y `scripts/.env`; no se pudo correr aquí). `sw.js` → `plandental-v13`.
+- [ ] Verificación manual (pendiente del usuario, ver pasos abajo).
 
-**Relevant Context**: [`index.html`](index.html):255-289; [`js/app.js`](js/app.js):1744-1796, 2228.
+**Hallazgos del audit de `is_admin()`** (estado final tras `20261105000600`):
+- Policies: ninguna usa `is_admin()`. Las históricas (`profiles: admin all`, `persons: *`, `plans`, `nutrition_data`, `default_week`, `ingredients: *`, `recipes: *`) fueron reemplazadas en 0100, 0300, 0400 y 0500; `families` y `profiles` actuales no la usan.
+- Funciones: solo `admin_create_user` (versión de 0300), `admin_reset_password` (versión de `20250610000003`) y `admin_list_families` (0200) la llaman. `upsert_plan_entry`/`delete_plan_entry` usan `person_in_my_family()`. Las versiones viejas que la usaban (`reject_person_access`, `approve_*`, etc.) fueron eliminadas en 0300. `is_admin()` queda definida (0100) como `security definer` con `search_path = public, pg_temp`.
+- Conclusión: no quedaba ningún bypass de datos, así que 0700 no reescribe policies de datos.
+- Hallazgo menor corregido: `admin_reset_password` solo tenía `revoke ... from public`; en Supabase `anon` suele tener un grant propio por default privileges. 0700 hace `revoke ... from public, anon` (la función igual valida `is_admin()` adentro).
 
-**Status**: [ ] pending
+**Hallazgo y decisión sobre `profiles`**: desde 0100 la policy `profiles: select authenticated` era `using (true)`: cualquier usuario autenticado podía listar `username`, `role` y `family_id` de todas las familias (y con eso, por ejemplo, saber cuáles son admin). Se reemplazó por `profiles: select own family` (`id = auth.uid() or family_id = my_family_id()`, `to authenticated`). Riesgo evaluado como bajo: el único `.from('profiles')` del cliente es `getMyProfile` (fila propia); `admin_list_families`, `admin_create_user`, `my_family_id()`, `same_family()` y los triggers son `security definer` y no dependen de la policy; ninguna otra policy lee `profiles` con el rol del cliente. La vista "Familia" usa `persons` (no `profiles`). `my_family_id()` es `security definer`, por lo que no hay recursión de RLS.
+
+**Validación ejecutable de 0700** (falla con `raise exception`): ninguna policy ni vista de `public` referencia `is_admin`; ninguna función de `public` fuera de `admin_create_user`, `admin_reset_password`, `admin_list_families` e `is_admin` la referencia; `is_admin()` única, `security definer` con `search_path` fijo; cada RPC admin con una sola firma, verifica `is_admin()`, `security definer`, `search_path` fijo, ejecutable por `authenticated` y no por `anon`; `profiles` con RLS, solo policies SELECT (una, limitada a `auth.uid()`/`my_family_id()`) y UPDATE, sin policies abiertas ni para `anon`/`public`, y `anon` sin SELECT.
+
+**Cómo ejecutar**: aplicar `20261105000700_admin_cleanup.sql` (`supabase db push` o editor SQL) y desplegar el JS a la vez (`sw.js` v13): con el JS viejo, crear usuarios sigue roto. Si la validación aborta, el mensaje dice qué objeto viola la regla. Nota: no se pudo ejecutar el SQL (no hay DB disponible); se revisó a mano.
+
+**Prueba manual**:
+1. Como pablo: Mi cuenta → Gestionar usuarios. El selector debe listar las familias con sus miembros (p. ej. "Pablo y Juli (juli, pablo)") y "Nueva familia…".
+2. Crear usuario en familia existente (p. ej. `test1` en la de Lara): debe crearse, aparecer en esa familia tras recargar la lista, y al loguearse ver las recetas/ingredientes de esa familia y su persona "Test1" en "Mis datos".
+3. Crear usuario con "Nueva familia…" (nombre `Familia Test`): la familia aparece en el selector con ese usuario; el usuario no ve datos de otras familias. Probar nombre vacío y nombre duplicado: mensaje de error sin detalles internos.
+4. Sin elegir familia ni nombre: el cliente bloquea con un toast.
+5. Como lara: no aparece "Gestionar usuarios"; desde la consola, `supabase.rpc('admin_list_families')`, `admin_create_user` y `admin_reset_password` fallan.
+6. Como lara: `supabase.from('profiles').select('username, family_id')` solo devuelve su propia fila (y las de su familia); pablo ve solo pablo y juli.
+7. Opcional, `node scripts/validate-migration.js` (con `scripts/.env`) para los checks de `anon`.
+
+**Notas para Sub-task 8**:
+- `shopping_preferences` es nueva: usar el patrón de 0400/0500 (`family_id` PK con FK a `families`, `default my_family_id()`, policies `to authenticated` con `family_id = my_family_id()`, `revoke all ... from anon`). No usar `is_admin()`: al agregar su migración, el bloque de 0700 (si se vuelve a ejecutar o se copia) y `validate-ingredients.js` 3c ayudan a no reintroducirlo.
+- Como la PK será `family_id`, el `upsert` del cliente usa `onConflict: 'family_id'` (constraint real). Hacer `updated_at` con default `now()` y actualizarlo desde el cliente al guardar.
+- `state.profile` ya trae `role`; la lista de deseleccionados se debe cargar tras el login junto a `getMyPersons`, para que `buildShoppingList` siga síncrono. `buildShoppingItems` en [`js/plan-versions.js`](js/plan-versions.js) recibe `isExcluded` inyectado desde `app.js`.
+- Subir `CACHE_NAME` a `plandental-v14` si se tocan JS/HTML.
+- Pendiente de seguridad fuera de alcance (ya anotado en sub-tarea 6): `innerHTML` sin escapar en `renderRecipeCard`, `showSlotPickerForDrop` y el editor de recetas/ingredientes.
+
+**Relevant Context**: [`supabase/migrations/20261105000700_admin_cleanup.sql`](supabase/migrations/20261105000700_admin_cleanup.sql); [`index.html`](index.html):262-295; [`js/app.js`](js/app.js):1717-1840, 2187; [`js/storage.js`](js/storage.js):55-97.
+
+**Status**: [x] done
 
 ---
 

@@ -12,7 +12,7 @@ import {
   signIn, signOut, isAuthenticated, getMyProfile, getMyPersons,
   saveRecipes, deleteRecipeFromDB, consumeTokenFromHash,
   saveIngredient, deleteIngredient as deleteIngredientFromStorage,
-  changePassword, adminCreateUser, adminResetPassword,
+  changePassword, adminCreateUser, adminResetPassword, adminListFamilies,
   fetchNutrition, saveNutritionProfile,
 } from './storage.js';
 import { supabase } from './supabase.js';
@@ -1716,13 +1716,66 @@ function closeAuthModal() {
 
 // ── User management modal (admin only) ────────────────────────
 
+const NEW_FAMILY_OPTION = '__new__';
+
+/** Render the family <select> using DOM APIs (textContent only, no innerHTML). */
+function renderFamilySelect(families) {
+  const sel = document.getElementById('select-new-user-family');
+  if (!sel) return;
+  sel.replaceChildren();
+
+  const placeholder = document.createElement('option');
+  placeholder.value = '';
+  placeholder.textContent = 'Elegí una familia…';
+  sel.appendChild(placeholder);
+
+  for (const f of families) {
+    const opt = document.createElement('option');
+    opt.value = String(f.id);
+    const members = Array.isArray(f.members) ? f.members : [];
+    opt.textContent = members.length
+      ? `${f.name} (${members.join(', ')})`
+      : String(f.name);
+    sel.appendChild(opt);
+  }
+
+  const newOpt = document.createElement('option');
+  newOpt.value = NEW_FAMILY_OPTION;
+  newOpt.textContent = 'Nueva familia…';
+  sel.appendChild(newOpt);
+
+  sel.value = '';
+  toggleNewFamilyField();
+}
+
+function toggleNewFamilyField() {
+  const sel   = document.getElementById('select-new-user-family');
+  const field = document.getElementById('field-new-family-name');
+  if (!sel || !field) return;
+  field.classList.toggle('hidden', sel.value !== NEW_FAMILY_OPTION);
+}
+
+async function loadFamiliesForUserMgmt() {
+  if (state.profile?.role !== 'admin') return;
+  try {
+    renderFamilySelect(await adminListFamilies());
+  } catch (e) {
+    console.error('adminListFamilies failed:', e);
+    renderFamilySelect([]);
+    showToast('❌ No se pudieron cargar las familias', 'error');
+  }
+}
+
 function openUserMgmtModal() {
   closeAuthModal();
   const u = document.getElementById('input-new-username');
   const p = document.getElementById('input-new-user-password');
+  const n = document.getElementById('input-new-family-name');
   if (u) u.value = '';
   if (p) p.value = '';
+  if (n) n.value = '';
   document.getElementById('modal-user-mgmt').classList.remove('hidden');
+  loadFamiliesForUserMgmt();
 }
 
 function closeUserMgmtModal() {
@@ -1754,15 +1807,34 @@ async function handleCreateUser() {
   const password = document.getElementById('input-new-user-password')?.value ?? '';
   if (!username) { showToast('Ingresá un nombre de usuario', 'error'); return; }
   if (password.length < 6) { showToast('La contraseña debe tener al menos 6 caracteres', 'error'); return; }
+
+  const choice = document.getElementById('select-new-user-family')?.value ?? '';
+  let family;
+  if (choice === NEW_FAMILY_OPTION) {
+    const newName = document.getElementById('input-new-family-name')?.value.trim() ?? '';
+    if (!newName) { showToast('Ingresá el nombre de la nueva familia', 'error'); return; }
+    if (newName.length > 100) { showToast('El nombre de la familia no puede superar los 100 caracteres', 'error'); return; }
+    family = { newFamilyName: newName };
+  } else if (choice) {
+    family = { familyId: choice };
+  } else {
+    showToast('Elegí una familia o creá una nueva', 'error');
+    return;
+  }
+
   const btn = document.getElementById('btn-create-user');
   if (btn) { btn.disabled = true; btn.textContent = 'Creando…'; }
   try {
-    await adminCreateUser(username, password);
+    await adminCreateUser(username, password, family);
     showToast(`✅ Usuario "${username}" creado`, 'success');
     document.getElementById('input-new-username').value = '';
     document.getElementById('input-new-user-password').value = '';
+    const n = document.getElementById('input-new-family-name');
+    if (n) n.value = '';
+    await loadFamiliesForUserMgmt();
   } catch (e) {
-    showToast('❌ ' + e.message, 'error');
+    console.error('adminCreateUser failed:', e);
+    showToast('❌ No se pudo crear el usuario. Verificá los datos e intentá de nuevo.', 'error');
   } finally {
     if (btn) { btn.disabled = false; btn.textContent = 'Crear usuario'; }
   }
@@ -2116,6 +2188,7 @@ function wireControls() {
   document.getElementById('btn-close-user-mgmt')?.addEventListener('click', closeUserMgmtModal);
   document.querySelector('#modal-user-mgmt .modal-backdrop')?.addEventListener('click', closeUserMgmtModal);
   document.getElementById('btn-create-user')?.addEventListener('click', handleCreateUser);
+  document.getElementById('select-new-user-family')?.addEventListener('change', toggleNewFamilyField);
   document.getElementById('btn-reset-user-password')?.addEventListener('click', handleResetUserPassword);
 
   // Login gate form — click and Enter key both trigger sign-in

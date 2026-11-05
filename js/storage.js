@@ -53,19 +53,34 @@ export async function changePassword(newPassword) {
 }
 
 /**
- * Admin-only: create a new Supabase Auth user.
+ * Admin-only: create a new Supabase Auth user in a family.
  * Calls the admin_create_user RPC (SECURITY DEFINER, postgres-level insert).
+ * Exactly one of familyId / newFamilyName must be provided (the RPC enforces it).
  * @param {string} username — display name; stored lowercased
  * @param {string} password — minimum 6 characters
+ * @param {{ familyId?: string|null, newFamilyName?: string|null }} [family]
  * @returns {string} new user UUID
  */
-export async function adminCreateUser(username, password) {
+export async function adminCreateUser(username, password, { familyId = null, newFamilyName = null } = {}) {
   const { data, error } = await supabase.rpc('admin_create_user', {
-    p_username: username.toLowerCase().trim(),
-    p_password: password,
+    p_username:        username.toLowerCase().trim(),
+    p_password:        password,
+    p_family_id:       familyId || null,
+    p_new_family_name: newFamilyName ? newFamilyName.trim() : null,
   });
   if (error) throw new Error(error.message);
   return data; // uuid
+}
+
+/**
+ * Admin-only: list all families with their members.
+ * Calls the admin_list_families RPC (SECURITY DEFINER, validates is_admin()).
+ * @returns {Promise<Array<{ id: string, name: string, member_count: number, members: string[] }>>}
+ */
+export async function adminListFamilies() {
+  const { data, error } = await supabase.rpc('admin_list_families');
+  if (error) throw new Error(error.message);
+  return Array.isArray(data) ? data : [];
 }
 
 /**
