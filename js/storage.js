@@ -388,6 +388,11 @@ export async function fetchNutrition() {
       height_cm:          row.height_cm,
       age_years:          row.age_years,
       sex:                row.sex,
+      activity_level:     row.activity_level,
+      goal:               row.goal,
+      deficit_pct:        row.deficit_pct,
+      target_weight_kg:   row.target_weight_kg,
+      auto_recalc:        row.auto_recalc,
       protein_g:          row.protein_g,
       carbs_g:            row.carbs_g,
       fat_g:              row.fat_g,
@@ -405,25 +410,133 @@ export async function fetchNutrition() {
  * Create or update the profile fields of a person's nutrition_data row.
  * Only the columns listed here are written; protein/carbs/fat targets,
  * supplements and the JSON blob are left untouched on existing rows.
+ * weight_kg is NOT written here: the weight lives in weight_log (see
+ * saveWeightEntry) and a DB trigger keeps nutrition_data.weight_kg in sync.
+ * Optional goal fields (activity_level, goal, deficit_pct, target_weight_kg,
+ * auto_recalc) are written only when provided.
  * @param {string} personId
  * @param {{bmr_kcal:number, daily_calories_kcal:number, maintenance_kcal:number,
- *          weight_kg:?number, height_cm:?number, age_years:?number, sex:?string}} p
+ *          height_cm:?number, age_years:?number, sex:?string,
+ *          activity_level?:string, goal?:string, deficit_pct?:number,
+ *          target_weight_kg?:?number, auto_recalc?:boolean,
+ *          protein_g?:number, carbs_g?:number, fat_g?:number}} p
  */
 export async function saveNutritionProfile(personId, p) {
+  const row = {
+    person_id:           personId,
+    bmr_kcal:            p.bmr_kcal,
+    daily_calories_kcal: p.daily_calories_kcal,
+    maintenance_kcal:    p.maintenance_kcal,
+    height_cm:           p.height_cm,
+    age_years:           p.age_years,
+    sex:                 p.sex,
+    updated_at:          new Date().toISOString(),
+  };
+  for (const k of ['activity_level', 'goal', 'deficit_pct', 'target_weight_kg', 'auto_recalc',
+                  'protein_g', 'carbs_g', 'fat_g']) {
+    if (p[k] !== undefined) row[k] = p[k];
+  }
   const { error } = await supabase
     .from('nutrition_data')
-    .upsert({
-      person_id:           personId,
-      bmr_kcal:            p.bmr_kcal,
-      daily_calories_kcal: p.daily_calories_kcal,
-      maintenance_kcal:    p.maintenance_kcal,
-      weight_kg:           p.weight_kg,
-      height_cm:           p.height_cm,
-      age_years:           p.age_years,
-      sex:                 p.sex,
-      updated_at:          new Date().toISOString(),
-    }, { onConflict: 'person_id' });
+    .upsert(row, { onConflict: 'person_id' });
   if (error) throw new Error(error.message);
+}
+
+// ── Weight log, daily intake and targets history ──────────────
+
+/** All weight entries of a person, oldest first: [{ date_key, weight_kg }]. */
+export async function fetchWeightLog(personId) {
+  const { data, error } = await supabase
+    .from('weight_log')
+    .select('date_key, weight_kg')
+    .eq('person_id', personId)
+    .order('date_key', { ascending: true });
+  if (error) { console.warn('fetchWeightLog:', error.message); return []; }
+  return (data || []).map(r => ({ date_key: r.date_key, weight_kg: Number(r.weight_kg) }));
+}
+
+/** Insert or overwrite the weight (kg) of a person for a day ('YYYY-MM-DD'). */
+export async function saveWeightEntry(personId, dateKey, weightKg) {
+  const { error } = await supabase
+    .from('weight_log')
+    .upsert({ person_id: personId, date_key: dateKey, weight_kg: weightKg },
+            { onConflict: 'person_id,date_key' });
+  if (error) throw new Error(error.message);
+}
+
+export async function deleteWeightEntry(personId, dateKey) {
+  const { error } = await supabase
+    .from('weight_log')
+    .delete()
+    .eq('person_id', personId)
+    .eq('date_key', dateKey);
+  if (error) throw new Error(error.message);
+}
+
+/**
+ * Daily totals of the plan for a person (view person_daily_intake).
+ * Days without any meal have no row. Returns
+ * [{ date_key, kcal, protein_g, carbs_g, fat_g, meals_count }].
+ */
+export async function fetchDailyIntake(personId, fromDateKey, toDateKey) {
+  let q = supabase
+    .from('person_daily_intake')
+    .select('date_key, kcal, protein_g, carbs_g, fat_g, meals_count')
+    .eq('person_id', personId)
+    .order('date_key', { ascending: true });
+  if (fromDateKey) q = q.gte('date_key', fromDateKey);
+  if (toDateKey)   q = q.lte('date_key', toDateKey);
+  const { data, error } = await q;
+  if (error) { console.warn('fetchDailyIntake:', error.message); return []; }
+  return (data || []).map(r => ({
+    date_key:    r.date_key,
+    kcal:        Number(r.kcal),
+    protein_g:   Number(r.protein_g),
+    carbs_g:     Number(r.carbs_g),
+    fat_g:       Number(r.fat_g),
+    meals_count: Number(r.meals_count),
+  }));
+}
+
+/** Targets change history of a person, newest first. */
+export async function fetchTargetsHistory(personId, limit = 20) {
+  const { data, error } = await supabase
+    .from('targets_history')
+    .select('id, week_key, source, reason, previous, new, created_at, reverted_at')
+    .eq('person_id', personId)
+    .order('created_at', { ascending: false })
+    .limit(limit);
+  if (error) { console.warn('fetchTargetsHistory:', error.message); return []; }
+  return data || [];
+}
+
+/**
+ * Atomically apply a targets change (RPC apply_targets_change).
+ * @param {string} personId
+ * @param {'auto'|'manual'} source
+ * @param {string} reason
+ * @param {string} weekKey 'YYYY-Www'
+ * @param {object} newValues subset of maintenance_kcal, daily_calories_kcal,
+ *                           bmr_kcal, protein_g, carbs_g, fat_g
+ * @returns {Promise<object>} the history row (+ already_applied)
+ */
+export async function applyTargetsChange(personId, source, reason, weekKey, newValues) {
+  const { data, error } = await supabase.rpc('apply_targets_change', {
+    p_person_id: personId,
+    p_source:    source,
+    p_reason:    reason,
+    p_week_key:  weekKey,
+    p_new:       newValues,
+  });
+  if (error) throw new Error(error.message);
+  return data;
+}
+
+/** Revert the latest non-reverted change (RPC revert_targets_change). */
+export async function revertTargetsChange(historyId) {
+  const { data, error } = await supabase.rpc('revert_targets_change', { p_history_id: historyId });
+  if (error) throw new Error(error.message);
+  return data;
 }
 
 // ── Default Week ─────────────────────────────────────────────

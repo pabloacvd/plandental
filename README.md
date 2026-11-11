@@ -130,6 +130,45 @@ Esto garantiza que todos los dispositivos descarguen la versión nueva completa 
 
 ---
 
+## Perfil y progreso
+
+Al hacer click en el nombre de usuario se abre **Perfil y progreso**, con tres pestañas y una sección plegable "Mi cuenta" (contraseña, administración, cerrar sesión).
+
+- **Datos:** altura, edad, sexo, meta (bajar / mantener / subir), actividad, déficit (20% por defecto), peso objetivo, calorías y macros, "Calcular con fórmulas" (muestra el desarrollo), registro de peso (una fila por día; cargar el mismo día sobrescribe) e historial de recálculos con botón "Revertir".
+- **Dashboard:** calorías por día contra objetivo y mantenimiento, peso con tendencia, macros promedio y balance semanal. Ventanas de 7 / 30 / 90 días.
+- **Sugerencias:** evaluación de proteína (g/kg), grasa, calorías, ritmo de pérdida y estancamiento, con fuente en cada una, y comparación de metas actuales contra recomendadas.
+
+**La ingesta es el plan.** Toda comida planificada para hoy o días anteriores se considera consumida; los días sin ninguna comida son "sin datos" (no cero) y los días futuros no cuentan.
+
+### Fórmulas (unidades métricas, energía en kcal)
+
+| Concepto | Regla |
+|---|---|
+| BMR | Mifflin-St Jeor: `10·kg + 6,25·cm − 5·edad + 5` (hombre) / `− 161` (mujer) |
+| Mantenimiento | BMR × factor (sedentario 1,2 · ligero 1,375 · moderado 1,55 · alto 1,725 · atleta 1,9) |
+| Objetivo | bajar: mantenimiento × (1 − déficit%) · mantener: × 1,00 · subir: × 1,10 |
+| Proteína | 2,0 g/kg al bajar, 1,6 al mantener, 1,8 al subir |
+| Grasa | 25% de las calorías, mínimo 0,5 g/kg |
+| Carbohidratos | el resto de las calorías (4 kcal/g proteína y carbohidratos, 9 kcal/g grasa) |
+| Tendencia de peso | regresión lineal en 28 días, mínimo 3 pesajes que abarquen 14 días |
+| Mantenimiento real | ingesta promedio − pendiente (kg/día) × 7700; ventana ≥ 21 días con ≥ 70% de días con comidas; solo días anteriores a hoy |
+
+El objetivo nunca baja de la tasa basal ni de 1200 kcal (mujer) / 1500 kcal (hombre). Todo es orientativo y no reemplaza el asesoramiento médico.
+
+### Recálculo automático
+
+Corre al registrar un peso y al abrir el perfil, como máximo **una vez por semana por persona** (lo garantiza un índice único en la base, aun con dos dispositivos a la vez). Mezcla la fórmula con el mantenimiento real (más peso al historial cuanto más datos hay) y limita cada cambio a ±5% o ±150 kcal, lo menor. Cada cambio queda en el historial con su motivo y se puede revertir; un cambio revertido no vuelve a aplicarse hasta la semana siguiente. Se desactiva por persona con el interruptor "Recalcular automáticamente".
+
+### Migración
+
+Antes de usar la UI nueva, aplicá `supabase/migrations/20261111000100_weight_log_and_goals.sql` (requiere Postgres 15+ por `security_invoker`). Crea `weight_log`, `targets_history`, la vista `person_daily_intake`, nuevas columnas en `nutrition_data`, los triggers de peso y las RPC `apply_targets_change` / `revert_targets_change`. Es idempotente. El peso inicial se siembra desde `nutrition_data.weight_kg` con fecha aproximada (`updated_at`).
+
+### Tests
+
+```bash
+node scripts/test-nutrition.mjs
+```
+
 ## Estructura
 
 ```
@@ -141,6 +180,10 @@ Esto garantiza que todos los dispositivos descarguen la versión nueva completa 
 ├── js/
 │   ├── app.js                # Orquestador principal
 │   ├── calendar.js           # Utilidades de fecha y slots
+│   ├── charts.js             # Gráficos SVG propios
+│   ├── dashboard.js          # Pestaña Dashboard
+│   ├── nutrition.js          # Cálculos de nutrición (puros)
+│   ├── profile.js            # Modal Perfil y progreso
 │   ├── recipes.js            # Carga y búsqueda de recetas
 │   ├── storage.js            # GitHub API + localStorage
 │   └── ui.js                 # Renderizado
@@ -154,7 +197,8 @@ Esto garantiza que todos los dispositivos descarguen la versión nueva completa 
 │   ├── recipes.json          # Catálogo de recetas
 │   └── plan.json             # Plan semanal guardado (generado, no versionado)
 └── scripts/
-    └── generate-icons.js     # Genera los íconos de placeholder
+    ├── generate-icons.js     # Genera los íconos de placeholder
+    └── test-nutrition.mjs    # Tests de js/nutrition.js
 ```
 
 ## GitHub Pages
