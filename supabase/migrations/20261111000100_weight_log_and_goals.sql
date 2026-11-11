@@ -134,16 +134,21 @@ security definer
 set search_path = public, pg_temp
 as $$
 declare
-  v_person uuid;
-  v_latest numeric;
+  v_persons uuid[] := '{}';
+  v_person  uuid;
+  v_latest  numeric;
 begin
-  for v_person in
-    select distinct x from unnest(array[
-      case when tg_op in ('UPDATE', 'DELETE') then old.person_id end,
-      case when tg_op in ('INSERT', 'UPDATE') then new.person_id end
-    ]) as x
-    where x is not null
-  loop
+  -- OLD solo existe en UPDATE/DELETE y NEW en INSERT/UPDATE: se referencian
+  -- únicamente dentro de su rama.
+  if tg_op = 'DELETE' then
+    v_persons := array[old.person_id];
+  elsif tg_op = 'INSERT' then
+    v_persons := array[new.person_id];
+  else
+    v_persons := array[old.person_id, new.person_id];
+  end if;
+
+  foreach v_person in array v_persons loop
     select wl.weight_kg into v_latest
     from public.weight_log wl
     where wl.person_id = v_person

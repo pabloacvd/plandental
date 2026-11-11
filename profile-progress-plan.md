@@ -145,7 +145,7 @@ Fuentes consultadas directamente (no de memoria):
 - [`supabase/migrations/20261105000300_remove_person_access.sql`](supabase/migrations/20261105000300_remove_person_access.sql:29) (`person_in_my_family`, policies, validación final).
 - Verificar el nombre de la migración más reciente en `supabase/migrations/` antes de fijar el prefijo de fecha.
 
-**Status.** [ ] pending
+**Status.** [x] implementado (pendiente: aplicar migración y prueba manual con datos reales)
 
 ---
 
@@ -175,7 +175,7 @@ Fuentes consultadas directamente (no de memoria):
 - [`js/calendar.js`](js/calendar.js:86) (claves de macros: `calorias`, `proteina_g`, `carbohidratos_g`, `grasas_g`).
 - Convención de módulos ES de [`js/app.js`](js/app.js).
 
-**Status.** [ ] pending
+**Status.** [x] implementado (pendiente: aplicar migración y prueba manual con datos reales)
 
 ---
 
@@ -210,7 +210,7 @@ Fuentes consultadas directamente (no de memoria):
 - [`index.html`](index.html:188) (modal-auth actual), [`js/app.js`](js/app.js:1620) (`PROFILE_FIELDS`, `openAuthModal`, `closeAuthModal`).
 - `state.persons` y `state.personNameToId` contienen las personas de la familia del usuario.
 
-**Status.** [ ] pending
+**Status.** [x] implementado (pendiente: aplicar migración y prueba manual con datos reales)
 
 ---
 
@@ -240,7 +240,7 @@ Fuentes consultadas directamente (no de memoria):
 
 - [`js/ui.js`](js/ui.js:527) (estilo visual de barras), colores semánticos existentes: naranja calorías, accent proteína, verde carbohidratos, púrpura grasa.
 
-**Status.** [ ] pending
+**Status.** [x] implementado (pendiente: aplicar migración y prueba manual con datos reales)
 
 ---
 
@@ -268,7 +268,7 @@ Fuentes consultadas directamente (no de memoria):
 
 - Texto en español rioplatense coherente con el resto de la UI ("Ingresá", "Elegí").
 
-**Status.** [ ] pending
+**Status.** [x] implementado (pendiente: aplicar migración y prueba manual con datos reales)
 
 ---
 
@@ -299,7 +299,7 @@ Fuentes consultadas directamente (no de memoria):
 - [`js/app.js`](js/app.js:149) (carga de `state.nutrition`), [`js/app.js`](js/app.js:1706) (recarga tras guardar).
 - `maintenance_kcal` es el 100% de la barra de calorías. Documentar el efecto en la UI.
 
-**Status.** [ ] pending
+**Status.** [x] implementado (pendiente: aplicar migración y prueba manual con datos reales)
 
 ---
 
@@ -327,7 +327,7 @@ Fuentes consultadas directamente (no de memoria):
 
 - [`sw.js`](sw.js) (`CACHE_NAME`), [`README.md`](README.md).
 
-**Status.** [ ] pending
+**Status.** [x] implementado (pendiente: aplicar migración y prueba manual con datos reales)
 
 ---
 
