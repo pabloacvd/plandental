@@ -369,6 +369,7 @@ export function renderDayDetail({
   nutritionAll,
   onRemoveMeal,
   onAddMealToSlot,
+  onRecipeClick,
 }) {
   const date  = new Date(dateKey + 'T12:00:00');
   const label = `${DAY_NAMES_SHORT[(date.getDay() + 6) % 7]} ${date.getDate()} de ${MONTH_NAMES[date.getMonth()]}`;
@@ -404,7 +405,7 @@ export function renderDayDetail({
         const everyone = members.length === 2 ? 'Los dos' : 'Todos';
         card.innerHTML = `
           ${titleEl}
-          <div class="slot-family-shared">
+          <div class="slot-family-shared slot-meal-clickable" role="button" tabindex="0" data-recipe-id="${esc(sharedMeal.recipeId)}" title="Ver receta: ${esc(sharedMeal.recipeName)}">
             <span class="slot-family-badge shared-badge">👥 ${everyone}</span>
             <div class="slot-meal-name">${esc(sharedMeal.recipeName)}</div>
             <div class="slot-meal-macros">
@@ -416,6 +417,9 @@ export function renderDayDetail({
             <button class="slot-btn remove">Quitar a ${everyone === 'Los dos' ? 'los dos' : 'todos'}</button>
           </div>
         `;
+        const clickableEl = card.querySelector('.slot-family-shared');
+        if (clickableEl) clickableEl.mealRef = sharedMeal;
+
         card.querySelector('.slot-btn.remove').addEventListener('click', () => {
           onRemoveMeal(dateKey, slot.id, null); // null = everyone
         });
@@ -427,6 +431,10 @@ export function renderDayDetail({
             ${members.map((member, i) => buildPersonMealHTML(meals[i], member, i)).join('')}
           </div>
         `;
+        card.querySelectorAll('.slot-family-person-meal').forEach(el => {
+          const idx = Number(el.dataset.memberIdx);
+          if (meals[idx]) el.mealRef = meals[idx];
+        });
         card.querySelectorAll('.slot-btn-remove').forEach(btn => {
           btn.addEventListener('click', () => {
             onRemoveMeal(dateKey, slot.id, [btn.dataset.personId]);
@@ -466,17 +474,22 @@ export function renderDayDetail({
         const m = meal.macros || {};
         card.innerHTML = `
           <div class="slot-title">${slot.icon} ${slot.label}</div>
-          <div class="slot-meal-name">${esc(meal.recipeName)}</div>
-          <div class="slot-meal-macros">
-            <span>🔥 ${num(m.calorias)} kcal</span>
-            <span>💪 ${num(m.proteina_g)}g</span>
-            <span>🌾 ${num(m.carbohidratos_g)}g</span>
-            <span>🧈 ${num(m.grasas_g)}g</span>
+          <div class="slot-meal-info slot-meal-clickable" role="button" tabindex="0" data-recipe-id="${esc(meal.recipeId)}" title="Ver receta: ${esc(meal.recipeName)}">
+            <div class="slot-meal-name">${esc(meal.recipeName)}</div>
+            <div class="slot-meal-macros">
+              <span>🔥 ${num(m.calorias)} kcal</span>
+              <span>💪 ${num(m.proteina_g)}g</span>
+              <span>🌾 ${num(m.carbohidratos_g)}g</span>
+              <span>🧈 ${num(m.grasas_g)}g</span>
+            </div>
           </div>
           <div class="slot-actions">
             <button class="slot-btn remove" data-slot="${slot.id}">Quitar</button>
           </div>
         `;
+        const clickableEl = card.querySelector('.slot-meal-info');
+        if (clickableEl) clickableEl.mealRef = meal;
+
         card.querySelector('.slot-btn.remove').addEventListener('click', () => {
           onRemoveMeal(dateKey, slot.id);
         });
@@ -509,6 +522,27 @@ export function renderDayDetail({
 
     renderDaySummary(dayEntry, nutrition, summaryEl);
   }
+
+  // Clickable meal slots (open recipe snapshot modal)
+  slotsEl.querySelectorAll('.slot-meal-clickable').forEach(el => {
+    const handleOpen = (e) => {
+      if (e.target.closest('button, input, select')) return;
+      if (onRecipeClick && el.dataset.recipeId) {
+        onRecipeClick(el.dataset.recipeId, el.mealRef);
+      }
+    };
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      handleOpen(e);
+    });
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        e.stopPropagation();
+        handleOpen(e);
+      }
+    });
+  });
 }
 
 function buildPersonMealHTML(meal, member, index) {
@@ -519,8 +553,10 @@ function buildPersonMealHTML(meal, member, index) {
     return `
       <div class="slot-family-person-row has-meal-row">
         ${badge}
-        <span class="slot-meal-name-sm">${esc(meal.recipeName)}</span>
-        <span class="slot-meal-kcal">${num(m.calorias)} kcal</span>
+        <div class="slot-family-person-meal slot-meal-clickable" role="button" tabindex="0" data-member-idx="${index}" data-recipe-id="${esc(meal.recipeId)}" title="Ver receta: ${esc(meal.recipeName)}">
+          <span class="slot-meal-name-sm">${esc(meal.recipeName)}</span>
+          <span class="slot-meal-kcal">${num(m.calorias)} kcal</span>
+        </div>
         <button class="slot-btn-remove slot-btn-icon" data-person-id="${pid}" title="Quitar">✕</button>
       </div>
     `;

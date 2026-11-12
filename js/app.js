@@ -703,6 +703,7 @@ function refreshDayDetail() {
           openSlotPickerForPerson(slotId, targetPerson);
         }
       },
+      onRecipeClick: openRecipeModal,
     });
   } else {
     const dayEntry = state.plan?.[state.person]?.[weekKey]?.[state.activeDay] || {};
@@ -721,6 +722,7 @@ function refreshDayDetail() {
           openSlotPicker(slotId);
         }
       },
+      onRecipeClick: openRecipeModal,
     });
   }
 }

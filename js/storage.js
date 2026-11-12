@@ -172,7 +172,7 @@ export async function getMyPersons() {
  * the legacy nested format expected by the rest of the app:
  *
  *   {
- *     "<person name>": { "2025-W27": { "2025-07-07": { "desayuno": { recipeId, recipeName, macros, recipeSnapshot? } } } },
+ *     "<person name>": { "2025-W27": { "2025-07-07": { "desayuno": { recipeId, recipeName, macros, servings, recipeSnapshot?, slotPeriod? } } } },
  *     "<other person>": { ... }
  *   }
  *
@@ -186,7 +186,7 @@ export async function fetchPlan() {
 
   const { data, error } = await supabase
     .from('plans')
-    .select('person_id, date_key, week_key, slot_id, recipe_id, recipe_name, macros, recipe_snapshot')
+    .select('person_id, date_key, week_key, slot_id, recipe_id, recipe_name, macros, recipe_snapshot, servings, slot_period')
     .in('person_id', personIds);
 
   if (error) {
@@ -209,10 +209,13 @@ export async function fetchPlan() {
       recipeId:   row.recipe_id,
       recipeName: row.recipe_name,
       macros:     row.macros,
+      servings:   Number(row.servings) || 1,
     };
     // Legacy rows without a snapshot keep no recipeSnapshot (callers fall back
     // to the current catalog recipe).
     if (row.recipe_snapshot) meal.recipeSnapshot = row.recipe_snapshot;
+    // slotPeriod only exists on extra slots (extra_<n>).
+    if (row.slot_period) meal.slotPeriod = row.slot_period;
     plan[personName][row.week_key][row.date_key][row.slot_id] = meal;
   }
 
@@ -250,6 +253,8 @@ export async function savePlan(plan, personNameToId) {
             recipe_name: meal.recipeName || '',
             macros:      meal.macros     || {},
             recipe_snapshot: meal.recipeSnapshot ?? null,
+            servings:    meal.servings ?? 1,
+            slot_period: slotId.startsWith('extra_') ? (meal.slotPeriod ?? null) : null,
             updated_at:  new Date().toISOString(),
           });
         }
@@ -543,7 +548,7 @@ export async function revertTargetsChange(historyId) {
 
 /**
  * Fetch the default week template for all accessible persons.
- * Returns { personName: { dayIndex: { slotId: { recipeId, recipeName, macros, recipeSnapshot? } } } }
+ * Returns { personName: { dayIndex: { slotId: { recipeId, recipeName, macros, servings, recipeSnapshot?, slotPeriod? } } } }
  * dayIndex is 0 (Monday) … 6 (Sunday).
  */
 export async function fetchDefaultWeek() {
@@ -555,7 +560,7 @@ export async function fetchDefaultWeek() {
 
   const { data, error } = await supabase
     .from('default_week')
-    .select('person_id, day_index, slot_id, recipe_id, recipe_name, macros, recipe_snapshot')
+    .select('person_id, day_index, slot_id, recipe_id, recipe_name, macros, recipe_snapshot, servings, slot_period')
     .in('person_id', personIds);
 
   if (error) {
@@ -573,8 +578,10 @@ export async function fetchDefaultWeek() {
       recipeId:   row.recipe_id,
       recipeName: row.recipe_name,
       macros:     row.macros,
+      servings:   Number(row.servings) || 1,
     };
     if (row.recipe_snapshot) meal.recipeSnapshot = row.recipe_snapshot;
+    if (row.slot_period) meal.slotPeriod = row.slot_period;
     result[personName][row.day_index][row.slot_id] = meal;
   }
   return result;
@@ -582,7 +589,7 @@ export async function fetchDefaultWeek() {
 
 /**
  * Save the current week as the default week template for the given persons.
- * weekData: { dayIndex: { slotId: { recipeId, recipeName, macros, recipeSnapshot? } } }
+ * weekData: { dayIndex: { slotId: { recipeId, recipeName, macros, servings?, recipeSnapshot?, slotPeriod? } } }
  * personNames: string[]
  * personNameToId: { name: uuid }
  */
@@ -604,6 +611,8 @@ export async function saveDefaultWeek(weekData, personNames, personNameToId) {
           recipe_name: meal.recipeName || '',
           macros:      meal.macros     || {},
           recipe_snapshot: meal.recipeSnapshot ?? null,
+          servings:    meal.servings ?? 1,
+          slot_period: slotId.startsWith('extra_') ? (meal.slotPeriod ?? null) : null,
           updated_at:  new Date().toISOString(),
         });
       }
