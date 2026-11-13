@@ -197,26 +197,37 @@
 
 **Todo List.**
 
-- [ ] En [`js/calendar.js`](js/calendar.js:75): dejar `MEAL_SLOTS` como los 5 fijos (lo usa el planner) y agregar `EXTRA_PERIODS` (`manana`, `tarde`, `noche` con etiqueta e ícono) y helpers puros: `isExtraSlot(id)`, `extraAnchorSlot(period)` (desayuno / snack_tarde / snack_noche), `nextExtraId(existingIds)` y `orderedDaySlots(slotEntriesOrIds)` que devuelve los 5 fijos con los extras intercalados.
-- [ ] Estado transitorio `state.pendingExtras[dateKey] = [{ id, period }]` en [`js/app.js`](js/app.js): se crea al presionar "+ Agregar una comida" y se limpia al persistir una comida en ese extra.
-- [ ] `renderDayDetail` ([`js/ui.js`](js/ui.js:363)) recorre `orderedDaySlots` (unión de extras existentes de todos los integrantes visibles y extras pendientes). Los extras muestran título "Snack extra" y un `<select>` de período.
-- [ ] Caja "+ Agregar una comida" al final del contenedor `#meal-slots`, con estilo propio y aria-label.
-- [ ] `buildDayPills` ([`js/ui.js`](js/ui.js:167)) usa el mismo orden y el ícono del período para los extras.
-- [ ] `assignMeal` / `assignMealForPerson` ([`js/app.js`](js/app.js:886)): al asignar a un extra, guardar `slotPeriod` en la comida y quitar el pendiente.
-- [ ] `removeMeal` ([`js/app.js`](js/app.js:910)): sin cambios para extras; ya borra por `slot_id`.
-- [ ] Cambio de período: actualizar `meal.slotPeriod` para los integrantes visibles y persistir.
-- [ ] `showSlotPickerForDrop` y `openSlotPicker` ([`js/app.js`](js/app.js:812)) incluyen la opción "Snack extra" (crea un `extra_n` nuevo con período por defecto "tarde").
-- [ ] `savePlan`, `fetchPlan`, `saveDefaultWeek`, `fetchDefaultWeek` ya manejan `slot_period` desde el sub-task 2; verificar `applyDefaultWeekIfEmpty` ([`js/app.js`](js/app.js:203)) y copiar semana con ids `extra_n`.
-- [ ] `buildShoppingList` / `computeDayMacros` iteran `Object.values(dayEntry)` / `Object.keys(dayEntry)`, así que incluyen extras sin cambios; confirmarlo con una prueba.
-- [ ] Estilos: caja punteada "+ Agregar una comida", etiqueta de período, adaptación móvil.
-- [ ] Ampliar `scripts/test-servings.mjs` (o archivo equivalente) con pruebas de `orderedDaySlots`, `nextExtraId` y totales con extras.
+- [x] En [`js/calendar.js`](js/calendar.js:75): dejar `MEAL_SLOTS` como los 5 fijos (lo usa el planner) y agregar `EXTRA_PERIODS` (`manana`, `tarde`, `noche` con etiqueta e ícono) y helpers puros: `isExtraSlot(id)`, `extraAnchorSlot(period)` (desayuno / snack_tarde / snack_noche), `nextExtraId(existingIds)` y `orderedDaySlots(slotEntriesOrIds)` que devuelve los 5 fijos con los extras intercalados. (Además: `collectDayExtras`, `EXTRA_SLOT_LABEL`, `DEFAULT_EXTRA_PERIOD`.)
+- [x] Estado transitorio `state.pendingExtras[dateKey] = [{ id, period }]` en [`js/app.js`](js/app.js): se crea al presionar "+ Agregar una comida" y se limpia al persistir una comida en ese extra.
+- [x] `renderDayDetail` ([`js/ui.js`](js/ui.js:363)) recorre `orderedDaySlots` (unión de extras existentes de todos los integrantes visibles y extras pendientes). Los extras muestran título "Snack extra" y un `<select>` de período.
+- [x] Caja "+ Agregar una comida" al final del contenedor `#meal-slots`, con estilo propio y aria-label.
+- [x] `buildDayPills` ([`js/ui.js`](js/ui.js:167)) usa el mismo orden y el ícono del período para los extras.
+- [x] `assignMeal` / `assignMealForPerson` ([`js/app.js`](js/app.js:886)): al asignar a un extra, guardar `slotPeriod` en la comida y quitar el pendiente.
+- [x] `removeMeal` ([`js/app.js`](js/app.js:910)): sin cambios para extras; ya borra por `slot_id`.
+- [x] Cambio de período: actualizar `meal.slotPeriod` para los integrantes visibles y persistir.
+- [x] `showSlotPickerForDrop` y `openSlotPicker` ([`js/app.js`](js/app.js:812)) incluyen la opción "Snack extra" (crea un `extra_n` nuevo con período por defecto "tarde").
+- [x] `savePlan`, `fetchPlan`, `saveDefaultWeek`, `fetchDefaultWeek` ya manejan `slot_period` desde el sub-task 2; verificar `applyDefaultWeekIfEmpty` ([`js/app.js`](js/app.js:203)) y copiar semana con ids `extra_n`. **Verificado:** `applyDefaultWeekIfEmpty` itera `Object.entries(slotMap)` y usa `copyMealForPlan` (deepClone), así que `extra_n` y `slotPeriod` viajan sin cambios.
+- [x] `buildShoppingList` / `computeDayMacros` iteran `Object.values(dayEntry)` / `Object.keys(dayEntry)`, así que incluyen extras sin cambios; confirmarlo con una prueba.
+- [x] Estilos: caja punteada "+ Agregar una comida", etiqueta de período, adaptación móvil.
+- [x] Ampliar `scripts/test-servings.mjs` (o archivo equivalente) con pruebas de `orderedDaySlots`, `nextExtraId` y totales con extras.
 
 **Relevant Context.**
 
 - [`js/calendar.js`](js/calendar.js:75), [`js/ui.js`](js/ui.js:167), [`js/ui.js`](js/ui.js:387), [`js/ui.js`](js/ui.js:459), [`js/app.js`](js/app.js:740) (`openSlotPicker`), [`js/app.js`](js/app.js:812) (`showSlotPickerForDrop`), [`js/planner.js`](js/planner.js:198) (no se modifica).
 - [`scripts/migrate-to-supabase.js`](scripts/migrate-to-supabase.js:204) tiene una lista fija de slots válidos: es un script de migración puntual y no se toca.
 
-**Status.** [ ] pending
+- **Contexto para Sub-Task 5 (resultado del Sub-Task 4):**
+  - [`js/calendar.js`](js/calendar.js) exporta ahora `EXTRA_PERIODS` (`{id,label,icon,anchor}`), `EXTRA_SLOT_LABEL` ("Snack extra"), `DEFAULT_EXTRA_PERIOD` ("tarde"), `isExtraSlot`, `extraAnchorSlot`, `nextExtraId`, `collectDayExtras(dayEntries, pending)` y `orderedDaySlots(extras)`. `MEAL_SLOTS` sigue con los 5 fijos y [`js/planner.js`](js/planner.js) no se tocó. `ui.js` ya no importa `MEAL_SLOTS`; `app.js` sí (picker y etiqueta).
+  - **Estado:** `state.pendingExtras[dateKey] = [{ id, period }]` (solo memoria; se pierde al recargar). `addExtraSlot(dateKey)` lo crea con `nextExtraId` sobre los ids de todos los integrantes (no solo los visibles, para no chocar) más los pendientes. `assignMeal`/`assignMealForPerson` usan `newMealForSlot`, que setea `slotPeriod` (pendiente → período de otra comida del mismo extra → "tarde") y luego `clearPendingExtra`.
+  - **Cambio de período:** `setExtraPeriod(dateKey, slotId, period)` reemplaza las comidas del extra de `personsToWrite()` (`{ ...meal, slotPeriod }`, sin mutar), re-renderiza y llama a `savePlan` (sin debounce; solo si hubo comidas). Si el extra es pendiente, solo cambia el período en memoria.
+  - **UI:** `renderDayDetail` recibe `pendingExtras`, `onAddExtraSlot`, `onSetExtraPeriod`. Cada extra es un `.slot-card[data-slot="extra_n"]` con título `.slot-title--extra` y `<select class="slot-period-select">`; por eso steppers, click de receta, drop y "+ Agregar" funcionan sin código extra. La caja es `<button class="slot-add-extra">` (hijo directo de `#meal-slots`, `grid-column: 1 / -1`; en móvil la grilla ya es de una columna). La pastilla toma el ícono del slot/período (`buildDayPills` devuelve `icon`).
+  - **Pickers:** `showSlotPickerForDrop` agrega el ítem "🍪 Snack extra", que asigna a un `nextExtraId(...)` nuevo (período "tarde"). `openSlotPicker` solo reconoce el título de un `extra_n` (se abre desde la tarjeta de un extra pendiente con "+ Agregar").
+  - **Verificado:** `applyDefaultWeekIfEmpty` y `handleSetDefaultWeek` iteran todos los slot ids y copian por deepClone, así que `extra_n` y `slotPeriod` viajan sin cambios.
+  - **Pendiente de prueba manual (sub-task 5):** nada de esto se probó en navegador contra la base (solo `node --check` y tests de módulos puros). Casos a mirar: extra pendiente que desaparece al recargar; quitar la última comida de un extra lo elimina; en Familia, extra donde solo uno tiene comida (el otro ve "Sin asignar"); la vista Familia usa el período de la primera comida encontrada si difieren entre integrantes; foco del `<select>` tras cambiar período; un extra pendiente no se puede descartar sin asignarle una receta o recargar; comprobar en pantalla la adaptación móvil de la caja y del select.
+  - Tests: `node scripts/test-servings.mjs` (22 checks).
+
+
+**Status.** [x] done
 
 ---
 
@@ -232,19 +243,20 @@
 
 **Todo List.**
 
-- [ ] Subir `CACHE_NAME` en [`sw.js`](sw.js) (v16 → v17). No hay archivos JS nuevos en el app shell.
-- [ ] Documentar en [`README.md`](README.md): porciones, slot-card clickeable, extras y migración `20261112000100`.
-- [ ] Ejecutar `node scripts/test-servings.mjs`, `node scripts/test-nutrition.mjs` y `node scripts/verify-recipe-versions.js`.
-- [ ] Prueba manual (Playwright o navegador): cheesecake de 4 porciones con 1/2/3 porciones; Café Latte 0,5 y 1+1 en Familia; click en slot-card tras editar la receta del catálogo (debe abrir la versión vieja del slot); agregar 2 extras en períodos distintos y del mismo período; mover un extra de período; quitar extras; copiar semana y semana por defecto; móvil (< 700px).
-- [ ] Verificar dashboard y recálculo automático con porciones distintas de 1.
-- [ ] Probar RLS: la persona de otra familia no puede leer ni escribir filas con `servings` o extras.
-- [ ] Revisar la consola del navegador: sin errores ni warnings nuevos.
+- [x] Subir `CACHE_NAME` en [`sw.js`](sw.js) (v16 → v17). No hay archivos JS nuevos en el app shell.
+- [x] Documentar en [`README.md`](README.md): porciones, slot-card clickeable, extras y migración `20261112000100`.
+- [x] Ejecutar `node scripts/test-servings.mjs` (22 checks), `node scripts/test-nutrition.mjs` (25 tests) y `node scripts/verify-recipe-versions.js` (17 checks): todos pasan. `node --check` OK en `app.js`, `calendar.js`, `ui.js`, `storage.js`, `plan-versions.js`, `planner.js` y `sw.js`.
+- [ ] **PENDIENTE (manual, requiere login):** Prueba manual (navegador): cheesecake de 4 porciones con 1/2/3 porciones; Café Latte 0,5 y 1+1 en Familia; click en slot-card tras editar la receta del catálogo (debe abrir la versión vieja del slot); agregar 2 extras en períodos distintos y del mismo período; mover un extra de período; quitar extras; copiar semana y semana por defecto; móvil (< 700px). Ver también los casos listados en "Contexto para Sub-Task 5" del sub-task 4.
+- [ ] **PENDIENTE (manual):** Verificar dashboard y recálculo automático con porciones distintas de 1.
+- [ ] **PENDIENTE (manual):** Probar RLS: la persona de otra familia no puede leer ni escribir filas con `servings` o extras.
+- [x] Revisar la consola del navegador en la página de login: sin errores ni warnings (solo el aviso informativo de DevTools "Password field is not contained in a form"). Los 13 módulos de `js/` cargan con 200 y la caché activa es `plandental-v17`. El resto de la app no se pudo revisar porque requiere credenciales.
+- [x] Revisión estática: sin imports a símbolos inexistentes entre `ui.js` / `app.js` / `calendar.js` / `storage.js` / `plan-versions.js` (`eslint no-undef` con 0 errores, y chequeo de import/export). Sin bugs que corregir.
 
 **Relevant Context.**
 
 - [`sw.js`](sw.js), [`README.md`](README.md).
 
-**Status.** [ ] pending
+**Status.** [x] done (implementación y validación automática); las pruebas manuales con sesión iniciada quedan pendientes del usuario (ver Todo List).
 
 ---
 

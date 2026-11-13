@@ -167,7 +167,41 @@ Antes de usar la UI nueva, aplicá `supabase/migrations/20261111000100_weight_lo
 
 ```bash
 node scripts/test-nutrition.mjs
+node scripts/test-servings.mjs
+node scripts/verify-recipe-versions.js
 ```
+
+---
+
+## Porciones, slot-card clickeable y slots extra
+
+### Porciones comidas
+
+En el detalle del día, cada comida tiene un control de porciones (−, valor editable, +) con paso de 0,25. El rango es de 0,25 a 10 (0,25 / 0,5 / 1 / 2 / 3…); un valor tipeado fuera de rango se ajusta al más cercano y acepta coma o punto decimal. En la vista Familia hay un control por integrante, también en la tarjeta de la comida compartida.
+
+- `servings` es un multiplicador de la porción de la receta, sin caso especial para recetas de 1 porción: 0,5 de un Café Latte es la mitad de los macros; 2 es el doble.
+- Los macros guardados en la comida siguen siendo **por porción**; se multiplican por `servings` al calcular el slot-card, el resumen del día, las barras del calendario, el dashboard y el recálculo automático.
+- La pastilla del calendario muestra "×N" cuando `servings ≠ 1`.
+- **Lista de compras:** se suman las porciones comidas por receta y versión, y se cocinan `ceil(Σ porciones / porciones de la receta)` tandas (la suma se redondea a 2 decimales antes del `ceil`). Ejemplos: Café Latte con Pablo 1 + Juli 1 → 2 porciones; cheesecake de 4 porciones con 2 + 2 → 1 tanda, con 2 + 3 → 2 tandas.
+- `servings` no forma parte del snapshot de la receta, así que cambiarlo no pierde la versión guardada.
+- El autoplanner (`js/planner.js`) no cambia: siempre asigna 1 porción.
+
+### Slot-card clickeable
+
+En el detalle del día, al hacer click en una comida (nombre y macros) se abre la receta **guardada en ese día y slot** (snapshot), no la versión actual del recetario. Las comidas anteriores al snapshot abren la receta actual del catálogo. En Familia, la comida compartida y cada fila por integrante abren el snapshot de esa persona. Es navegable con teclado (Enter / Espacio); los botones y controles (Quitar, porciones, período) no abren el modal.
+
+### Slots extra ("Snack extra")
+
+Además de los 5 slots fijos, cada día admite comidas extra sin tope:
+
+- El botón **+ Agregar una comida**, al final del detalle del día, crea un "Snack extra" con un selector de período (mañana / tarde / noche; por defecto, tarde). Acepta cualquier receta, por arrastre o con "+ Agregar".
+- El extra se muestra justo después del slot fijo de su período: mañana → después de Desayuno, tarde → después de Snack tarde, noche → después de Snack noche. Varios extras del mismo período se ordenan por número. Al cambiar el período, el orden se actualiza.
+- Se identifican como `extra_1`, `extra_2`… (único por día y compartido por los integrantes en Familia). Un extra sin receta vive solo en memoria y desaparece al recargar; quitar la última comida de un extra lo elimina.
+- Cuentan en pastillas, totales, lista de compras, aplicar la semana por defecto y guardar como semana por defecto. Los selectores de slot (arrastrar a un día, picker) incluyen "Snack extra".
+
+### Migración
+
+Antes de usar la UI nueva, aplicá `supabase/migrations/20261112000100_servings_and_extra_slots.sql`. Agrega a `plans` y `default_week` las columnas `servings` (`numeric`, default 1, entre 0,25 y 10) y `slot_period` (`manana` / `tarde` / `noche`, nulo en los slots fijos); reemplaza el check de `slot_id` para aceptar los 5 slots fijos o `extra_<n>` (los extras exigen `slot_period`); y recrea la vista `person_daily_intake` multiplicando los macros por `servings` (con `security_invoker = true`). Es idempotente, no cambia RLS y deja los datos existentes en `servings = 1`. Sin la migración, guardar y leer el plan falla porque el cliente pide las columnas nuevas.
 
 ## Estructura
 
@@ -198,7 +232,8 @@ node scripts/test-nutrition.mjs
 │   └── plan.json             # Plan semanal guardado (generado, no versionado)
 └── scripts/
     ├── generate-icons.js     # Genera los íconos de placeholder
-    └── test-nutrition.mjs    # Tests de js/nutrition.js
+    ├── test-nutrition.mjs    # Tests de js/nutrition.js
+    └── test-servings.mjs     # Tests de porciones, slots extra y lista de compras
 ```
 
 ## GitHub Pages

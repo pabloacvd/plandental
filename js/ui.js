@@ -2,7 +2,10 @@
  * ui.js — rendering helpers (recipe cards, calendar, day detail, modals)
  */
 
-import { MEAL_SLOTS, DAY_NAMES_SHORT, MONTH_NAMES, computeDayMacros, toDateKey } from './calendar.js';
+import {
+  EXTRA_PERIODS, orderedDaySlots, collectDayExtras,
+  DAY_NAMES_SHORT, MONTH_NAMES, computeDayMacros, toDateKey,
+} from './calendar.js';
 import {
   sameMealVersion, mealServings, scaledMacros, normalizeServings,
   SERVINGS_MIN, SERVINGS_MAX, SERVINGS_STEP,
@@ -179,12 +182,13 @@ function groupSlotMeals(memberEntries, slotId) {
 }
 
 /**
- * One pill per distinct meal version per slot (in MEAL_SLOTS order).
- * Members sharing a meal show a single pill.
+ * One pill per distinct meal version per slot (fixed slots with the extras
+ * interleaved, see orderedDaySlots). Members sharing a meal show a single pill.
  */
 function buildDayPills(memberEntries) {
-  return MEAL_SLOTS.flatMap(slot =>
-    groupSlotMeals(memberEntries, slot.id).map(g => ({ slotId: slot.id, ...g }))
+  const slots = orderedDaySlots(collectDayExtras(memberEntries.map(me => me.entry)));
+  return slots.flatMap(slot =>
+    groupSlotMeals(memberEntries, slot.id).map(g => ({ slotId: slot.id, icon: slot.icon, ...g }))
   );
 }
 
@@ -237,11 +241,8 @@ export function renderCalendarGrid({
     const mealsDiv = document.createElement('div');
     mealsDiv.className = 'day-meals-summary';
 
-    // Build a quick icon lookup for standard slot IDs
-    const slotIconMap = Object.fromEntries(MEAL_SLOTS.map(s => [s.id, s.icon]));
-
-    buildDayPills(memberEntries).forEach(({ slotId, meal, personIds, servings }) => {
-      const icon = slotIconMap[slotId] || '🍽️';
+    buildDayPills(memberEntries).forEach(({ slotId, icon: slotIcon, meal, personIds, servings }) => {
+      const icon = slotIcon || '🍽️';
       // In Familia, say who eats the meal when it is not shared by everyone.
       const who = isFamily && personIds.length < members.length
         ? ` (${personIds.map(id => nameById[id]).join(', ')})`
@@ -388,6 +389,9 @@ export function updateKcalBars(weekDays, planData, members, weekKey, nutritionAl
  * onRemoveMeal(dateKey, slotId, personIds|null)  — null = everyone in view
  * onAddMealToSlot(slotId, recipeId, personId|null) — null = everyone in view
  * onSetServings(dateKey, slotId, personId|null, servings) — null = the single viewed person
+ * pendingExtras: [{ id, period }] extras added by the user that have no meal yet
+ * onAddExtraSlot(dateKey) — "+ Agregar una comida"
+ * onSetExtraPeriod(dateKey, slotId, period) — period change of an extra
  */
 export function renderDayDetail({
   dateKey,
@@ -400,6 +404,9 @@ export function renderDayDetail({
   onAddMealToSlot,
   onRecipeClick,
   onSetServings,
+  pendingExtras = [],
+  onAddExtraSlot,
+  onSetExtraPeriod,
 }) {
   const date  = new Date(dateKey + 'T12:00:00');
   const label = `${DAY_NAMES_SHORT[(date.getDay() + 6) % 7]} ${date.getDate()} de ${MONTH_NAMES[date.getMonth()]}`;
@@ -411,11 +418,17 @@ export function renderDayDetail({
   const summaryEl = document.getElementById('day-summary');
   slotsEl.innerHTML = '';
 
+  // Fixed slots + the extras of the day (with a meal for someone, or still pending)
+  const daySlots = orderedDaySlots(collectDayExtras(
+    person === 'Familia' ? memberEntries.map(me => me.entry) : [dayEntry],
+    pendingExtras,
+  ));
+
   if (person === 'Familia') {
     // ── Family mode: one row per member for every slot ──
     const members = memberEntries.map(me => me.member);
 
-    MEAL_SLOTS.forEach(slot => {
+    daySlots.forEach(slot => {
       const meals = memberEntries.map(({ entry }) => entry?.[slot.id] || null);
       const hasMeal = meals.some(Boolean);
       // Everyone has a meal and it is the same version for all of them
@@ -427,7 +440,7 @@ export function renderDayDetail({
       card.className = 'slot-card' + (hasMeal ? ' has-meal' : '');
       card.dataset.slot = slot.id;
 
-      const titleEl = `<div class="slot-title">${slot.icon} ${slot.label}</div>`;
+      const titleEl = slotTitleHTML(slot);
 
       if (sharedMeal && members.length > 1) {
         // Same meal for everyone — show once
@@ -505,7 +518,7 @@ export function renderDayDetail({
 
   } else {
     // ── Single person mode ──
-    MEAL_SLOTS.forEach(slot => {
+    daySlots.forEach(slot => {
       const meal = dayEntry?.[slot.id];
       const card = document.createElement('div');
       card.className = 'slot-card' + (meal ? ' has-meal' : '');
@@ -514,7 +527,7 @@ export function renderDayDetail({
       if (meal) {
         const m = scaledMacros(meal);
         card.innerHTML = `
-          <div class="slot-title">${slot.icon} ${slot.label}</div>
+          ${slotTitleHTML(slot)}
           <div class="slot-meal-info slot-meal-clickable" role="button" tabindex="0" data-recipe-id="${esc(meal.recipeId)}" title="Ver receta: ${esc(meal.recipeName)}">
             <div class="slot-meal-name">${esc(meal.recipeName)}</div>
             <div class="slot-meal-macros">
@@ -537,7 +550,7 @@ export function renderDayDetail({
         });
       } else {
         card.innerHTML = `
-          <div class="slot-title">${slot.icon} ${slot.label}</div>
+          ${slotTitleHTML(slot)}
           <div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:.75rem;">
             Arrastrá una receta aquí
           </div>
@@ -565,6 +578,29 @@ export function renderDayDetail({
     renderDaySummary(dayEntry, nutrition, summaryEl);
   }
 
+  // Extra slots: period selector on each extra card + "+ Agregar una comida" box
+  slotsEl.querySelectorAll('.slot-period-select').forEach(select => {
+    select.addEventListener('change', () => {
+      const slotId = select.closest('.slot-card')?.dataset.slot;
+      if (!slotId || !onSetExtraPeriod) return;
+      onSetExtraPeriod(dateKey, slotId, select.value);
+      // The panel is re-rendered synchronously: give the focus back to the new select
+      [...slotsEl.querySelectorAll('.slot-card')]
+        .find(c => c.dataset.slot === slotId)
+        ?.querySelector('.slot-period-select')?.focus();
+    });
+  });
+
+  if (onAddExtraSlot) {
+    const addBox = document.createElement('button');
+    addBox.type = 'button';
+    addBox.className = 'slot-add-extra';
+    addBox.setAttribute('aria-label', 'Agregar una comida extra (Snack extra)');
+    addBox.textContent = '+ Agregar una comida';
+    addBox.addEventListener('click', () => onAddExtraSlot(dateKey));
+    slotsEl.appendChild(addBox);
+  }
+
   // Servings steppers (outside the clickable zones, so they never open the modal)
   slotsEl.querySelectorAll('.servings-stepper').forEach(stepper => {
     wireServingsStepper(stepper, slotsEl, dateKey, onSetServings);
@@ -590,6 +626,22 @@ export function renderDayDetail({
       }
     });
   });
+}
+
+/**
+ * Slot card title. Extras read "Snack extra" and carry a period <select>
+ * (the card's data-slot tells the handler which extra it is).
+ */
+function slotTitleHTML(slot) {
+  if (!slot.isExtra) return `<div class="slot-title">${slot.icon} ${slot.label}</div>`;
+  const options = EXTRA_PERIODS
+    .map(p => `<option value="${p.id}"${p.id === slot.period ? ' selected' : ''}>${p.label}</option>`)
+    .join('');
+  return `
+    <div class="slot-title slot-title--extra">
+      <span>${slot.icon} ${slot.label}</span>
+      <select class="slot-period-select" aria-label="Período del snack extra">${options}</select>
+    </div>`;
 }
 
 function memberBadgeHTML(member, index) {

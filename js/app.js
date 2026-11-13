@@ -5,7 +5,10 @@
 import { loadData, searchRecipes, getRecipeById, addRecipe, updateRecipe, deleteRecipe, getAllRecipes, slugify } from './recipes.js';
 import { autoFillWeek } from './planner.js';
 import { mealFromRecipe, copyMealForPlan, resolveMealReceta, buildShoppingItems, normalizeServings } from './plan-versions.js';
-import { getWeekDays, toDateKey, toWeekKey, MEAL_SLOTS, MONTH_NAMES } from './calendar.js';
+import {
+  getWeekDays, toDateKey, toWeekKey, MEAL_SLOTS, MONTH_NAMES,
+  EXTRA_PERIODS, EXTRA_SLOT_LABEL, DEFAULT_EXTRA_PERIOD, isExtraSlot, nextExtraId,
+} from './calendar.js';
 import {
   fetchPlan, savePlan, removePlanEntry,
   fetchDefaultWeek, saveDefaultWeek, clearDefaultWeek,
@@ -54,6 +57,9 @@ let state = {
   searchQuery:    '',
   searchCategory: 'all',
   draggingRecipeId: null,
+  // Extras added with "+ Agregar una comida" that have no meal yet (memory only):
+  // { dateKey: [{ id: 'extra_1', period: 'tarde' }] }
+  pendingExtras: {},
   mobileDayIndex: null,
   // Supabase-specific: resolved at runtime
   persons:        [],          // [{ id, name, owner_id }]
@@ -705,6 +711,9 @@ function refreshDayDetail() {
       },
       onRecipeClick: openRecipeModal,
       onSetServings: setMealServings,
+      pendingExtras:    state.pendingExtras[state.activeDay] || [],
+      onAddExtraSlot:   addExtraSlot,
+      onSetExtraPeriod: setExtraPeriod,
     });
   } else {
     const dayEntry = state.plan?.[state.person]?.[weekKey]?.[state.activeDay] || {};
@@ -725,6 +734,9 @@ function refreshDayDetail() {
       },
       onRecipeClick: openRecipeModal,
       onSetServings: setMealServings,
+      pendingExtras:    state.pendingExtras[state.activeDay] || [],
+      onAddExtraSlot:   addExtraSlot,
+      onSetExtraPeriod: setExtraPeriod,
     });
   }
 }
@@ -749,7 +761,9 @@ function openSlotPicker(slotId, targetPerson = null) {
   const picker = document.createElement('div');
   picker.className = 'slot-picker';
 
-  const slotLabel = MEAL_SLOTS.find(s => s.id === slotId)?.label || slotId;
+  const slotLabel = isExtraSlot(slotId)
+    ? EXTRA_SLOT_LABEL
+    : (MEAL_SLOTS.find(s => s.id === slotId)?.label || slotId);
   const personLabel = targetPerson ? ` — ${targetPerson}` : '';
   const results = searchRecipes(state.searchQuery, state.searchCategory);
 
@@ -843,6 +857,16 @@ function showSlotPickerForDrop(dateKey, recipeId) {
     picker.appendChild(item);
   });
 
+  // "Snack extra": creates a new extra for the day (default period: tarde)
+  const extraItem = document.createElement('div');
+  extraItem.className = 'slot-picker-item';
+  extraItem.textContent = `${EXTRA_PERIODS.find(p => p.id === DEFAULT_EXTRA_PERIOD).icon} ${EXTRA_SLOT_LABEL}`;
+  extraItem.addEventListener('click', () => {
+    assignMeal(dateKey, nextExtraId(dayExtraIds(dateKey)), recipeId);
+    picker.remove();
+  });
+  picker.appendChild(extraItem);
+
   picker.style.top  = '50%';
   picker.style.left = '50%';
   picker.style.transform = 'translate(-50%,-50%)';
@@ -887,6 +911,81 @@ function setDeep(plan, person, weekKey, dateKey, slotId, value) {
   plan[person][weekKey][dateKey][slotId] = value;
 }
 
+// ── Extra slots ("Snack extra") ──────────────────────────────
+
+/** Every slot id used that day by any family member, plus the pending extras. */
+function dayExtraIds(dateKey) {
+  const weekKey = toWeekKey(new Date(dateKey + 'T12:00:00'));
+  const ids = state.persons.flatMap(p => Object.keys(state.plan?.[p.name]?.[weekKey]?.[dateKey] || {}));
+  (state.pendingExtras[dateKey] || []).forEach(e => ids.push(e.id));
+  return ids;
+}
+
+/** Period of an extra: pending one, else the one stored on any member's meal, else the default. */
+function extraPeriodOf(dateKey, slotId) {
+  const pending = state.pendingExtras[dateKey]?.find(e => e.id === slotId);
+  if (pending) return pending.period;
+  const weekKey = toWeekKey(new Date(dateKey + 'T12:00:00'));
+  for (const p of state.persons) {
+    const period = state.plan?.[p.name]?.[weekKey]?.[dateKey]?.[slotId]?.slotPeriod;
+    if (period) return period;
+  }
+  return DEFAULT_EXTRA_PERIOD;
+}
+
+/**
+ * New plan meal for a slot. Meals in an extra carry their period
+ * (required by the database for `extra_<n>` slots).
+ */
+function newMealForSlot(recipe, dateKey, slotId) {
+  const meal = mealFromRecipe(recipe);
+  if (isExtraSlot(slotId)) meal.slotPeriod = extraPeriodOf(dateKey, slotId);
+  return meal;
+}
+
+/** Once an extra has a persisted meal it is no longer pending. */
+function clearPendingExtra(dateKey, slotId) {
+  const list = state.pendingExtras[dateKey];
+  if (!list) return;
+  state.pendingExtras[dateKey] = list.filter(e => e.id !== slotId);
+  if (state.pendingExtras[dateKey].length === 0) delete state.pendingExtras[dateKey];
+}
+
+/** "+ Agregar una comida": a new empty extra (memory only until a recipe is assigned). */
+function addExtraSlot(dateKey) {
+  const id = nextExtraId(dayExtraIds(dateKey));
+  (state.pendingExtras[dateKey] ||= []).push({ id, period: DEFAULT_EXTRA_PERIOD });
+  refreshDayDetail();
+}
+
+/** Change the period of an extra for every visible member that has a meal in it. */
+async function setExtraPeriod(dateKey, slotId, period) {
+  if (!isExtraSlot(slotId) || !EXTRA_PERIODS.some(p => p.id === period)) return;
+  const weekKey = toWeekKey(new Date(dateKey + 'T12:00:00'));
+
+  const pending = state.pendingExtras[dateKey]?.find(e => e.id === slotId);
+  if (pending) pending.period = period;
+
+  let changed = false;
+  for (const p of personsToWrite()) {
+    const dayEntry = state.plan?.[p]?.[weekKey]?.[dateKey];
+    // Replace (not mutate): the meal object can be shared with state.defaultWeek.
+    if (dayEntry?.[slotId]) {
+      dayEntry[slotId] = { ...dayEntry[slotId], slotPeriod: period };
+      changed = true;
+    }
+  }
+
+  renderWeek(); // also refreshes the open day panel
+  if (!changed) return;
+
+  try {
+    await savePlan(state.plan, state.personNameToId);
+  } catch (e) {
+    showToast('❌ Error al guardar: ' + e.message, 'error');
+  }
+}
+
 async function assignMeal(dateKey, slotId, recipeId) {
   const recipe = getRecipeById(recipeId);
   if (!recipe) return;
@@ -895,8 +994,9 @@ async function assignMeal(dateKey, slotId, recipeId) {
 
   // Each person gets an independent copy of the recipe version (snapshot).
   for (const p of personsToWrite()) {
-    setDeep(state.plan, p, weekKey, dateKey, slotId, mealFromRecipe(recipe));
+    setDeep(state.plan, p, weekKey, dateKey, slotId, newMealForSlot(recipe, dateKey, slotId));
   }
+  clearPendingExtra(dateKey, slotId);
 
   renderWeek();
   if (state.activeDay === dateKey) refreshDayDetail();
@@ -983,8 +1083,9 @@ async function assignMealForPerson(dateKey, slotId, recipeId, targetPerson) {
   const weekKey  = toWeekKey(new Date(dateKey + 'T12:00:00'));
   const persons  = targetPerson ? [targetPerson] : state.persons.map(p => p.name);
   for (const p of persons) {
-    setDeep(state.plan, p, weekKey, dateKey, slotId, mealFromRecipe(recipe));
+    setDeep(state.plan, p, weekKey, dateKey, slotId, newMealForSlot(recipe, dateKey, slotId));
   }
+  clearPendingExtra(dateKey, slotId);
   renderWeek();
   if (state.activeDay === dateKey) refreshDayDetail();
   try {

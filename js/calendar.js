@@ -72,7 +72,7 @@ export const MONTH_NAMES = [
 ];
 
 /**
- * The meal slots for each day, in order.
+ * The 5 fixed meal slots for each day, in order (the autoplanner only uses these).
  */
 export const MEAL_SLOTS = [
   { id: 'desayuno',    label: 'Desayuno',       icon: '☀️' },
@@ -81,6 +81,82 @@ export const MEAL_SLOTS = [
   { id: 'cena',        label: 'Cena',            icon: '🌙' },
   { id: 'snack_noche', label: 'Snack noche',     icon: '🥜' },
 ];
+
+// ── Extra slots ("Snack extra") ──────────────────────────────
+// Extra slots have the id `extra_<n>` and a period; each one is shown right
+// after the fixed slot of its period (`anchor`).
+
+export const EXTRA_SLOT_LABEL = 'Snack extra';
+export const DEFAULT_EXTRA_PERIOD = 'tarde';
+export const EXTRA_PERIODS = [
+  { id: 'manana', label: 'Mañana', icon: '🌅', anchor: 'desayuno' },
+  { id: 'tarde',  label: 'Tarde',  icon: '🍪', anchor: 'snack_tarde' },
+  { id: 'noche',  label: 'Noche',  icon: '🌜', anchor: 'snack_noche' },
+];
+
+const EXTRA_ID_RE = /^extra_(\d+)$/;
+
+const extraPeriod = id => EXTRA_PERIODS.find(p => p.id === id)
+  || EXTRA_PERIODS.find(p => p.id === DEFAULT_EXTRA_PERIOD);
+const extraNumber = id => Number(EXTRA_ID_RE.exec(id)[1]);
+
+/** True for `extra_<n>` slot ids. */
+export function isExtraSlot(slotId) {
+  return typeof slotId === 'string' && EXTRA_ID_RE.test(slotId);
+}
+
+/** Fixed slot id after which the extras of `period` are shown (unknown → default period). */
+export function extraAnchorSlot(period) {
+  return extraPeriod(period).anchor;
+}
+
+/** Next free `extra_<n>` id: highest existing number + 1 (non-extra ids are ignored). */
+export function nextExtraId(existingIds = []) {
+  const max = existingIds.filter(isExtraSlot).reduce((m, id) => Math.max(m, extraNumber(id)), 0);
+  return `extra_${max + 1}`;
+}
+
+/**
+ * The extras of one day: those that have a meal in any of `dayEntries`
+ * (slotId → meal objects) plus the pending (still empty) ones.
+ * @returns {Array<{id:string, period:string}>}
+ */
+export function collectDayExtras(dayEntries = [], pending = []) {
+  const byId = new Map();
+  for (const entry of dayEntries) {
+    for (const [slotId, meal] of Object.entries(entry || {})) {
+      if (meal && isExtraSlot(slotId) && !byId.has(slotId)) byId.set(slotId, extraPeriod(meal.slotPeriod).id);
+    }
+  }
+  for (const { id, period } of pending || []) {
+    if (isExtraSlot(id) && !byId.has(id)) byId.set(id, extraPeriod(period).id);
+  }
+  return [...byId].map(([id, period]) => ({ id, period }));
+}
+
+/**
+ * The 5 fixed slots with the extras interleaved: each extra goes right after the
+ * fixed slot of its period; several in the same period are ordered by number.
+ * `extras` items are `{ id, period }` or bare ids (bare ids use the default period).
+ * @returns {Array<{id:string, label:string, icon:string, isExtra?:boolean, period?:string}>}
+ */
+export function orderedDaySlots(extras = []) {
+  const seen = new Set();
+  const list = [];
+  for (const item of extras) {
+    const id = typeof item === 'string' ? item : item?.id;
+    if (!isExtraSlot(id) || seen.has(id)) continue;
+    seen.add(id);
+    const period = extraPeriod(typeof item === 'string' ? null : item.period);
+    list.push({ id, label: EXTRA_SLOT_LABEL, icon: period.icon, isExtra: true, period: period.id, anchor: period.anchor });
+  }
+  list.sort((a, b) => extraNumber(a.id) - extraNumber(b.id));
+
+  return MEAL_SLOTS.flatMap(slot => [
+    slot,
+    ...list.filter(e => e.anchor === slot.id).map(({ anchor, ...extra }) => extra),
+  ]);
+}
 
 /**
  * Compute the total macros for a given day entry (object of slotId → meal).
