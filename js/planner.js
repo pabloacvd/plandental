@@ -140,6 +140,8 @@ function mealEntry(recipeId) {
 
 /**
  * Return accumulated macros for a single person on a given day.
+ * Intentionally per-portion (meals the planner creates always have servings = 1);
+ * it does not apply `servings` — use computeDayMacros for real day totals.
  */
 function accumulatedMacros(dayEntry) {
   const totals = { calorias: 0, proteina_g: 0, carbohidratos_g: 0, grasas_g: 0 };

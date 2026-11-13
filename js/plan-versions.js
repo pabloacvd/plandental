@@ -5,11 +5,44 @@
  * node (scripts/verify-recipe-versions.js).
  *
  * A plan meal looks like:
- *   { recipeId, recipeName, macros, recipeSnapshot? }
+ *   { recipeId, recipeName, macros, servings, recipeSnapshot? }
+ * `macros` are PER PORTION of the recipe; `servings` is how many portions
+ * were eaten (multiplier, 0.25–10 in steps of 0.25, default 1).
  * `recipeSnapshot` is a deep copy of the recipe's `receta` object as it was
  * when the meal was assigned. Legacy meals may not have it; every consumer
  * falls back to the current catalog recipe in that case.
  */
+
+// ── Servings eaten ───────────────────────────────────────────────────────────
+
+export const SERVINGS_MIN  = 0.25;
+export const SERVINGS_MAX  = 10;
+export const SERVINGS_STEP = 0.25;
+
+/** Normalise any value to a valid servings number (default 1, clamped, step 0.25). */
+export function normalizeServings(value) {
+  const n = Number(value);
+  if (!Number.isFinite(n)) return 1;
+  const stepped = Math.round(n / SERVINGS_STEP) * SERVINGS_STEP;
+  return Math.min(SERVINGS_MAX, Math.max(SERVINGS_MIN, stepped));
+}
+
+/** Portions eaten for a plan meal (1 when missing or invalid). */
+export function mealServings(meal) {
+  return normalizeServings(meal?.servings ?? 1);
+}
+
+/** Macros of a plan meal multiplied by the portions eaten. */
+export function scaledMacros(meal) {
+  const s = mealServings(meal);
+  const m = meal?.macros ?? {};
+  return {
+    calorias:        (m.calorias        || 0) * s,
+    proteina_g:      (m.proteina_g      || 0) * s,
+    carbohidratos_g: (m.carbohidratos_g || 0) * s,
+    grasas_g:        (m.grasas_g        || 0) * s,
+  };
+}
 
 // ── Cloning ──────────────────────────────────────────────────────────────────
 
@@ -28,6 +61,7 @@ export function mealFromRecipe(recipe) {
     recipeId:       recipe.id,
     recipeName:     snapshot.nombre,
     macros:         { ...snapshot.macros_por_porcion },
+    servings:       1,
     recipeSnapshot: snapshot,
   };
 }
@@ -35,7 +69,8 @@ export function mealFromRecipe(recipe) {
 /**
  * Independent copy of an existing meal (used when applying the default week).
  * If the meal has no snapshot yet, one is generated from the current catalog
- * recipe (when it still exists); `macros` is never recomputed.
+ * recipe (when it still exists); `macros` is never recomputed. `servings` is
+ * preserved by the deep copy.
  */
 export function copyMealForPlan(meal, getRecipeById) {
   const copy = deepClone(meal);
@@ -109,9 +144,10 @@ export function resolveMealReceta(meal, getRecipeById) {
 // ── Shopping list ────────────────────────────────────────────────────────────
 
 /**
- * Aggregate ingredients for a list of consumed meals (1 meal = 1 portion).
- * Meals are grouped by (recipeId + shopping fingerprint of their version);
- * each group is cooked in its own batches: ceil(portionsConsumed / porciones).
+ * Aggregate ingredients for a list of consumed meals (each weighs its
+ * `servings`, default 1). Meals are grouped by (recipeId + shopping
+ * fingerprint of their version); each group is cooked in its own batches:
+ * ceil(round2(Σ servings) / porciones).
  *
  * @param {object[]} meals  plan meals already de-duplicated by the caller
  * @param {object}   opts   { getRecipeById, isExcluded }
@@ -127,14 +163,15 @@ export function buildShoppingItems(meals, { getRecipeById, isExcluded = () => fa
 
     const key = `${meal.recipeId}::${shoppingFingerprint(receta)}`;
     const group = groups.get(key);
-    if (group) group.consumed += 1;
-    else groups.set(key, { receta, consumed: 1 });
+    const servings = mealServings(meal);
+    if (group) group.consumed += servings;
+    else groups.set(key, { receta, consumed: servings });
   }
 
   const agg = new Map(); // ingredient name → { name, qty, unit, rawQty }
 
   for (const { receta, consumed } of groups.values()) {
-    const batches = Math.ceil(consumed / (receta.porciones || 1));
+    const batches = Math.ceil(Math.round(consumed * 100) / 100 / (receta.porciones || 1));
 
     for (const ing of receta.ingredientes) {
       if (!ing.item) continue;

@@ -131,6 +131,16 @@ comment on view public.person_daily_intake is
   'Totales diarios del plan por persona (macros por porción × servings). security_invoker: aplica RLS de plans.';
 
 -- ────────────────────────────────────────────────────────────
+-- 4b. Sin privilegios para anon sobre plans / default_week
+--     (en Supabase anon recibe grants por defecto; las migraciones
+--     originales nunca los revocaron. RLS ya bloqueaba el acceso,
+--     esto cierra también el nivel de tabla. El cliente usa siempre
+--     el rol authenticated.)
+-- ────────────────────────────────────────────────────────────
+revoke all on public.plans        from anon, public;
+revoke all on public.default_week from anon, public;
+
+-- ────────────────────────────────────────────────────────────
 -- 5. VALIDACIÓN FINAL
 -- ────────────────────────────────────────────────────────────
 do $$

@@ -2,6 +2,8 @@
  * calendar.js — week / date helpers
  */
 
+import { scaledMacros } from './plan-versions.js';
+
 /**
  * Return the ISO week number and year for a given date.
  */
@@ -82,6 +84,7 @@ export const MEAL_SLOTS = [
 
 /**
  * Compute the total macros for a given day entry (object of slotId → meal).
+ * Per-portion macros are multiplied by each meal's `servings`.
  */
 export function computeDayMacros(dayEntry) {
   const totals = { calorias: 0, proteina_g: 0, carbohidratos_g: 0, grasas_g: 0 };
@@ -90,10 +93,11 @@ export function computeDayMacros(dayEntry) {
   for (const slotId of Object.keys(dayEntry)) {
     const meal = dayEntry[slotId];
     if (!meal || !meal.macros) continue;
-    totals.calorias      += meal.macros.calorias      || 0;
-    totals.proteina_g    += meal.macros.proteina_g    || 0;
-    totals.carbohidratos_g += meal.macros.carbohidratos_g || 0;
-    totals.grasas_g      += meal.macros.grasas_g      || 0;
+    const m = scaledMacros(meal);
+    totals.calorias        += m.calorias;
+    totals.proteina_g      += m.proteina_g;
+    totals.carbohidratos_g += m.carbohidratos_g;
+    totals.grasas_g        += m.grasas_g;
   }
 
   // Round to 1 decimal

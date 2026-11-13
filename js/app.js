@@ -4,7 +4,7 @@
 
 import { loadData, searchRecipes, getRecipeById, addRecipe, updateRecipe, deleteRecipe, getAllRecipes, slugify } from './recipes.js';
 import { autoFillWeek } from './planner.js';
-import { mealFromRecipe, copyMealForPlan, resolveMealReceta, buildShoppingItems } from './plan-versions.js';
+import { mealFromRecipe, copyMealForPlan, resolveMealReceta, buildShoppingItems, normalizeServings } from './plan-versions.js';
 import { getWeekDays, toDateKey, toWeekKey, MEAL_SLOTS, MONTH_NAMES } from './calendar.js';
 import {
   fetchPlan, savePlan, removePlanEntry,
@@ -704,6 +704,7 @@ function refreshDayDetail() {
         }
       },
       onRecipeClick: openRecipeModal,
+      onSetServings: setMealServings,
     });
   } else {
     const dayEntry = state.plan?.[state.person]?.[weekKey]?.[state.activeDay] || {};
@@ -723,6 +724,7 @@ function refreshDayDetail() {
         }
       },
       onRecipeClick: openRecipeModal,
+      onSetServings: setMealServings,
     });
   }
 }
@@ -939,6 +941,37 @@ async function removeMeal(dateKey, slotId, personIds = null) {
   } catch (e) {
     showToast('❌ Error al eliminar: ' + e.message, 'error');
   }
+}
+
+const SERVINGS_SAVE_DELAY_MS = 500;
+let _servingsSaveTimer = null;
+
+/**
+ * Change the portions eaten of one meal. Updates state and the UI right away;
+ * the save is debounced so several +/− clicks produce a single write.
+ * personId = null → the single person in view.
+ */
+function setMealServings(dateKey, slotId, personId, servings) {
+  const weekKey = toWeekKey(new Date(dateKey + 'T12:00:00'));
+  const persons = personId ? [personNameById(personId)] : personsToWrite();
+  const value   = normalizeServings(servings);
+
+  for (const p of persons) {
+    const dayEntry = state.plan?.[p]?.[weekKey]?.[dateKey];
+    // Replace (not mutate): the meal object can be shared with state.defaultWeek.
+    if (dayEntry?.[slotId]) dayEntry[slotId] = { ...dayEntry[slotId], servings: value };
+  }
+
+  renderWeek(); // also refreshes the open day panel
+
+  clearTimeout(_servingsSaveTimer);
+  _servingsSaveTimer = setTimeout(async () => {
+    try {
+      await savePlan(state.plan, state.personNameToId);
+    } catch (e) {
+      showToast('❌ Error al guardar: ' + e.message, 'error');
+    }
+  }, SERVINGS_SAVE_DELAY_MS);
 }
 
 /**
@@ -1441,8 +1474,9 @@ function buildShoppingList() {
   const persons = viewMembers().map(p => p.name);
 
   // ── Collect the consumed meals ───────────────────────────────────────────
-  // Each slot entry (per person) = 1 portion consumed. The plan is keyed by
-  // person → week → day → slot, so every (person, day, slot) is unique.
+  // Each slot entry (per person) weighs its `servings` portions (default 1).
+  // The plan is keyed by person → week → day → slot, so every
+  // (person, day, slot) is unique.
   // Grouping by (recipeId + version) and batch math live in
   // buildShoppingItems (plan-versions.js): two versions of the same recipe
   // are cooked as separate batches with their own ingredient quantities.

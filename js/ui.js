@@ -3,7 +3,10 @@
  */
 
 import { MEAL_SLOTS, DAY_NAMES_SHORT, MONTH_NAMES, computeDayMacros, toDateKey } from './calendar.js';
-import { sameMealVersion } from './plan-versions.js';
+import {
+  sameMealVersion, mealServings, scaledMacros, normalizeServings,
+  SERVINGS_MIN, SERVINGS_MAX, SERVINGS_STEP,
+} from './plan-versions.js';
 
 /** Escape text before interpolating it into innerHTML (recipe data comes from the DB). */
 function esc(value) {
@@ -19,6 +22,16 @@ function esc(value) {
 function num(value) {
   const n = Number(value);
   return Number.isFinite(n) ? n : 0;
+}
+
+/** Display value rounded to 1 decimal (scaled macros can be fractional). */
+function num1(value) {
+  return Math.round(num(value) * 10) / 10;
+}
+
+/** Servings for display with a decimal comma: 0.25 → "0,25". */
+function formatServings(servings) {
+  return String(servings).replace('.', ',');
 }
 
 // ── Category → CSS class mapping ─────────────────────────
@@ -146,7 +159,8 @@ const MEMBER_COLORS = 5;
  *
  * @param {Array<{member:{id:string,name:string}, entry:object}>} memberEntries
  * @param {string} slotId
- * @returns {Array<{meal:object, personIds:string[]}>}
+ * @returns {Array<{meal:object, personIds:string[], servings:number[]}>}
+ *          `servings[i]` belongs to `personIds[i]` (servings do not affect grouping).
  */
 function groupSlotMeals(memberEntries, slotId) {
   const groups = [];
@@ -154,8 +168,12 @@ function groupSlotMeals(memberEntries, slotId) {
     const meal = entry?.[slotId];
     if (!meal) continue;
     const group = groups.find(g => sameMealVersion(g.meal, meal));
-    if (group) group.personIds.push(member.id);
-    else groups.push({ meal, personIds: [member.id] });
+    if (group) {
+      group.personIds.push(member.id);
+      group.servings.push(mealServings(meal));
+    } else {
+      groups.push({ meal, personIds: [member.id], servings: [mealServings(meal)] });
+    }
   }
   return groups;
 }
@@ -222,17 +240,27 @@ export function renderCalendarGrid({
     // Build a quick icon lookup for standard slot IDs
     const slotIconMap = Object.fromEntries(MEAL_SLOTS.map(s => [s.id, s.icon]));
 
-    buildDayPills(memberEntries).forEach(({ slotId, meal, personIds }) => {
+    buildDayPills(memberEntries).forEach(({ slotId, meal, personIds, servings }) => {
       const icon = slotIconMap[slotId] || '🍽️';
       // In Familia, say who eats the meal when it is not shared by everyone.
       const who = isFamily && personIds.length < members.length
         ? ` (${personIds.map(id => nameById[id]).join(', ')})`
         : '';
+      // "×N" when the portions differ from 1; mixed portions list each person in the title.
+      const distinct = [...new Set(servings)];
+      const mixed    = distinct.length > 1;
+      const servingsTag = mixed
+        ? `×${distinct.map(formatServings).join('/')}`
+        : (distinct[0] !== 1 ? `×${formatServings(distinct[0])}` : '');
+      const servingsTitle = mixed
+        ? ` — ${personIds.map((id, i) => `${nameById[id]} ×${formatServings(servings[i])}`).join(', ')}`
+        : (servingsTag ? ` — ${servingsTag}` : '');
       const pill = document.createElement('div');
       pill.className = 'meal-pill';
       pill.innerHTML = `
         <span class="meal-pill-slot">${icon}</span>
-        <span class="meal-pill-name meal-pill-name--link" data-recipe-id="${esc(meal.recipeId)}" title="Ver receta: ${esc(meal.recipeName)}${esc(who)}">${esc(meal.recipeName)}</span>
+        <span class="meal-pill-name meal-pill-name--link" data-recipe-id="${esc(meal.recipeId)}" title="Ver receta: ${esc(meal.recipeName)}${esc(who)}${esc(servingsTitle)}">${esc(meal.recipeName)}</span>
+        ${servingsTag ? `<span class="meal-pill-servings" title="Porciones${esc(servingsTitle)}">${esc(servingsTag)}</span>` : ''}
         <button class="meal-pill-remove" data-date="${esc(dateKey)}" data-slot="${esc(slotId)}" data-person-ids="${esc(personIds.join(','))}" title="Quitar">✕</button>
       `;
       // The click opens THIS meal's version (snapshot), not the current recipe.
@@ -359,6 +387,7 @@ export function updateKcalBars(weekDays, planData, members, weekKey, nutritionAl
  *        Familia mode only: every family member with their entry for the day.
  * onRemoveMeal(dateKey, slotId, personIds|null)  — null = everyone in view
  * onAddMealToSlot(slotId, recipeId, personId|null) — null = everyone in view
+ * onSetServings(dateKey, slotId, personId|null, servings) — null = the single viewed person
  */
 export function renderDayDetail({
   dateKey,
@@ -370,6 +399,7 @@ export function renderDayDetail({
   onRemoveMeal,
   onAddMealToSlot,
   onRecipeClick,
+  onSetServings,
 }) {
   const date  = new Date(dateKey + 'T12:00:00');
   const label = `${DAY_NAMES_SHORT[(date.getDay() + 6) % 7]} ${date.getDate()} de ${MONTH_NAMES[date.getMonth()]}`;
@@ -401,17 +431,28 @@ export function renderDayDetail({
 
       if (sharedMeal && members.length > 1) {
         // Same meal for everyone — show once
-        const m = sharedMeal.macros || {};
+        // Header macros only make sense when everyone ate the same portions;
+        // otherwise each member's kcal is shown next to their stepper.
+        const sameServings = meals.every(x => mealServings(x) === mealServings(meals[0]));
+        const m = scaledMacros(sharedMeal);
         const everyone = members.length === 2 ? 'Los dos' : 'Todos';
         card.innerHTML = `
           ${titleEl}
           <div class="slot-family-shared slot-meal-clickable" role="button" tabindex="0" data-recipe-id="${esc(sharedMeal.recipeId)}" title="Ver receta: ${esc(sharedMeal.recipeName)}">
             <span class="slot-family-badge shared-badge">👥 ${everyone}</span>
             <div class="slot-meal-name">${esc(sharedMeal.recipeName)}</div>
-            <div class="slot-meal-macros">
-              <span>🔥 ${num(m.calorias)} kcal</span>
-              <span>💪 ${num(m.proteina_g)}g</span>
-            </div>
+            ${sameServings ? `<div class="slot-meal-macros">
+              <span>🔥 ${num1(m.calorias)} kcal</span>
+              <span>💪 ${num1(m.proteina_g)}g</span>
+            </div>` : ''}
+          </div>
+          <div class="slot-servings-list">
+            ${members.map((member, i) => `
+              <div class="slot-servings-row">
+                ${memberBadgeHTML(member, i)}
+                ${servingsStepperHTML(meals[i], member.id)}
+                <span class="slot-meal-kcal">${num1(scaledMacros(meals[i]).calorias)} kcal</span>
+              </div>`).join('')}
           </div>
           <div class="slot-actions">
             <button class="slot-btn remove">Quitar a ${everyone === 'Los dos' ? 'los dos' : 'todos'}</button>
@@ -471,18 +512,19 @@ export function renderDayDetail({
       card.dataset.slot = slot.id;
 
       if (meal) {
-        const m = meal.macros || {};
+        const m = scaledMacros(meal);
         card.innerHTML = `
           <div class="slot-title">${slot.icon} ${slot.label}</div>
           <div class="slot-meal-info slot-meal-clickable" role="button" tabindex="0" data-recipe-id="${esc(meal.recipeId)}" title="Ver receta: ${esc(meal.recipeName)}">
             <div class="slot-meal-name">${esc(meal.recipeName)}</div>
             <div class="slot-meal-macros">
-              <span>🔥 ${num(m.calorias)} kcal</span>
-              <span>💪 ${num(m.proteina_g)}g</span>
-              <span>🌾 ${num(m.carbohidratos_g)}g</span>
-              <span>🧈 ${num(m.grasas_g)}g</span>
+              <span>🔥 ${num1(m.calorias)} kcal</span>
+              <span>💪 ${num1(m.proteina_g)}g</span>
+              <span>🌾 ${num1(m.carbohidratos_g)}g</span>
+              <span>🧈 ${num1(m.grasas_g)}g</span>
             </div>
           </div>
+          ${servingsStepperHTML(meal)}
           <div class="slot-actions">
             <button class="slot-btn remove" data-slot="${slot.id}">Quitar</button>
           </div>
@@ -523,6 +565,11 @@ export function renderDayDetail({
     renderDaySummary(dayEntry, nutrition, summaryEl);
   }
 
+  // Servings steppers (outside the clickable zones, so they never open the modal)
+  slotsEl.querySelectorAll('.servings-stepper').forEach(stepper => {
+    wireServingsStepper(stepper, slotsEl, dateKey, onSetServings);
+  });
+
   // Clickable meal slots (open recipe snapshot modal)
   slotsEl.querySelectorAll('.slot-meal-clickable').forEach(el => {
     const handleOpen = (e) => {
@@ -545,18 +592,77 @@ export function renderDayDetail({
   });
 }
 
+function memberBadgeHTML(member, index) {
+  return `<span class="slot-family-badge member-badge-${index % MEMBER_COLORS}">${esc(member.name)}</span>`;
+}
+
+/**
+ * Servings control: − / editable value / + (step 0,25, range 0,25–10).
+ * `personId` is empty in single-person mode.
+ */
+function servingsStepperHTML(meal, personId = '') {
+  const s = mealServings(meal);
+  return `
+    <div class="servings-stepper" role="group" aria-label="Porciones" data-person-id="${esc(personId)}" data-servings="${s}">
+      <button type="button" class="servings-btn" data-step="-1" aria-label="Menos porciones"${s <= SERVINGS_MIN ? ' disabled' : ''}>−</button>
+      <input type="text" class="servings-input" inputmode="decimal" autocomplete="off" aria-label="Porciones comidas" value="${esc(formatServings(s))}">
+      <button type="button" class="servings-btn" data-step="1" aria-label="Más porciones"${s >= SERVINGS_MAX ? ' disabled' : ''}>+</button>
+    </div>
+  `;
+}
+
+/**
+ * Hook up one stepper. The callback updates the state and re-renders the
+ * panel synchronously, so keyboard focus is restored on the new button.
+ */
+function wireServingsStepper(stepper, slotsEl, dateKey, onSetServings) {
+  if (!onSetServings) return;
+  const slotId   = stepper.closest('.slot-card')?.dataset.slot;
+  const personId = stepper.dataset.personId || null;
+  const input    = stepper.querySelector('.servings-input');
+  const current  = () => Number(stepper.dataset.servings) || 1;
+
+  const commit = (value, focusStep = null) => {
+    onSetServings(dateKey, slotId, personId, normalizeServings(value));
+    if (!focusStep) return;
+    const again = [...slotsEl.querySelectorAll('.slot-card')]
+      .find(c => c.dataset.slot === slotId)
+      ?.querySelectorAll('.servings-stepper');
+    [...(again || [])]
+      .find(s => (s.dataset.personId || null) === personId)
+      ?.querySelector(`[data-step="${focusStep}"]`)?.focus();
+  };
+
+  stepper.querySelectorAll('.servings-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const dir = Number(btn.dataset.step);
+      commit(current() + dir * SERVINGS_STEP, btn.dataset.step);
+    });
+  });
+
+  input.addEventListener('change', () => {
+    const typed = parseFloat(input.value.replace(',', '.'));
+    if (!Number.isFinite(typed)) {
+      input.value = formatServings(current());
+      return;
+    }
+    commit(typed);
+  });
+}
+
 function buildPersonMealHTML(meal, member, index) {
-  const badge = `<span class="slot-family-badge member-badge-${index % MEMBER_COLORS}">${esc(member.name)}</span>`;
+  const badge = memberBadgeHTML(member, index);
   const pid = esc(member.id);
   if (meal) {
-    const m = meal.macros || {};
+    const m = scaledMacros(meal);
     return `
       <div class="slot-family-person-row has-meal-row">
         ${badge}
         <div class="slot-family-person-meal slot-meal-clickable" role="button" tabindex="0" data-member-idx="${index}" data-recipe-id="${esc(meal.recipeId)}" title="Ver receta: ${esc(meal.recipeName)}">
           <span class="slot-meal-name-sm">${esc(meal.recipeName)}</span>
-          <span class="slot-meal-kcal">${num(m.calorias)} kcal</span>
+          <span class="slot-meal-kcal">${num1(m.calorias)} kcal</span>
         </div>
+        ${servingsStepperHTML(meal, member.id)}
         <button class="slot-btn-remove slot-btn-icon" data-person-id="${pid}" title="Quitar">✕</button>
       </div>
     `;

@@ -150,23 +150,32 @@
 
 **Todo List.**
 
-- [ ] Helpers puros en [`js/plan-versions.js`](js/plan-versions.js): `mealServings(meal)` (default 1, normaliza a rango 0,25–10, paso 0,25) y `scaledMacros(meal)`.
-- [ ] `mealFromRecipe` agrega `servings: 1`; `copyMealForPlan` conserva `servings`.
-- [ ] `computeDayMacros` ([`js/calendar.js`](js/calendar.js:86)) usa `scaledMacros`. Revisar `accumulatedMacros` de [`js/planner.js`](js/planner.js:144): queda sin cambios (siempre 1 porción), documentarlo.
-- [ ] `buildShoppingItems` ([`js/plan-versions.js`](js/plan-versions.js:120)): acumular `Σ servings` por grupo en lugar de contar comidas; `batches = ceil(round2(Σ) / porciones)`. Actualizar comentarios que dicen "1 meal = 1 portion" (también en [`js/app.js`](js/app.js:1442)).
-- [ ] Función `setMealServings(dateKey, slotId, personId, servings)` en [`js/app.js`](js/app.js): actualiza `state.plan`, re-renderiza semana y detalle, y llama a `savePlan` (con debounce corto para no guardar en cada click del botón).
-- [ ] Controles de porciones en `renderDayDetail` ([`js/ui.js`](js/ui.js:363)) y en `buildPersonMealHTML` ([`js/ui.js`](js/ui.js:514)); macros del slot-card mostrados ya escalados.
-- [ ] Mostrar "×N" en la pastilla ([`js/ui.js`](js/ui.js:233)). En Familia, `groupSlotMeals` agrupa por versión: si las porciones difieren, mostrar el detalle por persona en el `title`.
-- [ ] Estilos del stepper en [`css/style.css`](css/style.css), con variables existentes y área táctil adecuada en móvil (< 700px).
-- [ ] Propagación al copiar semana, aplicar semana por defecto y guardar como semana por defecto (los tres usan el objeto de comida, así que deberían conservar `servings`; verificarlo).
-- [ ] Script nuevo `scripts/test-servings.mjs` (Node, `assert`, sin dependencias): `scaledMacros`, `computeDayMacros` con 0,5 / 1 / 2 porciones, y `buildShoppingItems` con Café Latte 1+1 → 2 batches, cheesecake de 4 porciones con 2+2 → 1 batch y 2+3 → 2 batches, y 0,5 de receta de 1 porción → 1 batch.
+- [x] Helpers puros en [`js/plan-versions.js`](js/plan-versions.js): `mealServings(meal)` (default 1, normaliza a rango 0,25–10, paso 0,25) y `scaledMacros(meal)`.
+- [x] `mealFromRecipe` agrega `servings: 1`; `copyMealForPlan` conserva `servings`.
+- [x] `computeDayMacros` ([`js/calendar.js`](js/calendar.js:86)) usa `scaledMacros`. Revisar `accumulatedMacros` de [`js/planner.js`](js/planner.js:144): queda sin cambios (siempre 1 porción), documentarlo (solo se agregó un comentario).
+- [x] `buildShoppingItems` ([`js/plan-versions.js`](js/plan-versions.js:120)): acumular `Σ servings` por grupo en lugar de contar comidas; `batches = ceil(round2(Σ) / porciones)`. Actualizar comentarios que dicen "1 meal = 1 portion" (también en [`js/app.js`](js/app.js:1442)).
+- [x] Función `setMealServings(dateKey, slotId, personId, servings)` en [`js/app.js`](js/app.js): actualiza `state.plan`, re-renderiza semana y detalle, y llama a `savePlan` (con debounce corto para no guardar en cada click del botón).
+- [x] Controles de porciones en `renderDayDetail` ([`js/ui.js`](js/ui.js:363)) y en `buildPersonMealHTML` ([`js/ui.js`](js/ui.js:514)); macros del slot-card mostrados ya escalados.
+- [x] Mostrar "×N" en la pastilla ([`js/ui.js`](js/ui.js:233)). En Familia, `groupSlotMeals` agrupa por versión: si las porciones difieren, mostrar el detalle por persona en el `title`.
+- [x] Estilos del stepper en [`css/style.css`](css/style.css), con variables existentes y área táctil adecuada en móvil (< 700px).
+- [x] Propagación al copiar semana, aplicar semana por defecto y guardar como semana por defecto (los tres usan el objeto de comida, así que deberían conservar `servings`; verificarlo). **Verificado:** no existe una función "copiar semana" en el código (`grep`); aplicar la semana por defecto usa `copyMealForPlan` (deepClone, conserva `servings`) y guardar como predeterminada pasa el objeto de comida a `saveDefaultWeek`, que escribe `servings`.
+- [x] Script nuevo `scripts/test-servings.mjs` (Node, `assert`, sin dependencias): `scaledMacros`, `computeDayMacros` con 0,5 / 1 / 2 porciones, y `buildShoppingItems` con Café Latte 1+1 → 2 batches, cheesecake de 4 porciones con 2+2 → 1 batch y 2+3 → 2 batches, y 0,5 de receta de 1 porción → 1 batch.
 
 **Relevant Context.**
 
 - [`js/plan-versions.js`](js/plan-versions.js), [`js/calendar.js`](js/calendar.js:86), [`js/ui.js`](js/ui.js:363), [`js/app.js`](js/app.js:886) (`assignMeal`, `assignMealForPerson`), [`js/app.js`](js/app.js:1431) (`buildShoppingList`).
 - `computeDayMacros` ya lo importa [`scripts/verify-recipe-versions.js`](scripts/verify-recipe-versions.js:81): no romper su ejecución.
+- **Contexto para Sub-Task 4 (resultado del Sub-Task 3):**
+  - [`js/plan-versions.js`](js/plan-versions.js) exporta ahora `SERVINGS_MIN/MAX/STEP`, `normalizeServings`, `mealServings` y `scaledMacros`. [`js/calendar.js`](js/calendar.js) importa `scaledMacros` desde ahí (sin ciclo: `plan-versions.js` no importa nada). `computeDayMacros` itera `Object.keys(dayEntry)`, así que los extras ya cuentan con su `servings`.
+  - **`setMealServings(dateKey, slotId, personId, servings)`** ([`js/app.js`](js/app.js)) no tiene lógica específica de slots fijos: funciona igual con `extra_n`. Reemplaza el objeto de comida (`{ ...meal, servings }`, no lo muta, porque puede compartirse con `state.defaultWeek`), llama a `renderWeek()` (que refresca el detalle abierto) y guarda con `savePlan` con debounce de 500 ms (`_servingsSaveTimer`). `savePlan` sube todo `state.plan`, así que incluye `slotPeriod` de los extras sin cambios.
+  - **Steppers en `ui.js`:** `servingsStepperHTML(meal, personId)` y `wireServingsStepper(...)`. El slot se lee de `stepper.closest('.slot-card').dataset.slot`, por lo que cualquier card nueva para extras con `data-slot="extra_n"` y el stepper dentro funciona sin cambios. `renderDayDetail` recibe `onSetServings`; la caja de "+ Agregar una comida" no necesita nada de porciones. En Familia la tarjeta compartida muestra una lista `.slot-servings-list` (un stepper por integrante) y oculta los macros de cabecera si las porciones difieren.
+  - **Pastilla ×N:** `groupSlotMeals` ahora devuelve `{ meal, personIds, servings[] }` (las porciones no afectan el agrupado por versión). `buildDayPills` itera `MEAL_SLOTS`; el sub-task 4 debe conservar `servings` al cambiar a `orderedDaySlots`. La pastilla toma `slotIconMap[slotId] || '🍽️'`.
+  - `meal.servings` siempre existe en memoria tras `fetchPlan`/`fetchDefaultWeek`/`mealFromRecipe`; los helpers igualmente toleran comidas sin el campo.
+  - No existe un "copiar semana": la propagación de `servings` aplica a `applyDefaultWeekIfEmpty` (`copyMealForPlan`) y `handleSetDefaultWeek`. Al agregar extras, `slotPeriod` también viaja en el deepClone.
+  - **Pendiente de prueba manual (sub-task 5):** el stepper nunca se probó contra la base real porque la migración no está aplicada; UI y debounce se verificaron solo por sintaxis y tests de los módulos puros. El input de porciones acepta coma o punto decimal y se normaliza a 0,25–10 en pasos de 0,25 (un valor tipeado fuera de rango se ajusta al más cercano).
+  - Tests: `node scripts/test-servings.mjs` (12 checks). El sub-task 4 debe ampliarlo con `orderedDaySlots`, `nextExtraId` y totales con extras.
 
-**Status.** [ ] pending
+**Status.** [x] done
 
 ---
 

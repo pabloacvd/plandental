@@ -426,6 +426,11 @@ input  { font: inherit; border: none; outline: none; }
 }
 .meal-pill:hover .meal-pill-remove { display: flex; }
 .meal-pill-remove:hover { background: var(--red-bg); color: var(--red); }
+.meal-pill-servings {
+  font-size: .65rem; font-weight: 700;
+  color: var(--accent-dark); background: var(--accent-bg);
+  border-radius: 3px; padding: 0 4px; flex-shrink: 0;
+}
 
 .day-kcal-bar {
   margin-top: auto;
@@ -544,6 +549,29 @@ input  { font: inherit; border: none; outline: none; }
 .slot-btn:hover { background: var(--accent-bg); color: var(--accent); border-color: var(--accent); }
 .slot-btn.remove:hover { background: var(--red-bg); color: var(--red); border-color: var(--red); }
 
+/* ── Servings stepper (− / value / +) ── */
+.servings-stepper {
+  display: inline-flex; align-items: stretch; align-self: flex-start;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--surface); flex-shrink: 0;
+}
+.servings-btn {
+  width: 24px; min-height: 24px;
+  font-size: .85rem; font-weight: 700; color: var(--text-muted);
+  transition: var(--transition);
+}
+.servings-btn:hover:not(:disabled) { background: var(--accent-bg); color: var(--accent); }
+.servings-btn:disabled { opacity: .35; cursor: default; }
+.servings-btn:focus-visible,
+.servings-input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.servings-input {
+  width: 42px; text-align: center;
+  font-size: .75rem; font-weight: 600; color: var(--text);
+  background: transparent; padding: 0;
+}
+.slot-servings-list { display: flex; flex-direction: column; gap: 4px; }
+.slot-servings-row  { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+
 /* ── Clickable meal slot zones ── */
 .slot-meal-clickable {
   cursor: pointer;
@@ -565,11 +593,11 @@ input  { font: inherit; border: none; outline: none; }
 .slot-family-shared { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
 .slot-family-person-meal {
   display: flex; align-items: center; gap: 6px;
-  flex: 1; min-width: 0;
+  flex: 1 1 90px; min-width: 0;
 }
 
 .slot-family-person-row {
-  display: flex; align-items: center; gap: 6px;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
   padding: 4px 6px; border-radius: 5px;
   font-size: .75rem;
 }
@@ -1686,6 +1714,9 @@ text.ch-ref-label.ch-ref--maint { fill: var(--purple); }
 .sources-list { padding-left: 18px; font-size: .74rem; color: var(--text-muted); display: grid; gap: 3px; }
 
 @media (max-width: 700px) {
+  /* Touch-friendly servings stepper */
+  .servings-btn   { width: 36px; min-height: 36px; font-size: 1.1rem; }
+  .servings-input { width: 52px; font-size: .9rem; }
   .dash-cards { grid-template-columns: 1fr 1fr; }
   .weight-add { grid-template-columns: 1fr 1fr; }
   .weight-add .btn-secondary { grid-column: 1 / -1; }
