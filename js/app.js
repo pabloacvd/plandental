@@ -2159,13 +2159,9 @@ function wireControls() {
     renderSidebar();
   });
 
-  // Recipe category filter chips
-  document.getElementById('filter-chips').addEventListener('click', (e) => {
-    const chip = e.target.closest('.chip');
-    if (!chip) return;
-    document.querySelectorAll('#filter-chips .chip').forEach(c => c.classList.remove('active'));
-    chip.classList.add('active');
-    state.searchCategory = chip.dataset.cat;
+  // Recipe category filter (dropdown)
+  document.getElementById('recipe-category-filter').addEventListener('change', (e) => {
+    state.searchCategory = e.target.value;
     renderSidebar();
   });
 

@@ -271,6 +271,16 @@ input  { font: inherit; border: none; outline: none; }
   display: flex; flex-wrap: wrap; gap: 4px;
   padding: 8px 12px;
 }
+.filter-select {
+  width: 100%;
+  padding: 6px 10px;
+  font-size: .8rem; font-weight: 600;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  cursor: pointer;
+}
 .chip {
   padding: 3px 10px;
   border-radius: 20px;

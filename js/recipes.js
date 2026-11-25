@@ -62,15 +62,22 @@ export function getNutrition(person) {
   return _nutrition[person] || null;
 }
 
+/** Calories per serving; recipes without data sort last. */
+function recipeKcal({ receta }) {
+  const k = receta?.macros_por_porcion?.calorias ?? receta?.totales?.calorias_kcal;
+  return Number.isFinite(k) ? k : Infinity;
+}
+
 /**
  * Search recipes by query across name, description and ingredients.
+ * Results are sorted by calories per serving, lowest first.
  * @param {string} query
  * @param {string} category — 'all' or a category substring
  */
 export function searchRecipes(query = '', category = 'all') {
   const q = query.toLowerCase().trim();
 
-  return _recipes.filter(({ receta }) => {
+  const filtered = _recipes.filter(({ receta }) => {
     // Category filter
     if (category !== 'all') {
       const cat = receta.categoria?.toLowerCase() || '';
@@ -87,6 +94,13 @@ export function searchRecipes(query = '', category = 'all') {
     );
 
     return nameMatch || descMatch || ingrMatch;
+  });
+
+  return filtered.sort((a, b) => {
+    const ka = recipeKcal(a);
+    const kb = recipeKcal(b);
+    if (ka === kb) return 0;
+    return ka < kb ? -1 : 1;
   });
 }
 

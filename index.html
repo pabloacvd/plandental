@@ -115,10 +115,12 @@
 
       <!-- Recipe filter chips (hidden when ingredients tab is active) -->
       <div class="filter-chips" id="filter-chips">
-        <button class="chip active" data-cat="all">Todas</button>
-        <button class="chip" data-cat="desayuno">Desayuno</button>
-        <button class="chip" data-cat="almuerzo/cena">Almuerzo/Cena</button>
-        <button class="chip" data-cat="snack">Snack</button>
+        <select id="recipe-category-filter" class="filter-select" aria-label="Filtrar por tipo de comida">
+          <option value="all" selected>Todas</option>
+          <option value="desayuno">Desayuno</option>
+          <option value="almuerzo/cena">Almuerzo/Cena</option>
+          <option value="snack">Snack</option>
+        </select>
       </div>
 
       <!-- Ingredient category filter chips (hidden when recipes tab is active) -->
