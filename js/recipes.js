@@ -3,7 +3,7 @@
  */
 
 import { fetchRecipes, fetchNutrition } from './storage.js';
-import { loadIngredients } from './ingredients.js';
+import { loadIngredients, normalizeText } from './ingredients.js';
 
 let _recipes = [];
 let _nutrition = {};
@@ -75,7 +75,7 @@ function recipeKcal({ receta }) {
  * @param {string} category — 'all' or a category substring
  */
 export function searchRecipes(query = '', category = 'all') {
-  const q = query.toLowerCase().trim();
+  const q = normalizeText(query).trim();
 
   const filtered = _recipes.filter(({ receta }) => {
     // Category filter
@@ -87,10 +87,10 @@ export function searchRecipes(query = '', category = 'all') {
     // Text filter
     if (!q) return true;
 
-    const nameMatch = receta.nombre?.toLowerCase().includes(q);
-    const descMatch = receta.descripcion_breve?.toLowerCase().includes(q);
+    const nameMatch = normalizeText(receta.nombre).includes(q);
+    const descMatch = normalizeText(receta.descripcion_breve).includes(q);
     const ingrMatch = receta.ingredientes?.some(
-      ing => ing.item?.toLowerCase().includes(q)
+      ing => normalizeText(ing.item).includes(q)
     );
 
     return nameMatch || descMatch || ingrMatch;

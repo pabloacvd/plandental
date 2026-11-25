@@ -49,6 +49,18 @@ function _normalise(raw) {
 // ── ID generation ─────────────────────────────────────────────────────────────
 
 /**
+ * Lowercase and strip diacritics so searches match with or without accents
+ * (e.g. "atun" matches "atún").
+ * @param {string} [text]
+ * @returns {string}
+ */
+export function normalizeText(text) {
+  return String(text ?? '')
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+/**
  * Generate a URL-safe id slug from an ingredient name.
  * @param {string} name
  * @returns {string}
@@ -135,14 +147,14 @@ export function getIngredientByName(name) {
  * @returns {object[]}
  */
 export function searchIngredients(query = '', category = 'all') {
-  const q = query.toLowerCase().trim();
+  const q = normalizeText(query).trim();
 
   return _ingredients.filter(ing => {
     if (category !== 'all') {
       if ((ing.categoria ?? '').toLowerCase() !== category.toLowerCase()) return false;
     }
     if (!q) return true;
-    return ing.nombre.toLowerCase().includes(q);
+    return normalizeText(ing.nombre).includes(q);
   });
 }
 
